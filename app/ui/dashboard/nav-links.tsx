@@ -8,17 +8,20 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
+import IconAutomotor from '@/app/ui/icon-automotor'
+import IconForms from '@/app/ui/icon-forms'
+import IconTramites from '@/app/ui/icon-tramites'
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Automotores', href: '/dashboard', icon: IconAutomotor },
   {
-    name: 'Invoices',
-    href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
+    name: 'Trámites',
+    href: '/dashboard/tramites',
+    icon: IconTramites,
   },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Formularios', href: '/dashboard/forms', icon: IconForms },
 ];
 
 export default function NavLinks() {
@@ -32,9 +35,9 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-white p-3 text-sm font-medium hover:bg-[#f9d8f2] hover:text-[#b31991] md:flex-none md:justify-start md:p-2 md:px-3 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f] duration-200',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-[#f9d8f2] text-[#b31991]': pathname === link.href,
               },
             )}
           >

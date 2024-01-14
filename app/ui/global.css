@@ -16,3 +16,24 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.imageFormAuto {
+  background-image: url('/tramites-.png');
+}
+.imageHero {
+  background-image: url('/hero.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.fondo-automotores {
+  background-image: url('/fondo-automotores.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.fondo-forms {
+  background-image: url('/e4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
