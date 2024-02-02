@@ -16,12 +16,12 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="rounded-lg bg-white p-4 md:pt-0 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
           <div className="md:hidden">
             {invoices?.map((invoice) => (
               <div
                 key={invoice.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full bg-[#f7f7f7] rounded-md p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
@@ -58,26 +58,26 @@ export default async function InvoicesTable({
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
+                  Cliente
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Monto
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Date
+                  Fecha
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Status
+                  Estado
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-[#f7f7f7]">
               {invoices?.map((invoice) => (
                 <tr
                   key={invoice.id}

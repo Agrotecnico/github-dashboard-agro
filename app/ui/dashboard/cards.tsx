@@ -3,8 +3,9 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
+} from '@heroicons/react/24/outline'
+import { lusitana } from '@/app/ui/fonts'
+import { fetchCardData } from '@/app/lib/data'
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -14,18 +15,24 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+  const {
+    numberOfInvoices,
+    numberOfCustomers,
+    totalPaidInvoices,
+    totalPendingInvoices,
+  } = await fetchCardData();
   return (
     <>
       {/* NOTE: comment in this code when you get to this point in the course */}
 
-      {/* <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+      <Card title="Cobradas" value={totalPaidInvoices} type="collected" />
+      <Card title="Pendientes" value={totalPendingInvoices} type="pending" />
+      <Card title="Total facturas" value={numberOfInvoices} type="invoices" />
       <Card
-        title="Total Customers"
+        title="Total Clientes"
         value={numberOfCustomers}
         type="customers"
-      /> */}
+      />
     </>
   );
 }
@@ -42,14 +49,14 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+    <div className="rounded-xl bg-white p-2 shadow-sm [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
       <div className="flex p-4">
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
       <p
         className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          bg-[#f7f7f7] truncate rounded-xl px-4 py-8 text-center text-2xl`}
       >
         {value}
       </p>

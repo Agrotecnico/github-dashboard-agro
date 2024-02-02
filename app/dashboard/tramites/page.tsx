@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className="relative mb-2 flex h-[400px] flex-col justify-between">
+    <div className="relative mb-2 flex h-[364px] flex-col justify-between">
       <h2 className="z-20 mt-3 text-center text-[17px] font-semibold">
         Gestiones del Automotor:
       </h2>

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className="fondo-forms relative mb-2 h-[400px]">
+    <div className="fondo-forms relative mb-2 h-[364px]">
       <div className="absolute flex h-full w-full flex-col justify-center pl-14 pr-4 text-[13px] uppercase leading-none text-[#222] [text-shadow:_1px_1px_white]">
         <div className="mb-3 flex">
           <div className="flex">
