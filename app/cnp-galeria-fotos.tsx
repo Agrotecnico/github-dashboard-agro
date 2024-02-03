@@ -178,12 +178,6 @@ export default function GaleriaFotosCnp() {
     >
       <NavHome />
 
-      {/* <div
-        slot="container-start"
-        className="parallax-bg bg-[url(../../public/cp.jpg)]"
-        data-swiper-parallax="-4%"
-      ></div> */}
-
       <div
         slot="container-start"
         className="parallax-bg bg-[url(../../public/ofi-c.jpg)] min-[880px]:bg-[url(../../public/ofi-c.jpg)]"
@@ -249,7 +243,7 @@ export default function GaleriaFotosCnp() {
             },
           }}
           >
-          {/* Espacios verdes */}
+          {/* Manos */}
           <SwiperSlide className="">
               <Swiper
                 className="swiper3 relative"
@@ -284,7 +278,7 @@ export default function GaleriaFotosCnp() {
               </Swiper>
           </SwiperSlide>
         
-          {/* Control Plagas */}
+          {/* Oficina */}
           <SwiperSlide className="">
               <Swiper
                 className="swiper3 relative"
@@ -320,7 +314,7 @@ export default function GaleriaFotosCnp() {
         </Swiper>
       </SwiperSlide>
 
-      {/* Espacios verdes */}
+      {/* Trámites */}
       <SwiperSlide id="ev">
         <Swiper 
           className="swiper2 !h-[308px] mb-1 !pl-2"
@@ -585,7 +579,7 @@ export default function GaleriaFotosCnp() {
         </Swiper>
       </SwiperSlide>
 
-      {/* Control Plagas */}
+      {/* Consultas */}
       
         <SwiperSlide id="cp">
           <Swiper 
@@ -644,25 +638,24 @@ export default function GaleriaFotosCnp() {
                 <Link href={"/consultas"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
                   ¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?
                 </Link>
-                <Link href={"/consultas"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/consulta-2"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
                   ¿Qué es el formulario 08?
                 </Link> 
-                <Link href={"/consultas"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/consulta-3"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
                   ¿Validez del formulario 08?
                 </Link> 
-                <Link href={"/consultas"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/consulta-4"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 border-b-[#fdfdfd17] border-b ">
                   Ante la compra o venta de un vehículo, ¿que documentación tengo que solicitar o entregar al vendedor?
                 </Link> 
                 <div className="flex items-center mt-2 [font-variant-caps:_small-caps] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1.5 min-[500px]:mb-2.5 pb-1.5 min-[500px]:pb-2.5 ">
                   Realizá Tu Consulta 
                   <ArrowRightIcon className="h-4 ml-3" />
-                  <Link href= "https://api.whatsapp.com/send?phone=543476604071"  target="_blank" >
-                    <IconWhatsApp size="36" className="ml-6 opacity-70 hover:opacity-95 duration-200 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+                  <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank" >
+                    <IconWhatsApp size="36" className="ml-6 opacity-60 hover:opacity-95 duration-200 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
                   </Link>
-                  <Link href="mailto:agrotecnicog@gmail.com?subject=Consulta&body=Cuerpo del mensaje" /* target="_blank" */ >
-                    <IconEmail size="48" className="ml-4 opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+                  <Link href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje" /* target="_blank" */ >
+                    <IconEmail size="48" className="ml-4 opacity-60 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
                   </Link>
-                  {/* <IconWhatsApp size="36" className="ml-6 opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" /> */}
                   
                 </div> 
               </div>

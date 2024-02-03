@@ -61,7 +61,6 @@ const IconWhatsApp: React.FC<IconProps> = ({
           fill={color}
         />
         <path
-          /* style="opacity:0.6;fill:#ffffff;fill-opacity:1;stroke-width:1.61829;stroke-linecap:round;paint-order:markers stroke fill;filter:url(#filter883)" */
           d="M 13.739353,0 H 46.26064 c 7.611596,0 13.739346,6.127752 13.739346,13.739353 v 32.521296 c 0,7.611598 -6.12775,13.739348 -13.739346,13.739348 H 13.739353 C 6.127752,59.999997 0,53.872247 0,46.260649 V 13.739353 C 0,6.127752 6.127752,0 13.739353,0 Z"
           filter="url(#filter883)"
           fill="#ffffff"

@@ -35,7 +35,7 @@ const NavHome = () => {
 
   return (
     <div
-      className={clsx("fixed top-0 inset-x-0 z-50 xgroup  w-ful backdrop-blur-md  bg-[#ad6fa88c] shadow-[inset_0_-2px_6px_#ffffff66,_0_2px_6px_#00000066]  bg-[#0003]",  /* bg-[linear-gradient(180deg,#fffa,transparent_15%,transparent_85%,#fffa)] */
+      className={clsx("fixed top-0 inset-x-0 z-50 xgroup  w-ful backdrop-blur-md  bg-[#ad6fa88c] shadow-[inset_0_-2px_6px_#ffffff66,_0_2px_6px_#00000066]  bg-[#0003]",
       {
         /* "!fixed": isHome, */
       }
