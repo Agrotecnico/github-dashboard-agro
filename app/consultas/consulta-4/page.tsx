@@ -27,6 +27,7 @@ export default function Page() {
               alt={`Cover Image for Titulo`}
               width={481}
               height={361}
+              priority={true} 
             />
           </div>
         </div>

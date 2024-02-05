@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import carinaBlog from '../../../public/carina-blog.jpg'
-import form08 from '../../../public/form-08.png'
+import formTransf from '../../../public/formTransf.png'
 
 export default function Page() {
   return (
@@ -21,12 +21,12 @@ export default function Page() {
         </div>
 
         <div className="mb-4 md:mb-8 sm:mx-0">
-          <div className="sm:mx-0">
+          <div /* className="sm:mx-0" */>
             <Image
-              src={form08}
+              src={formTransf}
               alt={`Cover Image for Titulo`}
-              width={481}
-              height={361}
+              width={787}
+              height={403}
             />
           </div>
         </div>

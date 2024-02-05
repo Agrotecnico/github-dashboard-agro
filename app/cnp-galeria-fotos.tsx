@@ -394,7 +394,7 @@ export default function GaleriaFotosCnp() {
                 
                 <SwiperSlide >
                   <div className="border border-[#858585] absolute top-[24px] mb-2 bg-fixed bg-cover bg-center 
-                    bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url(../../public/Vehicular-4.jpg)]
+                    bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url(../../public/vehicular-4.jpg)]
                       text-4xl font-bold bg-cover h-[255px] bg-[#fff9] w-full flex items-center justify-center backdrop-blur ">
                   </div>
                   <div className="-bottom-[5px] duration-300 pb-1 text-[15px] max-[500px]:text-base h-9 max-[375px]:text-sm absolute w-full text-center flex items-center justify-center font-normal [text-shadow:1px_1px_1px_#222] ">Altas y Bajas de Dominio</div>
@@ -410,7 +410,7 @@ export default function GaleriaFotosCnp() {
 
                 <SwiperSlide >
                   <div className="border border-[#858585] absolute top-[24px] mb-2 bg-fixed bg-cover bg-center 
-                    bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url(../../public/Vehicular-2.jpg)]
+                    bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url(../../public/vehicular-3.jpg)]
                       text-4xl font-bold bg-cover h-[255px] bg-[#fff9] w-full flex items-center justify-center backdrop-blur ">
                   </div>
                   <div className="-bottom-[5px] duration-300 pb-1 text-[15px] max-[500px]:text-base h-9 max-[375px]:text-sm absolute w-full text-center flex items-center justify-center font-normal [text-shadow:1px_1px_1px_#222] ">Radicaciones</div>

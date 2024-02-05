@@ -18,14 +18,14 @@ input[type='number']::-webkit-outer-spin-button {
 }
 /* .imageFormAuto {
   background-image: url('/tramites-.png');
-}
+} */
 .imageHero {
   background-image: url('/hero.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-.imageHero2 {
+/* .imageHero2 {
   background-image: url('/carina-c.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -36,10 +36,10 @@ input[type='number']::-webkit-outer-spin-button {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-}
+} */
 .fondo-forms {
   background-image: url('/e4.png');
   background-size: cover;
   background-repeat: no-repeat;
-} */
+}
 
