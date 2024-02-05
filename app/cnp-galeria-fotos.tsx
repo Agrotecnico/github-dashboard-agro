@@ -157,8 +157,8 @@ export default function GaleriaFotosCnp() {
       }}
       slidesPerView={1}
       spaceBetween={0}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      /* onSlideChange={() => console.log("slide change")}
+      onSwiper={(swiper) => console.log(swiper)} */
       direction="vertical"
       mousewheel={true}
       speed={600}
@@ -259,6 +259,7 @@ export default function GaleriaFotosCnp() {
                 pagination={{
                   clickable: false,
                 }}
+                /* slidesPerView={1} */
                 spaceBetween={0}
                 /* autoplay={{
                   delay: 4000,
@@ -293,7 +294,7 @@ export default function GaleriaFotosCnp() {
                 pagination={{
                   clickable: false,
                 }}
-                slidesPerView={1}
+                /* slidesPerView={1} */
                 spaceBetween={0}
                 /* autoplay={{
                   delay: 4000,
@@ -600,7 +601,7 @@ export default function GaleriaFotosCnp() {
             slidesPerView={1}
             spaceBetween={10}
             speed={600}
-            breakpoints= {{
+            /* breakpoints= {{
               320: {
                 slidesPerView: 1.3,
                 spaceBetween: 10,
@@ -629,7 +630,7 @@ export default function GaleriaFotosCnp() {
                 keyboard:true,
                 grabCursor: true,
               },
-              }}>
+              }} */>
            
               <div className="absolute z-10 top-[24px] text-[13px] min-[500px]:text-[14px] md:text-[15px] [border-radius:_12px_12px_0_0]  mb-2 bg-fixed bg-cover bg-center text-4xl font-bold bg-cover h-[255px] w-full flex flex-col items-center justify-center px-4 min-[500px]:px-6 md:px-9 ">
                 <div className="w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2 min-[500px]:mb-3 pb-2 min-[500px]:pb-3 ">

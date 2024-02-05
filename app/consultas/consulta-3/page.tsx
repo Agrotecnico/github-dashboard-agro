@@ -44,11 +44,11 @@ export default function Page() {
         </div>
 
         <div className="max-w-2xl mx-auto">
-        <p className="mb-2 text-gray-500 dark:text-gray-400">
+        <div className="mb-2 text-gray-500 dark:text-gray-400">
           Si posee el formulario 08 firmado por el titular y certificado ante escribano público o registro del automotor, tenga en cuenta que de no efectivizar la transferencia en tiempo y forma dicho formulario pierde toda validez y tendrá que volver a tramitarlo.
           <p> En caso de fallecimiento del titular antes de realizar la transferencia, el formulario 08 pierde toda validez y es necesaria la convocatoria de herederos o sucesión.</p>
           <p> Los vendedores deben exigir la inmediata transferencia ante el registro del automotor a nombre del nuevo propietario, única forma legal existente para dicha transacción</p>
-        </p>
+        </div>
         </div>
       </article>
       

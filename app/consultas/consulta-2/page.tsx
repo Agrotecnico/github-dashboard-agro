@@ -27,6 +27,7 @@ export default function Page() {
               alt={`Cover Image for Titulo`}
               width={481}
               height={361}
+              priority={true} 
             />
           </div>
         </div>
@@ -34,7 +35,12 @@ export default function Page() {
         <div className="max-w-2xl mx-auto">
           <div className="block md:hidden mb-6">
           <div className="flex items-center">
-            <Image src={carinaBlog} width={300} height={300} className="w-12 h-12 rounded-full mr-4" alt="Nombre" />
+            <Image 
+              src={carinaBlog} 
+              width={300} 
+              height={300} 
+              className="w-12 h-12 rounded-full mr-4" 
+              alt="Nombre"/>
             <div className="text-xl font-bold">Carina Noemi Pacheco</div>
           </div>
           </div>
