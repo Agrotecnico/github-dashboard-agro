@@ -16,30 +16,35 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-/* .imageFormAuto {
-  background-image: url('/tramites-.png');
-} */
 .imageHero {
   background-image: url('/hero.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-/* .imageHero2 {
-  background-image: url('/carina-c.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
-}
-.fondo-automotores {
-  background-image: url('/fondo-automotores.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-} */
 .fondo-forms {
   background-image: url('/e4.png');
   background-size: cover;
   background-repeat: no-repeat;
+}
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.2s;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  color: #fffd;
+  font-size: 12.5px;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 99999;
+  border-radius: 6px;
+  bottom: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+[data-title] {
+  position: relative;
 }
 

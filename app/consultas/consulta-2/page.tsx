@@ -7,7 +7,7 @@ import usados from '../../../public/usados.jpg'
 export default function Page() {
   return (
     <>
-      <article className="mt-0 md:mt-4 p-6 bg-white rounded-xl  [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
+      <article className="mx-1 mb-1 mt-0 p-6 bg-white rounded-xl  [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
 
         <h1 className="text-2xl md:text-2xl lg:text-2xl font-bold tracking-tighter leading-tight md:leading-none mb-6 text-center md:text-left">
           ¿Qué es y cómo funciona el 08 para transferir un vehículo?
@@ -45,7 +45,7 @@ export default function Page() {
           </div>
           </div>
           <div className="mb-6 text-md">
-            enero 12, 2024
+            12 enero, 2024
           </div>
         </div>
 

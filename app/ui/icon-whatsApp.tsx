@@ -4,38 +4,38 @@ export type IconProps = {
   size?: string | number
   color?: string
   colorFondo?: string
+  sombraX?: string | number
+  sombraY?: string | number
+  filter?: string | number
 } & React.SVGAttributes<SVGElement>
 
 const IconWhatsApp: React.FC<IconProps> = ({
   size= 60,
-  color= "white",/* currentColor",*/
+  color= "white",
   colorFondo="#57c061",
+  sombraX= "1",
+  sombraY= "1",
+  filter="filter1",
   ...attributes
 }) => {
   return (
     <svg
       width={size}
-      /* height={size} */
       viewBox="0 0 65 65"
-      /* fill={colorIcon} */
       xmlns="http://www.w3.org/2000/svg"
       {...attributes}
       >
       <defs>
         <filter
-          /* inkscape:label="In and Out"
-          inkscape:menu="Shadows and Glows"
-          inkscape:menu-tooltip="Inner colorized shadow, outer black shadow"
-          style="color-interpolation-filters:sRGB;" */
-          id="filter883">
+          id={filter}>
           <feGaussianBlur
             result="result0"
             in="SourceAlpha"
             stdDeviation="1.01"
             id="feGaussianBlur877" />
           <feOffset
-            dx="1"
-            dy="1"
+            dx={sombraX}
+            dy={sombraY}
             result="result4"
             id="feOffset879"
             preserveAlpha="false" />
@@ -62,7 +62,7 @@ const IconWhatsApp: React.FC<IconProps> = ({
         />
         <path
           d="M 13.739353,0 H 46.26064 c 7.611596,0 13.739346,6.127752 13.739346,13.739353 v 32.521296 c 0,7.611598 -6.12775,13.739348 -13.739346,13.739348 H 13.739353 C 6.127752,59.999997 0,53.872247 0,46.260649 V 13.739353 C 0,6.127752 6.127752,0 13.739353,0 Z"
-          filter="url(#filter883)"
+          filter=/* "url(#filter880)" */{`url(#${filter})`}
           fill="#ffffff"
           opacity="0.7" />
       </g>

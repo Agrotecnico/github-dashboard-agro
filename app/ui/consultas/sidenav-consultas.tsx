@@ -1,41 +1,41 @@
 import Link from 'next/link'
 import NavLinksConsultas from '@/app/ui/consultas/nav-links-consultas'
-/* import AcmeLogo from '@/app/ui/acme-logo' */
-import { PowerIcon } from '@heroicons/react/24/outline'
-import { signOut } from '@/auth'
-import LogoCNP from '@/app/ui/logoCNP'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import IconWhatsApp from "../icon-whatsApp"
+import IconEmail from "../icon-Email"
+import IconConsultas from "../icon-consultas"
+
 
 export default function SideNavConsultas() {
   return (
-    <div className="flex h-full flex-col md:px-2">
-      
-      <Link
-        className="mb-2 flex h-20 items-center leading-6 justify-between rounded-md bg-[#e580d0] p-4 md:h-40 md:flex-col-reverse"
-        href="/"
-      >
-        <div className="w-32 text-white md:w-full">
-          <LogoCNP className="md:w-[170px]" colorC="white" colorN="#ddd" colorP="#ccc" color="#eee" />
-        </div>
-        <div className="flex flex-col md:flex-row opacity-30 text-[22px] font-black text-center">
-          <span className="mr-1.5">Consultas</span><span>2024</span>  
-        </div>
-      </Link>
-      <div className="flex grow gap-2 md:gap-0 flex-col justify-between space-x-2 md:space-x-0 md:space-y-2">
+    <div className="flex h-full flex-col">
+      <div className="mx-1 flex grow gap-2 md:gap-0 flex-col justify-between space-x-2 md:space-x-0 md:space-y-2">
         <NavLinksConsultas />
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-        <form
-          action={async () => {
-            'use server';
-            await signOut();
-          }}
+
+        <div className="flex items-center mt-2 [font-variant-caps:_small-caps] w-full leading-4 text-left font-normal mb-1.5 min-[500px]:mb-2.5      duration-200 flex text-[#333] !ml-0 text-start grow items-center justify-start gap-4 rounded-md bg-white py-1.5 px-3 text-sm font-medium md:flex-none ">
+          <div>Realizá Tu Consulta</div> 
+          <ArrowRightIcon className="h-4 ml-1.5" />
+          <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank">
+            <IconWhatsApp filter="filterTramites1" sombraX="1.2" sombraY="1.2" size="32" className="opacity-80 hover:opacity-100 duration-200 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+          </Link>
+          <Link href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje">
+            <IconEmail filter="filterTramites1" sombraX="1.2" sombraY="1.2" size="42" className="opacity-80 hover:opacity-100 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+          </Link>
+          <Link href={"/realizarConsulta"} >
+            <IconConsultas filter="filterTramites1" sombraX="1" sombraY="1" size="28" className="opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+          </Link>
+        </div> 
+        
+        <div
           className="!ml-0"
         >
-          <Link href={"/"}  className="flex h-[48px] w-full text-[#444] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3">
-            <ArrowLeftIcon className="h-4 ml-3" />
+          <Link href={"/"}  className="flex h-[48px] w-full text-[#555] hover:text-[#111] duration-200 grow items-center justify-start gap-2 rounded-md p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3">
+            <ArrowLeftIcon className="h-4" />
             <div className="">Regresar</div>
           </Link>
-        </form>
+        </div>
+        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
       </div>
     </div>
   );

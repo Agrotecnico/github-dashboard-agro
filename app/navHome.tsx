@@ -2,6 +2,7 @@ import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import IconCuenta from "./ui/icon-cuenta"
 
 const NavHome = () => {
   const pathname = usePathname()
@@ -52,15 +53,16 @@ const NavHome = () => {
         <div></div> 
         <nav
           className={clsx(
-            " text-white flex items-center justify-between max-w-[1100px] px-8 max-[500px]:px-4 mx-auto w-full h-full text-small-regular transition-colors duration-200",
+            " text-white flex items-center justify-between max-w-[1100px] px-2.5 mx-auto w-full h-full text-small-regular transition-colors duration-200",
             /* {
               "text-white group-hover:text-gray-900": isHome && !isScrolled,
             } */
           )}
           >
-          <div className="duration-200 flex items-center justify-end w-full pt-[46px] [text-shadow:_1px_1px_#222;] text-[15px] text-[#fffc] h-full min-[425px]:mr-4 min-[500px]:mr-0 min-[500px]:pt-9 min-[880px]:text-[16px]">
-            <Link href={"/dashboard"} className="hover:text-[#fff]">
-              Ingresá
+          <div className="flex items-center justify-end w-full pt-[18px] h-full min-[425px]:mr-4 min-[500px]:pt-1 min-[500px]:mr-8 min-[1100px]:mr-0">
+            <Link href={"/dashboard"} className="duration-200 flex leading-4 flex-col-reverse opacity-70 hover:opacity-95 items-center text-[#fffd] hover:text-white text-[14px] " >
+              <div className="text-white [text-shadow:_1px_-1px_#000]">Ingresá</div>
+              <IconCuenta filter="filterCuenta7" sombraX="1.5" sombraY="-1.5" size="30" className="bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
             </Link>
           </div>
         </nav>
