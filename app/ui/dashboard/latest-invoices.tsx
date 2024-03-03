@@ -16,17 +16,17 @@ export default async function LatestInvoices(/* {
       <h2 className={`${lusitana.className} text-xl md:text-2xl p-4`}>
         Últimas facturas
       </h2>
-      <div className="bg-white flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+      <div className="flex grow flex-col justify-between rounded-xl p-2">
 
-        <div className="bg-[#f7f7f7] px-6">
+        <div className="">
           {latestInvoices.map((invoice, i) => {
             return (
               <div
                 key={invoice.id}
                 className={clsx(
-                  'flex flex-row items-center justify-between py-4',
+                  'flex flex-row items-center justify-between p-4 bg-[#f7f7f7] rounded-lg mb-2  ',
                   {
-                    'border-t': i !== 0,
+                    /* 'border-t': i !== 0, */
                   },
                 )}
               >
