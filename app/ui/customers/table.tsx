@@ -1,24 +1,25 @@
 import Image from 'next/image';
+import { UpdateCustomer, DeleteCustomer } from '@/app/ui/customers/buttons';
 import { lusitana } from '@/app/ui/fonts';
  import Search from '@/app/ui/search';
 import {
   CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
-/*import { fetchFilteredCustomers } from '@/app/lib/data';
-import { CreateInvoice } from '@/app/ui/customers/buttons'*/
+import { fetchFilteredCustomers } from '@/app/lib/data';
+/*import { CreateInvoice } from '@/app/ui/customers/buttons'*/
  import { CreateCustomer } from '@/app/ui/customers/buttons' 
 
 export default async function CustomersTable({
-   customers, 
-  /*query,
-  currentPage,*/
+   /* customers,  */
+  query,
+  currentPage,
 }: {
-   customers: FormattedCustomersTable[]; 
-  /*query: string;
-  currentPage: number;*/
+   /* customers: FormattedCustomersTable[];  */
+  query: string;
+  currentPage: number;
 }) {
-  /* const customers = await fetchFilteredCustomers(query, currentPage); */
+  const customers = await fetchFilteredCustomers(query, currentPage);
 
   return (
     <div className="w-full">
@@ -37,7 +38,7 @@ export default async function CustomersTable({
                 {customers?.map((customer) => (
                   <div
                     key={customer.id}
-                    className="bg-[#f7f7f7] md:bg-white mb-2 w-full rounded-md p-4"
+                    className="bg-[#f7f7f7] md:bg-white mb-2 w-full rounded-lg p-4"
                   >
                     <div className="flex items-center justify-between border-b pb-4">
                       <div>
@@ -68,8 +69,12 @@ export default async function CustomersTable({
                         <p className="font-medium">{customer.total_paid}</p>
                       </div>
                     </div>
-                    <div className="pt-4 text-sm">
+                    <div className="pt-4 text-sm flex justify-between">
                       <p>{customer.total_invoices} facturas</p>
+                      <div className="flex">
+                        <UpdateCustomer id={customer.id} />
+                        <DeleteCustomer id={customer.id} />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -95,10 +100,10 @@ export default async function CustomersTable({
                   </tr>
                 </thead>
 
-                <tbody className="!bg-white divide-y divide-gray-200 text-gray-900">
+                <tbody className="!bg-white text-gray-900 divide-y-2 divide-white">
                   {customers.map((customer) => (
-                    <tr key={customer.id} className="group">
-                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                    <tr key={customer.id} className="group bg-[#f7f7f7]">
+                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm text-black sm:pl-6 group-first-of-type:[border-radius:_8px_0_0_0] group-last-of-type:[border-radius:_0_0_0_8px]">{/*  group-first-of-type:rounded-md group-last-of-type:rounded-md */}
                         <div className="flex items-center gap-3">
                           <Image
                             src={customer.image_url}
@@ -119,8 +124,14 @@ export default async function CustomersTable({
                       <td className="whitespace-nowrap px-4 py-5 text-sm">
                         {customer.total_pending}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+                      <td className="whitespace-nowrap px-4 py-5 text-sm">
                         {customer.total_paid}
+                      </td>
+                      <td className="whitespace-nowrap py-3 pl-6 pr-3 group-first-of-type:[border-radius:_0_8px_0_0] group-last-of-type:[border-radius:_0_0_8px_0]">
+                        <div className="flex justify-end gap-3">
+                          <UpdateCustomer id={customer.id} />
+                          <DeleteCustomer id={customer.id} />
+                        </div>
                       </td>
                     </tr>
                   ))}

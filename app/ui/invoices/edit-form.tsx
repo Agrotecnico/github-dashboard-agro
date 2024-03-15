@@ -25,17 +25,17 @@ export default function EditInvoiceForm({
   
   return (
     <form action={dispatch}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-white p-4 md:p-6 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
             Elija un cliente
           </label>
-          <div className="relative">
+          <div className="relative bg-[#f7f7f7] ">
             <select
               id="customer"
               name="customerId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className="peer block w-full bg-transparent cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue={invoice.customer_id}
               aria-describedby="customer-error"
             >
@@ -67,7 +67,7 @@ export default function EditInvoiceForm({
             Ingrese un monto
           </label>
           <div className="relative mt-2 rounded-md">
-            <div className="relative">
+            <div className="relative bg-[#f7f7f7] ">
               <input
                 id="amount"
                 name="amount"
@@ -75,7 +75,7 @@ export default function EditInvoiceForm({
                 defaultValue={invoice.amount}
                 step="0.01"
                 placeholder="Ingrese el monto en $"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="amount-error"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -97,7 +97,7 @@ export default function EditInvoiceForm({
           <legend className="mb-2 block text-sm font-medium">
             Establezca el estado de la factura
           </legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+          <div className="rounded-md border border-gray-200 bg-[#f7f7f7] px-[14px] py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input
@@ -110,7 +110,7 @@ export default function EditInvoiceForm({
                 />
                 <label
                   htmlFor="pending"
-                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600"
                 >
                   Pendiente <ClockIcon className="h-4 w-4" />
                 </label>

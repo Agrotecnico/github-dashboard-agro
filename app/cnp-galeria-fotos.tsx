@@ -20,6 +20,7 @@ import IconWhatsApp from "./ui/icon-whatsApp"
 import IconEmail from "./ui/icon-Email"
 import IconCuenta from "./ui/icon-cuenta"
 import IconConsultas from "./ui/icon-consultas"
+import IconWeb from "./ui/icon-web"
 
 // import required modules
 import {
@@ -392,7 +393,7 @@ export default function GaleriaFotosCnp() {
           }
         },
       }}
-    >
+      >
       <NavHome />
 
       <div
@@ -929,9 +930,12 @@ export default function GaleriaFotosCnp() {
                     </Link>
                     {/* <Link href="/dashboard"  data-title="Creá tu cuenta" >
                       <IconCuenta sombraX="0" sombraY="1" size="34" className="opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
-                    </Link> */}
-                    <Link href={"/realizarConsulta"} data-title="por aqui" /* className="opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)] " */ >{/* duration-200 flex leading-4 flex-col-reverse opacity-70 hover:opacity-95 items-center text-[#fffd] hover:text-white text-[14px] */}
+                    </Link> 
+                    <Link href={"/realizarConsulta"} data-title="por aqui" >
                       <IconConsultas filter="filterTramites2" sombraX="0" sombraY="1.2" size="28" className="opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
+                    </Link>*/}
+                    <Link href={"/register"} data-title="creá tu cuenta">
+                      <IconWeb filter="filterWeb2" sombraX="0" sombraY="1.2" size="34" className="opacity-70 hover:opacity-95 duration-200 bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
                     </Link>
                   </div>
                 </div> 

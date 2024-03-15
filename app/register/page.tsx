@@ -1,132 +1,25 @@
-"use client"
-
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-
-function RegisterPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const router = useRouter();
-
-  const onSubmit = handleSubmit(async (data) => {
-    if (data.password !== data.confirmPassword) {
-      return alert("Passwords do not match");
-    }
-
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      body: JSON.stringify({
-        username: data.username,
-        email: data.email,
-        password: data.password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.ok) {
-      router.push("/auth/login");
-    }
-  });
-
-  console.log(errors);
-
+import LogoCNP from '@/app/ui/logoCNP'
+import RegisterForm from '@/app/ui/register-form'
+import Link from 'next/link'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
+ 
+export default function RegisterPage() {
   return (
-    <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
-      <form onSubmit={onSubmit} className="w-1/4">
-        <h1 className="text-slate-200 font-bold text-4xl mb-4">Register</h1>
-
-        <label htmlFor="username" className="text-slate-500 mb-2 block text-sm">
-          Username:
-        </label>
-        <input
-          type="text"
-          {...register("username", {
-            required: {
-              value: true,
-              message: "Username is required",
-            },
-          })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
-          placeholder="yourUser123"
-        />
-
-        {errors.username && (
-          <span className="text-red-500 text-xs">
-            {errors.username.message}
-          </span>
-        )}
-
-        <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
-          Email:
-        </label>
-        <input
-          type="email"
-          {...register("email", {
-            required: {
-              value: true,
-              message: "Email is required",
-            },
-          })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
-          placeholder="user@email.com"
-        />
-        {errors.email && (
-          <span className="text-red-500 text-xs">{errors.email.message}</span>
-        )}
-
-        <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
-          Password:
-        </label>
-        <input
-          type="password"
-          {...register("password", {
-            required: {
-              value: true,
-              message: "Password is required",
-            },
-          })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
-          placeholder="********"
-        />
-        {errors.password && (
-          <span className="text-red-500 text-sm">
-            {errors.password.message}
-          </span>
-        )}
-
-        <label
-          htmlFor="confirmPassword"
-          className="text-slate-500 mb-2 block text-sm"
-        >
-          Confirm Password:
-        </label>
-        <input
-          type="password"
-          {...register("confirmPassword", {
-            required: {
-              value: true,
-              message: "Confirm Password is required",
-            },
-          })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
-          placeholder="********"
-        />
-        {errors.confirmPassword && (
-          <span className="text-red-500 text-sm">
-            {errors.confirmPassword.message}
-          </span>
-        )}
-
-        <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2">
-          Register
-        </button>
-      </form>
-    </div>
+    <main className="h-full min-h-screen max-w-[1280px] mx-auto flex pt-14 justify-center bg-center bg-no-repeat bg-cover bg-[url(../../public/ofi.jpg)]">
+      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4">
+        <Link href="/" >
+          <div className="flex h-20 w-full items-end rounded-lg bg-[#c969b5] p-3 md:h-32">
+            <div className="text-white">
+              <LogoCNP className="md:w-[200px]" color="#ddd" colorC="white" colorN="#ddd" colorP="#ccc"  />
+            </div>
+          </div>
+        </Link>
+        <RegisterForm />
+        
+        {/* <Link href={"/login"} className="flex items-center justify-center "> <i className="mr-[10px] text-[#0009]">Ya tienes una cuenta?</i><div className="flex items-center opacity-80 hover:opacity-100">Ingresá <ArrowRightIcon className="ml-2 h-4 w-4" /></div></Link> */}
+        <Link href={"/login"} className="opacity-80 flex items-center justify-center hover:opacity-100 "> <i className="mr-[10px] text-[#333]">Ya tienes una cuenta?</i> Ingresá <ArrowRightIcon className="ml-2 h-4 w-4" /></Link>
+        <Link href={"/"} className="opacity-80 absolute bottom-[-24px] !mb-[56px] flex items-center justify-start hover:opacity-100 "><ArrowLeftIcon className="mr-2 h-5 w-5" /> Regresar </Link>
+      </div>
+    </main>
   );
 }
-export default RegisterPage;

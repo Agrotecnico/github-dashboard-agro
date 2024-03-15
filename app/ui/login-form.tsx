@@ -14,8 +14,8 @@ import { authenticate } from '@/app/lib/actions'
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
   return (
-    <form action={dispatch}  className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8  [box-shadow:_0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
+    <form action={dispatch}  className="mt-4">{/* space-y-3 */}
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-2 pt-4  [box-shadow:_0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           {/* Please log in to continue. */} Ingresá a tu cuenta.
         </h1>
@@ -62,7 +62,7 @@ export default function LoginForm() {
         </div>
         <LoginButton />
         <div
-          className="flex h-8 items-end space-x-1"
+          className="flex h-8 items-end space-x-1 mb-2"
           aria-live="polite"
           aria-atomic="true"
         >
