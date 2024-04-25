@@ -6,9 +6,9 @@ import LogoCNP2 from '@/app/ui/logoCNP2'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-    <div className="p-3 md:p-6 flex flex-col mx-auto bg-[#f7f2f7] flex min-h-screen max-w-[1024px]">
+    <div className="p-3 md:p-6 flex flex-col mx-auto bg-[#f7f2f7] min-h-screen max-w-[1024px]">
       <Link
-        className="mb-4 flex h-20 items-center leading-6 justify-between rounded-md bg-[#e580d0] p-4 md:h-32 md:flex-col-reverse"
+        className="mb-4 flex h-20 items-center leading-6 justify-between rounded-md bg-[#e580d0] p-4 md:h-32 md:items-end"
         href="/"
         >
         <div className="text-white w-full">
@@ -20,11 +20,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </Link>
       <div className="flex gap-8 flex-col-reverse md:gap-4 md:flex-row md:overflow-hidden ">
-      
-        <div className="flex-none md:w-80">
-          <SideNavConsultas />
+        <div className="md:mt-6">
+          <div className="ml-4 text-[#777] font-medium mb-6 md:hidden">
+            Otras Consultas:
+          </div>
+          <div className="flex-none md:w-80">
+            <SideNavConsultas />
+          </div>
+          
         </div>
-        <div className="flex justify-between flex-grow flex-col md:overflow-y-auto">
+        <div className="md:mt-6 first-line:flex justify-between flex-grow flex-col md:overflow-y-auto">
           {children}
         </div>
       </div>

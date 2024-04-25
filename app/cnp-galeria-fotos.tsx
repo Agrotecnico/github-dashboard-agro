@@ -21,6 +21,10 @@ import IconEmail from "./ui/icon-Email"
 import IconCuenta from "./ui/icon-cuenta"
 import IconConsultas from "./ui/icon-consultas"
 import IconWeb from "./ui/icon-web"
+import type { Session } from "next-auth"
+/*import { useSession } from "next-auth/react" */
+
+
 
 // import required modules
 import {
@@ -36,7 +40,12 @@ import {
   Parallax,
 } from "swiper/modules"
 
-export default function GaleriaFotosCnp() {
+
+
+export default function GaleriaFotosCnp({ session }: { session: Session | null }) {
+
+  /* const { data: session, status } = useSession() */
+
 
   const agrotecnico = [
   `<svg
@@ -353,6 +362,8 @@ export default function GaleriaFotosCnp() {
 
   return (
     <>
+
+    
       <Swiper
       className= "swiper1 text-[#fffc] bg-fixed bg-center bg-cover bg-no-repeat relative "
       centeredSlides={true}
@@ -394,7 +405,7 @@ export default function GaleriaFotosCnp() {
         },
       }}
       >
-      <NavHome />
+      <NavHome session={session} />
 
       <div
         slot="container-start"
@@ -878,7 +889,6 @@ export default function GaleriaFotosCnp() {
       </SwiperSlide>
 
       {/* Consultas */}
-      
         <SwiperSlide id="cp">
           <Swiper 
             className="swiper2 !h-[316px] !mx-3 min-[500px]:!mx-8 md:!mx-24 [box-shadow:_#00000069_0px_0px_12px_0px_inset,_#ffffff69_0px_0px_1px_1px] rounded-xl bg-[#00000068]"
@@ -901,23 +911,28 @@ export default function GaleriaFotosCnp() {
            
               <div className="absolute z-10 top-[40px] text-[13px] min-[500px]:text-[14px] md:text-[15px] [border-radius:_12px_12px_0_0]  mb-2 bg-fixed bg-cover bg-center text-4xl font-bold bg-cover h-[255px] w-full flex flex-col items-center justify-center px-4 min-[500px]:px-6 md:px-9 ">
                 <div className="w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2 min-[500px]:mb-3 pb-2 min-[500px]:pb-3 ">
-                  PREGUNTAS FRECUENTES
+                  CONSULTAS FRECUENTES
                 </div>
-                <Link href={"/consultas"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
+                {/*<div>Polo</div>
+                 <ListConsultas />*/}
+
+                
+                <Link href={"/consultas/dif-gestor-mandatario"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
                   ¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?
                 </Link>
-                <Link href={"/consultas/consulta-2"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/formulario-08"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
                   ¿Qué es y cómo funciona el 08 para transferir un vehículo?
                 </Link> 
-                <Link href={"/consultas/consulta-3"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/validez-del-formulario"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
                   ¿Validez del formulario 08?
                 </Link> 
-                <Link href={"/consultas/consulta-4"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/dif-gestor-mandatario"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
                   Ante la compra o venta de un vehículo, ¿que documentación tengo que solicitar o entregar al vendedor?
                 </Link> 
-                <Link href={"/consultas/consulta-5"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
+                <Link href={"/consultas/dif-gestor-mandatario"} className="duration-200 hover:text-[#ffffffe9] w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-2.5 pb-1.5 min-[500px]:pb-1 border-b-[#fdfdfd17] border-b ">
                   Actualidad
-                </Link> 
+                </Link>
+
                 <div className="flex items-center mt-2 w-full leading-4 text-left [text-shadow:_1px_1px_#222] font-normal mb-1 pb-1.5 min-[500px]:pb-2.5 ">
                   <div className=" [font-variant-caps:_small-caps]"> Realizá Tu Consulta</div> 
                   <ArrowRightIcon className="h-4 ml-3" />
@@ -940,17 +955,15 @@ export default function GaleriaFotosCnp() {
                   </div>
                 </div> 
               </div>
+
+              
  
           </Swiper>
         </SwiperSlide>
       
-
       <FooterInicio />
 
       </Swiper>
     </>
   );
 }
-
-
-

@@ -16,7 +16,7 @@ export default function LoginPage() {
         </Link>
         <LoginForm />
         
-        <Link href={"/register"} className="opacity-80 flex items-center justify-center hover:opacity-100 "> <i className="mr-[10px] text-[#444]">No tienes una cuenta?</i> Créala <ArrowRightIcon className="ml-2 h-4 w-4" /></Link>
+        <Link href={"/register"} className="pt-2 opacity-80 flex items-center justify-center hover:opacity-100 "> <i className="mr-[10px] text-[#444]">No tienes una cuenta?</i> Créala <ArrowRightIcon className="ml-2 h-4 w-4" /></Link>
         <Link href={"/"} className="opacity-80 absolute bottom-[-24px] !mb-[56px] flex items-center justify-center hover:opacity-100 "><ArrowLeftIcon className="mr-2 h-5 w-5" /> Regresar </Link>
 
       </div>

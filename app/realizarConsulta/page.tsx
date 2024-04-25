@@ -1,4 +1,4 @@
-'use client';
+/* 'use client'; */
 
 import Image from 'next/image';
 import infobae from '../../public/infobae.jpg'
@@ -6,8 +6,12 @@ import intervencion from '../../public/intervencion.jpg'
 import Link from 'next/link'
 import LogoCNP from '@/app/ui/logoCNP'
 import LogoCNP2 from '@/app/ui/logoCNP2'
+import { signOut } from '@/auth'
+import { PowerIcon } from '@heroicons/react/24/outline'
+import { auth } from '@/auth'
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth()
   return (
     <>
       <div className="p-3 md:p-6 flex flex-col mx-auto bg-[#f7f2f7] flex min-h-screen max-w-[1024px]">
@@ -26,6 +30,17 @@ export default function Page() {
       <h1 className="text-2xl md:text-2xl lg:text-2xl font-bold tracking-tighter leading-tight md:leading-none mb-6 text-center md:text-left">
         Realizá tu Consulta
       </h1>
+      <form
+          action={async () => {
+            'use server';
+            await signOut()
+          }}
+        >
+          <button className="flex h-[48px] text-[#444] w-full grow items-center justify-center gap-2 rounded-md bg-white p-3 text-sm font-medium hover:text-[#b520b5] md:flex-none md:justify-start md:p-2 md:px-3">
+            <PowerIcon className="w-6" />
+            <div className="hidden md:block">Cerrar sesión</div>
+          </button>
+        </form>
       <article className="mx-1 mb-1 mt-0 p-6 bg-white rounded-xl  [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
 
         {/* <h1 className="text-2xl md:text-2xl lg:text-2xl font-bold tracking-tighter leading-tight md:leading-none mb-6 text-center md:text-left">

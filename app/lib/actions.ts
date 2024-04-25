@@ -167,6 +167,7 @@ export async function authenticate(
 ) {
   try {
     await signIn('credentials', formData);
+    
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -179,7 +180,6 @@ export async function authenticate(
     throw error;
   }
 }
-
 
 export async function createCustomer(prevStateCustomer: StateCustomer, formData: FormData) {
   // Validate form fields using Zod
@@ -311,7 +311,7 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: No se pudo crear el Usuario.',
+      message: `Database Error: El email ya existe.`,
     };
   }
 
