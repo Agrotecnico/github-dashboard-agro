@@ -11,7 +11,7 @@ export type IconProps = {
 
 const IconEmail: React.FC<IconProps> = ({
   size= 58,
-  color= "#ff8fe7",
+  color= "#eee",
   sombraX= "1",
   sombraY= "1",
   filter="filter1",

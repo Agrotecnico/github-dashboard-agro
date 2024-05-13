@@ -1,7 +1,7 @@
 import SideNav from '@/app/ui/dashboard/sidenav'
 import { auth } from "@/auth"
-/* import { Providers } from './providersxxx' */
-/* import { SessionProvider } from "next-auth/react" */
+import { Providers } from './providers'
+import { SessionProvider } from "next-auth/react"
 import Image from 'next/image'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   console.log("Ses33s: ",session) */
   return (
     <>
-    {/* <Providers basePath={"/auth"} session={session} > */}
+    <Providers /* basePath={"/auth"} */ session={session} >
     <div className="mx-auto gap-4 bg-[#f7f2f7] flex min-h-screen p-3 md:p-6 max-w-[1280px] flex-col md:flex-row md:overflow-hidden ">
       <div className="flex-none md:w-80 mb-4">
         <SideNav />
@@ -45,7 +45,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         {children}
       </div>
     </div>
-    {/* </Providers> */}
+    </Providers>
     </>
   );
 }

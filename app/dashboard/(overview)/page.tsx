@@ -8,8 +8,8 @@ import { Suspense } from 'react'
 import { RevenueChartSkeleton, LatestInvoicesSkeleton, CardsSkeleton,} from '@/app/ui/skeletons'
 import CardWrapper from '@/app/ui/dashboard/cards'
 import { auth } from '@/auth'
-/* import type { Session } from "next-auth"
-import { useSession } from "next-auth/react" */
+import type { Session } from "next-auth"
+import { useSession } from "next-auth/react"
 
 
 export default async function Page() {

@@ -21,7 +21,7 @@ const IconWhatsApp: React.FC<IconProps> = ({
   return (
     <svg
       width={size}
-      viewBox="0 0 65 65"
+      viewBox="-2 0 65 65"
       xmlns="http://www.w3.org/2000/svg"
       {...attributes}
       >

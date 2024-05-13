@@ -2,15 +2,14 @@ import type { NextAuthConfig } from 'next-auth'
 
  
 export const authConfig = {
-  pages: {
+  /* pages: {
     signIn: '/login',
-  },
+  }, */
   callbacks: {
 
 
 
-
-    authorized({ auth, request: { nextUrl } }) {
+    /* authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
       if (isOnDashboard) {
@@ -20,7 +19,15 @@ export const authConfig = {
         return Response.redirect(new URL('/dashboard', nextUrl));
       } 
       return true;
+    }, */
+
+
+    authorized({ request, auth }) {
+      const { pathname } = request.nextUrl
+      if (pathname === "/dashboard") return !!auth
+      return true
     },
+
 
 
     /* authorized({ request, auth }) {
@@ -35,7 +42,6 @@ export const authConfig = {
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     } */
-
 
   },
   providers: [], // Add providers with an empty array for now

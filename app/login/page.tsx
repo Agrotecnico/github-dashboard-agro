@@ -1,4 +1,4 @@
-import LogoCNP from '@/app/ui/logoCNP'
+import LogoCNP from '@/app/ui/logosIconos/logoCNP'
 import LoginForm from '@/app/ui/login-form'
 import Link from 'next/link'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid'

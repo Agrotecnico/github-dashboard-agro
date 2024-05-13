@@ -13,7 +13,7 @@ import { authenticate } from '@/app/lib/actions'
 import Image from "next/image"
 import { signIn } from "next-auth/react" 
 /*import { signIn } from "@/auth"*/
-import LogoGoogle from "../ui/logo-google"
+import LogoGoogle from "./logosIconos/logo-google"
 import { redirect } from 'next/navigation';
 
 

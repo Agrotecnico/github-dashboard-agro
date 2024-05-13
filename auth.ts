@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import { authConfig } from './auth.config'
 import Credentials from 'next-auth/providers/credentials'
 import Google from "next-auth/providers/google"
+import Facebook from "next-auth/providers/facebook"
 import { z } from 'zod'
 import { sql } from '@vercel/postgres'
 import type { User } from '@/app/lib/definitions'
@@ -37,9 +38,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
             return null
         },
       }),
-      Google/* Provider({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-      }) */,
+      Google,
+      Facebook
     ],
 });

@@ -115,16 +115,11 @@
   opacity: .75;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:hover {
-  /* color: white; */
   opacity: 1;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
-  /* opacity: .85; */
   margin-top:4px !important;
 }
-/* .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1):hover {
-  opacity: 1;
-} */
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet-active {
   color: white;
   opacity: 1;
@@ -161,28 +156,6 @@
 #ini .swiper3 .swiper-pagination-bullet {
   display: none;
 }
-/* [data-title]:hover:after {
-  opacity: 1;
-  transition: all 0.1s ease 0.2s;
-  visibility: visible;
-}
-[data-title]:after {
-  content: attr(data-title);
-  color: #fffd;
-  font-size: 12px;
-  position: absolute;
-  white-space: nowrap;
-  z-index: 99999;
-  border-radius: 6px;
-  bottom: 100%;
-  opacity: 0;
-  visibility: hidden;
-}
-[data-title] {
-  position: relative;
-} */
-
-
 
 
 @media (min-width: 320px) {
