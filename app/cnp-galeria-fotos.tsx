@@ -87,7 +87,7 @@ export default function GaleriaFotosCnp({
         },
       }}
     >
-      <NavInicio session={session} />
+      <NavInicio session={session} linkDatos={linkDatos} />
 
       <div
         slot="container-start"
@@ -536,7 +536,7 @@ export default function GaleriaFotosCnp({
       {/* Consultas */}
       <SwiperSlide id="cp">
         <Swiper
-          className="swiper2 !mx-3 !h-[356px] rounded-xl  bg-[#00000068] backdrop-blur [box-shadow:_#00000040_0px_0px_12px_0px_inset] md:!mx-24 md:!h-[322px] "
+          className="swiper2 !mx-3 !h-[356px] rounded-xl  bg-[#0000001f] backdrop-blur-lg [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:!mx-24 md:!h-[322px] "
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -550,8 +550,8 @@ export default function GaleriaFotosCnp({
           spaceBetween={10}
           speed={600}
         >
-          <div className="absolute top-0 z-10 flex h-full w-full  flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 text-4xl text-[13px] font-bold [border-radius:_12px_12px_0_0] min-[500px]:px-6 min-[500px]:text-[14px] md:px-9 md:text-[15px] ">
-            <div className="mb-2 w-full pb-2 text-left font-normal leading-4 [text-shadow:_1px_1px_#222] min-[500px]:mb-3 min-[500px]:pb-3 ">
+          <div className="absolute top-0 z-10 flex h-full w-full text-[#000000c2] [text-shadow:_0px_1px_#ffffff66] flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 text-4xl text-[13px] [border-radius:_12px_12px_0_0] min-[500px]:px-6 min-[500px]:text-[14px] md:px-9 md:text-[15px] ">
+            <div className="mb-2 w-full pb-2 text-left font-medium leading-4 min-[500px]:mb-3 min-[500px]:pb-3 ">
               CONSULTAS FRECUENTES
             </div>
 
@@ -561,9 +561,9 @@ export default function GaleriaFotosCnp({
                   <Link
                     as={`/consultas/${linkDato.slug}`} 
                     href="/consultas/[slug]"
-                    className='!ml-0 flex grow flex-col justify-start border-b border-b-[#ffffff19] text-start  text-[14px]  font-medium  leading-[18px] text-[#fffc] duration-300 hover:border-b-[#999]  hover:text-white md:flex-none '
+                    className='!ml-0 flex grow flex-col justify-start border-b border-b-[#00000012] text-start text-[14px] leading-[18px] duration-200 hover:border-b-[#0000001f]  hover:text-[#000000ee] md:flex-none '
                   >
-                    <p className=" text-sm font-normal [text-shadow:1px_1px_#222]">
+                    <p className=" text-sm font-medium">
                       {linkDato.excerpt}
                     </p>
                   </Link>
@@ -575,8 +575,8 @@ export default function GaleriaFotosCnp({
               </p> /* No blog posted yet :/ */
             )}
 
-            <div className="mt-3 flex w-full items-center text-left font-normal leading-4 [text-shadow:_1px_1px_#222] ">
-              <div className=" [font-variant-caps:_small-caps]">
+            <div className="mt-3 flex w-full items-center text-left font-medium leading-4 ">
+              <div className=" [font-variant-caps:_small-caps] text-[16px] ">
                 Realizá Tu Consulta Por:
               </div>
               <div className="ml-6 flex items-end gap-6">
@@ -605,7 +605,7 @@ export default function GaleriaFotosCnp({
                     className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
                   />
                 </Link>
-                <Link href={'/consultas'} data-title="cnp mandataria">
+                <Link href={session ? '/dashboard' : "/login"} data-title="cnp mandataria">
                   <LogoCnp
                     filter="filterCnp2"
                     sombraX="0"

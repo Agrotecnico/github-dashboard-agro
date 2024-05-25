@@ -43,6 +43,7 @@
   position: fixed;
   justify-content: start;
   margin-left: 4px;
+  margin-top: 8px;
 }
 .swiper2 > .swiper-pagination {
   top: 314px;
@@ -180,11 +181,11 @@
     line-height: .8;
   }
   .swiper1 > .swiper-pagination {
-    margin-left: 24px;
+    margin-left: 4px;
     justify-content: normal;
   }
   .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
-    margin-top:2px !important;
+    margin-top:0px !important;
   }
 }
 @media (min-width: 768px) {
@@ -214,7 +215,7 @@
 }
 @media (min-width: 1100px) {
   .swiper1 > .swiper-pagination {
-    margin-left: calc((100% - 1100px) / 2);
+    margin-left: calc(((100% - 1100px) / 2) + 42px);
   }
   .swiper1 > .swiper-wrapper {
     max-width: 1036px;

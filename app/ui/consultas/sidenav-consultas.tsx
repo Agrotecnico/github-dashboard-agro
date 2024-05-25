@@ -6,16 +6,23 @@ import IconWhatsApp from '@/app/ui/logosIconos/icon-whatsApp';
 import IconEmail from '@/app/ui/logosIconos/icon-Email';
 import IconWeb from '@/app/ui/logosIconos/icon-web';
 import LogoCnp from '@/app/ui/logosIconos/logo-cnp';
+import {auth} from "auth"
+/* import { usePathname } from 'next/navigation'
+import { getAllPosts } from '@/app/lib/getPost' */
 
-export default function SideNavConsultas() {
+
+export default async function SideNavConsultas() {
+  /* const pathname = usePathname()
+  const allPosts = getAllPosts(); */
+  const session = await auth()
   return (
     <div className="flex h-full flex-col md:mt-6">
-      <div className="text-white  mx-1 px-2 pt-6 flex grow flex-col justify-between rounded-xl bg-[#00000040]  backdrop-blur [box-shadow:_#00000040_0px_0px_12px_0px_inset] ">
+      <div className="text-white  px-3 pt-6 flex grow flex-col justify-between rounded-lg bg-[#0000001f]  backdrop-blur [box-shadow:_#00000040_0px_0px_6px_0px_inset] ">
         
         <NavLinksConsultas />
 
-        <div className="!ml-0 mb-4 mt-2 text-[#fff] flex flex-col items-start w-full grow justify-start gap-4 rounded-md px-3 py-1.5 text-left text-sm font-normal leading-4 duration-200 min-[400px]:flex-row min-[500px]:mb-2.5 md:flex-col ">
-          <div className="flex items-center [font-variant-caps:_small-caps]  [text-shadow:1px_1px_#222]">
+        <div className="!ml-0 mb-4 mt-2 text-[#000000c2] flex flex-col w-full grow justify-start gap-4 rounded-md px-3 py-1.5 text-left text-sm font-normal leading-4 duration-200 min-[400px]:items-end min-[400px]:flex-row min-[500px]:mb-2.5 md:items-start md:flex-col ">
+          <div className="flex items-center [font-variant-caps:_small-caps] font-semibold [text-shadow:0_1px_#ffffff66]">
             <div>Realizá Tu Consulta por:</div> 
             {/* <ArrowRightIcon className="ml-1.5 h-4 " /> */}
           </div>
@@ -45,7 +52,7 @@ export default function SideNavConsultas() {
                 className="opacity-70 duration-200 hover:opacity-95"
               />
             </Link>
-            <Link href={'/consultas'} data-title="cnp mandataria">
+            <Link href={session ? '/dashboard' : "/login"} data-title="cnp mandataria">
               <LogoCnp
                 filter="filterCnp1"
                 sombraX="-1.2"

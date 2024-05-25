@@ -19,7 +19,7 @@ export const agrotecnico = [
             id="feGaussianBlur877" />
             <feOffset
             dx="-1"
-            dy="-1"
+            dy="0"
             result="result4"
             id="feOffset879"
             preserveAlpha="false" />
@@ -178,7 +178,7 @@ export const agrotecnico2 = [
                 id="feGaussianBlur877" />
             <feOffset
                 dx="-1"
-                dy="-1"
+                dy="0"
                 result="result4"
                 id="feOffset879"
                 preserveAlpha="false" />

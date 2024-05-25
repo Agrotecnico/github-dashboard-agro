@@ -13,13 +13,14 @@ import { useSession } from "next-auth/react"
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const linkMembers = [
-  { name: 'Panel Info Consultas', href: '/dashboard', icon: HomeIcon },
-  { name: 'Tus Consultas', href: '/dashboard/tusConsultas', icon: HomeIcon },
   {
     name: 'Realizá tu consulta',
-    href: '/dashboard/realizarConsulta',
+    href: '/dashboard',
     icon: DocumentDuplicateIcon,
   },
+  /* { name: 'Panel Info Consultas', href: '/dashboard', icon: HomeIcon }, */
+  { name: 'Tus Consultas', href: '/dashboard/tusConsultas', icon: HomeIcon },
+  
   { name: 'Mi perfil', href: '/dashboard/perfil', icon: UserGroupIcon },
 ];
 
@@ -31,7 +32,7 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
-  { name: 'Mi perfil', href: '/dashboard/perfil', icon: UserGroupIcon },
+  /* { name: 'Mi perfil', href: '/dashboard/perfil', icon: UserGroupIcon }, */
 ];
 
 export default function NavLinks() {
@@ -50,9 +51,11 @@ export default function NavLinks() {
               key={link.name}
               href={link.href}
               className={clsx(
-                'duration-200 text-[#555] flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-white p-3 text-sm font-medium hover:text-[#b520b5] md:flex-none md:justify-start md:p-2 md:px-3',
+                'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] md:flex-none md:justify-start md:p-2 md:px-3',/* [box-shadow:_inset_-1px_1px_0_#ffffff55,_inset_1px_-1px_0_#00000055] */
+                /* 'duration-200 text-[#555] flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-red [box-shadow:_inset_-1px_1px_0_#ffffff3d,_inset_1px_-1px_0_#00000030] p-3 text-sm font-medium hover:text-[#b520b5] md:flex-none md:justify-start md:p-2 md:px-3', */
                 {
-                  'text-[#b520b5]': pathname === link.href,
+                  /* 'text-[#b520b5]': pathname === link.href, */
+                  'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href,
                 },
               )}
             >
@@ -73,9 +76,9 @@ export default function NavLinks() {
             key={linkMember.name}
             href={linkMember.href}
             className={clsx(
-              'duration-200 text-[#555] flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-white p-3 text-sm font-medium hover:text-[#b520b5] md:flex-none md:justify-start md:p-2 md:px-3',
+              'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                'text-[#b520b5]': pathname === linkMember.href,
+                'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href,
               },
             )}
           >

@@ -23,14 +23,14 @@ export default async function RevenueChart() {
   }
 
   return (
-    <div className="w-full md:col-span-4 bg-white rounded-xl [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
+    <div className="w-full md:col-span-4 rounded-xl bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0]">
       <h2 className={`${lusitana.className} mb-4 p-4 text-xl md:text-2xl`}>
         {/* Recent Revenue */}Ingresos recientes
       </h2>
       {/* NOTE: comment in this code when you get to this point in the course */}
 
-      <div className="rounded-xl p-2">
-        <div className="bg-[#f7f7f7] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4">
+      <div className="rounded-xl p-2 ">
+        <div className="bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4">
           <div
             className="mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex"
             style={{ height: `${chartHeight}px` }}

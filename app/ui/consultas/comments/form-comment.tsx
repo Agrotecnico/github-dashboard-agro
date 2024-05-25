@@ -18,7 +18,7 @@ type CommentFormProps = {
   session: Session | null;
 };
 
-export default function ConsultaForm({
+export default function CommentFormConsulta({
   /* text,
   setText,
   onSubmit, */
@@ -35,7 +35,7 @@ export default function ConsultaForm({
   }, []); */
 
   return (
-    <form /* onSubmit={onSubmit} */>
+    <form /* onSubmit={onSubmit} */className="mt-16 max-w-[42rem] mx-auto ">
 
    {/*    <div className="flex-shrink-0">
         <img
@@ -55,10 +55,10 @@ export default function ConsultaForm({
             "bg-[rgba(0,0,0,0.04)] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] ": session,
           }
         )}
-        rows= {session ? 4 : 2}
+        rows= {session ? 4 :2}
         /* ref={textareaName} */
         placeholder={
-          session ? "tu consulta..." : "Para realizar una consulta logeate con:"
+          session ? "tu comentario..." : "Para agregar un comentario logeate con:"
         }
         /* onChange={(e) => setText(e.target.value)}
         value={text} */
@@ -74,7 +74,7 @@ export default function ConsultaForm({
           </Button>
           <Button
             variant={"ghost"}
-            className="border border-[#d3d3d3] hover:bg-white "
+            className=" border border-[#d3d3d3] hover:bg-white"
             onClick={async () => {
               await signOut();
             }}
@@ -84,14 +84,16 @@ export default function ConsultaForm({
         </div>
       ) : (
         <div className="flex justify-start gap-4 items-center my-3">
-         <Button
+          <Button
             variant={"ghost"}
             size={"sm"}
             type="button"
             className="hover:bg-white opacity-80 hover:opacity-100 "
             onClick={async () => {
-              await signIn();
-            }} 
+              await signIn("google", {
+                callbackUrl: `${pathname}#consulta`,
+              });
+            }}
           >
             <img src="/google-icon.png" alt="my desk" width={26} height={26} />
           </Button>
@@ -108,20 +110,8 @@ export default function ConsultaForm({
             <img src="/facebook2.png" alt="my desk" width={16} height={16} />
           </Button> */}
 
-           {/* <Link href="/login"> */}
+          <Link href="/login">
             <Button
-             /*  onClick={async () => {
-                await signIn();
-              }} */
-              /* onClick={async () => {
-                await signIn("undefined", {
-                  callbackUrl: `${pathname}#consulta`,
-                });
-              }} */
-              onClick={async () => {
-                await signIn();
-              }}
-
               variant={"ghost"}
               size={"sm"}
               type="button"
@@ -129,7 +119,7 @@ export default function ConsultaForm({
             >
               <img src="/logoCnp.png" alt="my desk" width={56} height={28} />
             </Button>
-         {/* </Link> */}
+          </Link>
         </div>
       )}
     </form>

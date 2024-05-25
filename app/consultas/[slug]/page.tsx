@@ -5,8 +5,9 @@ import { getAllPosts, getPostBySlug } from '@/app/lib/getPost';
 import markdownToHtml from '@/app/lib/markdownToHtml';
 import distanceToNow from '@/app/lib/dateRelative';
 import markdownStyles from '@/app/ui/consultas/markdown-styles.module.css';
-import CommentFormConsulta from '@/app/ui/consultas/comments/form-consulta';
-import { auth } from "auth"
+import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
+import {auth } from "auth" 
+import CommentList from '@/app/ui/consultas/comments/list'
 
 
 type Params = {
@@ -45,7 +46,7 @@ export default async function PostPage({ params }: Params) {
               <div className="text-md font-semibold">{post.autor}</div>
             </div>
           </div>
-          <div className="mb-4 sm:mx-0 md:mb-8 md:max-w-2xl md:mx-auto">
+          <div className="mb-4 p-0.5 mx-auto max-w-max md:mb-8 rounded [box-shadow:inset_0_2px_0_#4d4d4db8,inset_0_-2px_0_#ffffff] ">
             <div className="sm:mx-0">
               {post.image ? (
                 <img
@@ -53,6 +54,7 @@ export default async function PostPage({ params }: Params) {
                   alt="my desk"
                   width={481}
                   height={361}
+                  className="roundrd"
                 />
               ) : null}
             </div>
@@ -83,18 +85,18 @@ export default async function PostPage({ params }: Params) {
               className={`parrafo-consultas  ${markdownStyles['markdown']}`}
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            <div id="consulta" className="mt-[14px]">
-              <p className="mb-36">
-                <i className="mb-5 text-[#374151] ">
-                  Podes contribuir {/*ampliar mejorar opinar participar colaborar contribuir*/} {/* esta respuesta */} {/* consulta */} agregando un comentario.{/* Para mejorar esta consulta podes dejar un comentario.*/}
+            <div id="consulta" className="pt-12">
+              <p className="">
+                <i className="text-[#374151] ">
+                  Podes contribuir {/*ampliar mejorar opinar participar colaborar contribuir*/} {/* esta respuesta */} {/* consulta */} agregando comentarios:{/* Para mejorar esta consulta podes dejar un comentario.*/}
                 </i>
               </p>
-             </div>
-            <CommentFormConsulta session={session} />  
-           
-          </div> 
-           <div className="mt-10 p-0.5 text-center text-[14px] [border-radius:_0_0_12px_12px] flex justify-center items-center bg-[#e580d0] mt- text-[#ffffffdd] ">
-              <div>cnp mandataria</div>
+            </div>
+            <CommentList />
+          </div>
+            <CommentFormConsulta session={session} />
+           <div className=" text-center [text-shadow:_1px_1px_#00000069] [border-radius:_0_0_12px_12px] flex justify-center items-center bg-[#e580d087] text-[#ffffff88] ">
+              cnp mandataria
             </div> 
         </article>
       </div>

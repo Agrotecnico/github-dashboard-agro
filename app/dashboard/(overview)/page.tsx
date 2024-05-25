@@ -10,6 +10,7 @@ import CardWrapper from '@/app/ui/dashboard/cards'
 import { auth } from '@/auth'
 import type { Session } from "next-auth"
 import { useSession } from "next-auth/react"
+import ConsultaForm from '@/app/ui/consultas/comments/form-consulta';
 
 
 export default async function Page() {
@@ -50,9 +51,14 @@ export default async function Page() {
   
   return (
     <main>
-        <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 md:text-2xl`}>
+        {/* <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 md:text-2xl`}>
           Panel Informacion Member
-        </h1>
+        </h1> */}
+         <h1 className="mb-8 text-2xl md:text-2xl lg:text-2xl font-bold tracking-tighter leading-tight md:leading-none text-center md:text-left">
+            Realizá tu Consulta
+          </h1>
+
+          <ConsultaForm session={session} />
     </main>
   );
 }

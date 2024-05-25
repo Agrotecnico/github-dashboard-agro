@@ -24,28 +24,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
-
-
-
-
-
-     /*    // El nombre que se mostrará en el formulario de inicio de sesión (por ejemplo, "Iniciar sesión con...")
-      name: "Credentials",
-      // `credenciales` se utiliza para generar un formulario en la página de inicio de sesión.
-      // Puede especificar qué campos deben enviarse agregando claves al objeto `credenciales`.
-      // p.ej. dominio, nombre de usuario, contraseña, token 2FA, etc.
-      // Puedes pasar cualquier atributo HTML a la etiqueta <input> a través del objeto.
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" }
-      }, */
-
-
-
-
-
-
-
         async authorize(credentials) {
           const parsedCredentials = z
             .object({ email: z.string().email(), password: z.string().min(6) })
@@ -65,7 +43,4 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       Google,
       Facebook
     ],
-    /* session: {
-      strategy: "jwt",
-    } */
 });

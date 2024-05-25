@@ -6,6 +6,9 @@ export type IconProps = {
   colorC?: string
   colorN?: string
   colorP?: string
+  sombraX?: string | number
+  sombraY?: string | number
+  filter?: string | number
 } & React.SVGAttributes<SVGElement>
 
 const LogoCNP2: React.FC<IconProps> = ({
@@ -14,6 +17,9 @@ const LogoCNP2: React.FC<IconProps> = ({
   colorC="#ab3aab",
   colorN="#ba6ddb",
   colorP="#de35de",
+  sombraX= "1",
+  sombraY= "1",
+  filter="filter1",
   ...attributes
 }) => {
   return (
@@ -25,15 +31,15 @@ const LogoCNP2: React.FC<IconProps> = ({
       >
       <defs>
         <filter
-          id="filter886">
+          id={filter}>
           <feGaussianBlur
             result="result0"
             in="SourceAlpha"
             stdDeviation="1.01"
             id="feGaussianBlur877" />
           <feOffset
-            dx="-.85"
-            dy="-.85"
+            dx={sombraX}
+            dy={sombraY}
             result="result4"
             id="feOffset879"
             preserveAlpha="false" />
@@ -71,7 +77,7 @@ const LogoCNP2: React.FC<IconProps> = ({
           fill="white"
           stroke= "white"
           strokeWidth="0"
-          filter="url(#filter886)"
+          filter={`url(#${filter})`}
           opacity="0.7"
         />
       </g>

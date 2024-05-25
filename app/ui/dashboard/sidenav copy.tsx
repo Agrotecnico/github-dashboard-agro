@@ -8,7 +8,6 @@ import LogoCNP from '@/app/ui/logosIconos/logoCNP'
 import { auth } from '@/auth'
 import Image from 'next/image'
 /* import { useSession } from "next-auth/react"; */
-import UserButtonHeader from "@/app/ui/user-button-header"
 
 
 export default async function SideNav() {
@@ -37,30 +36,21 @@ export default async function SideNav() {
         </div>
         <div className="text-white [text-shadow:_1px_1px_#000]">{session?.user?.name}</div>
       </Link> */}
-      <div className="flex flex-col-reverse items-center mb-6 ">
-       <span className="hidden text-sm text-[#fff] [text-shadow:_1px_-1px_0px_#000000] sm:inline-flex">
-         {session?.user?.name}
-       </span>
-       {/* <UserButtonHeader session={session} /> */}
-     </div>
-      
+      <div></div>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
         
-        {/* <form
+        <form
           action= {async () => {
             'use server'
-            await signOut()
+            await signOut({redirect: false, callbackUrl: "/"})
           }}
         >
-          <button 
-            className="duration-200 max-w-max flex h-[48px] text-[#444] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium hover:bg-[#ffffff21] md:flex-none md:justify-start md:p-2 md:px-3"
-            
-            >
+          <button className="duration-200 max-w-max flex h-[48px] text-[#444] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium hover:bg-[#ffffff21] md:flex-none md:justify-start md:p-2 md:px-3">
             <PowerIcon className="w-6" />
             <div className="hidden md:block [text-shadow:_1px_-1px_#ffffff47] ">Cerrar sesión</div>
           </button>
-        </form> */}
+        </form>
         <div className="hidden h-auto w-full grow rounded-md bg-[#ffffff22] md:block"></div>
       </div>
     </div>

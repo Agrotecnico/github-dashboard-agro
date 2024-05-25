@@ -2,19 +2,18 @@
 
 import React from 'react'
 import { useSession } from "next-auth/react"
-import { notFound } from 'next/navigation'
-
 
 function page() {
   
   const { data: session, status } = useSession()
 
-  if (session )
+  if (session?.user?.email === 'agrotecnicog@gmail.com' )
   return (
-    <div>{session.user?.name}</div>
+    <div>ERROR</div> 
   )
   return (
-    notFound()
+    status === "loading" ? <div>ERROR</div> : 
+    <div>page realizarConsulta</div>
   )
 }
 

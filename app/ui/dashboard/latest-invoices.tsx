@@ -12,11 +12,11 @@ export default async function LatestInvoices(/* {
   const latestInvoices = await fetchLatestInvoices()
 
   return (
-    <div className="flex w-full flex-col md:col-span-4 bg-white rounded-xl [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
+    <div className="flex w-full flex-col md:col-span-4 bg-[#0000000d] rounded-xl [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0]">
       <h2 className={`${lusitana.className} text-xl md:text-2xl p-4`}>
         Últimas facturas
       </h2>
-      <div className="flex grow flex-col justify-between rounded-xl p-2">
+      <div className="flex grow flex-col justify-between rounded-xl p-2 ">
 
         <div className="">
           {latestInvoices.map((invoice, i) => {
@@ -24,7 +24,7 @@ export default async function LatestInvoices(/* {
               <div
                 key={invoice.id}
                 className={clsx(
-                  'flex flex-row items-center justify-between p-4 bg-[#f7f7f7] rounded-lg mb-2  ',
+                  'flex flex-row items-center justify-between p-4 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]  rounded-lg mb-2  ',
                   {
                     /* 'border-t': i !== 0, */
                   },
