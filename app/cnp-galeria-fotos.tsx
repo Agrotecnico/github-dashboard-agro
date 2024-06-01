@@ -561,7 +561,7 @@ export default function GaleriaFotosCnp({
                   <Link
                     as={`/consultas/${linkDato.slug}`} 
                     href="/consultas/[slug]"
-                    className='!ml-0 flex grow flex-col justify-start border-b border-b-[#00000012] text-start text-[14px] leading-[18px] duration-200 hover:border-b-[#0000001f]  hover:text-[#000000ee] md:flex-none '
+                    className='!ml-0 flex grow flex-col justify-start border-b border-b-[#0000] text-start text-[#000000bb] text-[14px] leading-[18px] duration-200 hover:border-b-[#ffffff33]  hover:text-[#000000ee] md:flex-none '
                   >
                     <p className=" text-sm font-medium">
                       {linkDato.excerpt}

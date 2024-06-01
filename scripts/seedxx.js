@@ -177,3 +177,60 @@ main().catch((err) => {
     err,
   );
 });
+
+
+
+/* 
+CREATE TABLE IF NOT EXISTS consultas (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID NOT NULL,
+  consulta VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT 
+  
+CREATE TABLE IF NOT EXISTS consultas (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  consulta TEXT NOT NULL,
+  respuesta TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+*/
+/* 
+
+INSERT INTO users (name, email, password)
+      VALUES ('cabrera', 'cabrera@gmail.com', 'cabrera-User') 
+      
+DELETE FROM users WHERE name = 'Cabrera1';
+
+INSERT INTO consultas (name, email, consulta, respuesta )
+      VALUES ('Cabrera', 'cabrera1@gmail.com', 'Validez del formulario 08', 'Respuesta validez')
+      
+DELETE FROM consultas WHERE email = 'cabrera1@gmail.com'; 
+DELETE FROM consultas WHERE email = '8c11d30f-af9f-4f84-ab4f-3a22b79ec595'; 
+
+DROP TABLE IF EXISTS consultas;
+
+
+SELECT
+  id,
+  name,
+  email,
+  consulta,
+  respuesta
+  FROM consultas
+  WHERE id = 'f27c90f5-9b63-4fa2-a049-88e41e31db88'
+  ORDER BY created_at DESC;
+
+  UPDATE consultas
+  SET name = 'Userooo', email = 'userooo@nextmail.com', consulta = 'Consultaooo', respuesta = 'Respuestaooo'
+  WHERE id = '08aeb00a-c0a5-413d-8856-55f84ebc1a7a'
+*/

@@ -27,6 +27,15 @@ export type Invoice = {
   status: 'pending' | 'paid';
 };
 
+export type Consulta = {
+  id: string;
+  name: string;
+  email: string;
+  consulta: string;
+  respuesta: string | undefined;
+  created_at: string;
+};
+
 export type Revenue = {
   month: string;
   revenue: number;

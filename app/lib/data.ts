@@ -2,6 +2,7 @@ import { sql } from '@vercel/postgres'
 import {
   CustomerField,
   CustomersTableType,
+  Consulta,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
@@ -223,6 +224,34 @@ export async function fetchCustomerById(id: string) {
   }
 }
 
+export async function fetchConsultaById(id: string) {
+  noStore()
+  try {
+    const data = await sql<Consulta>`
+      SELECT
+      id,
+      name,
+      email,
+      consulta,
+      respuesta,
+      created_at
+      FROM consultas
+      WHERE id = ${id};
+    `;
+
+    const consulta = data.rows.map((consulta) => ({
+      ...consulta,
+      // Convert amount from cents to dollars
+      //amount: customer.amount / 100,
+    }));
+
+    return consulta[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch consulta.');
+  }
+}
+
 export async function fetchCustomers() {
   noStore()
   try {
@@ -278,6 +307,27 @@ export async function fetchFilteredCustomers(query: string, currentPage: number,
   }
 }
 
+export async function fetchConsultas() {
+  noStore()
+  try {
+    const data = await sql<Consulta>`
+      SELECT
+        id,
+        email,
+        consulta,
+        date
+      FROM consultas
+      ORDER BY name DESC
+    `;
+
+    const consultas = data.rows;
+    return consultas;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all consultas.');
+  }
+}
+
 export async function getUser(email: string) {
   try {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
@@ -285,5 +335,32 @@ export async function getUser(email: string) {
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function getConsulta(email: string) {
+  try {
+    const consultas = await sql<Consulta>
+    `SELECT * 
+      FROM consultas 
+      WHERE email=${email}
+      ORDER BY created_at DESC;`;
+    return consultas.rows;
+  } catch (error) {
+    console.error('Failed to fetch consulta:', error);
+    throw new Error('Failed to fetch consulta.');
+  }
+}
+
+export async function getConsultas() {
+  try {
+    const consultas = await sql<Consulta>
+    `SELECT * 
+      FROM consultas 
+      ORDER BY created_at DESC;`;
+    return consultas.rows;
+  } catch (error) {
+    console.error('Failed to fetch consultas:', error);
+    throw new Error('Failed to fetch consultas.');
   }
 }

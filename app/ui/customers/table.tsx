@@ -1,21 +1,14 @@
 import Image from 'next/image';
 import { UpdateCustomer, DeleteCustomer } from '@/app/ui/customers/buttons';
 import { lusitana } from '@/app/ui/fonts';
- import Search from '@/app/ui/search';
-import {
-  CustomersTableType,
-  FormattedCustomersTable,
-} from '@/app/lib/definitions';
+import Search from '@/app/ui/search';
 import { fetchFilteredCustomers } from '@/app/lib/data';
-/*import { CreateInvoice } from '@/app/ui/customers/buttons'*/
- import { CreateCustomer } from '@/app/ui/customers/buttons' 
+import { CreateCustomer } from '@/app/ui/customers/buttons';
 
 export default async function CustomersTable({
-   /* customers,  */
   query,
   currentPage,
 }: {
-   /* customers: FormattedCustomersTable[];  */
   query: string;
   currentPage: number;
 }) {
@@ -38,7 +31,7 @@ export default async function CustomersTable({
                 {customers?.map((customer) => (
                   <div
                     key={customer.id}
-                    className="bg-[#f7f7f7] md:bg-white mb-2 w-full rounded-lg p-4"
+                    className="mb-2 w-full rounded-lg bg-[#f7f7f7] p-4 md:bg-white"
                   >
                     <div className="flex items-center justify-between border-b pb-4">
                       <div>
@@ -69,7 +62,7 @@ export default async function CustomersTable({
                         <p className="font-medium">{customer.total_paid}</p>
                       </div>
                     </div>
-                    <div className="pt-4 text-sm flex justify-between">
+                    <div className="flex justify-between pt-4 text-sm">
                       <p>{customer.total_invoices} facturas</p>
                       <div className="flex">
                         <UpdateCustomer id={customer.id} />
@@ -99,11 +92,10 @@ export default async function CustomersTable({
                     </th>
                   </tr>
                 </thead>
-
-                <tbody className="!bg-white text-gray-900 divide-y-2 divide-white">
+                <tbody className="divide-y-2 divide-white !bg-white text-gray-900">
                   {customers.map((customer) => (
                     <tr key={customer.id} className="group bg-[#f7f7f7]">
-                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm text-black sm:pl-6 group-first-of-type:[border-radius:_8px_0_0_0] group-last-of-type:[border-radius:_0_0_0_8px]">{/*  group-first-of-type:rounded-md group-last-of-type:rounded-md */}
+                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm text-black group-first-of-type:[border-radius:_8px_0_0_0] group-last-of-type:[border-radius:_0_0_0_8px] sm:pl-6">
                         <div className="flex items-center gap-3">
                           <Image
                             src={customer.image_url}

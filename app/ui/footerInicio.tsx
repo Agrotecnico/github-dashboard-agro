@@ -16,9 +16,9 @@ const FooterInicio = () => {
              <span className="opacity-95  [text-shadow:1px_1px_0_#000]">P</span><div className="opacity-70 mr-1 flex h-full items-center [text-shadow:1px_1px_0_#000]">acheco</div>
          </div>
           <div className="opacity-70 flex h-full items-center [text-shadow:1px_1px_0_#000]">cnp.mandataria@gmail.com</div>
-          <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank" >
+          {/* <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank" >
             <IconWhatsApp filter="filterWhatsApp1" sombraX="1" sombraY="1"  size="42" className="fixed opacity-70 hover:opacity-95 duration-200 bottom-[56px] min-[768px]:bottom-[72px] right-4 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>
