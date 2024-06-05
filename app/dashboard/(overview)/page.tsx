@@ -10,7 +10,6 @@ import {
 import CardWrapper from '@/app/ui/dashboard/cards';
 import FormConsulta from '@/app/ui/consultas/comments/form-consulta';
 import { auth } from "auth"
-import { SessionProvider } from "next-auth/react"
 import { Metadata } from 'next';
 
 
@@ -27,7 +26,7 @@ export default async function Page() {
         <h1
           className={`${lusitana.className} mb-4 text-xl md:mb-8 md:text-2xl`}
         >
-          Panel Informacion General
+          Informacion Resumen
         </h1>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Suspense fallback={<CardsSkeleton />}>
@@ -50,9 +49,7 @@ export default async function Page() {
       <h1 className="mb-8 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
         Realizá tu Consulta
       </h1>
-      {/* <SessionProvider session={session}> */}
         <FormConsulta session={session} />
-      {/* </SessionProvider> */}
     </main>
   );
 }

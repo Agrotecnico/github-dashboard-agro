@@ -3,7 +3,6 @@
 import React from 'react'
 import { useSession } from "next-auth/react"
 import { notFound } from 'next/navigation';
-/* import ConsultaForm from '@/app/ui/consultas/comments/form-consulta'; */
 import ConsultaForm from '@/app/ui/consultas/comments/form-consulta';
 
 export default function Page() {

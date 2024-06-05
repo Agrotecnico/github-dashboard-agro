@@ -18,11 +18,7 @@ export default async function Layout({
       <main className=" mx-auto w-full max-w-7xl flex-auto px-2 py-4 md:px-6 md:py-6">
         <div className="mx-auto flex min-h-screen max-w-[1280px] flex-col pb-16 pt-3 md:px-6 md:pt-6      ">
           <div className="mt-[92px] flex flex-col-reverse gap-8 md:mt-14 md:flex-row md:gap-4 md:overflow-hidden ">
-            <div className="md:max-w-[280px] ">
-              <div className="">
-                <SideNavConsultas />
-              </div>
-            </div>
+            <SideNavConsultas />
             <div className="flex-grow flex-col justify-between first-line:flex md:mt-6 md:overflow-y-auto">
               {children}
             </div>

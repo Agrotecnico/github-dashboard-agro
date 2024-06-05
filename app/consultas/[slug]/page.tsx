@@ -83,22 +83,22 @@ export default async function PostPage({ params }: Params) {
               </time>
             </div>
           </div>
-          <div className="mx-auto max-w-2xl ">
+          <div className="mx-auto max-w-2xl mb-8">
             <div
               className={`parrafo-consultas  ${markdownStyles['markdown']}`}
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            <div id="consulta" className="pt-12">
+            {/* <div id="consulta" className="pt-12">
               <p className="">
                 <i className="text-[#374151] ">
                   Podes contribuir agregando comentarios:
                 </i>
               </p>
-            </div>
-            <CommentList />
+            </div> */}
+             {/* <CommentList />  */}
           </div>
-          <CommentFormConsulta session={session} />
-          <div className=" flex items-center justify-center bg-[#e580d087] text-center text-[#ffffff88] [border-radius:_0_0_12px_12px] [text-shadow:_1px_1px_#00000069] ">
+          {/* <CommentFormConsulta session={session} /> */}
+          <div className=" flex items-center justify-center bg-[#c160ad87] text-center text-[#ffffff88] [border-radius:_0_0_12px_12px] [text-shadow:_1px_1px_#00000069] ">
             cnp mandataria
           </div>
         </article>

@@ -4,7 +4,6 @@ import { fetchConsultaById } from '@/app/lib/data'
 import { Metadata } from 'next'
 import { auth } from '@/auth'
 import { notFound } from 'next/navigation'
-import { Divide } from 'lucide-react'
 
 
 export const metadata: Metadata = {
@@ -15,7 +14,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const session = await auth()
   const id = params.id;
   const consulta = await fetchConsultaById(id);
-  /* console.log("consulta", consulta) */
  if (!consulta) {
     notFound();
   }

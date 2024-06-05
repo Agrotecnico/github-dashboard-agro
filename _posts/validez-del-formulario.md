@@ -2,7 +2,7 @@
 title: "Validez del formulario 08"
 excerpt: "Validez del formulario 08"
 date: "2024-04-22"
-image: "/patentamiento1.jpg"
+image: "/usados.jpg"
 avatar: "/customers/guillermo-rauch.png"
 autor: "Guillermo Rauch"
 ---

@@ -5,11 +5,10 @@ import LogoCNP from '@/app/ui/logosIconos/logoCNP';
 import LogoCNP2 from '@/app/ui/logosIconos/logoCNP2';
 import { auth } from 'auth';
 import IconCuenta from './logosIconos/icon-cuenta';
-/* import { usePathname } from 'next/navigation'; */
 
 
 export default async function HeaderConsultas() {
-  /* const pathname = usePathname(); */
+
   const session = await auth();
   return (
     <header className=" fixed left-0 z-10 flex h-[96px] w-[100vw] items-center justify-center bg-[#ad6fa88c]  shadow-[inset_0_-2px_6px_#ffffff66,_0_2px_6px_#00000066] backdrop-blur-xl ">
@@ -43,11 +42,11 @@ export default async function HeaderConsultas() {
             </div>
           </Link>
         </div>
-        <div className="mb-1.5 flex flex-col text-center text-[22px] font-black leading-6 text-black opacity-40 [text-shadow:_0_1px_0_#ffffffdd] md:mb-1 md:flex-row md:leading-7">
+        <div className="mb-1.5 flex flex-col text-center text-[22px] font-black leading-6 text-black opacity-40 [text-shadow:_0_1px_0_#ffffffdd] max-[425px]:hidden md:mb-1 md:flex-row md:leading-7">
           <span className="mr-1.5">
             {session?.user?.email == 'agrotecnicog@gmail.com'
               ? 'Panel de control'
-              : 'Realizar consultas'}
+              : 'Consultas'}
           </span>
           <span>2024</span>
         </div>
@@ -71,7 +70,7 @@ export default async function HeaderConsultas() {
                 color={'#fffa'}
               />
             </div>
-            <div className="hidden text-sm leading-3 text-[#fff] [text-shadow:_1px_0_0px_#000000] sm:inline-flex">
+            <div className="text-sm leading-3 text-[#fff] [text-shadow:_1px_0_0px_#000000] sm:inline-flex">
               Realizá tu consulta
             </div>
           </Link>

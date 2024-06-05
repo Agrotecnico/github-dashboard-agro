@@ -98,7 +98,7 @@ export default function GaleriaFotosCnp({
       {/* Inicio */}
       <SwiperSlide id="ini">
         <Swiper
-          className="swiper2 mb-1 !h-[300px] "
+          className="swiper2 mb-1 !h-[344px] "
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -112,12 +112,12 @@ export default function GaleriaFotosCnp({
           pagination={{
             clickable: true,
           }}
-          slidesPerView={1}
+          slidesPerView={1.25}
           spaceBetween={10}
           speed={600}
           breakpoints={{
             425: {
-              slidesPerView: 1,
+              slidesPerView: 1.25,
               spaceBetween: 10,
               centeredSlides: true,
             },
@@ -168,8 +168,8 @@ export default function GaleriaFotosCnp({
               <SwiperSlide>
                 <div
                   className="absolute top-0 flex h-[300px] w-full flex-col items-center justify-start rounded-xl 
-                            bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/mano-b.jpg')]
-                            bg-cover bg-fixed bg-center text-4xl text-[#333] backdrop-blur "
+                            bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://i.ibb.co/z5Z9xQy/mano-b.jpg')]
+                            bg-cover bg-fixed bg-center text-4xl text-[#333] backdrop-blur "/* url('/mano-b.jpg') */
                 >
                   <p className="mt-8 text-[34px]">Hola!</p>
                   <p className="px-9 py-2 text-[18px] leading-7">
@@ -196,13 +196,13 @@ export default function GaleriaFotosCnp({
                 <div
                   className="absolute top-0 flex h-[300px] w-full items-end 
                             justify-center
-                            rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/carina-oficina.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                            rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://i.ibb.co/rwdK1ct/carina-oficina.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
                 >
                   <p className="w-full rounded-[0_0_12px_12px] border border-[#444] bg-[#00000085] text-[13.5px] font-extralight leading-5 text-[#fffb] backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
                     Mandataria Nacional{' '}
                     <span className="ml-2 text-[12px]">
                       Mat:{' '}
-                      <span className="text-[11px]">M202427306151350 DN</span>
+                      <span className="text-[11px]">M202427306151350 DN</span>{/* /carina-oficina.jpg */}
                     </span>
                   </p>
                 </div>
@@ -536,7 +536,7 @@ export default function GaleriaFotosCnp({
       {/* Consultas */}
       <SwiperSlide id="cp">
         <Swiper
-          className="swiper2 !mx-3 !h-[356px] rounded-xl  bg-[#0000001f] backdrop-blur-lg [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:!mx-24 md:!h-[322px] "
+          className="text-[#ffffffcc] text-[14px] [text-shadow:_1px_1px_#000] swiper2 !mx-3 !h-[356px] rounded-xl [backdrop-filter:_blur(1px)]  bg-[#00000061] [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:text-[15px] md:!mx-24 md:!h-[322px] "
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -550,20 +550,20 @@ export default function GaleriaFotosCnp({
           spaceBetween={10}
           speed={600}
         >
-          <div className="absolute top-0 z-10 flex h-full w-full text-[#000000c2] [text-shadow:_0px_1px_#ffffff66] flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 text-4xl text-[13px] [border-radius:_12px_12px_0_0] min-[500px]:px-6 min-[500px]:text-[14px] md:px-9 md:text-[15px] ">
+          <div className="absolute top-0 z-10 flex h-full w-full] flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
             <div className="mb-2 w-full pb-2 text-left font-medium leading-4 min-[500px]:mb-3 min-[500px]:pb-3 ">
               CONSULTAS FRECUENTES
             </div>
 
             {linkDatos.length ? (
               linkDatos.map((linkDato) => (
-                <article key={linkDato.slug} className="mb-3 w-full">
+                <article key={linkDato.slug} className="w-full">
                   <Link
                     as={`/consultas/${linkDato.slug}`} 
                     href="/consultas/[slug]"
-                    className='!ml-0 flex grow flex-col justify-start border-b border-b-[#0000] text-start text-[#000000bb] text-[14px] leading-[18px] duration-200 hover:border-b-[#ffffff33]  hover:text-[#000000ee] md:flex-none '
+                    className='!ml-0 pb-3 flex grow flex-col justify-start text-start leading-[18px] duration-200  hover:text-[#ffffff] md:flex-none '
                   >
-                    <p className=" text-sm font-medium">
+                    <p className="border-b border-b-[#fff2] [letter-spacing:_0.5px] ">
                       {linkDato.excerpt}
                     </p>
                   </Link>
@@ -572,14 +572,14 @@ export default function GaleriaFotosCnp({
             ) : (
               <p>
                 Ninguna consulta publicado todavía
-              </p> /* No blog posted yet :/ */
+              </p>
             )}
 
-            <div className="mt-3 flex w-full items-center text-left font-medium leading-4 ">
+            <div className="mt-4 gap-3 flex flex-col w-full items-start text-left font-medium leading-4  min-[500px]:flex-row min-[500px]:items-end min-[500px]:gap-6 ">
               <div className=" [font-variant-caps:_small-caps] text-[16px] ">
                 Realizá Tu Consulta Por:
               </div>
-              <div className="ml-6 flex items-end gap-6">
+              <div className="flex items-end gap-6">
                 <Link
                   href="https://api.whatsapp.com/send?phone=543476606595"
                   target="_blank"

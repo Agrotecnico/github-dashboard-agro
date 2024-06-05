@@ -1,6 +1,6 @@
 ---
 title: "Diferencias entre un gestor y un mandatario"
-excerpt: "¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor"
+excerpt: "¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?"
 date: "2024-04-25"
 image: "/carina-oficina.jpg"
 avatar: "/carina-blog.jpg"
@@ -10,7 +10,6 @@ autor: "Carina Noemi Pacheco"
 ##### Mandatario
 
 El Mandatario del Automotor brinda servicios especializados en el mercado automotriz, asesorando y realizando 
-
 diversas gestiones ante los Registros Seccionales del Automotor y de Créditos Prendarios.
 
 Debe abogar por el cumplimiento de las leyes y normas establecidas para la registración de un bien automotor.

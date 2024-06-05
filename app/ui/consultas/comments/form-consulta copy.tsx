@@ -1,137 +1,110 @@
-"use client";
+'use client';
 
-/* import { useAuth0 } from "@auth0/auth0-react"; */
-import type { Session } from "next-auth";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { usePathname, useSearchParams } from "next/navigation";
-/* import LogoGoogle from "@/app/ui/logosIconos/logo-google"; */
-import { Button } from "@/app/ui/uiRadix/button";
+/* import { CustomerField } from '@/app/lib/definitions'; */
+import Link from 'next/link';
+import {
+  CheckIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
+import { Button } from '@/app/ui/button';
+import { createConsulta } from '@/app/lib/actions';
+import { useFormState } from 'react-dom';
 import clsx from "clsx";
-import { useRef, useEffect } from "react";
-import Link from "next/link"
-import LogoCnp from '@/app/ui/logosIconos/logo-cnp'
+/* import { useRef, useEffect } from "react"; */
+import type { Session } from "next-auth"
+import { useSession } from "next-auth/react"
+import { getUser } from "@/app/lib/data"
 
-type CommentFormProps = {
-  /* text: string;
-  setText: Function;
-  onSubmit: (e: React.FormEvent) => Promise<void>; */
-  session: Session | null;
-};
 
-export default function ConsultaForm({
-  /* text,
-  setText,
-  onSubmit, */
-  session,
-}: CommentFormProps) {
-
-  const pathname = usePathname();
-  /* const searchParams = useSearchParams(); */
-  /* const { isAuthenticated, logout, loginWithPopup } = useAuth0(); */
-  const textareaName = useRef(null);
-
+export default async function FormConsulta({ session }: { session: Session | null }) {
+  /* const { data: session, update } = useSession() */
+  /* const textareaName = useRef(null); */
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(createConsulta, initialState);
+  /* console.log("session", session) */
   /* useEffect(() => {
-    textareaName.current.focus();
+    textareaName.current.focus()
   }, []); */
+   /* const user = await getUser(session?.user?.email);
+  const polo= session?.user?.id
+  console.log("user", user.name)  */
+  
 
   return (
-    <form /* onSubmit={onSubmit} */>
-
-   {/*    <div className="flex-shrink-0">
-        <img
-          src={`${session?.user?.image}`}
-          alt= {`${session?.user?.name}`}
-          width={40}
-          height={40}
-          className="rounded-full"
+    <form action={dispatch}>
+      {/* <div className="p-4"> */}
+        <textarea
+          className="mb-4 italic flex w-full border-[1px] border-[#fff0] max-h-40 p-3 rounded resize-y bg-[#0000000d] text-gray-900 placeholder-gray-400 focus:shadow-none 
+          focus-visible:outline-none focus:border focus:border-[#fff0] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] "
+          rows= {6}
+          id= "consulta"
+          name= "consulta"
+          placeholder="tu consulta..."
+          required
+          /* ref={textareaName} */
+          /* onChange={(e) => setText(e.target.value)}
+          value={text} */
+          /* disabled={!session} */
         />
-      </div>  */}
-      <div className="mb-1 text-[14px] font-semibold ">{session ? session.user?.name : "" }</div>
+        <textarea
+          className="italic hidden w-full border-[1px] border-[#fff0] max-h-40 p-3 rounded resize-y bg-[#0000000d] text-gray-900 placeholder-gray-400 focus:shadow-none focus-visible:outline-none focus:border focus:border-[#fff0] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] "
+          rows= {6}
+          id= "respuesta"
+          name= "respuesta"
+          placeholder="respuesta..."
+          /* disabled
+          required */
+          defaultValue= {undefined}
+        />
+        
 
-      <textarea
-        className={clsx(
-          "italic flex w-full border-[1px] border-[#fff0] max-h-40 p-3 rounded resize-y bg-[#ffffff1a] text-gray-900 placeholder-gray-400 focus:shadow-none focus-visible:outline-none focus:border focus:border-[#fff0] [box-shadow:inset_0_-1px_0_#4d4d4d59,inset_0_1px_0_#ffffff] ",
-          {
-            "bg-[rgba(0,0,0,0.04)] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] ": session,
-          }
-        )}
-        rows= {session ? 4 : 2}
-        /* ref={textareaName} */
-        placeholder={
-          session ? "tu consulta..." : "Para realizar una consulta logeate con:"
-        }
-        /* onChange={(e) => setText(e.target.value)}
-        value={text} */
-        disabled={!session}
-      />
-      {session ? (
-        <div className="flex justify-start gap-2 items-center my-3">
-          <Button 
-            variant={"outline"}
-            className="bg-[#fff] border border-[#d3d3d3] hover:bg-[#fff8] "
-            >
-            Enviar
-          </Button>
-          <Button
-            variant={"ghost"}
-            className="border border-[#d3d3d3] hover:bg-white "
-            onClick={async () => {
-              await signOut();
-            }}
-          >
-            Salir
-          </Button>
+        {/* Cliente Image_url 
+        <div className="mb-4">
+          <label htmlFor="image_url" className="mb-2 block text-sm font-medium">
+            Coloque la url
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative bg-[#f7f7f7] rounded-md">
+              <input
+                id="image_url"
+                name="image_url"
+                type="text"
+                placeholder="Ingrese la url"
+                className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="image_url-error"
+              />
+              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+          <div id="image_url-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.image_url &&
+              state.errors.image_url.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div>*/}
+
+        <div aria-live="polite" aria-atomic="true">
+          {state.message ? (
+            <p className="mt-2 text-sm text-red-500">{state.message}</p>
+          ) : null}
         </div>
-      ) : (
-        <div className="flex justify-start gap-4 items-center my-3">
-         <Button
-            variant={"ghost"}
-            size={"sm"}
-            type="button"
-            className="hover:bg-white opacity-80 hover:opacity-100 "
-            onClick={async () => {
-              await signIn();
-            }} 
-          >
-            <img src="/google-icon.png" alt="my desk" width={26} height={26} />
-          </Button>
-
-          {/* <Button
-            variant={"ghost"}
-            size={"sm"}
-            type="button"
-            className="hover:bg-[#fff] opacity-80 hover:opacity-100  "
-            onClick={async () => {
-              await signIn("google", { callbackUrl: `${pathname}#consulta` });
-            }}
-          >
-            <img src="/facebook2.png" alt="my desk" width={16} height={16} />
-          </Button> */}
-
-           {/* <Link href="/login"> */}
-            <Button
-             /*  onClick={async () => {
-                await signIn();
-              }} */
-              /* onClick={async () => {
-                await signIn("undefined", {
-                  callbackUrl: `${pathname}#consulta`,
-                });
-              }} */
-              onClick={async () => {
-                await signIn();
-              }}
-
-              variant={"ghost"}
-              size={"sm"}
-              type="button"
-              className="hover:bg-[#fff] opacity-80 hover:opacity-100  "
-            >
-              <img src="/logoCnp.png" alt="my desk" width={56} height={28} />
-            </Button>
-         {/* </Link> */}
-        </div>
-      )}
+      {/* </div> */}
+      <input type="hidden" id="email" name="email" value={session?.user?.email} readOnly/>
+      <input type="hidden" id="name" name="name" value={session?.user?.name} readOnly/>
+      <div className="flex justify-end gap-4">
+        {/* <Link
+          href="/dashboard/realizarConsulta"
+          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        >
+          Borrar
+        </Link> */}
+        <Button className="text-[#000000cc]  bg-[#ffffff99] hover:bg-[#ffffffcc] active:bg-[#fff] hover:text-[#000] " type="submit">Enviar</Button>
+      </div>
     </form>
   );
 }

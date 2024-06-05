@@ -31,7 +31,7 @@ export default async function Page({
 
   if (session?.user?.email === 'agrotecnicog@gmail.com' )
     return (
-      <div className="w-full">
+      <div className="">
         <div className="flex w-full items-center justify-between">
           <h1 className={`${lusitana.className} text-2xl`}>Facturas</h1>
         </div>

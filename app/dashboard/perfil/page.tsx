@@ -1,4 +1,3 @@
-/* "use client" */
 
 import React from 'react'
 import { useSession } from "next-auth/react"
@@ -6,17 +5,6 @@ import { auth } from '@/auth';
 
 export default async function Page() {
   const session = await auth();
-  
- /*  const { data: session, status } = useSession()
-
-  if (session?.user?.email === 'agrotecnicog@gmail.com' )
-  return (
-    <div>Perfil Admin</div> 
-  )
-  return (
-    status === "loading" ? <div>ERROR</div> : 
-    <div>Perfil Member</div>
-  ) */
 
   return (
     <div>
@@ -36,11 +24,6 @@ export default async function Page() {
                 {session?.user?.email?.substring(0, 1).toUpperCase()}
               </div>
             )}
-        {/* <img
-          decoding="async" 
-          src= {session?.user?.image}
-          className="rounded-full cursor-pointer bg-cover h-20 bject-cover w-full " alt="header-image-profile" /> */}
-
         <div className="flex items-center p-1 justify-center border border-[#999] bg-white rounded-full cursor-pointer max-h-[24px] max-w-[24px] min-h-[24px] min-w-[24px] absolute bottom-0 right-0 ">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="rgba(0, 0, 0, 0.9)">
             <path fillRule="evenodd" clipRule="evenodd" d="M11.8 14.2234C14.1353 14.2234 16.0284 12.3303 16.0284 9.99504C16.0284 7.65977 14.1353 5.76665 11.8 5.76665C9.46473 5.76665 7.57161 7.65977 7.57161 9.99504C7.57161 12.3303 9.46473 14.2234 11.8 14.2234ZM11.8 13.0234C10.1275 13.0234 8.77161 11.6676 8.77161 9.99504C8.77161 8.32251 10.1275 6.96665 11.8 6.96665C13.4725 6.96665 14.8284 8.32251 14.8284 9.99504C14.8284 11.6676 13.4725 13.0234 11.8 13.0234Z" fill="rgba(0, 0, 0, 0.9)">
@@ -56,11 +39,6 @@ export default async function Page() {
           {session?.user?.name}
         </h2>
         <p>{session?.user?.email}</p>
-        <div data-testid="meliplus-web" className="">
-          <a className="text-sm text-[#923891] " href="#" aria-label="Estás en nivel 1 - Mercado Puntos">
-            Estás en nivel
-          </a>
-        </div>
       </div>
     </div>
     </div>

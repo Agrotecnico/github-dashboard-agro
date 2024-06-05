@@ -40,8 +40,8 @@ export default function NavHome({
                     color={'#fffa'}
                   />
                 </div>
-                <div className="hidden text-sm leading-3 text-[#fff] [text-shadow:_1px_0_0px_#000000] sm:inline-flex">
-                  Realizá tu consulta
+                <div className="flex flex-col items-center text-sm leading-3 text-[#fff] [text-shadow:_1px_0_0px_#000000] min-[500px]:flex-row">
+                  <div>Realizá</div><div>tu consulta</div>
                 </div>
               </Link>
             )}

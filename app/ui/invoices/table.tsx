@@ -16,35 +16,35 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle ">
-        <div className="rounded-lg  p-4 md:pt-0 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffef] ">
-          <div className="md:hidden">
+        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffef] min-[824px]:pt-0 ">
+          <div className="min-[824px]:hidden">
             {invoices?.map((invoice) => (
               <div
                 key={invoice.id}
-                className="mb-2 w-full rounded-md p-4 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]"
+                className="mb-2 w-full text-sm rounded-md p-4 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]"
               >
                 <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <div className="mb-2 flex items-center">
-                      <Image
-                        src={invoice.image_url}
-                        className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      />
+                  <div className="flex items-center gap-3">
+                    <Image
+                      src={invoice.image_url}
+                      className="rounded-full"
+                      width={28}
+                      height={28}
+                      alt={`${invoice.name}'s profile picture`}
+                    />
+                    <div>
                       <p>{invoice.name}</p>
+                      <p>{invoice.email}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{invoice.email}</p>
                   </div>
-                  <InvoiceStatus status={invoice.status} />
+                  <p>{formatDateToLocal(invoice.date)}</p>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
+                    <p className="text-lg font-medium">
                       {formatCurrency(invoice.amount)}
                     </p>
-                    <p>{formatDateToLocal(invoice.date)}</p>
+                    <InvoiceStatus status={invoice.status} />
                   </div>
                   <div className="flex justify-end gap-2">
                     <UpdateInvoice id={invoice.id} />
@@ -54,14 +54,11 @@ export default async function InvoicesTable({
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
+          <table className="hidden min-w-full text-gray-900 min-[824px]:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                   Cliente
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Monto
@@ -69,11 +66,8 @@ export default async function InvoicesTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   Fecha
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Estado
-                </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="hidden">Edit</span>
                 </th>
               </tr>
             </thead>
@@ -92,23 +86,23 @@ export default async function InvoicesTable({
                         height={28}
                         alt={`${invoice.name}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <div>
+                        <p>{invoice.name}</p>
+                        <p>{invoice.email}</p>
+                      </div>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {invoice.email}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(invoice.amount)}
+                    <div className="flex flex-col ml-2 items-start gap-2">
+                      <p>{formatCurrency(invoice.amount)}</p>
+                      <InvoiceStatus status={invoice.status} />
+                    </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(invoice.date)}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <InvoiceStatus status={invoice.status} />
-                  </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
+                    <div className="flex items-end flex-col justify-end gap-3">
                       <UpdateInvoice id={invoice.id} />
                       <DeleteInvoice id={invoice.id} />
                     </div>

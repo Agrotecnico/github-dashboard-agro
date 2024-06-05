@@ -20,7 +20,7 @@ export default function RegisterForm() {
     <form action={dispatch} className="mt-4px">
       <div className="flex-1 rounded-lg bg-[#ffffff94] px-6 pb-2 pt-4 backdrop-blur-lg [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_8px_0_#fffe_inset]">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-          {/* Please log in to continue. */} Creá tu cuenta.
+           Creá tu cuenta.
         </h1>
         <div className="w-full">
           <div>
@@ -100,7 +100,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full  [box-shadow:inset_2px_-2px_#0000002e,inset_2px_2px_#ffffff,1px_-1px_#0000002e,1px_1px_#ffffff] [text-shadow:_0_1px_#fff]"
+      className="mt-4 w-full  [box-shadow:inset_2px_-2px_#0000002e,inset_2px_2px_#ffffff,1px_-1px_#0000002e,1px_1px_#ffffff]"
       aria-disabled={pending}
     >
       Crear cuenta

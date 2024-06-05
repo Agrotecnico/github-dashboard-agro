@@ -1,18 +1,19 @@
 'use client';
 
-/* import { CustomerField } from '@/app/lib/definitions'; */
 import Link from 'next/link';
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
+  AtSymbolIcon,
+  CameraIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { createCustomer } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 
-export default function FormCustomer(/* { customers }: { customers: CustomerField[] } */) {
+export default function FormCustomer() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createCustomer, initialState);
 
@@ -30,12 +31,11 @@ export default function FormCustomer(/* { customers }: { customers: CustomerFiel
                 id="name"
                 name="name"
                 type="text"
-                /* step="0.01" */
                 placeholder="Ingrese el nombre"
                 className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="name-error"
               />
-              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
 
@@ -60,12 +60,11 @@ export default function FormCustomer(/* { customers }: { customers: CustomerFiel
                 id="email"
                 name="email"
                 type="email"
-                /* step="0.01" */
                 placeholder="Ingrese el email"
                 className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="email-error"
               />
-              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
 
@@ -90,12 +89,12 @@ export default function FormCustomer(/* { customers }: { customers: CustomerFiel
                 id="image_url"
                 name="image_url"
                 type="text"
-                /* step="0.01" */
+                defaultValue={"/customers/imagen-cliente.png"}
                 placeholder="Ingrese la url"
                 className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="image_url-error"
               />
-              <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              <CameraIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
 

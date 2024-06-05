@@ -8,9 +8,11 @@ import {
   CurrencyDollarIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from '@/app/ui/button';
+import { UpdateInvoice } from '@/app/ui/invoices/buttons';
 import { updateCustomer } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
+import { Button } from '@/app/ui/button'
+
 
 export default function EditCustomerForm( { customer }: { customer: Customer }) {
   const initialState = { message: null, errors: {} };

@@ -223,7 +223,7 @@ export const agrotecnico2 = [
     </svg>`,
 
     `<svg
-        width="22"
+        width="24"
         viewBox="0 0 60 80"
         xmlns="http://www.w3.org/2000/svg"
         {...attributes}
@@ -267,12 +267,10 @@ export const agrotecnico2 = [
             opacity="0.4" />
         </g>
     </svg>
-    <div className="text-white [text-shadow:_1px_-1px_#000]">
-        Trámites
-    </div>`,
+    `,
 
     `<svg
-        width="24"
+        width="26"
         viewBox="0 0 48 58"
         xmlns="http://www.w3.org/2000/svg"
         {...attributes}
@@ -315,13 +313,7 @@ export const agrotecnico2 = [
             opacity="0.4" />
         </g>
     </svg>
-    <div className="text-white [text-shadow:_1px_-1px_#000]">
-        Consultas
-    </div>`,
+    `,
 ]
-
-
-
-
 
 

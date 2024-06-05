@@ -19,9 +19,9 @@
 .swiper2 > .swiper-wrapper > .swiper-slide {
   backdrop-filter: blur(1px);
   border-radius: 12px;
-  box-shadow:
+  /* box-shadow:
     #00000055 0px 0px 5px 2px inset,
-    #ffffff55 0px 0px 3px 1px;
+    #ffffff55 0px 0px 3px 1px; */
 }
 .swiper1 > .swiper-wrapper {
   width: 92%;
@@ -43,7 +43,6 @@
   position: fixed;
   justify-content: start;
   margin-left: 4px;
-  margin-top: 8px;
 }
 .swiper2 > .swiper-pagination {
   top: 314px;
@@ -108,7 +107,7 @@
   align-items: end;
   transition: 0.2s;
   line-height: 1;
-  margin-right: 8px !important;
+  margin-right: 20px !important;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
@@ -166,7 +165,7 @@
 }
 @media (min-width: 375px) {
   .swiper1 > .swiper-pagination > .swiper-pagination-bullet {
-    margin-right: 16px !important;
+    margin-right: 32px !important;
   }
 }
 @media (min-width: 425px) {
@@ -183,6 +182,7 @@
   .swiper1 > .swiper-pagination {
     margin-left: 4px;
     justify-content: normal;
+    margin-top: 8px;
   }
   .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
     margin-top:0px !important;
