@@ -55,7 +55,7 @@ export default function NavLinks() {
               key={link.name}
               href={link.href}
               className={clsx(
-                'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] min-[824px]:flex-none md:justify-start md:p-2 md:px-3',
+                'duration-200 text-[#00000099] flex h-[48px] grow  items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium md:p-2 md:px-3 hover:text-[#000000bb] hover:bg-[#ffffff17] min-[824px]:flex-none min-[824px]:justify-start ',
                 {
                   'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href,
                 },
@@ -78,7 +78,7 @@ export default function NavLinks() {
             key={linkMember.name}
             href={linkMember.href}
             className={clsx(
-              'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] md:flex-none md:justify-start md:p-2 md:px-3',
+              'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] min-[824px]:flex-none min-[824px]:justify-start md:p-2 md:px-3',
               {
                 'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href,
               },

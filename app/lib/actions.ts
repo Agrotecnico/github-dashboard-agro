@@ -24,17 +24,21 @@ const FormSchema = z.object({
 
 const FormSchemaCustomer = z.object({
   id: z.string(),
-  name: z.string().min(5, { message: "Must be 5 or more characters long" }),
+  name: z.string().min(2, { message: "Must be 2 or more characters long" }),
   email: z.string().email({ message: "Invalid email address" }),
   image_url: z.string().min(5, { message: "Must be 5 or more characters long" }),
 });
 
 const FormSchemaUser = z.object({
   id: z.string(),
-  name: z.string().min(5, { message: "Must be 5 or more characters long" }),
+  name: z.string().min(2, { message: "Must be 2 or more characters long" }),
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string().min(5, { message: "Must be 5 or more characters long" }),
   confirmPassword: z.string().min(5, { message: "Must be 5 or more characters long" }),
+  /* role: z.enum(['admin', 'member', 'developer'], {
+    invalid_type_error: 'Seleccione un rol de usuario.',
+  }),*/
+  image: z.string(),  /* .min(5, { message: "Must be 5 or more characters long" }) */
 });
 
 const FormSchemaConsulta = z.object({
@@ -48,13 +52,13 @@ const FormSchemaConsulta = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const CreateCustomer = FormSchemaCustomer.omit({ id: true });
-const CreateUser = FormSchemaUser.omit({ id: true/* , role: true */ });
+const CreateUser = FormSchemaUser.omit({ id: true, role: true });
 const CreateConsulta = FormSchemaConsulta.omit({ created_at: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const UpdateCustomer = FormSchemaCustomer.omit({ id: true });
+const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true });
 const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true });
-/* const UpdateUser = FormSchemaUser.omit({ role: true, id: true }); */
 
 
 // This is temporary
@@ -82,6 +86,7 @@ export type StateUser = {
     email?: string[];
     password?: string[];
     confirmPassword?: string[];
+    image?: string[] | undefined;
   };
   message?: string | null;
 };
@@ -123,18 +128,18 @@ export async function createInvoice(prevState: State, formData: FormData) {
       INSERT INTO invoices (customer_id, amount, status, date)
       VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
+    
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
       message: 'Database Error: Failed to Create Invoice.',
     };
   }
-
+      
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
-
 export async function updateInvoice(
   id: string,
   prevState: State,
@@ -169,7 +174,6 @@ export async function updateInvoice(
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
-
 export async function deleteInvoice(id: string) {
   // throw new Error('Failed to Delete Invoice');
 
@@ -182,25 +186,6 @@ export async function deleteInvoice(id: string) {
   }
 }
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  
-  try {
-    await signIn('credentials', formData );
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Credenciales no válidas.';
-        default:
-          return 'Algo salió mal.';
-      }
-    }
-    throw error;
-  }
-}
 
 export async function createCustomer(prevStateCustomer: StateCustomer, formData: FormData) {
   // Validate form fields using Zod
@@ -240,7 +225,6 @@ export async function createCustomer(prevStateCustomer: StateCustomer, formData:
   revalidatePath('/dashboard/customers');
   redirect('/dashboard/customers');
 }
-
 export async function updateCustomer(
   id: string,
   prevState: StateCustomer,
@@ -275,43 +259,6 @@ export async function updateCustomer(
   revalidatePath('/dashboard/customers');
   redirect('/dashboard/customers');
 }
-
-export async function updateConsulta(
-  id: string,
-  prevState: StateConsulta,
-  formData: FormData,
-) {
-  const validatedFields = UpdateConsulta.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    consulta: formData.get('consulta'),
-    respuesta: formData.get('respuesta'),
-  });
-  console.log("validatedFields", validatedFields)
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Consulta.',
-    };
-  }
-
-  const { name, email, consulta, respuesta } = validatedFields.data;
-  //const amountInCents = amount * 100;
-
-  try {
-    await sql`
-      UPDATE consultas
-      SET name = ${name}, email = ${email}, consulta = ${consulta}, respuesta = ${respuesta}
-      WHERE id = ${id}
-    `;
-  } catch (error) {
-    return { message: 'Database Error: Failed to Update Consulta.' };
-  }
-
-  revalidatePath('/dashboard/tusConsultas');
-  redirect('/dashboard/tusConsultas');
-}
-
 export async function deleteCustomer(id: string) {
   // throw new Error('Failed to Delete Customer');
 
@@ -322,71 +269,6 @@ export async function deleteCustomer(id: string) {
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Customer.' };
   }
-}
-
-export async function deleteConsulta(id: string) {
-  // throw new Error('Failed to Delete Consulta');
-
-  try {
-    await sql`DELETE FROM consultas WHERE id = ${id}`;
-    revalidatePath('/dashboard/tusConsulta');
-    return { message: 'Deleted Consulta' };
-  } catch (error) {
-    return { message: 'Database Error: Failed to Delete Consulta.' };
-  }
-}
-
-
-
-export async function createUser(prevStateCustomer: StateUser, formData: FormData) {
-  // Validate form fields using Zod
-  const validatedFieldsUser = CreateUser.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword'),
-  });
-
-  // Validate confirm password
-  const pwd= formData.get("password")
-  const confirmPwd= formData.get("confirmPassword")
-  if (pwd !== confirmPwd) {
-    return {
-      errors: {},
-      message: 'Las contraseñas no coinciden.',
-    };
-  }
-
-  // If form validation fails, return errors early. Otherwise, continue.
-  if (!validatedFieldsUser.success) {
-    return {
-      errors: validatedFieldsUser.error.flatten().fieldErrors,
-      message: 'Campos faltantes. No se pudo crear el Usuario.',
-    };
-  }
-  
-  // Prepare data for insertion into the database
-  const { name, email, password } = validatedFieldsUser.data;
-  /* const amountInCents = amount * 100; */
-  /* const date = new Date().toISOString().split('T')[0];*/
-  const hashedPassword = await bcrypt.hash(password, 10); 
-
-  // Insert data into the database
-  try {
-    await sql`
-      INSERT INTO users (name, email, password)
-      VALUES (${name}, ${email}, ${hashedPassword})
-    `;
-  } catch (error) {
-    // If a database error occurs, return a more specific error.
-    return {
-      message: `Database Error: El email ya existe.`,
-    };
-  }
-
-  // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath('/login');
-  redirect('/login');
 }
 
 
@@ -428,6 +310,163 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/tusConsultas');
   redirect('/dashboard/tusConsultas');
+}
+export async function updateConsulta(
+  id: string,
+  prevState: StateConsulta,
+  formData: FormData,
+) {
+  const validatedFields = UpdateConsulta.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    consulta: formData.get('consulta'),
+    respuesta: formData.get('respuesta'),
+  });
+  /* console.log("validatedFields", validatedFields) */
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Consulta.',
+    };
+  }
+
+  const { name, email, consulta, respuesta } = validatedFields.data;
+  //const amountInCents = amount * 100;
+
+  try {
+    await sql`
+      UPDATE consultas
+      SET name = ${name}, email = ${email}, consulta = ${consulta}, respuesta = ${respuesta}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Consulta.' };
+  }
+
+  revalidatePath('/dashboard/tusConsultas');
+  redirect('/dashboard/tusConsultas');
+}
+export async function deleteConsulta(id: string) {
+  // throw new Error('Failed to Delete Consulta');
+
+  try {
+    await sql`DELETE FROM consultas WHERE id = ${id}`;
+    revalidatePath('/dashboard/tusConsulta');
+    return { message: 'Deleted Consulta' };
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Consulta.' };
+  }
+}
+
+
+export async function createUser(prevStateCustomer: StateUser, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateUser.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
+    image: formData.get('image'),
+  });
+  
+  // Validate confirm password
+  const pwd= formData.get("password")
+  const confirmPwd= formData.get("confirmPassword")
+  if (pwd !== confirmPwd) {
+    return {
+      errors: {},
+      message: 'Las contraseñas no coinciden.',
+    };
+  }
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Campos faltantes. No se pudo crear el Usuario.',
+    };
+  }
+  
+  // Prepare data for insertion into the database
+  const { name, email, password, image } = validatedFields.data;
+  /* const amountInCents = amount * 100; */
+  /* const date = new Date().toISOString().split('T')[0];*/
+  const hashedPassword = await bcrypt.hash(password, 10); 
+
+  // Insert data into the database
+  try {
+    await sql`
+      INSERT INTO users (name, email, password, image)
+      VALUES (${name}, ${email}, ${hashedPassword}, ${image})
+    `;
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: `Database Error: El email ya existe.`,
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/login');
+  redirect('/login');
+}
+
+export async function updateUser(
+  id: string,
+  prevState: StateUser,
+  formData: FormData,
+) {
+  const validatedFields = UpdateUser.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
+    image: formData.get('image'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. No se pudo actualizar a el Usuario.',
+    };
+  }
+
+  const { name, email, image } = validatedFields.data;
+  //const amountInCents = amount * 100;
+
+  try {
+    await sql`
+      UPDATE users
+      SET name = ${name}, email = ${email}, image = ${image}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: No se pudo actualizar a el Usuario.' };
+  }
+
+  revalidatePath('/dashboard/perfil');
+  redirect('/dashboard/perfil');
+}
+
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  
+  try {
+    await signIn('credentials', formData );
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Credenciales no válidas.';
+        default:
+          return 'Algo salió mal.';
+      }
+    }
+    throw error;
+  }
 }
 
 

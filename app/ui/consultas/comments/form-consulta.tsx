@@ -6,7 +6,7 @@ import { useFormState } from 'react-dom';
 import type { Session } from "next-auth"
 
 
-export default async function FormConsulta({ session }: { session: Session | null }) {
+export default /* async */ function FormConsulta({ session }: { session: Session | null }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createConsulta, initialState);
   return (

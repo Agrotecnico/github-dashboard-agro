@@ -3,6 +3,8 @@ import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { UpdateConsulta, DeleteConsulta } from '@/app/ui/consultas/buttons';
 import Search from '@/app/ui/search';
 import { fetchFilteredConsultas } from '@/app/lib/data';
+import Image from 'next/image';
+import { Session } from 'inspector';
 
 
 export default async function ConsultasTableA({
@@ -57,7 +59,7 @@ export default async function ConsultasTableA({
                     </div>
                   </div>
                     <div className="flex w-full items-center justify-star gap-4 border-b border-t border-[#ffffff88] py-2">
-                      <div>Respuesta:</div>
+                      <div>Consulta:</div>
                       {AllConsulta?.respuesta ? (
                           <div className="text-center rounded bg-[#c2f3c1] text-sm ">Respondida</div>
                           ) : (
@@ -83,9 +85,9 @@ export default async function ConsultasTableA({
                     <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                       Mombre
                     </th>
-                    <th scope="col" className="px-3 py-5 font-medium">
+                    {/* <th scope="col" className="px-3 py-5 font-medium">
                       Email
-                    </th>
+                    </th> */}
                     <th scope="col" className="px-3 py-5 font-medium">
                       Fecha
                     </th>
@@ -98,13 +100,26 @@ export default async function ConsultasTableA({
                   {AllConsultas?.map((AllConsulta) => (
                     <tr key={AllConsulta?.id} className="w-full py-3 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] text-sm last-of-type:border-none [&:first-child]:rounded-tl-lg [&:first-child]:rounded-tr-lg [&:last-child]:rounded-bl-lg [&:last-child]:rounded-br-lg [&:first-child>td:first-child]:rounded-tl-lg  [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg  ">
                       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm text-black group-first-of-type:[border-radius:_8px_0_0_0] group-last-of-type:[border-radius:_0_0_0_8px] sm:pl-6">
-                        <div className="flex items-center gap-3">
-                          <p>{AllConsulta?.name }</p>
+                      <div className="flex items-center gap-3">
+                          {/* <Image
+                            src={sess}
+                            className="rounded-full"
+                            alt={`${AllConsulta.name}'s profile picture`}
+                            width={28}
+                            height={28}
+                          />*/}
+                          <div> 
+                            <p className="font-semibold ">{AllConsulta.name}</p>
+                            <p>{AllConsulta.email}</p>
+                          </div>
                         </div>
+                        {/* <div className="flex items-center gap-3">
+                          <p>{AllConsulta?.name }</p>
+                        </div> */}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-5 text-sm">
+                      {/* <td className="whitespace-nowrap px-4 py-5 text-sm">
                         {AllConsulta.email}
-                      </td>
+                      </td> */}
                       <td className="whitespace-nowrap px-4 py-5 text-sm">
                       <p>{formatDateToLocal(AllConsulta.created_at)}</p>
                       </td>
@@ -116,7 +131,7 @@ export default async function ConsultasTableA({
                           )}
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3 group-first-of-type:[border-radius:_0_8px_0_0] group-last-of-type:[border-radius:_0_0_8px_0]">
-                        <div className="flex justify-end gap-3">
+                        <div className="flex justify-end gap-3  items-end flex-col">
                           <UpdateConsulta id={AllConsulta.id} />
                           <DeleteConsulta id={AllConsulta.id} />
                         </div>

@@ -8,6 +8,7 @@ export type User = {
   email: string;
   password: string;
   role: 'admin' | 'member' | 'developer';
+  image: string | undefined;
 };
 
 export type Customer = {

@@ -16,8 +16,9 @@ export default async function Page() {
   return (
     <div className="flex flex-col justify-between w-full h-full min-h-screen">
       
-        <GaleriaFotosCnp session={session} linkDatos={linkDatos} />
-      
+      <GaleriaFotosCnp session={session} linkDatos={linkDatos} />
+
     </div>
+    
   )
 }

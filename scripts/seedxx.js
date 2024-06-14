@@ -17,6 +17,7 @@ async function seedUsers(client) {
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL
+        image_url VARCHAR(255)
       );
     `;
 
@@ -207,15 +208,28 @@ CREATE TABLE IF NOT EXISTS consultas (
 /* 
 
 INSERT INTO users (name, email, password)
-      VALUES ('cabrera', 'cabrera@gmail.com', 'cabrera-User') 
+      VALUES ('cabrera', 'cabrera@gmail.com', 'cabrera-User') https://i.ibb.co/vwT9smT/apreton-manos-jpg.jpg
       
-DELETE FROM users WHERE name = 'Cabrera1';
+
+Insertar filas
+
+INSERT INTO users (name, image)
+VALUES ('User1', 'https://i.ibb.co/vwT9smT/apreton-manos-jpg.jpg')      
 
 INSERT INTO consultas (name, email, consulta, respuesta )
-      VALUES ('Cabrera', 'cabrera1@gmail.com', 'Validez del formulario 08', 'Respuesta validez')
-      
+VALUES ('Cabrera', 'cabrera1@gmail.com', 'Validez del formulario 08', 'Respuesta validez')
+
+INSERT INTO users (name, email, password )
+VALUES ('Mario Jorge Szánto', 'agrotecnicog@gmail.com', 'agrotecnicog@gmail.com')
+
+Eliminar filas
+DELETE FROM users WHERE name = 'Mario Jorge Szanto';
+
 DELETE FROM consultas WHERE email = 'cabrera1@gmail.com'; 
+
 DELETE FROM consultas WHERE email = '8c11d30f-af9f-4f84-ab4f-3a22b79ec595'; 
+
+
 
 DROP TABLE IF EXISTS consultas;
 
@@ -230,7 +244,19 @@ SELECT
   WHERE id = 'f27c90f5-9b63-4fa2-a049-88e41e31db88'
   ORDER BY created_at DESC;
 
-  UPDATE consultas
+  UPDATE users
+  SET email = 'user@nextmail.com'
+  WHERE id = '410544b2-4001-4271-9855-fec4b6a6442a'
+
+  UPDATE users
   SET name = 'Userooo', email = 'userooo@nextmail.com', consulta = 'Consultaooo', respuesta = 'Respuestaooo'
   WHERE id = '08aeb00a-c0a5-413d-8856-55f84ebc1a7a'
+
+
+ALTER TABLE users 
+ADD COLUMN image_url VARCHAR(255);
+
+ALTER TABLE users 
+ALTER COLUMN image TYPE VARCHAR(255);
+
 */

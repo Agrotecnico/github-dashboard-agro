@@ -33,7 +33,7 @@ export default async function InvoicesTable({
                       alt={`${invoice.name}'s profile picture`}
                     />
                     <div>
-                      <p>{invoice.name}</p>
+                      <p className="font-semibold ">{invoice.name}</p>
                       <p>{invoice.email}</p>
                     </div>
                   </div>
@@ -87,7 +87,7 @@ export default async function InvoicesTable({
                         alt={`${invoice.name}'s profile picture`}
                       />
                       <div>
-                        <p>{invoice.name}</p>
+                        <p className="font-semibold ">{invoice.name}</p>
                         <p>{invoice.email}</p>
                       </div>
                     </div>

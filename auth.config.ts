@@ -1,9 +1,11 @@
 import type { NextAuthConfig } from 'next-auth';
+import "next-auth/jwt"
 
 export const authConfig = {
   pages: {
     signIn: '/login',
   },
+  /* basePath: "/auth", */
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;
@@ -11,18 +13,35 @@ export const authConfig = {
       if (pathname.startsWith('/dashboard')) return !!auth;
       return true;
     },
-    /* async jwt({ token, account, profile }) {
-      // Persist the OAuth access_token and or the user id to the token right after signin
-      if (account) {
-        token.accessToken = account.access_token
-        token.id = profile.id
+    jwt({ token, trigger, session, account }) {
+      if (trigger === "update") token.name = session.user.name
+      if (account?.provider === "keycloak") {
+        return { ...token, accessToken: account.access_token }
       }
       return token
     },
-    async session({ session, token, user }) {
-      console.log("session callback", {session, token, user});
-      return session;
-    }, */
+    async session({ session, token }) {
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken
+      }
+      return session
+    },
   },
+  experimental: {
+    enableWebAuthn: true,
+  },
+  debug: process.env.NODE_ENV !== "production" ? true : false,
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
+
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string
+  }
+}

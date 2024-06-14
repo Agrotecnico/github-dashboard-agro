@@ -20,7 +20,9 @@ import { useSession } from 'next-auth/react';
 export default function LoginForm() {
   const router = useRouter();
   const { data: session, update } = useSession();
+
   if (session) router.push('/dashboard');
+
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   
@@ -54,6 +56,7 @@ export default function LoginForm() {
                   type="password"
                   name="password"
                   placeholder="la contraseña"
+                  autoComplete='new password'
                   required
                   minLength={6}
                 />
@@ -76,6 +79,7 @@ export default function LoginForm() {
           </div>
         </div>
       </form>
+
       <Link
         href={'/register'}
         className="mx-auto mt-0 flex items-center justify-start rounded-xl px-4 py-2 opacity-80 duration-200 hover:opacity-100 hover:[box-shadow:0_2px_1px_-1px_#00000033,0-1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_4px_0_#fffe_inset] "
@@ -83,6 +87,7 @@ export default function LoginForm() {
         <i className="mr-[10px] text-[#444]">No tienes una cuenta?</i> Créala{' '}
         <ArrowRightIcon className="ml-2 h-5 w-5" />
       </Link>
+      
       <div
         onClick={async () => {
           await signIn('google', {

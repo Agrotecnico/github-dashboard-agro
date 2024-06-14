@@ -42,7 +42,7 @@ export default async function CustomersTable({
                           height={28}
                         />
                         <div>
-                        <p>{customer.name}</p>
+                        <p className="font-semibold ">{customer.name}</p>
                         <p>{customer.email}</p>
                         </div>
                       </div>
@@ -100,8 +100,8 @@ export default async function CustomersTable({
                             height={28}
                           />
                           <div>
-                          <p>{customer.name}</p>
-                          <p>{customer.email}</p>
+                            <p className="font-semibold ">{customer.name}</p>
+                            <p>{customer.email}</p>
                           </div>
                         </div>
                       </td>

@@ -23,6 +23,7 @@ export default function RegisterForm() {
            Creá tu cuenta.
         </h1>
         <div className="w-full">
+          {/* Nombre */}
           <div>
             <div className="relative mb-1.5">
               <input
@@ -36,6 +37,7 @@ export default function RegisterForm() {
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
             </div>
           </div>
+          {/* Email */}
           <div>
             <div className="relative">
               <input
@@ -49,6 +51,7 @@ export default function RegisterForm() {
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
             </div>
           </div>
+          {/* Contraseña */}
           <div className="mb-1.5 mt-4">
             <div className="relative">
               <input
@@ -57,12 +60,14 @@ export default function RegisterForm() {
                 type="password"
                 name="password"
                 placeholder="Creá tu contraseña..."
+                autoComplete='new password'
                 required
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
             </div>
           </div>
+          {/* Confirmar contraseña */}
           <div className="">
             <div className="relative">
               <input
@@ -71,12 +76,14 @@ export default function RegisterForm() {
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirmá la contraseña..."
+                autoComplete='new password'
                 required
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
             </div>
           </div>
+
         </div>
         <LoginButton />
         <div

@@ -168,7 +168,7 @@ export default function GaleriaFotosCnp({
               <SwiperSlide>
                 <div
                   className="absolute top-0 flex h-[300px] w-full flex-col items-center justify-start rounded-xl 
-                            bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://i.ibb.co/z5Z9xQy/mano-b.jpg')]
+                            bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://lh3.googleusercontent.com/pw/AP1GczNB_LOmDwneOypSdbXJYhH1BPPrHIOOo_VXGnGfQKpcPqU0qO9HHps0NgJyfMxdako6Tybj61v7ywgT-mNiom_VQWx_3kDB9WLjqc2SjD03oV3axhbT=w1920-h1080')]
                             bg-cover bg-fixed bg-center text-4xl text-[#333] backdrop-blur "/* url('/mano-b.jpg') */
                 >
                   <p className="mt-8 text-[34px]">Hola!</p>
@@ -194,9 +194,9 @@ export default function GaleriaFotosCnp({
             >
               <SwiperSlide>
                 <div
-                  className="absolute top-0 flex h-[300px] w-full items-end 
-                            justify-center
-                            rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://i.ibb.co/rwdK1ct/carina-oficina.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                  className="absolute top-0 flex h-[300px] w-full items-end justify-center
+                            rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://lh3.googleusercontent.com/pw/AP1GczPpnEMmNa_UiSaqjOnb20pW4mEaVtPjGlIAa5K7tiHyeAizSCi6Sem_snmJyaNqaapQ_lOXnrJuongSiXqx_Y2fm8eNgdPxBm-RgKMp-vqeUx6zRT0b=w1920-h1080')] 
+                            bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
                 >
                   <p className="w-full rounded-[0_0_12px_12px] border border-[#444] bg-[#00000085] text-[13.5px] font-extralight leading-5 text-[#fffb] backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
                     Mandataria Nacional{' '}
