@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await auth();
 
-  if (session?.user?.email === 'agrotecnicog@gmail.com')
+  if (session?.user?.email === 'agrotecnicog@gmail.com')/* process.env.GITHUB_ID, */
 
   return (
     <main>

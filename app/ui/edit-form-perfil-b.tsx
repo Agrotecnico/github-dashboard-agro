@@ -1,28 +1,22 @@
-'use client';
+'use client'
 
-import { User } from '@/app/lib/definitions';
-import Link from 'next/link';
 import {
-  CurrencyDollarIcon,
   AtSymbolIcon,
   CameraIcon,
   UserIcon,
   ArrowPathIcon,
   ExclamationCircleIcon,
-  ArrowRightIcon,
-  KeyIcon,
 } from '@heroicons/react/24/outline';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { Button } from '@/app/ui/button'
-import { updateUser } from '@/app/lib/actions';
-import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import { useSession } from "next-auth/react"
 import { createUser } from '@/app/lib/actions';
-import { lusitana } from '@/app/ui/fonts';
 
 
-export default function EditPerfilFormB( /* { user }: { user: User } */) {
+
+export default function EditPerfilFormB() {
 
   const { data: session, status } = useSession()
 
@@ -30,10 +24,6 @@ export default function EditPerfilFormB( /* { user }: { user: User } */) {
   const [file, setFile] = useState<File | undefined>()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-
-  /* console.log("name", name)
-   console.log("email", email)
-  console.log("image", image) */
 
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`
@@ -56,7 +46,6 @@ export default function EditPerfilFormB( /* { user }: { user: User } */) {
     if (!e.target.files?.[0]) return;
     setFile(e.target.files?.[0]);
   };
-  /* console.log("user", user) */
 
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createUser, initialState);
@@ -158,7 +147,6 @@ export default function EditPerfilFormB( /* { user }: { user: User } */) {
                 id="name"
                 type="text"
                 name="name"
-                /* defaultValue={session?.user?.name} */
                 defaultValue={!name ? session?.user?.name : name}
                 placeholder="Elegí tu nombre..."
                 required
@@ -240,16 +228,15 @@ export default function EditPerfilFormB( /* { user }: { user: User } */) {
       </div>
 
       <div className="mt-6 flex justify-end gap-4">
-        <Link
-          href="/dashboard/realizarConsulta"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          Cancelar
-        </Link>
+        <div
+          onClick={() => {window.location.reload()}}
+          className="flex h-10 items-center rounded-lg cursor-pointer bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          > 
+            Cancelar
+        </div>
         <Button 
           type="submit"
-          className={`p-1 mt-1 leading-4 text-[#374151] text-[15px] w-max h-8 rounded duration-200 hover:bg-[#ffffff99] `}/* ${ disabled:opacity-60 name=="" && email=="" && image=="" ? "hover:bg-transparent active:bg-transparent" : ""} */
-          /* disabled=  {name=="" && email=="" && image==""} */
+          className={`p-1 mt-1 leading-4 text-[#374151] text-[15px] w-max h-8 rounded duration-200 hover:bg-[#ffffff99] `}
           >Guardar cambios
         </Button>
       </div>
@@ -258,15 +245,3 @@ export default function EditPerfilFormB( /* { user }: { user: User } */) {
   );
 }
 
-/* function LoginButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button
-      className="mt-4 w-full  [box-shadow:inset_2px_-2px_#0000002e,inset_2px_2px_#ffffff,1px_-1px_#0000002e,1px_1px_#ffffff]"
-      aria-disabled={pending}
-    >
-      Crear cuenta
-      <ArrowRightIcon className="ml-auto h-5 w-5 text-[#6b7280] " />
-    </Button>
-  );
-} */

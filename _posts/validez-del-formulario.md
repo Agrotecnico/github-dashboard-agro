@@ -13,4 +13,4 @@ Si posee el formulario 08 firmado por el titular y certificado ante escribano p�
 En caso de fallecimiento del titular antes de realizar la transferencia, el formulario 08 pierde toda validez y es necesaria la convocatoria de herederos o sucesión.
 
 
-Los vendedores deben exigir la inmediata transferencia ante el registro del automotor a nombre del nuevo propietario, única forma legal existente para dicha transacción
+Los vendedores deben exigir la inmediata transferencia ante el registro del automotor a nombre del nuevo propietario, única forma legal existente para dicha transacción.

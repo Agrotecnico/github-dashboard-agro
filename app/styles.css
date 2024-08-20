@@ -19,9 +19,6 @@
 .swiper2 > .swiper-wrapper > .swiper-slide {
   backdrop-filter: blur(1px);
   border-radius: 12px;
-  /* box-shadow:
-    #00000055 0px 0px 5px 2px inset,
-    #ffffff55 0px 0px 3px 1px; */
 }
 .swiper1 > .swiper-wrapper {
   width: 92%;

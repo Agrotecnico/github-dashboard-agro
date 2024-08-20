@@ -17,6 +17,8 @@ import IconEmail from '@/app/ui/logosIconos/icon-Email';
 import LogoCnp from '@/app/ui/logosIconos/logo-cnp';
 import type { Session } from 'next-auth';
 import { agrotecnico, agrotecnico2 } from '@/app/constant';
+import { User } from '@/app/lib/definitions'
+import FooterConsultas from '@/app/ui/footerConsultas';
 
 // import required modules
 import {
@@ -36,14 +38,17 @@ import {
 export default function GaleriaFotosCnp({
   session,
   linkDatos,
+  user,
 }: {
   session: Session | null;
   linkDatos: {
     slug: string;
     excerpt: string;
   }[];
+  user: User
 }) {
   return (
+    <>
     <Swiper
       className="swiper1 relative bg-cover bg-fixed bg-center bg-no-repeat text-[#fffc] "
       centeredSlides={true}
@@ -87,7 +92,7 @@ export default function GaleriaFotosCnp({
         },
       }}
     >
-      <NavInicio session={session} linkDatos={linkDatos} />
+      <NavInicio session={session} user={user} /* linkDatos={linkDatos} */ />
 
       <div
         slot="container-start"
@@ -305,41 +310,10 @@ export default function GaleriaFotosCnp({
                 <div
                   className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
                                 border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/verificacion.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                >
-                  <div className=" z-10 w-full px-10 text-[14px] font-normal text-[#000] [line-height:_1] [text-shadow:_1px_1px_#ffffffe3]">
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">I</span>
-                      nscripción inicial
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">B</span>
-                      aja por destrucción total, robo, hurto e incendio
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur ">
-                      <span className="font-extrabold text-[#a31785]">D</span>
-                      enuncia de compra y poseción - Venta
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">A</span>
-                      ltas/Bajas municipales
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">D</span>
-                      uplicado de chapa patente
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">C</span>
-                      ancelacion de prenda
-                    </p>
-                    <p className="mb-1.5 rounded-md bg-[#ffffff00] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-extrabold text-[#a31785]">m</span>
-                      ás otras gestiones...
-                    </p>
-                  </div>
-                </div>
+                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehicular-3.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                ></div>
                 <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Denuncia de Venta
+                  Verificaciones
                 </div>
               </SwiperSlide>
 
@@ -347,12 +321,44 @@ export default function GaleriaFotosCnp({
                 <div
                   className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
                                 border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehicular-3.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                ></div>
+                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/e4.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                >
+                  <div className=" z-10 w-full px-10 text-[14px] font-medium text-[#523852] [line-height:_1] ">
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold ">I</span>
+                      nscripción inicial
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold ">B</span>
+                      aja por destrucción total, robo, hurto e incendio
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur ">
+                      <span className="font-bold ">D</span>
+                      enuncia de compra y poseción - Venta
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold ">A</span>
+                      ltas/Bajas municipales
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold ">D</span>
+                      uplicado de chapa patente
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold ">C</span>
+                      ancelacion de prenda
+                    </p>
+                    <p className="mb-1.5 rounded-md bg-[#ffffff00] text-[13px] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-medium">C</span>
+                      onsultar por otras gestiones...
+                    </p>
+                  </div>
+                </div>
                 <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Verificaciones
+                  Otras gestiones
                 </div>
               </SwiperSlide>
+
             </Swiper>
           </SwiperSlide>
 
@@ -397,12 +403,23 @@ export default function GaleriaFotosCnp({
                 <div
                   className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
                             border
+                            border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/verificacion.jpg')] bg-cover bg-fixed bg-top text-4xl font-bold backdrop-blur "
+                ></div>
+                <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
+                  03-Inscripción Contrato Prendario
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div
+                  className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
+                            border
                             border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/hero.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
                 >
-                  <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none text-[#222] [text-shadow:_1px_1px_white]">
+                  <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none text-[#523852]">
                     <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur ">
                       <div className="flex">
-                        <div className="mr-2 text-[15px] font-semibold text-[#a31785]">
+                        <div className="mr-2 text-[15px] font-bold">
                           04
                         </div>
                       </div>
@@ -410,7 +427,7 @@ export default function GaleriaFotosCnp({
                     </div>
                     <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
                       <div className="flex">
-                        <div className="mr-2 text-[15px] font-semibold text-[#a31785]">
+                        <div className="mr-2 text-[15px] font-bold">
                           08
                         </div>
                       </div>
@@ -420,7 +437,7 @@ export default function GaleriaFotosCnp({
                     </div>
                     <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
                       <div className="flex">
-                        <div className="mr-2 text-[15px] font-semibold text-[#a31785]">
+                        <div className="mr-2 text-[15px] font-bold">
                           03
                         </div>
                       </div>
@@ -428,7 +445,7 @@ export default function GaleriaFotosCnp({
                     </div>
                     <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
                       <div className="flex">
-                        <div className="mr-2 text-[15px] font-semibold text-[#a31785]">
+                        <div className="mr-2 text-[15px] font-bold">
                           05
                         </div>
                       </div>
@@ -436,37 +453,32 @@ export default function GaleriaFotosCnp({
                     </div>
                     <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
                       <div className="flex">
-                        <div className="mr-2 text-[15px] font-semibold text-[#a31785]">
+                        <div className="mr-2 text-[15px] font-bold">
                           59
                         </div>
                       </div>
                       <div>Mandatario, Mero Presentante y Comerciante</div>
                     </div>
-                    <div className="flex">
+                    <p className="mb-1.5 rounded-md bg-[#ffffff00] px-1.5 py-[3px] text-start backdrop-blur">
+                      <span className="font-bold">C</span>
+                      onsultar por otros formularios...
+                    </p>
+                    {/* <div className="flex">
                       <div className="flex">
                         <div className="text-[14px] font-semibold normal-case text-[#a31785]">
                           más otros
                         </div>
                         <div className="">...</div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Informes de Dominios
+                  Otros formularios
                 </div>
               </SwiperSlide>
 
-              <SwiperSlide>
-                <div
-                  className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                            border
-                            border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/e4.png')] bg-cover bg-fixed bg-top text-4xl font-bold backdrop-blur "
-                ></div>
-                <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Inscripcion Inicial
-                </div>
-              </SwiperSlide>
+
             </Swiper>
           </SwiperSlide>
 
@@ -496,16 +508,6 @@ export default function GaleriaFotosCnp({
               <div className="absolute  left-[0px] top-[0px] flex h-7 w-full items-center justify-center pl-14 text-[17px] font-normal [font-variant-caps:_small-caps] [text-shadow:1px_1px_1px_#222] ">
                 Automotores
               </div>
-              <SwiperSlide>
-                <div
-                  className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                                border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/patentamiento1.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                ></div>
-                <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Patentamiento
-                </div>
-              </SwiperSlide>
 
               <SwiperSlide>
                 <div
@@ -514,7 +516,7 @@ export default function GaleriaFotosCnp({
                                 border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehiculos-p.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
                 ></div>
                 <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                  Duplicado chapa Patente
+                  Parque Vehículos
                 </div>
               </SwiperSlide>
 
@@ -528,13 +530,27 @@ export default function GaleriaFotosCnp({
                   Resolución de Infracciones
                 </div>
               </SwiperSlide>
+
+              <SwiperSlide>
+                <div
+                  className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
+                                border
+                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/patentamiento1.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                ></div>
+                <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
+                  Patentamiento
+                </div>
+              </SwiperSlide>
+
+              
+
             </Swiper>
           </SwiperSlide>
         </Swiper>
       </SwiperSlide>
 
       {/* Consultas */}
-      <SwiperSlide id="cp">
+      <SwiperSlide id="cp"       >
         <Swiper
           className="text-[#ffffffcc] text-[14px] [text-shadow:_1px_1px_#000] swiper2 !mx-3 !h-[356px] rounded-xl [backdrop-filter:_blur(1px)]  bg-[#00000061] [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:text-[15px] md:!mx-24 md:!h-[322px] "
           centeredSlides={true}
@@ -618,9 +634,13 @@ export default function GaleriaFotosCnp({
             </div>
           </div>
         </Swiper>
+         <FooterInicio />
       </SwiperSlide>
 
-      <FooterInicio />
+      {/* <FooterInicio /> */}
+
     </Swiper>
+    {/* <FooterInicio /> */}
+    </>
   );
 }

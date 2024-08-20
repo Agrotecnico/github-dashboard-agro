@@ -30,12 +30,12 @@ export default async function ConsultasTableM({
             {consultas?.map((consulta) => (
               <div className="mb-8 rounded-md bg-[#0000000d] px-4 pt-6 pb-3 text-[14px] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff]">
                 <div className="mb-6 rounded-lg ">
-                  <div className="mb-1 flex justify-between text-[#747e91]">
-                    <p className="flex text-[#747e91] underline">
-                      Consulta:
+                  <div className="mb-1 gap-1 flex items-end text-[#523852]">
+                    <p className="flex  ">
+                      Consulta
                     </p>
-                    <p className="ml-2 text-[13px] opacity-80">
-                      {formatDateToLocal(consulta.created_at)}
+                    <p className="text-[13px] opacity-80">
+                      realizada el día {formatDateToLocal(consulta.created_at)}:
                     </p>
                   </div>
                   <p className="">{consulta?.consulta}</p>
@@ -44,8 +44,8 @@ export default async function ConsultasTableM({
                   <div>
                     {consulta.respuesta ? (
                       <>
-                      <div className="mb-1 flex justify-between text-[#747e91]">
-                        <p className="flex text-[#747e91]  underline">
+                      <div className="mb-1 flex  text-[#747e91]">
+                        <p className="flex text-[#747e91] ">
                           Respuesta:
                         </p>
                       </div>
@@ -53,7 +53,7 @@ export default async function ConsultasTableM({
                       </>
                     ) : (
                       <>
-                      <p className="mb-1 text-[14px] flex text-[#747e91] underline">
+                      <p className="mb-1 text-[14px] flex text-[#747e91] ">
                         Respuesta:
                       </p>
                       <p className="text-[14px] text-[#747e91]">

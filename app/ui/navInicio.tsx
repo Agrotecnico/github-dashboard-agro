@@ -4,16 +4,19 @@ import Link from 'next/link';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import type { Session } from 'next-auth';
 import UserButtonHeader from './user-button-header';
+import { User } from '@/app/lib/definitions'
 
-export default function NavHome({
+export default function NavInicio({
   session,
-  linkDatos,
+  user,
+  /* linkDatos, */
 }: {
   session: Session | null;
-  linkDatos: {
+  user: User
+  /* linkDatos: {
     slug: string;
     excerpt: string;
-  }[];
+  }[]; */
 }) {
   return (
     <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#ad6fa88c]  shadow-[inset_0_-2px_6px_#ffffff66,_0_2px_6px_#00000066] backdrop-blur-md ">
@@ -25,7 +28,7 @@ export default function NavHome({
                 <span className="hidden text-sm text-[#fff] [text-shadow:_1px_-1px_0px_#000000] sm:inline-flex">
                   {session?.user?.email}
                 </span>
-                <UserButtonHeader session={session} />
+                <UserButtonHeader session={session} user={user} />
               </div>
             ) : (
               <Link
@@ -41,7 +44,7 @@ export default function NavHome({
                   />
                 </div>
                 <div className="flex flex-col items-center text-sm leading-3 text-[#fff] [text-shadow:_1px_0_0px_#000000] min-[500px]:flex-row">
-                  <div>Realizá</div><div>tu consulta</div>
+                  <div className="min-[500px]:pr-1">Realizá</div><div>tu consulta</div>
                 </div>
               </Link>
             )}

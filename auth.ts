@@ -7,12 +7,11 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
-import "next-auth/jwt"
+/* import "next-auth/jwt" */
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    /* console.log('user', user); */
     return user.rows[0];
   } catch (error) {
     console.error('Failed to fetch user:', error);

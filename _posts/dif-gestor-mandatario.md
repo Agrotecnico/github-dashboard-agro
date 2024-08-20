@@ -7,7 +7,7 @@ avatar: "/carina-blog.jpg"
 autor: "Carina Noemi Pacheco"
 ---
 
-##### Mandatario
+#### Mandatario
 
 El Mandatario del Automotor brinda servicios especializados en el mercado automotriz, asesorando y realizando 
 diversas gestiones ante los Registros Seccionales del Automotor y de Créditos Prendarios.
@@ -16,7 +16,7 @@ Debe abogar por el cumplimiento de las leyes y normas establecidas para la regis
 
 Es plenamente reconocido por la DNRPA (Dirección Nacional de Registros de la Propiedad del Automotor) y para llevar adelante su labor, se le otorga una Matrícula Nacional Oficial que le permitirá desarrollar sus actividades en todo el país.
 
-##### Gestor
+#### Gestor
 
 El gestor puede realizar trámites para particulares y/o contribuyentes ante la administración pública de las distintas provincias y organismos dependientes tanto del Estado Nacional, Provincial o Municipal.
 

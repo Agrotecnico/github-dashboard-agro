@@ -14,15 +14,12 @@ import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 /* import { fetchUserById } from '@/app/lib/data' */
-import { User } from '@/app/lib/definitions'
 
 
-export default /* async */ function UserButtonHeader({
+export default async function UserButtonHeader({
   session,
-  user,
 }: {
   session: Session | null;
-  user: User
 }) {
 
   /* const user = await fetchUserById(session?.user?.email); */
@@ -39,18 +36,17 @@ export default /* async */ function UserButtonHeader({
           >
             {session?.user?.image ? (
               <Avatar className="h-8 w-8">
-                {session?.user.image && (
+                {session?.user?.image && (
                   <AvatarImage
-                    src={session?.user.image}
-                    alt={session?.user.name ?? ''}
+                    src={session.user.image}
+                    alt={session.user.name ?? ''}
                   />
                 )}
-                <AvatarFallback>{session?.user.email}</AvatarFallback>
+                <AvatarFallback>{session?.user?.email}</AvatarFallback>
               </Avatar>
             ) : (
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eee] text-[#374151] ">
                 {session?.user?.email?.substring(0, 1).toUpperCase()}
-                 {/* {user?.email.substring(0, 1).toUpperCase()} */}
               </span>
             )}
           </Button>

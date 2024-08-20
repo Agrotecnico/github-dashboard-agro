@@ -14,8 +14,7 @@ export default async function Page() {
 
   const user = await fetchUserById(session?.user?.email);
   
-  console.log("session", session)
-  /* console.log("user", user) */
+  /* console.log("session", session) */
 
   if (user)
 

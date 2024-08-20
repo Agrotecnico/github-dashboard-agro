@@ -205,8 +205,6 @@ export async function createCustomer(prevStateCustomer: StateCustomer, formData:
 
   // Prepare data for insertion into the database
   const { name, email, image_url } = validatedFieldsCustomer.data;
-  /* const amountInCents = amount * 100; */
-  /* const date = new Date().toISOString().split('T')[0]; */
 
   // Insert data into the database
   try {
@@ -244,7 +242,6 @@ export async function updateCustomer(
   }
 
   const { name, email, image_url } = validatedFields.data;
-  //const amountInCents = amount * 100;
 
   try {
     await sql`
@@ -291,8 +288,6 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
 
   // Prepare data for insertion into the database
   const { email, consulta, respuesta, name } = validatedFields.data;
-  /* const amountInCents = amount * 100;
-  const date = new Date().toISOString().split('T')[0]; */
 
   // Insert data into the database 
   try {
@@ -322,7 +317,7 @@ export async function updateConsulta(
     consulta: formData.get('consulta'),
     respuesta: formData.get('respuesta'),
   });
-  /* console.log("validatedFields", validatedFields) */
+
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -331,7 +326,6 @@ export async function updateConsulta(
   }
 
   const { name, email, consulta, respuesta } = validatedFields.data;
-  //const amountInCents = amount * 100;
 
   try {
     await sql`
@@ -389,8 +383,6 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   
   // Prepare data for insertion into the database
   const { name, email, password, image } = validatedFields.data;
-  /* const amountInCents = amount * 100; */
-  /* const date = new Date().toISOString().split('T')[0];*/
   const hashedPassword = await bcrypt.hash(password, 10); 
 
   // Insert data into the database
@@ -432,7 +424,6 @@ export async function updateUser(
   }
 
   const { name, email, image } = validatedFields.data;
-  //const amountInCents = amount * 100;
 
   try {
     await sql`

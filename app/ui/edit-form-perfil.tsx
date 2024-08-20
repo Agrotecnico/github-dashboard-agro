@@ -14,7 +14,7 @@ import { useFormState } from 'react-dom';
 import { Button } from '@/app/ui/button'
 import { updateUser } from '@/app/lib/actions';
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
-import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
+import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';;
 
 
 export default function EditPerfilForm( { user }: { user: User }) {
@@ -23,10 +23,6 @@ export default function EditPerfilForm( { user }: { user: User }) {
   const [file, setFile] = useState<File | undefined>()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-
-  /* console.log("name", name)
-  console.log("email", email)
-  console.log("image", image) */
 
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`
@@ -49,11 +45,10 @@ export default function EditPerfilForm( { user }: { user: User }) {
     if (!e.target.files?.[0]) return;
     setFile(e.target.files?.[0]);
   };
-  /* console.log("user", user) */
   const initialState = { message: null, errors: {} };
   const updateUserWithId = updateUser.bind(null, user?.id );
   const [state, dispatch] = useFormState(updateUserWithId, initialState);
-  /* console.log("state", state) */
+
   return (
     <>
       <div className="flex w-full gap-3 flex-col items-center rounded-lg bg-[#00000008] p-6 [box-shadow:inset_0_2px_#ffffff9c,inset_0_-2px_#0000002e] min-[800px]:flex-row ">
@@ -61,22 +56,22 @@ export default function EditPerfilForm( { user }: { user: User }) {
           className="min-w-20 relative max-h-[80px] min-h-[80px] min-w-[80px] max-w-[80px]"
           data-testid="image-container"
         >
-          { image ? (
+          { image  ? (
             <img
             decoding="async"
-            src={image}
-            className="bject-cover h-20 w-full rounded-full bg-cover "
+            src= {image}
+            className="bject-cover h-20 w-full rounded-full bg-cover [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e] "
             alt="header-image-profile"
           ></img>
           ) : user?.image ? (
             <img
               decoding="async"
               src={user?.image}
-              className="bject-cover h-20 w-full rounded-full bg-cover "
+              className="bject-cover h-20 w-full rounded-full bg-cover  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e]"
               alt="header-image-profile"
             ></img>
           ) : (
-            <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333] ">
+            <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333]  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000002e] ">
               {user?.email?.substring(0, 1).toUpperCase()}
             </div>
           )}
@@ -110,8 +105,8 @@ export default function EditPerfilForm( { user }: { user: User }) {
             onClick={uploadToServer}
           >
             <div className="flex">
-            <ArrowPathIcon className={`${ file && "stroke-[#ff00cbaa]"} mr-2 stroke-2 font-semibold w-4` }/>
-            <p>Cambiar imagen</p>
+              <ArrowPathIcon className={`${ file && "stroke-[#ff00cbaa]"} mr-2 stroke-2 font-semibold w-4` }/>
+              <p>Cambiar imagen</p>
             </div>
           </button>
         </div>
@@ -129,8 +124,8 @@ export default function EditPerfilForm( { user }: { user: User }) {
             />
             ) : (
               <div className="flex relative">
-              <IconCuenta className="flex items-center justify-center" color="#0006" size="48" filter="" />
-              <CameraIcon  className="text-[#00000057] w-4 -right-[6px] top-[2px] text-[16px] absolute" />
+                <IconCuenta className="flex items-center justify-center" color="#0006" size="48" filter="" />
+                <CameraIcon  className="text-[#00000057] w-4 -right-[6px] top-[2px] text-[16px] absolute" />
               </div>
             )
           }
@@ -162,14 +157,6 @@ export default function EditPerfilForm( { user }: { user: User }) {
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
-          {/* <div id="name-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.name &&
-              state.errors.name.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))} 
-          </div> */}
         </div>
         
         {/* Edit email */}
@@ -195,14 +182,6 @@ export default function EditPerfilForm( { user }: { user: User }) {
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
-          {/* <div id="email-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.email &&
-              state.errors.email.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))} 
-          </div> */}
         </div>
 
         {/* Contraseña */}
@@ -233,33 +212,6 @@ export default function EditPerfilForm( { user }: { user: User }) {
             name="image"
             value= {!image ? user?.image : image}
           />
-        {/*   <div className="mb-4 hidden">
-            <label htmlFor="image" className="mt-8 text-start text-sm">
-              Coloque la url
-            </label>
-            <div className="flex flex-col gap-2 mt-1 min-[425px]:flex-row min-[425px]:gap-4">
-              <div className="w-max relative rounded [box-shadow:inset_0_2px_#ffffff9c,inset_0_-2px_#0000002e] ">
-                <input
-                  id="image"
-                  name="image"
-                  type="text"
-                  defaultValue={image ? image : user.image}
-                  placeholder="Ingrese la url"
-                  className="px-4 py-1 pl-10 m-0  text-[#374151aa] text-sm h-8 bg-transparent border border-transparent rounded placeholder:text-[#37415188]"
-                  aria-describedby="image-error"
-                />
-                <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-              </div>
-            </div>
-            <div id="image-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.image &&
-              state.errors.image.map((error: string) => (
-                  <p className="mt-2 text-sm text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div> 
-          </div> */}
         </div>
         
         {/* Massages */}
@@ -275,20 +227,15 @@ export default function EditPerfilForm( { user }: { user: User }) {
             </>
           )}
         </div>
-        {/* <div aria-live="polite" aria-atomic="true">
-          {state.message ? (
-            <p className="mt-2 text-sm text-red-500">{state.message}</p>
-          ) : null}
-        </div> */}
 
         <div className="mt-6 flex justify-end gap-4">
-          <Link
-            href="/dashboard/realizarConsulta"
-            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          <div
+            onClick={() => {window.location.reload()}}
+            className="flex h-10 items-center rounded-lg cursor-pointer bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
           >
             Cancelar
-          </Link>
-          <Button 
+          </div>
+          <Button  
             type="submit"
             className={`p-1 mt-1 leading-4 text-[#374151] text-[15px] w-max h-8 rounded duration-200 ${name=="" && email=="" && image=="" ? "hover:bg-transparent active:bg-transparent" : ""}  disabled:opacity-60 `}
             disabled=  {name=="" && email=="" && image==""}

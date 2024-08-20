@@ -219,11 +219,11 @@ VALUES ('User1', 'https://i.ibb.co/vwT9smT/apreton-manos-jpg.jpg')
 INSERT INTO consultas (name, email, consulta, respuesta )
 VALUES ('Cabrera', 'cabrera1@gmail.com', 'Validez del formulario 08', 'Respuesta validez')
 
-INSERT INTO users (name, email, password )
-VALUES ('Mario Jorge Szánto', 'agrotecnicog@gmail.com', 'agrotecnicog@gmail.com')
+INSERT INTO users (name, email, password, image )
+VALUES ('Elias', 'elias@gmail.com', 'elias-User', 'https://i.ibb.co/mB4S7K2/elias-szanto.png')
 
 Eliminar filas
-DELETE FROM users WHERE name = 'Mario Jorge Szanto';
+DELETE FROM users WHERE email = 'elias@gmail.com';
 
 DELETE FROM consultas WHERE email = 'cabrera1@gmail.com'; 
 
@@ -245,12 +245,12 @@ SELECT
   ORDER BY created_at DESC;
 
   UPDATE users
-  SET email = 'user@nextmail.com'
-  WHERE id = '410544b2-4001-4271-9855-fec4b6a6442a'
+  SET email = 'cabrera1@gmail.com'
+  WHERE image = 'https://i.ibb.co/QnnWYHb/Daniel-Cabrera-jpg.jpg'
 
   UPDATE users
   SET name = 'Userooo', email = 'userooo@nextmail.com', consulta = 'Consultaooo', respuesta = 'Respuestaooo'
-  WHERE id = '08aeb00a-c0a5-413d-8856-55f84ebc1a7a'
+  WHERE id = '13b93b77-f37e-4692-ba8d-8f813ab85a6e'
 
 
 ALTER TABLE users 
