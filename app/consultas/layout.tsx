@@ -14,7 +14,7 @@ export default async function Layout({
 }) {
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-between bg-[url('/ofi.jpg')] bg-cover bg-fixed bg-center bg-no-repeat">
-      <HeaderConsultas />
+      <HeaderConsultas title="Consultas" />
       <main className=" mx-auto w-full max-w-7xl flex-auto px-2 py-4 md:px-6 md:py-6">
         <div className="mx-auto flex min-h-screen max-w-[1280px] flex-col pb-16 pt-3 md:px-6 md:pt-6      ">
           <div className="mt-[92px] flex flex-col-reverse gap-8 md:mt-14 md:flex-row md:gap-4 md:overflow-hidden ">

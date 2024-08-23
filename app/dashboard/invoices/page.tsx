@@ -33,9 +33,9 @@ export default async function Page({
     return (
       <div className="">
         <div className="flex w-full items-center justify-between">
-          <h1 className={`${lusitana.className} text-2xl`}>Facturas</h1>
+          <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>Facturas</h1>
         </div>
-        <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+        <div className="flex items-center justify-between gap-2">
           <Search placeholder="Buscar facturas..." />
           <CreateInvoice />
         </div>

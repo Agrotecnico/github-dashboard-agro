@@ -35,9 +35,9 @@ const FormSchemaUser = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string().min(5, { message: "Must be 5 or more characters long" }),
   confirmPassword: z.string().min(5, { message: "Must be 5 or more characters long" }),
-  /* role: z.enum(['admin', 'member', 'developer'], {
+  role: z.enum(['admin', 'member', 'developer'], {
     invalid_type_error: 'Seleccione un rol de usuario.',
-  }),*/
+  }),
   image: z.string(),  /* .min(5, { message: "Must be 5 or more characters long" }) */
 });
 
@@ -52,7 +52,7 @@ const FormSchemaConsulta = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const CreateCustomer = FormSchemaCustomer.omit({ id: true });
-const CreateUser = FormSchemaUser.omit({ id: true, role: true });
+const CreateUser = FormSchemaUser.omit({ id: true, role: true, image: true });
 const CreateConsulta = FormSchemaConsulta.omit({ created_at: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
@@ -360,7 +360,7 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
     email: formData.get('email'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
-    image: formData.get('image'),
+    /* image: formData.get('image'), */
   });
   
   // Validate confirm password
@@ -372,7 +372,7 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
       message: 'Las contraseñas no coinciden.',
     };
   }
-
+  /* console.log("validatedFields: ", validatedFields) */
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -382,14 +382,14 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   }
   
   // Prepare data for insertion into the database
-  const { name, email, password, image } = validatedFields.data;
+  const { name, email, password, /* image */ } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10); 
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO users (name, email, password, image)
-      VALUES (${name}, ${email}, ${hashedPassword}, ${image})
+      INSERT INTO users (name, email, password )
+      VALUES (${name}, ${email}, ${hashedPassword} )
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -402,7 +402,6 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   revalidatePath('/login');
   redirect('/login');
 }
-
 export async function updateUser(
   id: string,
   prevState: StateUser,

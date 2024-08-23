@@ -3,6 +3,7 @@ import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { UpdateConsulta, DeleteConsulta } from '@/app/ui/consultas/buttons';
 import Search from '@/app/ui/search';
 import { fetchFilteredConsultas } from '@/app/lib/data';
+import { lusitana } from '@/app/ui/fonts';
 
 
 export default async function ConsultasTableA({
@@ -17,7 +18,7 @@ export default async function ConsultasTableA({
 
   return (
     <div>
-      <h1 className="mb-8 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
+      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
         Consultas
       </h1>
 

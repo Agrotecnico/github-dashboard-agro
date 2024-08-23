@@ -16,7 +16,7 @@ export default async function CustomersTable({
   
   return (
     <div className="">
-      <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
         Clientes
       </h1>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">

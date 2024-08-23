@@ -1,26 +1,28 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { taskOne, taskTwo } from './tasks'
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
-  const [calculation, setCalculation] = useState(0);
+// Secuentially Processes
+async function main() {
+  try {
+    console.time('Measuring time');
 
-  useEffect(() => {
-    setCalculation(() => count * 2);
-  }, [count]); // <- add the count variable here 
+    /* const valueOne = await taskOne(); // task 4 seconds to finish
+    const valueTwo = await taskTwo(); // wait the last task to finish
 
-  /* useEffect(() => {
-    setTimeout(() => {
-      setCount((count) => count + 1);
-    }, 1000);
-  });*/
+    console.log('Task One returned: ', valueOne);
+    console.log('Task Two returned: ', valueTwo); */
 
-  return (
-    <>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount((c) => c + 1)}>+</button>
-      <p>Calculation: {calculation}</p>
-    </>
-  );
+    const [data1, data2] = await Promise.all([taskOne(), taskTwo()]);
+
+    console.log('Task One returned: ', data1);
+    console.log('Task Two returned: ', data2);
+    
+    console.timeEnd('Measuring time'); // the total is 6 seconds to finish
+  }
+  catch (e) {
+    console.log(e);
+  }
 }
+
+main();

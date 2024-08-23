@@ -5,6 +5,7 @@ import  EditPerfilForm  from "@/app/ui/edit-form-perfil";
 import  EditPerfilFormB  from "@/app/ui/edit-form-perfil-b";
 import { fetchUserById } from '@/app/lib/data'
 import { SessionProvider } from "next-auth/react"
+import { lusitana } from '@/app/ui/fonts';
 
 
 
@@ -20,7 +21,7 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className="mb-8 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
+      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
         Editar perfil
       </h1>
 
@@ -32,7 +33,7 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className="mb-8 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
+      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
         Editar perfil
       </h1>
 

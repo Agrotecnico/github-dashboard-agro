@@ -30,9 +30,9 @@ export default async function RevenueChart() {
       {/* NOTE: comment in this code when you get to this point in the course */}
 
       <div className="rounded-xl p-2 ">
-        <div className="bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4">
+        <div className="bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4 min-[1024px]:[grid-template-columns:_auto_repeat(12,_minmax(0,_1fr))] min-[1024px]:gap-1.5 ">
           <div
-            className="mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex"
+            className="mb-6 hidden flex-col justify-between text-xs text-gray-500 sm:flex"
             style={{ height: `${chartHeight}px` }}
           >
             {yAxisLabels.map((label) => (
@@ -48,7 +48,7 @@ export default async function RevenueChart() {
                   height: `${(chartHeight / topLabel) * month.revenue}px`,
                 }}
               ></div>
-              <p className="-rotate-90 text-sm text-gray-400 sm:rotate-0">
+              <p className="w-6 -rotate-90 text-xs text-gray-500 sm:rotate-0 min-[1024px]:-rotate-90 min-[1024px]:text-xs">
                 {month.month}
               </p>
             </div>

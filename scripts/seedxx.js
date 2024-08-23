@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS consultas (
 /* 
 
 INSERT INTO users (name, email, password)
-      VALUES ('cabrera', 'cabrera@gmail.com', 'cabrera-User') https://i.ibb.co/vwT9smT/apreton-manos-jpg.jpg
+VALUES ('Raúl', 'raul@gmail.com', 'Raul-User1') https://i.ibb.co/vwT9smT/apreton-manos-jpg.jpg
       
 
 Insertar filas
@@ -225,7 +225,7 @@ VALUES ('Elias', 'elias@gmail.com', 'elias-User', 'https://i.ibb.co/mB4S7K2/elia
 Eliminar filas
 DELETE FROM users WHERE email = 'elias@gmail.com';
 
-DELETE FROM consultas WHERE email = 'cabrera1@gmail.com'; 
+DELETE FROM users WHERE email = 'cabrera1@gmail.com';
 
 DELETE FROM consultas WHERE email = '8c11d30f-af9f-4f84-ab4f-3a22b79ec595'; 
 

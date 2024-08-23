@@ -25,7 +25,7 @@ export default async function Page() {
   return (
     <main>
       <h1
-        className={`${lusitana.className} mb-4 text-xl md:mb-8 md:text-2xl`}
+        className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}
       >
         Informacion Resumen
       </h1>
@@ -47,10 +47,11 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className="mb-8 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
-        Realizá tu Consulta
+      <h1 
+        className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
+        Realizá tu consulta
       </h1>
-        <FormConsulta session={session} />
+      <FormConsulta session={session} />
     </main>
   );
 }
