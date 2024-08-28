@@ -38,17 +38,18 @@ export default async function ConsultasTableA({
                   >
                   <div className="flex pb-2 items-center w-full rounded-lg min-[800px]:flex-row ">
                     <div className=" relative" data-testid="image-container">
-                      {AllConsulta?.image ? (
+                      {/* {AllConsulta?.image ? (
                           <img
                             decoding="async" 
                             src= {session?.user?.image}
                             className="rounded-full cursor-pointer bg-cover h-10 bject-cover w-full " alt="header-image-profile">
+                            
                           </img>
-                        ) : (
+                        ) : ( */}
                           <div className="flex w-10 h-10 text-2xl items-center justify-center rounded-full bg-[#ffffffba] text-[#666] ">
                             {AllConsulta?.email?.substring(0, 1).toUpperCase()}
                           </div>
-                        )}
+                        {/* )} */}
                     </div>
                     <div className="flex flex-col justify-center items-start ml-4 w-full min-[800px]:items-start min-[800px]:my-1 ">
                       <h2 className="text-md font-semibold m-0" data-testid="username-test">

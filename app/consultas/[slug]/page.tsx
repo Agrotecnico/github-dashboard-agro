@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPostBySlug } from '@/app/lib/getPost';
 import markdownToHtml from '@/app/lib/markdownToHtml';
-import distanceToNow from '@/app/lib/dateRelative';
+/* import distanceToNow from '@/app/lib/dateRelative'; */
 import markdownStyles from '@/app/ui/consultas/markdown-styles.module.css';
 import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
 import { auth } from 'auth';
