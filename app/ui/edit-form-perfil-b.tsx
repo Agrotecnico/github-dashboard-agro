@@ -13,6 +13,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import { useSession } from "next-auth/react"
 import { createUser } from '@/app/lib/actions';
+import Image from 'next/image'
 
 
 export default function EditPerfilFormB() {
@@ -59,19 +60,23 @@ export default function EditPerfilFormB() {
           data-testid="image-container"
         >
           { image ? (
-            <img
+            <Image
             decoding="async"
-            src={image}
+            src={`${image}`}
             className="bject-cover h-20 w-full rounded-full bg-cover "
             alt="header-image-profile"
-          ></img>
+            width={80}
+            height={80}
+          />
           ) : session?.user?.image ? (
-            <img
+            <Image
               decoding="async"
-              src={session.user.image}
+              src={`${session.user.image}`}
               className="bject-cover h-20 w-full rounded-full bg-cover "
               alt="header-image-profile"
-            ></img>
+              width={80}
+              height={80}
+            />
           ) : (
             <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333] ">
               {session?.user?.email?.substring(0, 1).toUpperCase()}
@@ -117,8 +122,8 @@ export default function EditPerfilFormB() {
           data-testid="image-container"
           >
           {file ? (
-            <img
-              src= {URL.createObjectURL(file)}
+            <Image
+              src= {`${URL.createObjectURL(file)}`}
               alt="Uploaded file"
               className="mx-auto rounded items-center justify-center object-cover"
               width={80}

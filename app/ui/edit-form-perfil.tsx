@@ -15,6 +15,7 @@ import { Button } from '@/app/ui/button';
 import { updateUser } from '@/app/lib/actions';
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
+import Image from 'next/image'
 
 export default function EditPerfilForm({ user }: { user: User }) {
   const [image, setImage] = useState('');
@@ -55,19 +56,23 @@ export default function EditPerfilForm({ user }: { user: User }) {
           data-testid="image-container"
         >
           {image ? (
-            <img
+            <Image
               decoding="async"
-              src={image}
+              src={`${image}`}
               className="bject-cover h-20 w-full rounded-full bg-cover [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e] "
               alt="header-image-profile"
-            ></img>
+              width={80}
+              height={80}
+            />
           ) : user?.image ? (
-            <img
+            <Image
               decoding="async"
-              src={user?.image}
+              src={`${user?.image}`}
               className="bject-cover h-20 w-full rounded-full bg-cover  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e]"
               alt="header-image-profile"
-            ></img>
+              width={80}
+              height={80}
+            />
           ) : (
             <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333]  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000002e] ">
               {user?.email?.substring(0, 1).toUpperCase()}

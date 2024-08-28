@@ -29,7 +29,7 @@ export default async function ConsultasTableM({
         {consultas.length ? (
           <div className="text-[#374151] ">
             {consultas?.map((consulta) => (
-              <div className="mb-8 rounded-md bg-[#0000000d] px-4 pb-3 pt-6 text-[14px] [box-shadow:inset_0_1px_0_#00000047,inset_0_-1px_0_#ffffffe0]">
+              <div key={consulta.id } className="mb-8 rounded-md bg-[#0000000d] px-4 pb-3 pt-6 text-[14px] [box-shadow:inset_0_1px_0_#00000047,inset_0_-1px_0_#ffffffe0]">
                 <div className="mb-6 rounded-lg ">
                   <div className="mb-1 flex items-end gap-1 text-[#523852]">
                     <p className="flex  ">Consulta</p>
