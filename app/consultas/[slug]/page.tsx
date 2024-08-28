@@ -83,9 +83,9 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="text-md mb-6">
-              <time className="mt-2 flex text-[#747e91]">
+              {/* <time className="mt-2 flex text-[#747e91]">
                 {distanceToNow(new Date(post.date))}
-              </time>
+              </time> */}
             </div>
           </div>
 
