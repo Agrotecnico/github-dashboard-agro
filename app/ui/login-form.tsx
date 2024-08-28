@@ -12,20 +12,14 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { useSession } from 'next-auth/react';
 
 export default function LoginForm() {
-  const router = useRouter();
   const { data: session, update } = useSession();
 
-  if (session) router.push('/dashboard');
-
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
-  
 
   return (
     <>

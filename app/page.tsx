@@ -16,10 +16,8 @@ const linkDatos= allPosts.map((linkdato) => {
 export default async function Page() {
 
   const session = await auth();
-  console.log("sessionxx", session)
 
   const user = await fetchUserById(session?.user?.email)
-  console.log("userxx", user)
 
   return (
     <div className="flex flex-col justify-between w-full h-full min-h-screen">

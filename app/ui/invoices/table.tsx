@@ -16,14 +16,14 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle ">
-        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffef] min-[824px]:pt-0 ">
+        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0] min-[824px]:pt-0 ">
           <div className="min-[824px]:hidden">
             {invoices?.map((invoice) => (
               <div
                 key={invoice.id}
                 className="mb-2 w-full text-sm rounded-md p-4 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]"
               >
-                <div className="flex items-center justify-between border-b pb-4">
+                <div className="flex items-center justify-between border-b border-[#00000014] pb-4">
                   <div className="flex items-center gap-3">
                     <Image
                       src={invoice.image_url}

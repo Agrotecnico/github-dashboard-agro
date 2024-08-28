@@ -1,18 +1,14 @@
-'use client';
-
 import {
   UserGroupIcon,
   HomeIcon,
-  DocumentDuplicateIcon,
   QuestionMarkCircleIcon,
   QueueListIcon,
   UserCircleIcon,
   InboxIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { useSession } from "next-auth/react"
+import { auth } from '@/auth';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -22,8 +18,12 @@ const linkMembers = [
     href: '/dashboard',
     icon: QuestionMarkCircleIcon,
   },
-  { name: 'Tus Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
-  
+  {
+    name: 'Tus Consultas',
+    href: '/dashboard/tusConsultas',
+    icon: QueueListIcon,
+  },
+
   { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
 ];
 
@@ -36,16 +36,13 @@ const links = [
   },
   { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
   { name: 'Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
-  { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
+  /* { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon }, */
 ];
 
-export default function NavLinks() {
+export default async function NavLinks() {
+  const session = await auth();
 
-  const { data: session, update } = useSession()
-
-  const pathname = usePathname();
-
-  if (session?.user?.email === 'agrotecnicog@gmail.com' ) 
+  if (session?.user?.email === process.env.ADMIN)
     return (
       <>
         {links.map((link) => {
@@ -55,9 +52,9 @@ export default function NavLinks() {
               key={link.name}
               href={link.href}
               className={clsx(
-                'duration-200 text-[#00000099] flex h-[48px] grow  items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium md:p-2 md:px-3 hover:text-[#000000bb] hover:bg-[#ffffff17] min-[824px]:flex-none min-[824px]:justify-start ',
+                'flex h-[48px] grow items-center justify-center  gap-2 rounded-md p-3 text-sm font-medium text-[#00000099] duration-200 [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffff17] hover:text-[#000000bb] md:p-2 md:px-3 min-[824px]:flex-none min-[824px]:justify-start ',
                 {
-                  'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href,
+                  /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href, */
                 },
               )}
             >
@@ -67,7 +64,7 @@ export default function NavLinks() {
           );
         })}
       </>
-    ) 
+    );
 
   return (
     <>
@@ -78,9 +75,9 @@ export default function NavLinks() {
             key={linkMember.name}
             href={linkMember.href}
             className={clsx(
-              'duration-200 text-[#00000099] flex h-[48px] grow items-center justify-center gap-2 rounded-md [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] p-3 text-sm font-medium hover:text-[#000000bb] hover:bg-[#ffffff17] min-[824px]:flex-none min-[824px]:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-[#00000099] duration-200 [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffff17] hover:text-[#000000bb] md:p-2 md:px-3 min-[824px]:flex-none min-[824px]:justify-start',
               {
-                'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href,
+                /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href, */
               },
             )}
           >

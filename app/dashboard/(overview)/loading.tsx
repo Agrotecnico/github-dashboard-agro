@@ -1,9 +1,13 @@
 import DashboardSkeleton from '@/app/ui/skeletons';
+import { auth } from 'auth';
 
-export default function Loading() {
+export default async function Loading() {
+  const session = await auth();
+  if (session?.user?.email === process.env.ADMIN )
     return  (
-      <>
-      {/* <DashboardSkeleton /> */} 
-      <p>Loading...</p></>
+      <DashboardSkeleton />
+    );
+    return  (
+      <div>Loanding...</div>
     )
   }

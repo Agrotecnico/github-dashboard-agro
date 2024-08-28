@@ -1,24 +1,24 @@
-import Form from '@/app/ui/consultas/edit-form-consulta'
-import Breadcrumbs from '@/app/ui/invoices/breadcrumbs'
-import { fetchConsultaById } from '@/app/lib/data'
-import { Metadata } from 'next'
-import { auth } from '@/auth'
-import { notFound } from 'next/navigation'
-
+import Form from '@/app/ui/consultas/edit-form-consulta';
+import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
+import { fetchConsultaById } from '@/app/lib/data';
+import { Metadata } from 'next';
+import { auth } from '@/auth';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Editar Consulta',
-}
- 
+};
+
 export default async function Page({ params }: { params: { id: string } }) {
-  const session = await auth()
+  const session = await auth();
   const id = params.id;
   const consulta = await fetchConsultaById(id);
- if (!consulta) {
+
+  if (!consulta) {
     notFound();
   }
- 
-  if (session?.user?.email === 'agrotecnicog@gmail.com' ) 
+
+  if (session?.user?.email === process.env.ADMIN)
     return (
       <main>
         <Breadcrumbs
@@ -31,10 +31,12 @@ export default async function Page({ params }: { params: { id: string } }) {
             },
           ]}
         />
-        <Form  consulta={consulta}  /> 
+        <Form consulta={consulta} />
       </main>
-    )
-    return (
-      notFound()
-    )
+    );
+  return (
+    <div className="flex h-[50%] items-center justify-center ">
+      No editar las consultas
+    </div>
+  );
 }

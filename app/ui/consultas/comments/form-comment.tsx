@@ -1,127 +1,121 @@
-"use client";
+'use client';
 
-/* import { useAuth0 } from "@auth0/auth0-react"; */
-import type { Session } from "next-auth";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { usePathname, useSearchParams } from "next/navigation";
-/* import LogoGoogle from "@/app/ui/logosIconos/logo-google"; */
-import { Button } from "@/app/ui/uiRadix/button";
-import clsx from "clsx";
-import { useRef, useEffect } from "react";
-import Link from "next/link"
-import LogoCnp from '@/app/ui/logosIconos/logo-cnp'
+import type { Session } from 'next-auth';
+import { signIn } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/app/ui/uiRadix/button';
+import clsx from 'clsx';
+import { useRef } from 'react';
+import LogoGoogle from '@/app/ui/logosIconos/logo-google';
 
-type CommentFormProps = {
-  /* text: string;
-  setText: Function;
-  onSubmit: (e: React.FormEvent) => Promise<void>; */
-  session: Session | null;
-};
-
-export default function CommentFormConsulta({
-  /* text,
-  setText,
-  onSubmit, */
-  session,
-}: CommentFormProps) {
-
+export default function CommentFormConsulta({ session }: { session: Session | null }) {
   const pathname = usePathname();
-  /* const searchParams = useSearchParams(); */
-  /* const { isAuthenticated, logout, loginWithPopup } = useAuth0(); */
   const textareaName = useRef(null);
 
-  /* useEffect(() => {
-    textareaName.current.focus();
-  }, []); */
-
   return (
-    <form /* onSubmit={onSubmit} */className="mt-16 max-w-[42rem] mx-auto ">
+    <form /* onSubmit={onSubmit} */ className="mx-auto max-w-[42rem] ">
+      <div id="consulta" className="mx-6 pt-12">
+        <p className="">
+          <i className="text-[#374151] ">
+            Podes contribuir con tu opinión mejorando este artículo.
+          </i>
+        </p>
+      </div>
 
-   {/*    <div className="flex-shrink-0">
-        <img
-          src={`${session?.user?.image}`}
-          alt= {`${session?.user?.name}`}
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-      </div>  */}
-      <div className="mb-1 text-[14px] font-semibold ">{session ? session.user?.name : "" }</div>
+      <div className=" mx-6 mb-8 mt-6 rounded-lg bg-[#0000000d] p-3 pb-2  [box-shadow:inset_0_1px_0px_#00000047,inset_0_-1px_0px_#ffffffe0] ">
+        <div className="flex w-full flex-col items-center gap-2 space-x-4">
+          {session ? (
+            <div className="flex w-full items-center gap-2">
+              <img
+                src={session?.user?.image}
+                alt={session?.user?.name}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <div className="">
+                <b>{session ? session.user?.name : null} </b>
+              </div>
+            </div>
+          ) : null}
 
-      <textarea
-        className={clsx(
-          "italic flex w-full border-[1px] border-[#fff0] max-h-40 p-3 rounded resize-y bg-[#ffffff1a] text-gray-900 placeholder-gray-400 focus:shadow-none focus-visible:outline-none focus:border focus:border-[#fff0] [box-shadow:inset_0_-1px_0_#4d4d4d59,inset_0_1px_0_#ffffff] ",
-          {
-            "bg-[rgba(0,0,0,0.04)] [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] ": session,
-          }
-        )}
-        rows= {session ? 4 :2}
-        /* ref={textareaName} */
-        placeholder={
-          session ? "tu comentario..." : "Para agregar un comentario logeate con:"
-        }
-        /* onChange={(e) => setText(e.target.value)}
-        value={text} */
-        disabled={!session}
-      />
-      {session ? (
-        <div className="flex justify-start gap-2 items-center my-3">
-          <Button 
-            variant={"outline"}
-            className="bg-[#fff] border border-[#d3d3d3] hover:bg-[#fff8] "
-            >
-            Enviar
-          </Button>
-          <Button
-            variant={"ghost"}
-            className=" border border-[#d3d3d3] hover:bg-white"
-            onClick={async () => {
-              await signOut();
-            }}
-          >
-            Salir
-          </Button>
+          <div className="!ml-0 w-full flex-grow">
+            {session ? (
+              <textarea
+                className={clsx(
+                  'mb-2 flex max-h-40 w-full resize-y rounded border-[1px] border-[#fff0] bg-[#ffffff57] p-2 italic text-gray-900 placeholder-gray-500 focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none  ',
+                  {
+                    /* "bg-[#ffffff57]  ": session, */
+                    /* [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff] */
+                  },
+                )}
+                rows={4}
+                placeholder={'tu comentario...'}
+              />
+            ) : (
+              <>
+                <p className="mb-6 flex">
+                  Para agregar un comentario logeate con:
+                </p>
+                <div className="flex items-center gap-4">
+                  <Button
+                    variant={'ghost'}
+                    size={'sm'}
+                    type="button"
+                    className="!px-0 opacity-80 hover:bg-[#fff] hover:opacity-100 "
+                    onClick={async () => {
+                      await signIn('google', {
+                        callbackUrl: `${pathname}#consulta`,
+                      });
+                    }}
+                  >
+                    <LogoGoogle
+                      filter="filterGoogle1"
+                      sombraX="2"
+                      sombraY="2"
+                      size="94"
+                    />
+                  </Button>
+
+                  <Button
+                    variant={'ghost'}
+                    size={'sm'}
+                    type="button"
+                    className="opacity-80 hover:bg-[#fff] hover:opacity-100  "
+                    /* onClick={ () => {
+                        signIn( "", { callbackUrl: `${pathname}` } );
+                    }} */
+                  >
+                    <img
+                      src="/logoCnp.png"
+                      alt="my desk"
+                      width={56}
+                      height={28}
+                    />
+                  </Button>
+
+                  {/* <Button
+                    variant={'ghost'}
+                    size={'sm'}
+                    type="button"
+                    className="mr-4 opacity-80 hover:bg-[#fff] hover:opacity-100 "
+                     onClick={async () => {
+                      await signIn("google", { callbackUrl: `${pathname}#consulta` });
+                    }} 
+                  >
+                    <img
+                      src="/infobae.jpg"
+                      alt="my desk"
+                      width={80}
+                      height={26}
+                    />
+                  </Button> */}
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      ) : (
-        <div className="flex justify-start gap-4 items-center my-3">
-          <Button
-            variant={"ghost"}
-            size={"sm"}
-            type="button"
-            className="hover:bg-white opacity-80 hover:opacity-100 "
-            onClick={async () => {
-              await signIn("google", {
-                callbackUrl: `${pathname}#consulta`,
-              });
-            }}
-          >
-            <img src="/google-icon.png" alt="my desk" width={26} height={26} />
-          </Button>
-
-          {/* <Button
-            variant={"ghost"}
-            size={"sm"}
-            type="button"
-            className="hover:bg-[#fff] opacity-80 hover:opacity-100  "
-            onClick={async () => {
-              await signIn("google", { callbackUrl: `${pathname}#consulta` });
-            }}
-          >
-            <img src="/facebook2.png" alt="my desk" width={16} height={16} />
-          </Button> */}
-
-          <Link href="/login">
-            <Button
-              variant={"ghost"}
-              size={"sm"}
-              type="button"
-              className="hover:bg-[#fff] opacity-80 hover:opacity-100  "
-            >
-              <img src="/logoCnp.png" alt="my desk" width={56} height={28} />
-            </Button>
-          </Link>
-        </div>
-      )}
+      </div>
     </form>
   );
 }

@@ -8,15 +8,10 @@ import { User } from '@/app/lib/definitions'
 
 export default function NavInicio({
   session,
-  user,
-  /* linkDatos, */
+  user
 }: {
   session: Session | null;
-  user: User
-  /* linkDatos: {
-    slug: string;
-    excerpt: string;
-  }[]; */
+  user: User | undefined
 }) {
   return (
     <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#ad6fa88c]  shadow-[inset_0_-2px_6px_#ffffff66,_0_2px_6px_#00000066] backdrop-blur-md ">
@@ -28,7 +23,7 @@ export default function NavInicio({
                 <span className="hidden text-sm text-[#fff] [text-shadow:_1px_-1px_0px_#000000] sm:inline-flex">
                   {session?.user?.email}
                 </span>
-                <UserButtonHeader session={session} user={user} />
+                <UserButtonHeader session={session} /* user={user} */ />
               </div>
             ) : (
               <Link

@@ -1,7 +1,5 @@
-
-
 export const agrotecnico = [
-    `<svg
+  `<svg
         width="200"
         height="52"
         viewBox="0 0 160 42"
@@ -61,7 +59,7 @@ export const agrotecnico = [
         </g>
     </svg>`,
 
-    `<svg
+  `<svg
         width="22"
         viewBox="0 0 60 80"
         xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +108,7 @@ export const agrotecnico = [
         Trámites
     </div>`,
 
-    `<svg
+  `<svg
         width="24"
         viewBox="0 0 48 58"
         xmlns="http://www.w3.org/2000/svg"
@@ -157,10 +155,10 @@ export const agrotecnico = [
     <div className="text-white [text-shadow:_1px_-1px_#000]">
         Consultas
     </div>`,
-]
+];
 
 export const agrotecnico2 = [
-    `<svg
+  `<svg
         width="105"
         height="72"
         viewBox="0 0 105 72"
@@ -222,7 +220,7 @@ export const agrotecnico2 = [
         </g>
     </svg>`,
 
-    `<svg
+  `<svg
         width="24"
         viewBox="0 0 60 80"
         xmlns="http://www.w3.org/2000/svg"
@@ -269,7 +267,7 @@ export const agrotecnico2 = [
     </svg>
     `,
 
-    `<svg
+  `<svg
         width="26"
         viewBox="0 0 48 58"
         xmlns="http://www.w3.org/2000/svg"
@@ -314,6 +312,4 @@ export const agrotecnico2 = [
         </g>
     </svg>
     `,
-]
-
-
+];

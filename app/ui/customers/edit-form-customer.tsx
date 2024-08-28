@@ -21,21 +21,21 @@ export default function EditCustomerForm( { customer }: { customer: Customer }) 
 
   return (
     <form action={dispatch}>
-      <div className="rounded-md bg-white p-4 md:p-6 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0px_#00000024,0_1px_3px_0px_#0000001f]">
+      <div className="rounded-md bg-[#0000000d] p-4 md:p-6 [box-shadow:_inset_0_1px_#00000047,inset_0_-1px_#ffffffef;]">
         {/* Cliente Name */}
         <div className="mb-4">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
             Coloque el nombre
           </label>
           <div className="relative mt-2 rounded-md">
-            <div className="relative bg-[#f7f7f7] ">
+            <div className="relative bg-[#f7f7f700] ">
               <input
                 id="name"
                 name="name"
                 type="text"
                 defaultValue={customer.name}
                 placeholder="Ingrese el nombre"
-                className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full bg-[#ffffff6b] rounded border-0 border-[#fff0] py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 [box-shadow:_inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] "
                 aria-describedby="name-error"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -58,14 +58,14 @@ export default function EditCustomerForm( { customer }: { customer: Customer }) 
             Coloque el email
           </label>
           <div className="relative mt-2 rounded-md">
-            <div className="relative bg-[#f7f7f7] ">
+            <div className="relative bg-[#f7f7f700] ">
               <input
                 id="email"
                 name="email"
                 type="email"
                 defaultValue={customer.email}
                 placeholder="Ingrese el email"
-                className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full bg-[#ffffff6b] rounded border-0 border-[#fff0] py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 [box-shadow:_inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] "
                 aria-describedby="email-error"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -88,14 +88,14 @@ export default function EditCustomerForm( { customer }: { customer: Customer }) 
             Coloque la url
           </label>
           <div className="relative mt-2 rounded-md">
-            <div className="relative bg-[#f7f7f7] ">
+            <div className="relative bg-[#f7f7f700] ">
               <input
                 id="image_url"
                 name="image_url"
                 type="text"
                 defaultValue={customer.image_url}
                 placeholder="Ingrese la url"
-                className="peer block w-full bg-transparent rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full bg-[#ffffff6b] rounded border-0 border-[#fff0] py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 [box-shadow:_inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] "
                 aria-describedby="image_url-error"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />

@@ -4,7 +4,7 @@ const {
   customers,
   revenue,
   users,
-} = require('../app/lib/placeholder-data.js');
+} = require('./placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {
@@ -225,7 +225,7 @@ VALUES ('Elias', 'elias@gmail.com', 'elias-User', 'https://i.ibb.co/mB4S7K2/elia
 Eliminar filas
 DELETE FROM users WHERE email = 'elias@gmail.com';
 
-DELETE FROM users WHERE email = 'cabrera1@gmail.com';
+DELETE FROM users WHERE email = 'Manuel';
 
 DELETE FROM consultas WHERE email = '8c11d30f-af9f-4f84-ab4f-3a22b79ec595'; 
 

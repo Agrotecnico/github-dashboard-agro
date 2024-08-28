@@ -11,7 +11,7 @@ export default async function SideNavConsultas() {
   const session = await auth()
   return (
     <div className="flex h-max flex-col md:mt-6">
-      <div className="px-3 pt-6 flex grow flex-col justify-between text-[#ffffffbb] text-[14px] [text-shadow:_1px_1px_#000] mx-1 !h-auto rounded-xl [backdrop-filter:_blur(1px)] bg-[#00000071] [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:text-[15px] md:w-[280px] ">
+      <div className="px-3 pt-6 flex grow flex-col justify-between text-[#ffffffbb] text-[14px] [text-shadow:_1px_1px_#000] mx-1 !h-auto rounded-xl [backdrop-filter:_blur(1px)] bg-[#00000071] [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] md:text-[15px] min-[1024px]:w-[280px] ">
         
         <NavLinksConsultas />
 

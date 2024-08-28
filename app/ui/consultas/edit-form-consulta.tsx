@@ -2,19 +2,12 @@
 
 import { Consulta } from '@/app/lib/definitions';
 import Link from 'next/link';
-import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserCircleIcon,
-  AtSymbolIcon,
-  CameraIcon,
-} from '@heroicons/react/24/outline';
+import { UserCircleIcon, AtSymbolIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { updateConsulta } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 
-export default function EditConsultaForm( { consulta }: { consulta: Consulta }) {
+export default function EditConsultaForm({ consulta }: { consulta: Consulta }) {
   const initialState = { message: null, errors: {} };
   const updateConsultaWithId = updateConsulta.bind(null, consulta.id);
   const [state, dispatch] = useFormState(updateConsultaWithId, initialState);
@@ -24,7 +17,7 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
       <div className="flex flex-col justify-between rounded-xl bg-[#0000000d] px-4 py-6 shadow-sm [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0] ">
         {/* Consulta user Name */}
         <div className="mb-4">
-          <label htmlFor="name" className="ml-3 mb-1 block text-sm font-medium">
+          <label htmlFor="name" className="mb-1 ml-3 block text-sm font-medium">
             Editar nombre
           </label>
           <div className="relative rounded-md">
@@ -35,7 +28,7 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
                 type="text"
                 defaultValue={consulta.name}
                 placeholder="Ingrese el nombre"
-                className="peer block border border-[#0000] py-2.5 pl-10 text-sm outline-2 placeholder:text-[#bbb]   flex-col items-center p-6 w-full rounded  bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row   "
+                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   p-6 py-2.5 pl-10 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#bbb] min-[800px]:flex-row   "
                 aria-describedby="name-error"
               />
               <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -54,7 +47,7 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
 
         {/* Consulta user Email */}
         <div className="mb-4">
-          <label htmlFor="email" className="ml-3 -1 block text-sm font-medium">
+          <label htmlFor="email" className="-1 ml-3 block text-sm font-medium">
             Editar email
           </label>
           <div className="relative rounded-md">
@@ -65,7 +58,7 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
                 type="email"
                 defaultValue={consulta.email}
                 placeholder="Ingrese el email"
-                className="peer block border border-[#0000] py-2.5 pl-10 text-sm outline-2 placeholder:text-[#bbb]   flex-col items-center p-6 w-full rounded  bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row   "
+                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   p-6 py-2.5 pl-10 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#bbb] min-[800px]:flex-row   "
                 aria-describedby="email-error"
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -84,7 +77,10 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
 
         {/* Consulta consulta */}
         <div className="mb-4">
-          <label htmlFor="consulta" className="ml-3 mb-1 block text-sm font-medium">
+          <label
+            htmlFor="consulta"
+            className="mb-1 ml-3 block text-sm font-medium"
+          >
             Editar consulta
           </label>
           <div className="relative mt-1 rounded-md">
@@ -92,10 +88,10 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
               <textarea
                 id="consulta"
                 name="consulta"
-                rows= {6}
+                rows={6}
                 defaultValue={consulta.consulta}
                 placeholder="Edite la consulta"
-                className="peer block border border-[#0000] py-2.5 pl-3 text-sm outline-2 placeholder:text-[#bbb]   flex-col items-center w-full rounded  bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row"
+                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   py-2.5 pl-3 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#bbb] min-[800px]:flex-row"
                 aria-describedby="consulta-error"
               />
             </div>
@@ -113,7 +109,10 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
 
         {/* Consulta respuesta */}
         <div className="mb-4">
-          <label htmlFor="respuesta" className="ml-3 mb-1 block text-sm font-medium">
+          <label
+            htmlFor="respuesta"
+            className="mb-1 ml-3 block text-sm font-medium"
+          >
             Editar respuesta
           </label>
           <div className="relative mt-1 rounded-md">
@@ -121,10 +120,10 @@ export default function EditConsultaForm( { consulta }: { consulta: Consulta }) 
               <textarea
                 id="respuesta"
                 name="respuesta"
-                rows= {6}
+                rows={6}
                 defaultValue={consulta.respuesta}
                 placeholder="Edite la respuesta"
-                className="peer block border border-[#0000] py-2.5 pl-3 text-sm outline-2 placeholder:text-[#999]   flex-col items-center w-full rounded  bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row   "
+                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   py-2.5 pl-3 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#999] min-[800px]:flex-row   "
                 aria-describedby="respuesta-error"
                 required
               />

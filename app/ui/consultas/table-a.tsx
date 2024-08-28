@@ -57,7 +57,7 @@ export default async function ConsultasTableA({
                       <p>{AllConsulta?.email}</p>
                     </div>
                   </div>
-                    <div className="flex w-full items-center justify-star gap-4 border-b border-t border-[#ffffff88] py-2">
+                    <div className="flex w-full items-center justify-star gap-4 border-y border-[#00000014] py-2">
                       <div>Consulta:</div>
                       {AllConsulta?.respuesta ? (
                           <div className="text-center rounded bg-[#c2f3c1] text-sm ">Respondida</div>

@@ -25,7 +25,7 @@ export default async function CustomersTable({
       </div>
       <div className="mt-6 flow-root">
           <div className="inline-block min-w-full align-middle">
-            <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffef] min-[824px]:pt-0 ">
+            <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0] min-[824px]:pt-0 ">
               <div className="min-[824px]:hidden">
                 {customers?.map((customer) => (
                   <div
@@ -47,7 +47,7 @@ export default async function CustomersTable({
                         </div>
                       </div>
                     </div>
-                    <div className="flex w-full items-center justify-between border-b py-5">
+                    <div className="flex w-full items-center justify-between border-[#00000014] border-y py-5">
                       <div className="flex w-1/2 flex-col  " >
                         <p className="text-sm">Debe</p>
                         <p className="font-medium text-red-500">{customer.total_pending}</p>

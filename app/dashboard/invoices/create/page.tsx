@@ -14,7 +14,7 @@ export default async function Page() {
   const session = await auth()
   const customers = await fetchCustomers();
  
-  if (session?.user?.email === 'agrotecnicog@gmail.com' )
+  if (session?.user?.email ===  process.env.ADMIN )
   return (
     <main>
       <Breadcrumbs

@@ -15,20 +15,11 @@ import { unstable_noStore as noStore } from 'next/cache'
 
 
 export async function fetchRevenue() {
-  // Add noStore() here to prevent the response from being cached.
-  // This is equivalent to in fetch(..., {cache: 'no-store'}).
   noStore()
 
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
-    //console.log('Fetching revenue data...');
-    //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
-
-    //console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -61,9 +52,6 @@ export async function fetchLatestInvoices() {
 export async function fetchCardData() {
   noStore()
   try {
-    // You can probably combine these into a single SQL query
-    // However, we are intentionally splitting them to demonstrate
-    // how to initialize multiple queries in parallel with JS.
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
@@ -186,7 +174,7 @@ export async function fetchFilteredConsultas(query: string, currentPage: number,
   }
 }
 
-export async function fetchFilteredConsultasM(email: string, currentPage: number,) {
+export async function fetchFilteredConsultasM(email: string | null | undefined, currentPage: number,) {
   noStore()
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   try {
@@ -266,7 +254,7 @@ export async function fetchConsultasPages(query: string) {
   }
 }
 
-export async function fetchConsultasPagesM(email: string) {
+export async function fetchConsultasPagesM(email: string | null | undefined) {
   noStore()
   try {
     const count = await sql`SELECT COUNT(*)
@@ -364,16 +352,7 @@ export async function fetchConsultaById(id: string) {
   }
 }
 
-/* export async function getUser(email: string) {
-  try {
-    const user = await sql`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0] as User;
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
-} */
-export async function fetchUserById(email: string): Promise<User | undefined> {
+export async function fetchUserById(email: string | null | undefined): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
     return user.rows[0];
@@ -401,65 +380,3 @@ export async function fetchUserById(email: string): Promise<User | undefined> {
     throw new Error('Failed to fetch all customers.');
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*export async function fetchConsultas() {
-  noStore()
-  try {
-    const data = await sql<Consulta>`
-      SELECT
-        id,
-        email,
-        consulta,
-        date
-      FROM consultas
-      ORDER BY name DESC
-    `;
-
-    const consultas = data.rows;
-    return consultas;
-  } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch all consultas.');
-  }
-}
-
-export async function getConsulta(email: string) {
-  try {
-    const consultas = await sql<Consulta>
-    `SELECT * 
-      FROM consultas 
-      WHERE email=${email}
-      ORDER BY created_at DESC;`;
-    return consultas.rows;
-  } catch (error) {
-    console.error('Failed to fetch consulta:', error);
-    throw new Error('Failed to fetch consulta.');
-  }
-}
-
-export async function getConsultas(query: string, currentPage: number) {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  try {
-    const consultas = await sql<Consulta>
-    `SELECT * 
-      FROM consultas 
-      ORDER BY created_at DESC
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-      `;
-    return consultas.rows;
-  } catch (error) {
-    console.error('Failed to fetch consultas:', error);
-    throw new Error('No se pudieron recuperar las consultas.');
-  }
-} */

@@ -5,7 +5,6 @@ import { fetchConsultasPages } from '@/app/lib/data';
 import ConsultasTableA from '@/app/ui/consultas/table-a';
 import ConsultasTableM from '@/app/ui/consultas/table-m';
 
-
 export default async function Page({
   searchParams,
 }: {
@@ -21,20 +20,19 @@ export default async function Page({
 
   const totalPages = await fetchConsultasPages(query);
 
-  if (session?.user?.email === 'agrotecnicog@gmail.com')
+  if (session?.user?.email === process.env.ADMIN)
+    return (
+      <main>
+        <ConsultasTableA query={query} currentPage={currentPage} />
+        <div className="mt-5 flex w-full justify-center">
+          <Pagination totalPages={totalPages} />
+        </div>
+      </main>
+    );
 
   return (
     <main>
-      <ConsultasTableA query={query} currentPage={currentPage} />
-      <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
-      </div>
-    </main>
-  );
-
-  return  (
-    <main>
       <ConsultasTableM currentPage={currentPage} session={session} />
     </main>
-  ); 
+  );
 }

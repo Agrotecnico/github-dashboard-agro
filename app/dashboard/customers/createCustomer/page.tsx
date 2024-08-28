@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await auth();
 
-  if (session?.user?.email === 'agrotecnicog@gmail.com')
+  if (session?.user?.email ===  process.env.ADMIN )
     return (
       <main>
         <Breadcrumbs

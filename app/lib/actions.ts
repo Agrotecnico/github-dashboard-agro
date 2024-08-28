@@ -38,7 +38,7 @@ const FormSchemaUser = z.object({
   role: z.enum(['admin', 'member', 'developer'], {
     invalid_type_error: 'Seleccione un rol de usuario.',
   }),
-  image: z.string(),  /* .min(5, { message: "Must be 5 or more characters long" }) */
+  image: z.string(),
 });
 
 const FormSchemaConsulta = z.object({
@@ -382,7 +382,7 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   }
   
   // Prepare data for insertion into the database
-  const { name, email, password, /* image */ } = validatedFields.data;
+  const { name, email, password  } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10); 
 
   // Insert data into the database
@@ -434,8 +434,10 @@ export async function updateUser(
     return { message: 'Database Error: No se pudo actualizar a el Usuario.' };
   }
 
-  revalidatePath('/dashboard/perfil');
-  redirect('/dashboard/perfil');
+  /* revalidatePath('/dashboard/perfil'); */
+  revalidatePath('/dashboard');
+  /* redirect('/dashboard/perfil'); */
+  redirect('/dashboard');
 }
 
 

@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     notFound();
   }
 
-  if (session?.user?.email === 'agrotecnicog@gmail.com' )
+  if (session?.user?.email ===  process.env.ADMIN )
     return (
       <main>
         <Breadcrumbs

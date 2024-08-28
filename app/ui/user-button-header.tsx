@@ -13,21 +13,13 @@ import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-/* import { fetchUserById } from '@/app/lib/data' */
-import { User } from '@/app/lib/definitions'
 
-
-export default /* async */ function UserButtonHeader({
+export default function UserButtonHeader({
   session,
-  user,
 }: {
   session: Session | null;
-  user: User
 }) {
-
-  /* const user = await fetchUserById(session?.user?.email); */
   const pathname = usePathname();
-  /* console.log("user", user) */
 
   return (
     <>
@@ -50,7 +42,6 @@ export default /* async */ function UserButtonHeader({
             ) : (
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eee] text-[#374151] ">
                 {session?.user?.email?.substring(0, 1).toUpperCase()}
-                 {/* {user?.email.substring(0, 1).toUpperCase()} */}
               </span>
             )}
           </Button>
@@ -62,10 +53,10 @@ export default /* async */ function UserButtonHeader({
         >
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none text-[#374151] ">{/* text-[#020817] */}
+              <p className="text-sm font-medium leading-none text-[#374151] ">
                 {session?.user?.name}
               </p>
-              <p className="text-muted-foreground text-xs leading-none text-[#64748b]">{/* text-[#64748b] */}
+              <p className="text-muted-foreground text-xs leading-none text-[#64748b]">
                 {session?.user?.email}
               </p>
             </div>

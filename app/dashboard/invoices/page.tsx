@@ -8,7 +8,6 @@ import { Suspense } from 'react'
 import { fetchInvoicesPages } from '@/app/lib/data'
 import { Metadata } from 'next'
 import { auth } from '@/auth'
-import { notFound } from 'next/navigation'
 
 
 export const metadata: Metadata = {
@@ -29,7 +28,7 @@ export default async function Page({
 
     const totalPages = await fetchInvoicesPages(query)
 
-  if (session?.user?.email === 'agrotecnicog@gmail.com' )
+  if (session?.user?.email ===  process.env.ADMIN )
     return (
       <div className="">
         <div className="flex w-full items-center justify-between">
@@ -47,7 +46,7 @@ export default async function Page({
         </div>
       </div>
     )
-    return (
-      notFound()
-    )
+      return (
+        <div className="h-[50%] flex items-center justify-center ">Facturas no disponble para este Usuario</div>
+      );
 }

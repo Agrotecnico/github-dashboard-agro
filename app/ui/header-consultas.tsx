@@ -7,7 +7,7 @@ import { auth } from 'auth';
 import IconCuenta from './logosIconos/icon-cuenta';
 
 
-export default async function HeaderConsultas( props ) {
+export default async function HeaderConsultas( ) {
 
   const session = await auth();
   return (
@@ -43,11 +43,8 @@ export default async function HeaderConsultas( props ) {
           </Link>
         </div>
         <div className="mb-1.5 flex flex-col text-center text-[18px] font-black leading-6 text-black opacity-40 [text-shadow:_0_1px_0_#ffffffdd] max-[425px]:hidden md:mb-1 md:flex-row md:leading-7">
-          <span className="mr-1.5">
-            {/* {session?.user?.email == 'agrotecnicog@gmail.com'
-              ? 'Panel de control'
-              : 'Consultas'} */}
-            {props.title}
+          <span className="hidden mr-1.5">
+            {/* Consultas o panel de control */}
           </span>
           <span>2024</span>
         </div>
