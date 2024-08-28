@@ -126,7 +126,7 @@ export default function EditPerfilForm({ user }: { user: User }) {
           data-testid="image-container"
         >
           {file ? (
-            <img
+            <Image
               src={URL.createObjectURL(file)}
               alt="Uploaded file"
               className="mx-auto items-center justify-center rounded object-cover"

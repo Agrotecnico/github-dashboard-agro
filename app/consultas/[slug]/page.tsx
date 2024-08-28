@@ -40,8 +40,8 @@ export default async function PostPage({ params }: Params) {
           <div className="hidden md:mb-6 md:block">
             <div className="flex items-center">
               {post.avatar ? (
-                <img
-                  src={post.avatar}
+                <Image
+                  src={`${post.avatar}`}
                   alt="my desk"
                   width={300}
                   height={300}
@@ -55,8 +55,8 @@ export default async function PostPage({ params }: Params) {
           <div className="mx-auto mb-4 max-w-max rounded p-0.5 [box-shadow:inset_0_2px_0_#4d4d4db8,inset_0_-2px_0_#ffffff] md:mb-8 ">
             <div className="sm:mx-0">
               {post.image ? (
-                <img
-                  src={post.image}
+                <Image
+                  src={`${post.image}`}
                   alt="my desk"
                   width={481}
                   height={361}
@@ -71,7 +71,7 @@ export default async function PostPage({ params }: Params) {
               <div className="flex items-center">
                 {post.avatar ? (
                   <Image
-                    src={post.avatar}
+                    src={`${post.avatar}`}
                     alt="my desk"
                     width={300}
                     height={300}

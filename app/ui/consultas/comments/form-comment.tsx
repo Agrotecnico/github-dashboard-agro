@@ -27,9 +27,9 @@ export default function CommentFormConsulta({ session }: { session: Session | nu
         <div className="flex w-full flex-col items-center gap-2 space-x-4">
           {session ? (
             <div className="flex w-full items-center gap-2">
-              <img
-                src={session?.user?.image}
-                alt={session?.user?.name}
+              <Image
+                src={`${session?.user?.image}`}
+                alt={`${session?.user?.name}`}
                 width={40}
                 height={40}
                 className="rounded-full"

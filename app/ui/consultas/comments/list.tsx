@@ -21,9 +21,9 @@ export default function CommentList({ session }: { session: Session | null }) {
         <div className="flex-grow">
           <div className="flex flex-col">
             <b>Raúl Paredes </b>
-            <time className="text-[14px] text-gray-400 ">
+            {/* <time className="text-[14px] text-gray-400 ">
               {distanceToNow(`11/11/23`)}
-            </time>
+            </time> */}
           </div>
 
           <div className="my-2">
