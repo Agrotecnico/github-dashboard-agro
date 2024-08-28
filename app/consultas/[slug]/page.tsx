@@ -7,6 +7,7 @@ import markdownStyles from '@/app/ui/consultas/markdown-styles.module.css';
 import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
 import { auth } from 'auth';
 import CommentList from '@/app/ui/consultas/comments/list';
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Consultas',
@@ -69,7 +70,7 @@ export default async function PostPage({ params }: Params) {
             <div className="mb-6 block md:hidden">
               <div className="flex items-center">
                 {post.avatar ? (
-                  <img
+                  <Image
                     src={post.avatar}
                     alt="my desk"
                     width={300}

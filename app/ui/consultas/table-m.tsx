@@ -43,7 +43,7 @@ export default async function ConsultasTableM({
                   <div>
                     {consulta.respuesta ? (
                       <>
-                        <div className="mb-1 flex  text-[#747e91]">
+                        <div key= {consulta.id } className="mb-1 flex  text-[#747e91]">
                           <p className="flex text-[#747e91] ">Respuesta:</p>
                         </div>
                         <p>{consulta.respuesta} </p>

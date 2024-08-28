@@ -7,6 +7,7 @@ import { Button } from '@/app/ui/uiRadix/button';
 import clsx from 'clsx';
 import { useRef } from 'react';
 import LogoGoogle from '@/app/ui/logosIconos/logo-google';
+import Image from 'next/image'
 
 export default function CommentFormConsulta({ session }: { session: Session | null }) {
   const pathname = usePathname();
@@ -86,7 +87,7 @@ export default function CommentFormConsulta({ session }: { session: Session | nu
                         signIn( "", { callbackUrl: `${pathname}` } );
                     }} */
                   >
-                    <img
+                    <Image
                       src="/logoCnp.png"
                       alt="my desk"
                       width={56}

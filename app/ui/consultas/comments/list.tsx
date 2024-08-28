@@ -1,5 +1,6 @@
 import distanceToNow from '@/app/lib/dateRelative';
 import type { Session } from 'next-auth';
+import Image from 'next/image'
 
 export default function CommentList({ session }: { session: Session | null }) {
   const isAuthor = true;
@@ -8,7 +9,7 @@ export default function CommentList({ session }: { session: Session | null }) {
     <div className="mt-6 space-y-6 rounded-lg bg-[#0000000d] p-3  [box-shadow:inset_0_1px_0px_#00000047,inset_0_-1px_0px_#ffffffe0] ">
       <div className="flex space-x-4">
         <div className="flex-shrink-0">
-          <img
+          <Image
             src="/customers/marcelo-morel.png"
             alt="Raul paredes"
             width={40}
@@ -21,7 +22,7 @@ export default function CommentList({ session }: { session: Session | null }) {
           <div className="flex flex-col">
             <b>Raúl Paredes </b>
             <time className="text-[14px] text-gray-400 ">
-              {distanceToNow('2024-3-20')}
+              {distanceToNow(`11/11/23`)}
             </time>
           </div>
 
