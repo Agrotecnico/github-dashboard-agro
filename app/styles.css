@@ -19,9 +19,6 @@
 .swiper2 > .swiper-wrapper > .swiper-slide {
   backdrop-filter: blur(1px);
   border-radius: 12px;
-  box-shadow:
-    #00000055 0px 0px 5px 2px inset,
-    #ffffff55 0px 0px 3px 1px;
 }
 .swiper1 > .swiper-wrapper {
   width: 92%;
@@ -42,11 +39,10 @@
   z-index: 60;
   position: fixed;
   justify-content: start;
-  margin-left: 16px;
+  margin-left: 4px;
 }
 .swiper2 > .swiper-pagination {
-  bottom: 236px;
-  position: fixed;
+  top: 314px;
 }
 .swiper2 .swiper-pagination-bullet {
   opacity: 1;
@@ -58,15 +54,15 @@
   box-shadow: 0px 0px 3px 1px #0007;
 }
 .swiper2 .swiper-pagination-bullet-active {
-  background: #ffffff9d;
+  background: #ffffffaa;
   box-shadow: 0px 0px 3px 1px #0007;
 }
 .swiper2 .swiper-pagination-bullet:hover {
   background: #ffffff88;
 }
 .swiper3 > .swiper-pagination {
-  height: 276px;
-  bottom: 309px;
+  height: 308px;
+  bottom: 307px;
   position: relative;
   display: flex;
 }
@@ -85,7 +81,7 @@
   background: #ffffff88;
 }
 .swiper3 .swiper-pagination-bullet-active {
-  background: #ffffff99;
+  background: #ffffffaa;
   box-shadow: 1px 1px #0009;
 }
 .swiper3 > .swiper-button-next:after,
@@ -95,34 +91,35 @@
   text-shadow: 3px 0px 0px black;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet {
-  height: 60px;
+  height: 70px;
   width: max-content;
   border-radius: 0;
-  color: #ffffffcc;
+  color: #ffffff;
   margin: 0 !important;
   background: none;
   opacity: 1;
   font-size: 15px;
-  text-shadow: 1px 1px #222;
+  text-shadow: -1px -1px #222;
   display: flex !important;
   align-items: end;
   transition: 0.2s;
   line-height: 1;
-  margin-right: 8px !important;
+  margin-right: 20px !important;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+  opacity: .75;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:hover {
-  color: white;
+  opacity: 1;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
-  font-size: 20px;
-  font-weight: 500;
-  opacity: .9;
-}
-.swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1):hover {
-  opacity: 1;
+  margin-top:4px !important;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet-active {
   color: white;
+  opacity: 1;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet-active .agrot {
   fill: white;
@@ -156,6 +153,8 @@
 #ini .swiper3 .swiper-pagination-bullet {
   display: none;
 }
+
+
 @media (min-width: 320px) {
   .swiper1 > .swiper-wrapper {
     width: 100%;
@@ -163,12 +162,12 @@
 }
 @media (min-width: 375px) {
   .swiper1 > .swiper-pagination > .swiper-pagination-bullet {
-    margin-right: 16px !important;
+    margin-right: 32px !important;
   }
 }
 @media (min-width: 425px) {
   .swiper1 > .swiper-pagination {
-    margin-left: 24px;
+    margin-left: 18px;
   }
 }
 @media (min-width: 500px) {
@@ -178,8 +177,12 @@
     line-height: .8;
   }
   .swiper1 > .swiper-pagination {
-    margin-left: 24px;
+    margin-left: 4px;
     justify-content: normal;
+    margin-top: 8px;
+  }
+  .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
+    margin-top:0px !important;
   }
 }
 @media (min-width: 768px) {
@@ -209,7 +212,7 @@
 }
 @media (min-width: 1100px) {
   .swiper1 > .swiper-pagination {
-    margin-left: calc((100% - 1100px) / 2 + 54px);
+    margin-left: calc(((100% - 1100px) / 2) + 42px);
   }
   .swiper1 > .swiper-wrapper {
     max-width: 1036px;

@@ -1,4 +1,6 @@
 import { Revenue } from './definitions';
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -9,12 +11,12 @@ export const formatCurrency = (amount: number) => {
 
 export const formatDateToLocal = (
   dateStr: string,
-  locale: string = 'en-US',
+  locale: string = "es-AR" /* 'en-US' */,
 ) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
-    month: 'short',
+    month: 'numeric'/* 'short' */,
     year: 'numeric',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
@@ -67,3 +69,8 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+

@@ -216,3 +216,49 @@ export function InvoicesTableSkeleton() {
     </div>
   );
 }
+
+export function FormConsultaSkeleton() {
+  return (
+    <>
+      <div className={`${shimmer} opacity-50 rounded p-4 mt-24 w-full h-40 bg-gray-300  `}>
+        <div className= "w-28 h-6 bg-gray-200" ></div>
+      </div>
+
+      <div className="opacity-50 mb-4 mt-4 flex flex-col  place-items-start gap-3 rounded border-[1px] border-[#fff0] bg-gray-300 p-3 ">
+        <div className=" w-24 h-6 bg-gray-200 ">
+        </div>
+        <div className="flex w-full flex-col gap-4 sm:flex-row ">
+          <div>
+            <div className="flex flex-col rounded items-start gap-4 bg-gray-200  min-[500px]:flex-row min-[500px]:items-center  ">
+              <div className="relative">
+                <div
+                  className="absolute m-0 h-8 w-[164px] rounded px-4 py-1 opacity-0"
+                />
+                <div className=" w-32 h-6 bg-white ">
+                </div>
+              </div>
+            </div>
+            <button
+              className={`mt-1 hidden h-8 w-max rounded p-1 text-[13.5px] leading-4 duration-200   disabled:opacity-60 `}
+            >
+              <div className="flex">
+                <p>Adjuntar archivo</p>
+              </div>
+            </button>
+          </div>
+          <div
+            className={`relative opacity-50 flex h-[310px] w-full justify-center mb-4 rounded bg-gray-100  `}
+          >
+            <div className="w-9 h-12 my-auto relative flex bg-gray-300">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-20 h-10 ml-auto items-end flex justify-end gap-4 rounded-lg bg-gray-100">
+        <div className="m-auto w-14 h-5 bg-gray-200 ">
+        </div>
+      </div>
+    </>
+  );
+}

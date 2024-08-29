@@ -1,52 +1,36 @@
-'use client';
-
-import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
-} from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-const links = [
-  { name: '¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?',
-    href: '/consultas',
-  },
-  { name: '¿Qué es el formulario 08?', href: '/consultas/consulta-2' },
-  { name: 'Validez del formulario 08', href: '/consultas/consulta-3' },
-  {
-    name: 'Ante la compra / venta de un vehículo, ¿que documentación tengo que solicitar al vendedor o entregar?',
-    href: '/consultas/consulta-4',
-  },
-  /* { name: 'Qué es el formulario 08?', href: '/consultas/consulta-5' }, */
-];
+/* import distanceToNow from '@/app/lib/dateRelative'; */
+import { getAllPosts } from '@/app/lib/getPost';
 
 export default function NavLinksConsultas() {
-  const pathname = usePathname();
+  const allPosts = getAllPosts();
 
   return (
-    <>
-      {links.map((link) => {
-        /* const LinkIcon = link.icon; */
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={clsx(
-              'duration-200 flex text-[#666] !ml-0 hover:text-[#111] text-start grow items-center justify-start gap-2 rounded-md bg-white p-1.5 text-sm font-medium md:flex-none',
-              {
-                ' text-[#010101]': pathname === link.href,
-              },
-            )}
-          >
-            {/* <LinkIcon className="w-6" /> */}
-            <p className="rounded-md w-full text-start p-2 md:block bg-[#f7f7f7] ">{link.name}</p>
-          </Link>
-        );
-      })}
-    </>
+    <div>
+      <div className="mb-2 w-full pb-2 pl-2 text-left text-[14px] leading-4 min-[500px]:mb-3 min-[500px]:pb-3 ">
+        CONSULTAS FRECUENTES:
+      </div>
+      {allPosts.length ? (
+        allPosts.map((post) => (
+          <article key={post.slug} className="mb-2 rounded-md duration-200  ">
+            <Link
+              as={`/consultas/${post.slug}`}
+              href="/consultas/[slug]"
+              className={clsx(
+                '!ml-0 flex grow flex-col justify-start border-b border-b-[#fff2] px-2.5 pt-2.5 text-start text-[14px] leading-[18px] duration-300 hover:text-white focus:text-[#fff] ',
+              )}
+            >
+              <p className="[letter-spacing:_0.5px] ">{post.excerpt}</p>
+              {/* <div className="text-[13px] leading-5 text-[#ffffff99] [text-shadow:1px_1px_#00000094]  ">
+                <time>{distanceToNow(new Date(post.date))}</time>
+              </div> */}
+            </Link>
+          </article>
+        ))
+      ) : (
+        <p>No blog posted yet :/</p>
+      )}
+    </div>
   );
 }

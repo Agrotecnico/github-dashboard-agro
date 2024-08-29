@@ -1,46 +1,88 @@
-'use client';
-
 import {
   UserGroupIcon,
   HomeIcon,
-  DocumentDuplicateIcon,
+  QuestionMarkCircleIcon,
+  QueueListIcon,
+  UserCircleIcon,
+  InboxIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { auth } from '@/auth';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
+const linkMembers = [
+  {
+    name: 'Realizá tu consulta',
+    href: '/dashboard',
+    icon: QuestionMarkCircleIcon,
+  },
+  {
+    name: 'Tus Consultas',
+    href: '/dashboard/tusConsultas',
+    icon: QueueListIcon,
+  },
+
+  { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
+];
+
 const links = [
-  { name: 'Panel Info', href: '/dashboard', icon: HomeIcon },
+  { name: 'Info resumen', href: '/dashboard', icon: HomeIcon },
   {
     name: 'Facturas',
     href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
+    icon: InboxIcon,
   },
   { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
+  /* { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon }, */
 ];
 
-export default function NavLinks() {
-  const pathname = usePathname();
+export default async function NavLinks() {
+  const session = await auth();
+
+  if (session?.user?.email === process.env.ADMIN)
+    return (
+      <>
+        {links.map((link) => {
+          const LinkIcon = link.icon;
+          return (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={clsx(
+                'flex h-[48px] grow items-center justify-center  gap-2 rounded-md p-3 text-sm font-medium text-[#00000099] duration-200 [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffff17] hover:text-[#000000bb] md:p-2 md:px-3 min-[824px]:flex-none min-[824px]:justify-start ',
+                {
+                  /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href, */
+                },
+              )}
+            >
+              <LinkIcon className="w-6" />
+              <p className="hidden md:block">{link.name}</p>
+            </Link>
+          );
+        })}
+      </>
+    );
 
   return (
     <>
-      {links.map((link) => {
-        const LinkIcon = link.icon;
+      {linkMembers.map((linkMember) => {
+        const LinkIcon = linkMember.icon;
         return (
           <Link
-            key={link.name}
-            href={link.href}
+            key={linkMember.name}
+            href={linkMember.href}
             className={clsx(
-              'duration-200 flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-[#fee1fe] hover:text-[#b520b5] md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-[#00000099] duration-200 [box-shadow:inset_2px_-2px_#0000002e,inset_-2px_2px_#ffffff36,1px_-1px_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffff17] hover:text-[#000000bb] md:p-2 md:px-3 min-[824px]:flex-none min-[824px]:justify-start',
               {
-                'bg-[#fee1fe] text-[#b520b5]': pathname === link.href,
+                /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href, */
               },
             )}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <p className="hidden md:block">{linkMember.name}</p>
           </Link>
         );
       })}
