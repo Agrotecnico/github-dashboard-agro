@@ -30,7 +30,7 @@ export default function EditPerfilFormB() {
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`
     const data = new FormData()
-    data.append("image", file)
+    data.append("image", `${file}`)
 
     try {
       const response = await fetch(url, {
@@ -153,7 +153,7 @@ export default function EditPerfilFormB() {
                 id="name"
                 type="text"
                 name="name"
-                defaultValue={!name ? session?.user?.name : name}
+                defaultValue={`${!name ? session?.user?.name : name}`}
                 placeholder="Elegí tu nombre..."
                 required
                 onChange={(e) => {
@@ -177,7 +177,7 @@ export default function EditPerfilFormB() {
                 id="email"
                 type="email"
                 name="email"
-                defaultValue={!email ? session?.user?.email : email}
+                defaultValue={`${!email ? session?.user?.email : email}`}
                 placeholder="Agregá tu email..."
                 required
                 onChange={(e) => {
@@ -195,7 +195,7 @@ export default function EditPerfilFormB() {
             id="password"
             type="hidden"
             name="password"
-            value= {session?.user?.email}
+            value= {`${session?.user?.email}`}
           />
         </div>
 
@@ -205,7 +205,7 @@ export default function EditPerfilFormB() {
             id="confirmPassword"
             type="hidden"
             name="confirmPassword"
-            value= {session?.user?.email}
+            value= {`${session?.user?.email}`}
           />
         </div>
 
@@ -215,7 +215,7 @@ export default function EditPerfilFormB() {
             id="image"
             type="hidden"
             name="image"
-            value= {!image ? session?.user?.image : image}
+            value= {`${!image ? session?.user?.image : image}`}
           />
         </div>
 

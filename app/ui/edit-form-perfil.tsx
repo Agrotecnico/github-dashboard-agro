@@ -26,7 +26,7 @@ export default function EditPerfilForm({ user }: { user: User }) {
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`;
     const data = new FormData();
-    data.append('image', file);
+    data.append('image', `${file}`);
 
     try {
       const response = await fetch(url, {
