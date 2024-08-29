@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import distanceToNow from '@/app/lib/dateRelative';
+/* import distanceToNow from '@/app/lib/dateRelative'; */
 import { getAllPosts } from '@/app/lib/getPost';
 
 export default function NavLinksConsultas() {

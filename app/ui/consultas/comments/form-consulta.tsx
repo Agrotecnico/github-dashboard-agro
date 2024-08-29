@@ -74,14 +74,14 @@ export default function FormConsulta({ session }: { session: Session | null }) {
         type="hidden"
         id="email"
         name="email"
-        value={session?.user?.email}
+        value={`${session?.user?.email}`}
         readOnly
       />
       <input
         type="hidden"
         id="name"
         name="name"
-        value={session?.user?.name}
+        value={`${session?.user?.name}`}
         readOnly
       />
       <div className="flex justify-end gap-4">
