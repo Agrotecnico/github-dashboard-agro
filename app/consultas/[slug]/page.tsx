@@ -102,7 +102,7 @@ export default async function PostPage({ params }: Params) {
 
            <CommentList session={session} />
           
-          <CommentFormConsulta session={session} />
+          {/* <CommentFormConsulta session={session} /> */}
 
           <div className=" flex items-center justify-center bg-[#c160ad87] text-center text-[#ffffff88] [border-radius:_0_0_12px_12px] [text-shadow:_1px_1px_#00000069] ">
             cnp mandataria
