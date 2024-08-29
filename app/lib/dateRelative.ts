@@ -1,4 +1,4 @@
-import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
+/* import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
 import es from 'date-fns/locale/es';
 
 const locale= es
@@ -8,3 +8,4 @@ export default function distanceToNow(dateTime: number | Date) {
     locale,
   });
 }
+ */

@@ -1,4 +1,4 @@
-'use client';
+/* 'use client'; */
 
 import CustomersTable from '@/app/ui/customers/table';
 import Pagination from '@/app/ui/invoices/pagination';
