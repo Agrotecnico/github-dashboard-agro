@@ -585,7 +585,7 @@ export default function GaleriaFotosCnp({
                       className="opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
                     />
                   </Link>
-                  <Link
+                  {/* <Link
                     href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje"
                     data-title="e-mail"
                   >
@@ -596,7 +596,7 @@ export default function GaleriaFotosCnp({
                       size="43"
                       className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
                     />
-                  </Link>
+                  </Link> */}
                   <Link
                     href={session ? '/dashboard' : '/login'}
                     data-title="cnp mandataria"

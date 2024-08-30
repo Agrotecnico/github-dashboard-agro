@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-/* import distanceToNow from '@/app/lib/dateRelative'; */
+import distanceToNow from '@/app/lib/dateRelative';
 import { getAllPosts } from '@/app/lib/getPost';
 
 export default function NavLinksConsultas() {
@@ -22,9 +22,9 @@ export default function NavLinksConsultas() {
               )}
             >
               <p className="[letter-spacing:_0.5px] ">{post.excerpt}</p>
-              {/* <div className="text-[13px] leading-5 text-[#ffffff99] [text-shadow:1px_1px_#00000094]  ">
-                <time>{distanceToNow(new Date(post.date))}</time>
-              </div> */}
+              <div className="text-[13px] leading-5 text-[#ffffff99] [text-shadow:1px_1px_#00000094]  ">
+                <time>{distanceToNow(new Date(`${post.date}`))}</time>
+              </div>
             </Link>
           </article>
         ))

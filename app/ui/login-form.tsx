@@ -28,6 +28,7 @@ export default function LoginForm() {
           <h1 className={`${lusitana.className} mb-3 text-2xl`}>
             Logeate con
           </h1>
+
           <div className="w-full">
             <div>
               <div className="relative">
@@ -58,7 +59,9 @@ export default function LoginForm() {
               </div>
             </div>
           </div>
+
           <LoginButton />
+
           <div
             className="my-3 flex items-end space-x-1"
             aria-live="polite"
@@ -82,7 +85,7 @@ export default function LoginForm() {
         <ArrowRightIcon className="ml-2 h-5 w-5" />
       </Link>
       
-      <div
+      {/* <div
         onClick={async () => {
           await signIn('google', {
             callbackUrl: '/dashboard',
@@ -101,7 +104,7 @@ export default function LoginForm() {
           className="ml-4"
         />
         <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-500" />
-      </div>
+      </div> */}
     </>
   );
 }
