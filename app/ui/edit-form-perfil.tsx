@@ -88,15 +88,15 @@ export default function EditPerfilForm({ user }: { user: User }) {
       </div>
 
       {/* Select imagen */}
-      <div className="mb-4 mt-6 flex items-center gap-6 min-[375px]:gap-12 ">
+      <div className="opacity-40 mb-4 mt-6 flex items-center gap-6 min-[375px]:gap-12 ">
         <div>
           <div className="flex flex-col  items-start gap-4 bg-[#ffffff57] text-[#374151cc] hover:bg-[#ffffff78] hover:text-[#374151] min-[500px]:flex-row min-[500px]:items-center ">
             <div className="relative">
-              <input
+              {/* <input
                 type="file"
                 className="absolute m-0 h-8 w-[164px] rounded px-4 py-1 text-sm opacity-0"
                 onChange={handleFileChange}
-              />
+              /> */}
               <div className="flex h-8 w-[164px] items-center rounded bg-[#ffffff57] px-4 py-1 text-sm [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] ">
                 Seleccionar imagen
               </div>

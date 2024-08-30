@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPostBySlug } from '@/app/lib/getPost';
 import markdownToHtml from '@/app/lib/markdownToHtml';
-/* import distanceToNow from '@/app/lib/dateRelative'; */
+import distanceToNow from '@/app/lib/dateRelative';
 import markdownStyles from '@/app/ui/consultas/markdown-styles.module.css';
 import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
 import { auth } from 'auth';
@@ -83,9 +83,9 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="text-md mb-6">
-              {/* <time className="mt-2 flex text-[#747e91]">
-                {distanceToNow(new Date(post.date))}
-              </time> */}
+              <time className="mt-2 flex text-[#747e91]">
+                {distanceToNow(new Date(`${post.date}`))}
+              </time>
             </div>
           </div>
 

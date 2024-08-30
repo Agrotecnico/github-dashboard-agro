@@ -33,7 +33,7 @@ export default async function SideNavConsultas() {
                 className="opacity-70 duration-200 hover:opacity-95"
               />
             </Link>
-            <Link
+            {/* <Link
               href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje"
               data-title="e-mail"
             >
@@ -44,7 +44,7 @@ export default async function SideNavConsultas() {
                 size="43"
                 className="opacity-70 duration-200 hover:opacity-95"
               />
-            </Link>
+            </Link> */}
             <Link href={session ? '/dashboard' : "/login"} data-title="cnp mandataria">
               <LogoCnp
                 filter="filterCnp1"
