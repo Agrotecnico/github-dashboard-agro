@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   description:
-    "This is an example site to demonstrate how to use NextAuth.js for authentication",
+    "Aqui harás consultas relacionadas a gestiones/registros del automotor y obtendrás una respuesta",
   icons: {icon:"/faviconCnp.png"} ,
 }
 
