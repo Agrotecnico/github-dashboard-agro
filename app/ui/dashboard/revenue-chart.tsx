@@ -23,14 +23,14 @@ export default async function RevenueChart() {
   }
 
   return (
-    <div className="w-full md:col-span-4 rounded-xl bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0]">
+    <div className="w-full md:col-span-4 rounded-xl bg-[#0000000d] [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff]">
       <h2 className={`${lusitana.className} mb-4 p-4 text-xl md:text-2xl`}>
         {/* Recent Revenue */}Ingresos recientes
       </h2>
       {/* NOTE: comment in this code when you get to this point in the course */}
 
       <div className="rounded-xl p-2 ">
-        <div className="bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4 min-[1024px]:[grid-template-columns:_auto_repeat(12,_minmax(0,_1fr))] min-[1024px]:gap-1.5 ">
+        <div className="bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md p-4 md:gap-4 min-[1024px]:[grid-template-columns:_auto_repeat(12,_minmax(0,_1fr))] min-[1024px]:gap-1.5 ">
           <div
             className="mb-6 hidden flex-col justify-between text-xs text-gray-500 sm:flex"
             style={{ height: `${chartHeight}px` }}

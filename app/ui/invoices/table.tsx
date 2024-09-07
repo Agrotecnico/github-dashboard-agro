@@ -16,12 +16,12 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle ">
-        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0] min-[824px]:pt-0 ">
+        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] min-[824px]:pt-0 ">
           <div className="min-[824px]:hidden">
             {invoices?.map((invoice) => (
               <div
                 key={invoice.id}
-                className="mb-2 w-full text-sm rounded-md p-4 bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]"
+                className="mb-2 w-full text-sm rounded-md p-4 bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e]"
               >
                 <div className="flex items-center justify-between border-b border-[#00000014] pb-4">
                   <div className="flex items-center gap-3">
@@ -75,7 +75,7 @@ export default async function InvoicesTable({
               {invoices?.map((invoice) => (
                 <tr
                   key={invoice.id}
-                  className="w-full py-3 bg-[#ffffff47] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] text-sm last-of-type:border-none [&:first-child]:rounded-tl-lg [&:first-child]:rounded-tr-lg [&:last-child]:rounded-bl-lg [&:last-child]:rounded-br-lg [&:first-child>td:first-child]:rounded-tl-lg  [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg "
+                  className="w-full py-3 bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] text-sm last-of-type:border-none [&:first-child]:rounded-tl-lg [&:first-child]:rounded-tr-lg [&:last-child]:rounded-bl-lg [&:last-child]:rounded-br-lg [&:first-child>td:first-child]:rounded-tl-lg  [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg "
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">

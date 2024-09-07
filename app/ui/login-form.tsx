@@ -13,6 +13,8 @@ import { authenticate } from '@/app/lib/actions';
 import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
+import {Fondo} from '@/app/ui/marcos';
+import {Frente} from '@/app/ui/marcos';
 
 import { useSession } from 'next-auth/react';
 
@@ -24,87 +26,126 @@ export default function LoginForm() {
   return (
     <>
       <form action={dispatch} className="mt-4">
-        <div className="flex-1 rounded-lg bg-[#ffffff94] px-6 pb-2 pt-4 backdrop-blur-lg [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_8px_0_#fffe_inset]">
-          <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-            Logeate con
-          </h1>
-
-          <div className="w-full">
-            <div>
-              <div className="relative">
-                <input
-                  className="peer block w-full rounded-md border border-gray-200 bg-[#0000000a] py-[9px] pl-10 text-sm outline-2 [box-shadow:inset_0_1px_0px_#4d4d4d52,inset_0_-1px_0px_#ffffff] placeholder:text-[#8c8c8c] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="tu email"
-                  required
+        <h1 className={` mb-3 text-4xl text-center`}>
+          Acceso
+        </h1>
+        <Fondo>
+          <div className="flex-1 px-6 pb-2 pt-4 ">
+            <Frente>
+              <div
+                onClick={async () => {
+                  await signIn('google', {
+                    callbackUrl: '/dashboard',
+                  });
+                }}
+                className=" mb-2 flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
+                >
+                <div className="text-[14.3px] ">
+                  Continuar con
+                </div>
+                <LogoGoogle
+                  filter="filterGoogle1"
+                  sombraX="2"
+                  sombraY="2"
+                  size="94"
+                  className="ml-4"
                 />
-                <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
               </div>
-            </div>
-            <div className="mt-4">
-              <div className="relative">
-                <input
-                  className="peer block w-full rounded-md border border-gray-200 bg-[#0000000a] py-[9px] pl-10 text-sm outline-2 [box-shadow:inset_0_1px_0px_#4d4d4d52,inset_0_-1px_0px_#ffffff] placeholder:text-[#8c8c8c] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="la contraseña"
-                  autoComplete='new password'
-                  required
-                  minLength={6}
+            </Frente>
+            <Frente>
+              <div
+                onClick={async () => {
+                  await signIn('google', {
+                    callbackUrl: '/dashboard',
+                  });
+                }}
+                className=" mb-2 flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
+              >
+                <div className="text-[14.3px]">
+                  Continuar con
+                </div>
+                <LogoGoogle
+                  filter="filterGoogle1"
+                  sombraX="2"
+                  sombraY="2"
+                  size="94"
+                  className="ml-4"
                 />
-                <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
               </div>
-            </div>
+            </Frente>
           </div>
-
-          <LoginButton />
-
-          <div
-            className="my-3 flex items-end space-x-1"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            {errorMessage && (
-              <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                <p className="text-sm text-red-500">{errorMessage}</p>
-              </>
-            )}
+        </Fondo>
+        
+        <div className="flex w-full items-center gap-2 py-6 text-sm">
+          <div className="h-px w-full bg-slate-300">
+          </div>
+          O
+          <div className="h-px w-full bg-slate-300">
           </div>
         </div>
-      </form>
+        
+        <Fondo>
+          <div className="flex-1 rounded-lg px-6 pb-2 pt-4 ">
+            <div className="w-full">
+              <Frente>
+                <div className="mb-2">
+                  <div className="relative">
+                    <input
+                      className="peer block w-full bg-transparent border border-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] !hover:bg-transparent hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      required
+                    />
+                    <AtSymbolIcon className="text-gray-900 pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900" />
+                  </div>
+                </div>
+              </Frente>
+              <Frente>
+                <div className="mb-2">
+                  <div className="relative">
+                    <input
+                      className="peer block w-full bg-transparent border border-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] !hover:bg-transparent hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
+                      id="password"
+                      type="password"
+                      name="password"
+                      placeholder="Contraseña"
+                      autoComplete='new password'
+                      required
+                      minLength={6}
+                    />
+                    <KeyIcon className="text-gray-900 pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900" />
+                  </div>
+                </div>
+              </Frente>
+            </div>
+            
+          </div>
+        </Fondo>
 
+        <LoginButton />
+      </form>
+      <div
+        className="my-3 flex items-end space-x-1"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {errorMessage && (
+          <>
+            <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+            <p className="text-sm text-red-500">{errorMessage}</p>
+          </>
+        )}
+      </div>
       <Link
         href={'/register'}
-        className="mx-auto mt-0 flex items-center justify-start rounded-xl px-4 py-2 opacity-80 duration-200 hover:opacity-100 hover:[box-shadow:0_2px_1px_-1px_#00000033,0-1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_4px_0_#fffe_inset] "
+        className="mx-auto !mt-0 flex text-sm items-center justify-start rounded-xl px-4 py-2 opacity-80 duration-200 hover:opacity-100 "
       >
-        <i className="mr-[10px] text-[#444]">No tienes una cuenta?</i> Créala{' '}
-        <ArrowRightIcon className="ml-2 h-5 w-5" />
+        <p className="mr-[10px] hover:no-underline">No tienes una cuenta?</p> 
+        <p className= "text-[#ae09e1] hover:underline hover:underline-offset-2">Créala</p>
+        {/* <ArrowRightIcon className="text-[#d83af0] ml-2 h-5 w-5" /> */}
       </Link>
-      
-      {/* <div
-        onClick={async () => {
-          await signIn('google', {
-            callbackUrl: '/dashboard',
-          });
-        }}
-        className="!mt-6 mb-2 flex cursor-pointer place-items-center items-center justify-start rounded-lg bg-[#ffffff69] px-10 py-1 backdrop-blur-lg duration-200 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_8px_0_#fffe_inset] hover:bg-[#ffffff99]  "
-      >
-        <div className="text-[14.3px] font-medium text-[#898989]">
-          O logeate con
-        </div>
-        <LogoGoogle
-          filter="filterGoogle1"
-          sombraX="2"
-          sombraY="2"
-          size="94"
-          className="ml-4"
-        />
-        <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-500" />
-      </div> */}
     </>
   );
 }
@@ -113,11 +154,11 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full text-base [box-shadow:inset_2px_-2px_#0000002e,inset_2px_2px_#ffffff,1px_-1px_#0000002e,1px_1px_#ffffff] "
+      className="mt-4 duration-150 w-full justify-center text-base  text-[#ffffffcc] bg-[#1d0215] hover:text-[#fff] hover:bg-[#1d0215dd] "/*text-[#ffffff] */
       aria-disabled={pending}
     >
-      Ingresar
-      <ArrowRightIcon className="ml-auto h-5 w-5 text-[#6b7280] " />
+      Continuar
+      {/* <ArrowRightIcon className="ml-auto h-5 w-5 text-[#6b7280] " /> */}
     </Button>
   );
 }

@@ -18,9 +18,9 @@ export function UpdateInvoice({ id }: { id: string }) {
   return (
     <Link
       href={`/dashboard/invoices/${id}/edit`}
-      className="rounded-md w-[38px] border p-2 hover:bg-gray-100 [box-shadow:inset_-1px_-1px_#00000047,inset_1px_1px_#ffffffd4,_-1px_-1px_#00000047,_1px_1px_#ffffffd4] "
+      className="rounded-md w-[38px] border p-2 opacity-70 hover:opacity-100  hover:bg-white [box-shadow:inset_1px_-1px_#0000002e,inset_-1px_1px_#ffffff45,1px_-1px_#0000002e,-1px_1px_#ffffff45] "
     >
-      <PencilIcon className="w-5" />
+      <PencilIcon className="w-5 text-[#1f2a5f]" />
     </Link>
   );
 }
@@ -30,9 +30,9 @@ export function DeleteInvoice({ id }: { id: string }) {
 
   return (
     <form action={deleteInvoiceWithId}>
-      <button className="rounded-md border p-2 hover:bg-gray-100 [box-shadow:inset_-1px_-1px_#00000047,inset_1px_1px_#ffffffd4,_-1px_-1px_#00000047,_1px_1px_#ffffffd4]">
+      <button className="rounded-md border p-2 opacity-70 hover:opacity-100 hover:bg-white [box-shadow:inset_1px_-1px_#0000002e,inset_-1px_1px_#ffffff45,1px_-1px_#0000002e,-1px_1px_#ffffff45]">
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-5" />
+        <TrashIcon className="w-5 text-[#b53f51] " />
       </button>
     </form>
   );

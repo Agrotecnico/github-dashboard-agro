@@ -46,4 +46,12 @@ export const {
     Google,
     Facebook,
   ],
+  /* callbacks: {
+    async signIn({ user }) {
+      // Si el usuario se logueo correctamente checkear si existe en la base de datos 
+      // Si existe return true
+      // Si no existe guardar el usuario en la base de datos y retornar true
+      return true
+  }
+  } */
 });

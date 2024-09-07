@@ -13,7 +13,7 @@ export type IconProps = {
 
 const LogoCNP: React.FC<IconProps> = ({
   size= 160,
-  color= "#ddd",
+  color= /* "#ddd" */"#000",
   colorC="#ab3aab",
   colorN="#ba6ddb",
   colorP="#de35de",
@@ -78,7 +78,7 @@ const LogoCNP: React.FC<IconProps> = ({
           stroke= "white"
           strokeWidth="0"
           filter={`url(#${filter})`}
-          opacity="0.7"
+          opacity="0.95"
         />
       </g>
     </svg>

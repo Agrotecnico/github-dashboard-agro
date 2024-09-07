@@ -27,7 +27,7 @@ export default function UserButtonHeader({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="relative mb-1.5 h-8 w-full max-w-max rounded-full px-0"
+            className="relative h-8 w-full max-w-max rounded-full px-0"
           >
             {session?.user?.image ? (
               <Avatar className="h-8 w-8">

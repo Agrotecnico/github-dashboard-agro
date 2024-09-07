@@ -7,6 +7,7 @@ import Link from 'next/link';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/zoom';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './styles.css';
@@ -16,8 +17,17 @@ import IconWhatsApp from '@/app/ui/logosIconos/icon-whatsApp';
 import IconEmail from '@/app/ui/logosIconos/icon-Email';
 import LogoCnp from '@/app/ui/logosIconos/logo-cnp';
 import type { Session } from 'next-auth';
-import { agrotecnico, agrotecnico2 } from '@/app/constant';
+import { agrotecnico, agrotecnico2, tramites, formularios, parqueAutomotor, } from '@/app/constant';
 import { User } from '@/app/lib/definitions';
+import Image from 'next/image'
+import {
+  CheckIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
+
+import Faq from "@/app/ui/uiRadix/FAQ";
 
 // import required modules
 import {
@@ -78,7 +88,7 @@ export default function GaleriaFotosCnp({
         speed={600}
         parallax={true}
         breakpoints={{
-          500: {
+          640: {
             pagination: {
               clickable: true,
               renderBullet: function (index, className) {
@@ -103,7 +113,18 @@ export default function GaleriaFotosCnp({
         ></div>
 
         {/* Inicio */}
-        <SwiperSlide id="ini">
+        <SwiperSlide id="ini" className= " text-[#1d0215] flex flex-col">
+          <div className="mb-8 flex flex-col w-full ">
+            <h2 className="font-bold  text-3xl mt-12 mx-auto mb-5 ">
+              CNP mandataria
+            </h2>
+            <p className="text-sm px-4 leading-snug max-w-[700px] my-0 mx-auto text-center ">
+              Vission es el primer sistema de gestion empresarial diseñado
+              especificamente para ópticas, nuestro objetivo es que puedas
+              administrar tu negocio desde la comodidad de tu computadora o
+              dispositivo movil, desde cualquier parte del mundo.
+            </p>
+          </div>
           <Swiper
             className="swiper2 mb-1 !h-[344px] "
             centeredSlides={true}
@@ -155,7 +176,7 @@ export default function GaleriaFotosCnp({
           >
             {/* Manos */}
             <SwiperSlide className="">
-              <Swiper
+              {/* <Swiper
                 className="swiper3 relative"
                 loop={true}
                 modules={[
@@ -172,7 +193,7 @@ export default function GaleriaFotosCnp({
                 spaceBetween={0}
                 speed={1}
               >
-                <SwiperSlide>
+                <SwiperSlide> */}
                   <div
                     className="absolute top-0 flex h-[300px] w-full flex-col items-center justify-start rounded-xl 
                             bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://lh3.googleusercontent.com/pw/AP1GczNB_LOmDwneOypSdbXJYhH1BPPrHIOOo_VXGnGfQKpcPqU0qO9HHps0NgJyfMxdako6Tybj61v7ywgT-mNiom_VQWx_3kDB9WLjqc2SjD03oV3axhbT=w1920-h1080')]
@@ -183,13 +204,13 @@ export default function GaleriaFotosCnp({
                       Aquí harás consultas y obtendrás respuestas
                     </p>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                {/* </SwiperSlide>
+              </Swiper> */}
             </SwiperSlide>
 
             {/* Oficina */}
             <SwiperSlide className="">
-              <Swiper
+              {/* <Swiper
                 className="swiper3 relative"
                 loop={true}
                 modules={[
@@ -205,7 +226,7 @@ export default function GaleriaFotosCnp({
                 spaceBetween={0}
                 speed={1}
               >
-                <SwiperSlide>
+                <SwiperSlide> */}
                   <div
                     className="absolute top-0 flex h-[300px] w-full items-end justify-center
                             rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://lh3.googleusercontent.com/pw/AP1GczPpnEMmNa_UiSaqjOnb20pW4mEaVtPjGlIAa5K7tiHyeAizSCi6Sem_snmJyaNqaapQ_lOXnrJuongSiXqx_Y2fm8eNgdPxBm-RgKMp-vqeUx6zRT0b=w1920-h1080')] 
@@ -219,16 +240,17 @@ export default function GaleriaFotosCnp({
                       </span>
                     </p>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                {/* </SwiperSlide>
+              </Swiper> */}
             </SwiperSlide>
           </Swiper>
+          
         </SwiperSlide>
 
         {/* Trámites */}
-        <SwiperSlide id="ev">
+        <SwiperSlide id="ev" className="flex flex-col">
           <Swiper
-            className="swiper2 mb-1 mt-8 !h-[339px] !pb-8 !pl-2"
+            className="swiper2 mb-1 mt-8 !h-[374px] !pb-8 !pl-2"
             centeredSlides={true}
             grabCursor={false}
             modules={[
@@ -247,22 +269,43 @@ export default function GaleriaFotosCnp({
             speed={600}
             breakpoints={{
               320: {
-                slidesPerView: 1.2,
+                slidesPerView: 1.25,
                 spaceBetween: 10,
                 centeredSlides: true,
               },
-              524: {
+
+
+
+              376: {
                 slidesPerView: 1.5,
                 spaceBetween: 10,
                 centeredSlides: true,
               },
-              768: {
-                slidesPerView: 2.5,
+              512: {
+                slidesPerView: 1.75,
                 spaceBetween: 10,
                 centeredSlides: true,
               },
+              640: {
+                slidesPerView: 2.25,
+                spaceBetween: 10,
+                centeredSlides: true,
+              },
+
+
+              /* 524: {
+                slidesPerView: 1.5,
+                spaceBetween: 10,
+                centeredSlides: true,
+              }, */
+              768: {
+                slidesPerView: 3,
+                /* slidesPerView: 2.5, */
+                spaceBetween: 10,
+                centeredSlides: false,
+              },
               880: {
-                slidesPerView: 2.75,
+                slidesPerView: 3/* 2.75 */,
                 spaceBetween: 10,
                 centeredSlides: true,
                 keyboard: true,
@@ -277,160 +320,138 @@ export default function GaleriaFotosCnp({
             }}
           >
             {/* Trámites 1 */}
-            <SwiperSlide className="bg-[#00000068]">
+            <SwiperSlide className="">
               <Swiper
-                className="swiper3"
-                grabCursor={false}
+                speed={600}
                 loop={true}
-                modules={[
-                  Pagination,
-                  Autoplay,
-                  EffectFade,
-                  Keyboard,
-                  Mousewheel,
-                  Navigation,
-                ]}
-                pagination={{
-                  clickable: true,
-                }}
-                slidesPerView={1}
-                spaceBetween={0}
+                className="text-[#1d0215] swiper3"
+                spaceBetween={30}
+                effect={'fade'}
                 navigation={true}
-                cssMode={true}
-                speed={1}
+                pagination={{
+                  clickable: false,
+                  renderBullet: function (index, className) {
+                    return (
+                      '<span class="' +
+                      className +
+                      '">' +
+                      tramites[index] +
+                      '</span>'
+                    );
+                  },
+                }}
+                 modules={[EffectFade, Navigation, Pagination, Autoplay]}
+                /*autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                  }} */
               >
-                <div className="absolute left-[0px] top-[0px] flex h-7 w-full items-center justify-center pl-14 text-[17px] font-normal [font-variant-caps:_small-caps] [text-shadow:1px_1px_1px_#222] ">
+                <div className="absolute left-[0px] pl-6 -top-1 flex w-full text-lg items-center justify-start font-medium [font-variant-caps:_small-caps] ">
                   Gestiones en <span className="ml-1 text-[15px]"> DNRPA</span>{' '}
                 </div>
-
+                
                 <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                                border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehicular-4.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Altas y Bajas de Dominio
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                                border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehicular-3.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Verificaciones
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                                border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/e4.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                  <Image
+                    objectFit='cover'
+                    src='/vehicular-4.jpg'
+                    alt="Picture of the author"
+                    width={960}
+                    height={720}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
                   >
-                    <div className=" z-10 w-full px-10 text-[14px] font-medium text-[#523852] [line-height:_1] ">
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                        <span className="font-bold ">I</span>
-                        nscripción inicial
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                        <span className="font-bold ">B</span>
-                        aja por destrucción total, robo, hurto e incendio
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur ">
-                        <span className="font-bold ">D</span>
-                        enuncia de compra y poseción - Venta
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                        <span className="font-bold ">A</span>
-                        ltas/Bajas municipales
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                        <span className="font-bold ">D</span>
-                        uplicado de chapa patente
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffffbb] px-1.5 py-[3px] text-start backdrop-blur">
-                        <span className="font-bold ">C</span>
-                        ancelacion de prenda
-                      </p>
-                      <p className="mb-1.5 rounded-md bg-[#ffffff00] px-1.5 py-[3px] text-start text-[13px] backdrop-blur">
-                        <span className="font-medium">C</span>
-                        onsultar por otras gestiones...
-                      </p>
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Otras gestiones
-                  </div>
+                  </Image>
+
                 </SwiperSlide>
+
+                <SwiperSlide>
+                  <Image
+                    src='/vehicular-3.jpg'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <Image
+                    src='/verificacion.jpg'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
+                </SwiperSlide>  
               </Swiper>
             </SwiperSlide>
 
-            {/* Trámites 2 */}
-            <SwiperSlide className="bg-[#00000068]">
+            {/* Trámite 2 */}
+            <SwiperSlide className="">
               <Swiper
-                className="swiper3"
-                grabCursor={false}
+                speed={600}
                 loop={true}
-                modules={[
-                  Pagination,
-                  Autoplay,
-                  EffectFade,
-                  Keyboard,
-                  Mousewheel,
-                  Navigation,
-                ]}
-                pagination={{
-                  clickable: true,
-                }}
-                slidesPerView={1}
-                spaceBetween={0}
+                className="text-[#1d0215] swiper3"
+                spaceBetween={30}
+                /* effect={'fade'} */
                 navigation={true}
-                cssMode={true}
-                speed={1}
+                pagination={{
+                  clickable: false,
+                  renderBullet: function (index, className) {
+                    return (
+                      '<span class="' +
+                      className +
+                      '">' +
+                      formularios[index] +
+                      '</span>'
+                    );
+                  },
+                }}
+                modules={[EffectFade, Navigation, Pagination, Autoplay]}
+                /* autoplay={{
+                    delay: 9000,
+                    disableOnInteraction: false,
+                  }} */
               >
-                <div className="absolute  left-[0px] top-[0px] flex h-7 w-full items-center justify-center pl-14 text-[17px] font-normal [font-variant-caps:_small-caps] [text-shadow:1px_1px_1px_#222] ">
+                <div className="absolute left-[0px] pl-6 -top-1 flex w-full text-lg items-center justify-start text-[17px] font-medium [font-variant-caps:_small-caps] ">
                   Formularios
                 </div>
-                <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                            border
-                            border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/usados.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    08-Transferencias
-                  </div>
-                </SwiperSlide>
 
                 <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                            border
-                            border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/verificacion.jpg')] bg-cover bg-fixed bg-top text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    03-Inscripción Contrato Prendario
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                            border
-                            border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/hero.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
+                  <Image
+                    src='/usados.jpg'
+                    alt="Picture of the author"
+                    width={960}
+                    height={720}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
                   >
-                    <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none text-[#523852]">
-                      <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur ">
+                  </Image>
+
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <Image
+                    src='/hero.png'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
+                    <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none ">
+                      <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur ">
                         <div className="flex">
                           <div className="mr-2 text-[15px] font-bold">04</div>
                         </div>
                         <div>Trámites Declaracion Deudas y Gravamenes</div>
                       </div>
-                      <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
+                      <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
                         <div className="flex">
                           <div className="mr-2 text-[15px] font-bold">08</div>
                         </div>
@@ -438,96 +459,139 @@ export default function GaleriaFotosCnp({
                           Contrato de Transferencia - Inscripción de Dominio
                         </div>
                       </div>
-                      <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
+                      <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
                         <div className="flex">
                           <div className="mr-2 text-[15px] font-bold">03</div>
                         </div>
                         <div>Inscripción Contrato Prendario</div>
                       </div>
-                      <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
+                      <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
                         <div className="flex">
                           <div className="mr-2 text-[15px] font-bold">05</div>
                         </div>
                         <div>Solicitud de Inscripción Inicial</div>
                       </div>
-                      <div className="mb-2 flex items-center rounded-md bg-[#ffffffb8] px-1.5 py-[3px] text-start backdrop-blur">
+                      <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
                         <div className="flex">
                           <div className="mr-2 text-[15px] font-bold">59</div>
                         </div>
                         <div>Mandatario, Mero Presentante y Comerciante</div>
                       </div>
-                      <p className="mb-1.5 rounded-md bg-[#ffffff00] px-1.5 py-[3px] text-start backdrop-blur">
+                      <p className="mb-1.5 rounded-md text-[#221322] bg-[#ffffff00] px-1.5 py-[3px] text-start backdrop-blur">
                         <span className="font-bold">C</span>
                         onsultar por otros formularios...
                       </p>
                     </div>
-                  </div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Otros formularios
-                  </div>
                 </SwiperSlide>
+
+                <SwiperSlide>
+                  <Image
+                    src='/e4.png'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
+                    <div className=" z-10 w-full px-10 text-[14px] font-medium [line-height:_1] ">
+                      <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
+                        <span className="font-bold ">I</span>
+                        nscripción inicial
+                      </p>
+                      <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
+                        <span className="font-bold ">B</span>
+                        aja por destrucción total, robo, hurto e incendio
+                      </p>
+                      <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur ">
+                        <span className="font-bold ">D</span>
+                        enuncia de compra y poseción - Venta
+                      </p>
+                      <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
+                        <span className="font-bold ">A</span>
+                        ltas/Bajas municipales
+                      </p>
+                      <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
+                        <span className="font-bold ">D</span>
+                        uplicado de chapa patente
+                      </p>
+                      <p className="mb-1.5 text-[#291a29] rounded-sm bg-[#ffffff00] px-1.5 py-[3px] text-start text-[13px] backdrop-blur">
+                        <span className="font-medium">C</span>
+                        onsultar por otras gestiones...
+                      </p>
+                    </div>
+                </SwiperSlide>  
+
               </Swiper>
             </SwiperSlide>
 
             {/* Trámites 3 */}
-            <SwiperSlide className="bg-[#00000068]">
+            <SwiperSlide className="">
               <Swiper
-                className="swiper3"
-                grabCursor={false}
+                speed={600}
                 loop={true}
-                modules={[
-                  Pagination,
-                  Autoplay,
-                  EffectFade,
-                  Keyboard,
-                  Mousewheel,
-                  Navigation,
-                ]}
-                pagination={{
-                  clickable: true,
-                }}
-                slidesPerView={1}
-                spaceBetween={0}
+                className="text-[#1d0215] swiper3"
+                spaceBetween={30}
+                effect={'fade'}
                 navigation={true}
-                cssMode={true}
-                speed={1}
+                pagination={{
+                  clickable: false,
+                  renderBullet: function (index, className) {
+                    return (
+                      '<span class="' +
+                      className +
+                      '">' +
+                      parqueAutomotor[index] +
+                      '</span>'
+                    );
+                  },
+                }}
+                modules={[EffectFade, Navigation, Pagination, Autoplay]}
+                /* autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }} */
               >
-                <div className="absolute  left-[0px] top-[0px] flex h-7 w-full items-center justify-center pl-14 text-[17px] font-normal [font-variant-caps:_small-caps] [text-shadow:1px_1px_1px_#222] ">
+                <div className="absolute left-[0px] pl-6 -top-1 flex w-full text-lg items-center justify-start text-[17px] font-medium [font-variant-caps:_small-caps] ">
                   Automotores
                 </div>
 
                 <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
-                                border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/vehiculos-p.png')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Parque Vehículos
-                  </div>
+                  <Image
+                    src='/vehiculos-p.png'
+                    alt="Picture of the author"
+                    width={960}
+                    height={720}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
+                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  >
+                  </Image>
+
                 </SwiperSlide>
 
                 <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
+                  <Image
+                    src='/infracciones.jpg'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
                                 border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/infracciones.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Resolución de Infracciones
-                  </div>
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
                 </SwiperSlide>
 
                 <SwiperSlide>
-                  <div
-                    className="absolute top-[24px] mb-2 flex h-[255px] w-full items-center justify-center 
+                  <Image
+                    src='/patentamiento1.jpg'
+                    alt="Picture of the author"
+                    width={660}
+                    height={490}
+                    className="rounded-lg absolute top-[24px] mb-2 flex h-[172px] w-full items-center justify-center 
                                 border
-                                border-[#858585] bg-[#fff9] bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('/patentamiento1.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-                  ></div>
-                  <div className="absolute -bottom-[5px] flex h-9 w-full items-center justify-center pb-1 text-center text-[15px] font-normal duration-300 [text-shadow:1px_1px_1px_#222] max-[500px]:text-base max-[375px]:text-sm ">
-                    Patentamiento
-                  </div>
-                </SwiperSlide>
+                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                  ></Image>
+                </SwiperSlide>      
               </Swiper>
             </SwiperSlide>
           </Swiper>
@@ -535,84 +599,7 @@ export default function GaleriaFotosCnp({
 
         {/* Consultas */}
         <SwiperSlide id="cp">
-          <Swiper
-            className="swiper2 !mx-3 !h-[356px] rounded-xl bg-[#00000061] text-[14px] text-[#ffffffcc] [backdrop-filter:_blur(1px)]  [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_3px_0_#00000082_inset] [text-shadow:_1px_1px_#000] md:!mx-24 md:!h-[322px] md:text-[15px] "
-             centeredSlides={true}
-            grabCursor={false}
-            modules={[Keyboard, Scrollbar, Navigation, A11y, Mousewheel]}
-            slidesPerView={1}
-            spaceBetween={10}
-            speed={600} 
-          >
-            <div className="w-full] absolute top-0 z-10 flex h-full flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
-              <div className="mb-2 w-full pb-2 text-left font-medium leading-4 min-[500px]:mb-3 min-[500px]:pb-3 ">
-                CONSULTAS FRECUENTES
-              </div>
-
-              {linkDatos.length ? (
-                linkDatos.map((linkDato) => (
-                  <article key={linkDato.slug} className="w-full">
-                    <Link
-                      as={`/consultas/${linkDato.slug}`}
-                      href="/consultas/[slug]"
-                      className="!ml-0 flex grow flex-col justify-start pb-3 text-start leading-[18px] duration-200  hover:text-[#ffffff] md:flex-none "
-                    >
-                      <p className="border-b border-b-[#fff2] [letter-spacing:_0.5px] ">
-                        {linkDato.excerpt}
-                      </p>
-                    </Link>
-                  </article>
-                ))
-              ) : (
-                <p>Ninguna consulta publicado todavía</p>
-              )}
-
-              <div className="mt-4 flex w-full flex-col items-start gap-3 text-left font-medium leading-4  min-[500px]:flex-row min-[500px]:items-end min-[500px]:gap-6 ">
-                <div className=" text-[16px] [font-variant-caps:_small-caps] ">
-                  Realizá Tu Consulta Por:
-                </div>
-                <div className="flex items-end gap-6">
-                  <Link
-                    href="https://api.whatsapp.com/send?phone=543476606595"
-                    target="_blank"
-                    data-title="whatsapp"
-                  >
-                    <IconWhatsApp
-                      filter="filterWhatsApp2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="32"
-                      className="opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link>
-                  {/* <Link
-                    href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje"
-                    data-title="e-mail"
-                  >
-                    <IconEmail
-                      filter="filterEmail2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="43"
-                      className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link> */}
-                  <Link
-                    href={session ? '/dashboard' : '/login'}
-                    data-title="cnp mandataria"
-                  >
-                    <LogoCnp
-                      filter="filterCnp2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="64"
-                      className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Swiper>
+          <Faq />
           <FooterInicio />
         </SwiperSlide>
       </Swiper>

@@ -6,7 +6,7 @@ export default async function SideNav() {
   if (session)
     return (
       <div className="flex h-full flex-col">
-        <div className="mb-6 flex flex-col-reverse items-center text-sm text-[#fffc] [text-shadow:_-1px_1px_#000c] max-[824px]:text-[#000] max-[824px]:[text-shadow:_0px_-1px_#fffc]  ">
+        <div className="mb-6 flex flex-col-reverse items-center text-sm text-[#000000d6] max-[824px]:text-[#000]  ">
           <div className="">
             {session?.user?.name}
           </div>

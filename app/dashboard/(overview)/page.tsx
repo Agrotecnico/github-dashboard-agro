@@ -25,7 +25,7 @@ export default async function Page() {
         <h1
           className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}
         >
-          Informacion Resumen
+          Resumen
         </h1>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Suspense fallback={<CardsSkeleton />}>
