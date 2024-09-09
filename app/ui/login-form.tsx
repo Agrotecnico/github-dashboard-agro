@@ -13,8 +13,8 @@ import { authenticate } from '@/app/lib/actions';
 import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
-import {Fondo} from '@/app/ui/marcos';
-import {Frente} from '@/app/ui/marcos';
+import { Fondo } from '@/app/ui/marcos';
+import { Frente } from '@/app/ui/marcos';
 
 import { useSession } from 'next-auth/react';
 
@@ -26,11 +26,9 @@ export default function LoginForm() {
   return (
     <>
       <form action={dispatch} className="mt-4">
-        <h1 className={` mb-3 text-4xl text-center`}>
-          Acceso
-        </h1>
+        <h1 className={` mb-3 text-center text-4xl`}>Acceso</h1>
         <Fondo>
-          <div className="flex-1 px-6 pb-2 pt-4 ">
+          <div className="flex flex-col gap-2 p-4 ">
             <Frente>
               <div
                 onClick={async () => {
@@ -38,11 +36,9 @@ export default function LoginForm() {
                     callbackUrl: '/dashboard',
                   });
                 }}
-                className=" mb-2 flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
-                >
-                <div className="text-[14.3px] ">
-                  Continuar con
-                </div>
+                className=" flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
+              >
+                <div className="text-[14.3px] ">Continuar con</div>
                 <LogoGoogle
                   filter="filterGoogle1"
                   sombraX="2"
@@ -59,11 +55,9 @@ export default function LoginForm() {
                     callbackUrl: '/dashboard',
                   });
                 }}
-                className=" mb-2 flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
+                className="flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
               >
-                <div className="text-[14.3px]">
-                  Continuar con
-                </div>
+                <div className="text-[14.3px]">Continuar con</div>
                 <LogoGoogle
                   filter="filterGoogle1"
                   sombraX="2"
@@ -75,52 +69,42 @@ export default function LoginForm() {
             </Frente>
           </div>
         </Fondo>
-        
+
         <div className="flex w-full items-center gap-2 py-6 text-sm">
-          <div className="h-px w-full bg-slate-300">
-          </div>
-          O
-          <div className="h-px w-full bg-slate-300">
-          </div>
+          <div className="h-px w-full bg-slate-300"></div>O
+          <div className="h-px w-full bg-slate-300"></div>
         </div>
-        
+
         <Fondo>
-          <div className="flex-1 rounded-lg px-6 pb-2 pt-4 ">
-            <div className="w-full">
-              <Frente>
-                <div className="mb-2">
-                  <div className="relative">
-                    <input
-                      className="peer block w-full bg-transparent border border-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] !hover:bg-transparent hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
-                      id="email"
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      required
-                    />
-                    <AtSymbolIcon className="text-gray-900 pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900" />
-                  </div>
-                </div>
-              </Frente>
-              <Frente>
-                <div className="mb-2">
-                  <div className="relative">
-                    <input
-                      className="peer block w-full bg-transparent border border-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] !hover:bg-transparent hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
-                      id="password"
-                      type="password"
-                      name="password"
-                      placeholder="Contraseña"
-                      autoComplete='new password'
-                      required
-                      minLength={6}
-                    />
-                    <KeyIcon className="text-gray-900 pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900" />
-                  </div>
-                </div>
-              </Frente>
-            </div>
-            
+          <div className="flex flex-col gap-2 p-4 ">
+            <Frente>
+              <div className="relative">
+                <input
+                  className="!hover:bg-transparent peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                />
+                <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-900 peer-focus:text-gray-900" />
+              </div>
+            </Frente>
+            <Frente>
+              <div className="relative">
+                <input
+                  className="!hover:bg-transparent peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Contraseña"
+                  autoComplete="new password"
+                  required
+                  minLength={6}
+                />
+                <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-900 peer-focus:text-gray-900" />
+              </div>
+            </Frente>
           </div>
         </Fondo>
 
@@ -140,10 +124,12 @@ export default function LoginForm() {
       </div>
       <Link
         href={'/register'}
-        className="mx-auto !mt-0 flex text-sm items-center justify-start rounded-xl px-4 py-2 opacity-80 duration-200 hover:opacity-100 "
+        className="mx-auto !mt-0 flex items-center justify-start rounded-xl px-4 py-2 text-sm opacity-80 duration-200 hover:opacity-100 "
       >
-        <p className="mr-[10px] hover:no-underline">No tienes una cuenta?</p> 
-        <p className= "text-[#ae09e1] hover:underline hover:underline-offset-2">Créala</p>
+        <p className="mr-[10px] hover:no-underline">No tienes una cuenta?</p>
+        <p className="text-[#ae09e1] hover:underline hover:underline-offset-2">
+          Créala
+        </p>
         {/* <ArrowRightIcon className="text-[#d83af0] ml-2 h-5 w-5" /> */}
       </Link>
     </>
@@ -154,7 +140,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 duration-150 w-full justify-center text-base  text-[#ffffffcc] bg-[#1d0215] hover:text-[#fff] hover:bg-[#1d0215dd] "/*text-[#ffffff] */
+      className="mt-4 w-full justify-center bg-[#1d0215] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d0215dd] hover:text-[#fff] " /*text-[#ffffff] */
       aria-disabled={pending}
     >
       Continuar

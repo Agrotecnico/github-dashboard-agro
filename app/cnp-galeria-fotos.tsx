@@ -25,6 +25,7 @@ import {
   ClockIcon,
   CurrencyDollarIcon,
   ChevronRightIcon,
+  ArrowRightIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 
@@ -43,6 +44,7 @@ import {
   EffectCube,
   Parallax,
 } from 'swiper/modules';
+import { Frente, Fondo } from './ui/marcos';
 
 export default function GaleriaFotosCnp({
   session,
@@ -109,7 +111,7 @@ export default function GaleriaFotosCnp({
 
         <div
           slot="container-start"
-          className="parallax-bg bg-[#1d021511]  "/* bg-[url('/ofi-c.jpg')] */
+          className="parallax-bg bg-[#1d021509]  "/* bg-[url('/ofi-c.jpg')] */
           data-swiper-parallax="-4%"
         ></div>
 
@@ -1297,36 +1299,37 @@ export default function GaleriaFotosCnp({
         {/* Consultas */}
         <SwiperSlide id="cp">
           <div className="w-full] absolute top-0 z-10 flex h-full flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
-            <div className=" bg-[#1d021519] p-4 rounded-xl [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff]">
+            <Fondo className=" p-4">
               <div className="my-4 w-full text-xl text-center font-medium ">
                 CONSULTAS FRECUENTES
               </div>
               
-              <div className=" flex flex-col  gap-2 rounded-xl ">
+              <div className=" flex flex-col gap-2 ">
                 {linkDatos.length ? (
                   linkDatos.map((linkDato) => (
-                    <article key={linkDato.slug} className="w-full">
+                    <div key={linkDato.slug}>
                       <Link
                         as={`/consultas/${linkDato.slug}`}
                         href="/consultas/[slug]"
-                        className="!ml-0 flex text-base grow flex-col justify-start text-start leading-[18px] duration-200 opacity-80  hover:opacity-100 md:flex-none "
+                        className=" duration-200 opacity-80 hover:opacity-100  "
                       >
-                        <div className="py-2 px-4 rounded-md flex bg-[#ffffff94] justify-between border-b border-[#1d021522] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] ">
-                          <div className="pb-1 border-b border-b-[#fff2] [letter-spacing:_0.5px] items-center ">
+                        <Frente className="py-1 px-4 gap-5 flex justify-between items-center ">
+                          <div className="text-base text-start max-[512px]:text-sm">
                             {linkDato.excerpt}
                           </div>
-                          {/* <div className="pl-4">o</div> */}
-                          <ChevronRightIcon   className="w-8 pl-4"/>
-                        </div>
+                          <div>
+                            <ChevronRightIcon className="w-4 min-[512px]:w-5 "  />
+                          </div>
+                        </Frente>
                       </Link>
-                    </article>
+                    </div>
                   ))
                 ) : (
                   <p>Ninguna consulta publicado todavía</p>
                 )}
               </div>
               
-              <div className="mt-8 mb-4 flex w-full flex-col place-items-center pl-4 gap-3 text-left font-medium min-[500px]:flex-row min-[500px]:items-end min-[500px]:gap-6 ">
+              <div className="mt-8 mb-4 flex flex-col items-center pl-4 gap-3 text-left font-medium min-[500px]:flex-row min-[500px]:items-end min-[500px]:gap-6 ">
                 <div className=" text-[16px] [font-variant-caps:_small-caps] ">
                   Realizá Tu Consulta Por:
                 </div>
@@ -1344,18 +1347,6 @@ export default function GaleriaFotosCnp({
                       className="opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
                     />
                   </Link>
-                  {/* <Link
-                    href="mailto:cnp.mandataria@gmail.com?subject=Consulta&body=Cuerpo del mensaje"
-                    data-title="e-mail"
-                  >
-                    <IconEmail
-                      filter="filterEmail2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="43"
-                      className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link> */}
                   <Link
                     href={session ? '/dashboard' : '/login'}
                     data-title="cnp mandataria"
@@ -1370,7 +1361,7 @@ export default function GaleriaFotosCnp({
                   </Link>
                 </div>
               </div>
-            </div>
+            </Fondo>
           </div>
           {/* <Faq /> */}
           <FooterInicio />
