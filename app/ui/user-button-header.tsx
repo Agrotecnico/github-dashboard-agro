@@ -13,6 +13,7 @@ import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import IconMenu from '@/app/ui/logosIconos/icon-menu';
 
 export default function UserButtonHeader({
   session,
@@ -27,8 +28,9 @@ export default function UserButtonHeader({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="relative h-8 w-full max-w-max rounded-full px-0"
+            className="relative gap-3 h-8 w-full max-w-max rounded-full px-0"
           >
+            <IconMenu width='20' heightx='20' className="fill-[#fff9] duration-200 hover:fill-[#ffffffdd] min-[640px]:hidden" />
             {session?.user?.image ? (
               <Avatar className="h-8 w-8">
                 {session?.user.image && (

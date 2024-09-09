@@ -116,22 +116,22 @@ export const parqueAutomotor = [
 
 export const dataFaq = [
   {
-    question: "Pregunta 1",
+    question: "Ante la compra o venta de un vehículo, ¿que documentación tengo que solicitar o entregar?",
     answer:
       'Respuesta 1. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },
   {
-    question: "Pregunta 2",
+    question: "¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?",
     answer:
       'Respuesta 2. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },
   {
-    question: "Pregunta 3",
+    question: "¿Qué es y cómo funciona el 08 para transferir un vehículo?",
     answer:
       'Respuesta 3. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },
   {
-    question: "Pregunta 4",
+    question: "Validez del formulario 08",
     answer:
       'Respuesta 4. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },

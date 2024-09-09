@@ -19,8 +19,8 @@ export default function NavInicio({
         <nav className=" text-small-regular mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 text-white transition-colors duration-200 sm:px-6">
           <div className="flex h-[72px] w-full items-center justify-end min-[1100px]:mr-0">
             {session ? (
-              <div className="h-[40px] flex items-end gap-2 ">
-                <span className="hidden text-[14px] [line-height:_0.7rem] text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
+              <div className=" flex items-center gap-3 ">
+                <span className="hidden text-[14px] text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
                   {session?.user?.email}
                 </span>
                 <UserButtonHeader session={session} /* user={user} */ />
