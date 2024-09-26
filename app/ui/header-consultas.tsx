@@ -11,7 +11,7 @@ export default async function HeaderConsultas( ) {
 
   const session = await auth();
   return (
-    <header className=" fixed left-0 z-10 flex h-[72px] w-[100vw] items-center justify-center bg-[#1d0215] backdrop-blur-lg sm:h-[96px] ">
+    <header className=" fixed left-0 z-10 flex h-[68px] w-[100vw] items-center justify-center bg-[#300322] backdrop-blur-lg sm:h-20 ">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-4 opacity-80 duration-200 hover:opacity-100 ">
           <Link
@@ -49,7 +49,7 @@ export default async function HeaderConsultas( ) {
           <span>2024</span>
         </div>
         {session ? (
-          <div className="flex items-end gap-2 ">
+          <div className="flex items-center gap-2 ">
             <span className="hidden text-sm text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
               {session?.user?.email}
             </span>

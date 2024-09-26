@@ -48,7 +48,7 @@ export default function LoginForm() {
                 />
               </div>
             </Frente>
-            <Frente>
+            {/* <Frente>
               <div
                 onClick={async () => {
                   await signIn('google', {
@@ -66,7 +66,7 @@ export default function LoginForm() {
                   className="ml-4"
                 />
               </div>
-            </Frente>
+            </Frente> */}
           </div>
         </Fondo>
 
@@ -140,11 +140,10 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full justify-center bg-[#1d0215] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d0215dd] hover:text-[#fff] " /*text-[#ffffff] */
+      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#300322dd] hover:text-[#fff] "
       aria-disabled={pending}
     >
       Continuar
-      {/* <ArrowRightIcon className="ml-auto h-5 w-5 text-[#6b7280] " /> */}
     </Button>
   );
 }

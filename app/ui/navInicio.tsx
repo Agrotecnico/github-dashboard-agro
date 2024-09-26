@@ -14,13 +14,13 @@ export default function NavInicio({
   user: User | undefined
 }) {
   return (
-    <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#1d0215] backdrop-blur-md ">
-      <header className="mt-0px group-hover:bg-tranaparent relative mx-auto h-18 bg-transparent transition-colors duration-200 group-hover:border-gray-200 sm:h-24">
+    <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#300322] backdrop-blur-md ">
+      <header className=" h-[68px] mt-0px group-hover:bg-tranaparent relative mx-auto h-18 bg-transparent transition-colors duration-200 group-hover:border-gray-200 sm:h-20">
         <nav className=" text-small-regular mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 text-white transition-colors duration-200 sm:px-6">
-          <div className="flex h-[72px] w-full items-center justify-end min-[1100px]:mr-0">
+          <div className="flex w-full items-center justify-end min-[1100px]:mr-0">
             {session ? (
-              <div className=" flex items-center gap-3 ">
-                <span className="hidden text-[14px] text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
+              <div className=" flex items-center gap-2 ">
+                <span className="hidden text-sm text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
                   {session?.user?.email}
                 </span>
                 <UserButtonHeader session={session} /* user={user} */ />

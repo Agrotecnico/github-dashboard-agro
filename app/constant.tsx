@@ -81,14 +81,14 @@ export const tramites = [
   </div>`,
 
   `<div className=" ">
-      Otras gestiones
+      Denuncias de Venta
   </div>
   `,
 ];
 
 export const formularios = [
   `<div className=" ">
-      08-Transferencias
+      F-08 Transferencias
   </div>`,
 
   `<div className=" ">
@@ -96,7 +96,7 @@ export const formularios = [
   </div>`,
 
   `<div className=" ">
-      03-Inscripción Contrato Prendario
+      F-03 Inscripción Contrato Prendario
   </div>`,
 ];
 
@@ -121,7 +121,7 @@ export const dataFaq = [
       'Respuesta 1. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },
   {
-    question: "¿Cuál es la diferencia entre un gestor y un mandatario nacional del automotor?",
+    question: "¿Cuál es la diferencia entre un Gestor y un Mandatario Nacional del automotor?",
     answer:
       'Respuesta 2. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
   },

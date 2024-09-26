@@ -33,7 +33,7 @@ export default async function LoginPage() {
   return (
     <>
       <HeaderConsultas />
-      <main className="mx-auto flex h-full min-h-screen max-w-[1280px] justify-center bg-[#1d021509] bg-cover bg-center bg-no-repeat pt-14">
+      <main className="mx-auto flex h-full min-h-screen max-w-[1280px] justify-center bg-[#30032209] bg-cover bg-center bg-no-repeat pt-14">
         <div className="relative mx-auto mt-8 flex w-full max-w-[460px] flex-col space-y-2.5 p-4">
           {/* <Link href="/">
             <div className="flex h-20 w-full items-end rounded-lg bg-[#c969b5b0] p-3 backdrop-blur-lg [box-shadow:_0_2px_1px_-1px_#ffffff33,0_1px_1px_0_#ffffff24,0_1px_3px_0_#ffffff1f,0_0_6px_0_#0000003d_inset] md:h-32 ">

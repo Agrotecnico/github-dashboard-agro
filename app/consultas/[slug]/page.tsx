@@ -32,7 +32,7 @@ export default async function PostPage({ params }: Params) {
   return (
     <>
       <div>
-        <article className=" mx-1 mb-1 mt-0 rounded-xl bg-[#ffffff94] px-3 pb-6 pt-6 text-[#374151] backdrop-blur-md [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_12px_0_#fff_inset] md:px-6">
+        <article className=" mx-1 mb-1 mt-0 rounded-xl bg-[#ffffffcc] px-3 pb-6 pt-6 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_12px_0_#fff_inset] md:px-6">
           <h1 className="mb-6 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
             {post.excerpt}
           </h1>
@@ -83,7 +83,7 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="text-md mb-6">
-              <time className="mt-2 flex text-[#747e91]">
+              <time className="mt-2 flex text-[#1d0215aa] ">
                 {distanceToNow(new Date(`${post.date}`))}
               </time>
             </div>
@@ -96,13 +96,13 @@ export default async function PostPage({ params }: Params) {
             />
           </div>
 
-          <div id="consulta" className="pt-12">
+           {/*<div id="consulta" className="pt-12">
               <h6>COMENTARIOS</h6>
           </div>
 
            <CommentList session={session} />
           
-          {/* <CommentFormConsulta session={session} /> */}
+          <CommentFormConsulta session={session} /> */}
 
           <div className=" flex items-center justify-center bg-[#c160ad87] text-center text-[#ffffff88] [border-radius:_0_0_12px_12px] [text-shadow:_1px_1px_#00000069] ">
             cnp mandataria

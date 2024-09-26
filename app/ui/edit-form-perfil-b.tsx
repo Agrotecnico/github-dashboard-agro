@@ -20,17 +20,17 @@ export default function EditPerfilFormB() {
 
   const { data: session, status } = useSession()
 
-  console.log("session: ", session)
+  /* console.log("session222: ", session) */
 
   const [ image, setImage ] = useState("")
-  const [file, setFile] = useState<File | undefined>()
+  const [file, setFile] = useState<File>()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
 
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`
     const data = new FormData()
-    data.append("image", `${file}`)
+    data.append("image", file)
 
     try {
       const response = await fetch(url, {

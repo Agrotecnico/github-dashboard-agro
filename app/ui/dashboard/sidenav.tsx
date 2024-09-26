@@ -6,15 +6,15 @@ export default async function SideNav() {
   if (session)
     return (
       <div className="flex h-full flex-col">
-        <div className="mb-6 flex flex-col-reverse items-center text-sm text-[#000000d6] max-[824px]:text-[#000]  ">
+        <div className="mb-2.5 flex flex-col-reverse font-medium items-center text-sm min-[824px]:[margin:_23px_0_31px]  ">
           <div className="">
             {session?.user?.name}
           </div>
         </div>
 
-        <div className="flex grow flex-row justify-between space-x-2 min-[824px]:flex-col min-[824px]:space-x-0 min-[824px]:space-y-2">
+        <div className="flex grow flex-col ">{/*  space-x-2 min-[824px]:space-x-0 min-[824px]:space-y-2 */}
           <NavLinks />
-          <div className="hidden h-auto w-full grow rounded-md bg-[#ffffff22] min-[824px]:block"></div>
+          {/* <div className="hidden h-auto w-full grow rounded-md bg-[#ffffff22] min-[824px]:block"></div> */}
         </div>
       </div>
     );

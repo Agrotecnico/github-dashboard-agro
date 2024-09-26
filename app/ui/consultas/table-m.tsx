@@ -4,6 +4,7 @@ import { fetchConsultasPagesM } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
 import { fetchFilteredConsultasM } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
+import { Fondo, Frente } from '@/app/ui/marcos';
 
 export default async function ConsultasTableM({
   currentPage,
@@ -27,11 +28,11 @@ export default async function ConsultasTableM({
 
       <div>
         {consultas.length ? (
-          <div className="text-[#374151] ">
+          <div className="text-[#1d0215] ">
             {consultas?.map((consulta) => (
-              <div key={consulta.id } className="mb-8 rounded-md bg-[#0000000d] px-4 pb-3 pt-6 text-[14px] [box-shadow:inset_0_1px_0_#00000047,inset_0_-1px_0_#ffffffe0]">
+              <Fondo key={consulta.id } className="mb-8 px-4 pb-3 pt-6 text-[14px] ">
                 <div className="mb-6 rounded-lg ">
-                  <div className="mb-1 flex items-end gap-1 text-[#523852]">
+                  <div className="mb-1 flex items-end gap-1 text-[#1d0215]">
                     <p className="flex  ">Consulta</p>
                     <p className="text-[13px] opacity-80">
                       realizada el día {formatDateToLocal(consulta.created_at)}:
@@ -39,26 +40,26 @@ export default async function ConsultasTableM({
                   </div>
                   <p className="">{consulta?.consulta}</p>
                 </div>
-                <div className="-mx-1 rounded-md bg-[#ffffff57] p-3  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] ">
+                <Frente className=" p-3  ">
                   <div>
                     {consulta.respuesta ? (
                       <>
-                        <div key= {consulta.id } className="mb-1 flex  text-[#747e91]">
-                          <p className="flex text-[#747e91] ">Respuesta:</p>
+                        <div key= {consulta.id } className="mb-1 flex  text-[#1d0215]">
+                          <p className="flex text-[#1d0215] ">Respuesta:</p>
                         </div>
                         <p>{consulta.respuesta} </p>
                       </>
                     ) : (
                       <>
-                        <p className="text-[14px] text-[#747e91]">
+                        <p className="text-sm text-[#1d0215]">
                           Hemos recibido tu consulta.<br></br>
                           Te responderemos a la brevedad.
                         </p>
                       </>
                     )}
                   </div>
-                </div>
-              </div>
+                </Frente>
+              </Fondo>/* [box-shadow:inset_0_1px_0_#00000047,inset_0_-1px_0_#ffffffe0] bg-[#0000000d] *//* bg-[#ffffff57]  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] */
             ))}
           </div>
         ) : (

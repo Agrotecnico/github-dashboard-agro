@@ -15,7 +15,10 @@ import NavInicio from '@/app/ui/navInicio';
 import FooterInicio from '@/app/ui/footerInicio';
 import IconWhatsApp from '@/app/ui/logosIconos/icon-whatsApp';
 import IconEmail from '@/app/ui/logosIconos/icon-Email';
-import LogoCnp from '@/app/ui/logosIconos/logo-cnp';
+import IconCnpColor from '@/app/ui/logosIconos/icon-cnp-color';
+import IconTiempo from '@/app/ui/logosIconos/icon-tiempo';
+import IconConocimiento from '@/app/ui/logosIconos/icon-conocimiento';
+import IconSeguridad from '@/app/ui/logosIconos/icon-seguridad';
 import type { Session } from 'next-auth';
 import { agrotecnico, agrotecnico2, tramites, formularios, parqueAutomotor, } from '@/app/constant';
 import { User } from '@/app/lib/definitions';
@@ -29,7 +32,7 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 
-import Faq from "@/app/ui/uiRadix/FAQ";
+import { Button } from "@/app/ui/button";
 
 // import required modules
 import {
@@ -111,9 +114,17 @@ export default function GaleriaFotosCnp({
 
         <div
           slot="container-start"
-          className="parallax-bg bg-[#1d021509]  "/* bg-[url('/ofi-c.jpg')] */
+          className="parallax-bg bg-[#30032209]  "/* bg-[url('/ofi-c.jpg')] */
           data-swiper-parallax="-4%"
         ></div>
+        
+        {/* <div className="fixed bottom-16 flex right-6 z-50 justify-center items-center gap-2 xl:[right:_calc((100vw_-_1232px)_/_2)]">
+          <Link  
+            href={session ? '/dashboard' : '/login'} 
+            className="text-white bg-[#1d0215] text-sm duration-150 text-center px-2 py-[2px] rounded opacity-80 hover:opacity-100 ">
+            Iniciá tu trámite
+          </Link>
+        </div> */}
 
         {/* Inicio */}
         <SwiperSlide id="ini" className= "flex flex-col">
@@ -122,7 +133,7 @@ export default function GaleriaFotosCnp({
               CNP mandataria
             </h2>
             <p className="text-sm px-4 leading-snug max-w-[700px] my-0 mx-auto text-center md:text-base">
-            Un servicio con la facultad de representacion legal, asesoramiento y gestion en la compra y venta de vehículos. 
+            Un servicio con la facultad de representacion legal, asesoramiento y gestion en la compra y venta de vehículos terrestres o nauticos. 
             Esto incluye la transferencia de dominio, el trámite de la cédula verde y azul, y otras diligencias importantes
               {/* Vission es el primer sistema de gestion empresarial diseñado
               especificamente para ópticas, nuestro objetivo es que puedas
@@ -206,13 +217,12 @@ export default function GaleriaFotosCnp({
                   >
                     
                     <p className="mt-6 mb-4 mx-2 text-xl min-[376px]:text-3xl">Hola! Bienvenido</p>
-                    <div className="flex flex-col items-start text-base min-[376px]:text-lg">
+                    <div className="flex flex-col items-start text-sm min-[376px]:text-base">
                       <p className="mb-1">
-                        Realizar consulta
+                        Aqui podés<Link href={session ? '/dashboard' : '/login'}  className="duration-150 underline decoration-[#1d021577] underline-offset-2 px-1.5 rounded-md hover:bg-[#ffffff44] ">realizar tu consulta</Link> {/*o  <Link href={session ? '/dashboard/inicioTramite' : '/login'}  className="underline decoration-[#1d021577] underline-offset-2">iniciar tu trámite</Link> automotor o nautico. */}
                         {/* Aquí harás consultas y obtendrás respuestas */}
                       </p>
-                      <p className="">
-                        Iniciar trámite
+                      <p className="">o<Link href={session ? '/dashboard/inicioTramite' : '/login'}  className="duration-150 underline decoration-[#1d021577] underline-offset-2 px-1.5 rounded-md hover:bg-[#ffffff44] ">iniciar tu trámite</Link>automotor o náutico
                       </p>
                     </div>
                   </div>
@@ -276,12 +286,12 @@ export default function GaleriaFotosCnp({
               clickable: true,
             }}
             slidesPerView={1}
-            spaceBetween={10}
+            spaceBetween={4}
             speed={600}
             breakpoints={{
               320: {
                 slidesPerView: 1.25,
-                spaceBetween: 10,
+                spaceBetween: 4,
                 centeredSlides: true,
               },
 
@@ -289,12 +299,12 @@ export default function GaleriaFotosCnp({
 
               524: {
                 slidesPerView: 1.5,
-                spaceBetween: 10,
+                spaceBetween: 4,
                 centeredSlides: true,
               },
               768: {
                 slidesPerView: 2.5,
-                spaceBetween: 10,
+                spaceBetween: 4,
                 centeredSlides: true,
               },
               /* 640: {
@@ -317,13 +327,13 @@ export default function GaleriaFotosCnp({
               }, */
               880: {
                 slidesPerView: 2.75,
-                spaceBetween: 10,
+                spaceBetween: 4,
                 centeredSlides: true,
                 keyboard: true,
               },
               1024: {
                 slidesPerView: 3,
-                spaceBetween: 10,
+                spaceBetween: 4,
                 centeredSlides: false,
                 keyboard: true,
                 grabCursor: true,
@@ -368,8 +378,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={960}
                     height={720}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
                   >
                   </Image>
 
@@ -381,9 +390,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
                   ></Image>
                 </SwiperSlide>
 
@@ -393,100 +400,19 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
                   ></Image>
                 </SwiperSlide>  
               </Swiper>
-              <div className="flex flex-col justify-center absolute top-[316px] items-center">
-                <div className="flex items-center w-full mb-2 justify-center">
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 61 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_335_18)">
-                      <path
-                        d="M48.1184 6.71074C43.1043 2.99684 37.154 1.03453 30.9108 1.03453C25.2181 1.03453 19.5625 2.67316 15.3532 5.48484V1.03453C15.3532 0.463477 14.8898 0 14.3187 0C13.7477 0 13.2842 0.463477 13.2842 1.03453V7.54242C13.2842 7.94379 13.5159 8.30894 13.879 8.47863C14.2421 8.64937 14.6714 8.59453 14.9798 8.33789C18.9252 5.06063 24.8808 3.10336 30.9108 3.10336C36.707 3.10336 42.2311 4.92609 46.8873 8.3741C47.0725 8.51062 47.2877 8.57684 47.5019 8.57684C47.8184 8.57684 48.1308 8.43199 48.3336 8.15789C48.674 7.69863 48.5778 7.05105 48.1184 6.71074Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M59.836 12.4138H53.3281C52.9268 12.4138 52.5636 12.6465 52.393 13.0097C52.2222 13.3727 52.2771 13.8021 52.5337 14.1104C55.811 18.0549 57.7682 24.0104 57.7682 30.0415C57.7682 35.8377 55.9455 41.3618 52.4975 46.0169C52.1572 46.4762 52.2534 47.1238 52.7127 47.4642C52.8978 47.6007 53.113 47.6669 53.3272 47.6669C53.6437 47.6669 53.9561 47.5221 54.1599 47.248C57.8737 42.2339 59.8361 36.2834 59.8361 30.0404C59.8361 24.3477 58.1975 18.6911 55.3858 14.4828H59.8361C60.4072 14.4828 60.8707 14.0193 60.8707 13.4483C60.8705 12.8772 60.4071 12.4138 59.836 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.8631 51.5224C47.5001 51.3527 47.0718 51.4055 46.7624 51.6632C42.8169 54.9404 36.8613 56.8977 30.8313 56.8977C25.0341 56.8977 19.51 55.075 14.8548 51.627C14.3955 51.2866 13.748 51.3829 13.4075 51.8421C13.0672 52.3014 13.1634 52.949 13.6227 53.2894C18.6368 57.0032 24.5872 58.9656 30.8303 58.9656C36.523 58.9656 42.1786 57.327 46.3879 54.5153V58.9656C46.3879 59.5366 46.8513 60.0001 47.4224 60.0001C47.9934 60.0001 48.4569 59.5366 48.4569 58.9656V52.4577C48.4569 52.0562 48.2252 51.6911 47.8631 51.5224Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M9.2085 45.8907C5.93123 41.9453 3.97396 35.9907 3.97396 29.9597C3.97396 24.1635 5.7967 18.6394 9.24365 13.9842C9.58396 13.5249 9.48775 12.8774 9.0285 12.5369C8.56924 12.1956 7.92166 12.2928 7.58123 12.7521C3.86744 17.7662 1.90514 23.7165 1.90514 29.9597C1.90514 35.6524 3.54377 41.308 6.35545 45.5172H1.90514C1.33408 45.5172 0.870605 45.9807 0.870605 46.5518C0.870605 47.1228 1.33408 47.5863 1.90514 47.5863H8.41303C8.81439 47.5863 9.1785 47.3546 9.34924 46.9915C9.51998 46.6283 9.46514 46.1989 9.2085 45.8907Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M31.9051 19.6531C31.9041 19.082 31.4406 18.6206 30.8706 18.6206C30.8706 18.6206 30.8695 18.6206 30.8685 18.6206C30.2964 18.6217 29.835 19.0861 29.8361 19.6572L29.8609 30.002C29.862 30.5731 30.3254 31.0344 30.8954 31.0344C30.8965 31.0344 30.8975 31.0344 30.8975 31.0344C31.4697 31.0334 31.931 30.569 31.93 29.9979L31.9051 19.6531Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8954 28.9655H24.6637C24.0926 28.9655 23.6292 29.4289 23.6292 30C23.6292 30.571 24.0926 31.0345 24.6637 31.0345H30.8954C31.4664 31.0345 31.9299 30.571 31.9299 30C31.9299 29.4289 31.4664 28.9655 30.8954 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 8.27594C18.8923 8.27594 9.14648 18.0208 9.14648 30C9.14648 41.9793 18.8923 51.7241 30.8706 51.7241C42.8498 51.7241 52.5947 41.9793 52.5947 30C52.5947 18.0208 42.8498 8.27594 30.8706 8.27594ZM30.8706 49.6552C20.0323 49.6552 11.2154 40.8384 11.2154 30C11.2154 19.1617 20.0323 10.3449 30.8706 10.3449C41.7089 10.3449 50.5257 19.1617 50.5257 30C50.5257 40.8384 41.7089 49.6552 30.8706 49.6552Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M16.3879 28.9655H14.319C13.7479 28.9655 13.2844 29.4289 13.2844 30C13.2844 30.571 13.7479 31.0345 14.319 31.0345H16.3879C16.959 31.0345 17.4224 30.571 17.4224 30C17.4224 29.4289 16.959 28.9655 16.3879 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.4222 28.9655H45.3533C44.7822 28.9655 44.3187 29.4289 44.3187 30C44.3187 30.571 44.7822 31.0345 45.3533 31.0345H47.4222C47.9933 31.0345 48.4567 30.571 48.4567 30C48.4567 29.4289 47.9933 28.9655 47.4222 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 43.4483C30.2995 43.4483 29.8361 43.9118 29.8361 44.4828V46.5518C29.8361 47.1228 30.2995 47.5863 30.8706 47.5863C31.4416 47.5863 31.9051 47.1228 31.9051 46.5518V44.4828C31.9051 43.9117 31.4416 43.4483 30.8706 43.4483Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 12.4138C30.2995 12.4138 29.8361 12.8772 29.8361 13.4483V15.5172C29.8361 16.0883 30.2995 16.5518 30.8706 16.5518C31.4416 16.5518 31.9051 16.0883 31.9051 15.5172V13.4483C31.9051 12.8772 31.4416 12.4138 30.8706 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2572 39.6135C20.8537 39.2089 20.1988 39.2089 19.7944 39.6135L18.4352 40.9718C18.0317 41.3753 18.0317 42.0301 18.4352 42.4345C18.6369 42.6362 18.9017 42.7376 19.1665 42.7376C19.4314 42.7376 19.6962 42.6373 19.8979 42.4345L21.2572 41.0762C21.6606 40.6727 21.6606 40.0179 21.2572 39.6135Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 17.5655C42.9006 17.161 42.2468 17.161 41.8424 17.5655L40.4841 18.9238C40.0795 19.3283 40.0795 19.9821 40.4841 20.3865C40.6857 20.5882 40.9506 20.6896 41.2154 20.6896C41.4803 20.6896 41.7451 20.5882 41.9468 20.3865L43.3051 19.0282C43.7095 18.6238 43.7095 17.97 43.3051 17.5655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 40.9717L41.9468 39.6134C41.5423 39.2088 40.8885 39.2088 40.4841 39.6134C40.0795 40.0179 40.0795 40.6717 40.4841 41.0761L41.8424 42.4344C42.0441 42.6361 42.3089 42.7375 42.5738 42.7375C42.8386 42.7375 43.1034 42.6372 43.3051 42.4344C43.7095 42.03 43.7095 41.3762 43.3051 40.9717Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2571 18.9238L19.8978 17.5655C19.4944 17.161 18.8395 17.161 18.4351 17.5655C18.0306 17.97 18.0306 18.6247 18.4351 19.0282L19.7944 20.3865C19.9961 20.5882 20.2609 20.6896 20.5257 20.6896C20.7906 20.6896 21.0554 20.5882 21.2571 20.3865C21.6616 19.9821 21.6616 19.3273 21.2571 18.9238Z"
-                        fill="#EF2A82"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_335_18">
-                        <rect
-                          width="60"
-                          height="60"
-                          fill="white"
-                          transform="translate(0.870605)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
+              <div className="flex flex-col justify-center absolute top-[304px] items-center">
+                <div className="flex items-center w-full mb-4 justify-center">
+                  <IconConocimiento size="33" />
                 </div>
                 <div className="px-4">
                   <h4 className="font-bold text-base m-0">Conocimiento Especializado</h4>
                   <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
-                  Profesional matriculada por la Dirección Nacional Registros Propiedad del Automotor (DNRPA),
-                   y capacitada para realizar los trámites de la manera más eficiente en los registros seccionales.
+                  Profesional matriculada  por la {/*Dirección Nacional de Registros y Propiedad del Automotor */} <dfn title="Dirección Nacional de Registros y Propiedad del Automotor" className="text-[#2e37e6] font-medium ">DNRPA</dfn>.
+                  Capacitada para realizar los trámites de la manera más eficiente en los Registros Seccionales.
                   </p>
                 </div>
               </div>
@@ -529,8 +455,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={960}
                     height={720}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center "
                   >
                   </Image>
 
@@ -542,9 +467,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center"
                   ></Image>
                     {/* <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none ">
                       <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur ">
@@ -588,13 +511,11 @@ export default function GaleriaFotosCnp({
 
                 <SwiperSlide>
                   <Image
-                    src='/e4.png'
+                    src='/vehicular-2.jpg'
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center"
                   ></Image>
                     {/* <div className=" z-10 w-full px-10 text-[14px] font-medium [line-height:_1] ">
                       <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
@@ -625,94 +546,15 @@ export default function GaleriaFotosCnp({
                 </SwiperSlide>  
 
               </Swiper>
-              <div className="flex flex-col justify-center absolute top-[316px] items-center">
-                <div className="flex items-center w-full mb-2 justify-center">
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 61 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_335_18)">
-                      <path
-                        d="M48.1184 6.71074C43.1043 2.99684 37.154 1.03453 30.9108 1.03453C25.2181 1.03453 19.5625 2.67316 15.3532 5.48484V1.03453C15.3532 0.463477 14.8898 0 14.3187 0C13.7477 0 13.2842 0.463477 13.2842 1.03453V7.54242C13.2842 7.94379 13.5159 8.30894 13.879 8.47863C14.2421 8.64937 14.6714 8.59453 14.9798 8.33789C18.9252 5.06063 24.8808 3.10336 30.9108 3.10336C36.707 3.10336 42.2311 4.92609 46.8873 8.3741C47.0725 8.51062 47.2877 8.57684 47.5019 8.57684C47.8184 8.57684 48.1308 8.43199 48.3336 8.15789C48.674 7.69863 48.5778 7.05105 48.1184 6.71074Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M59.836 12.4138H53.3281C52.9268 12.4138 52.5636 12.6465 52.393 13.0097C52.2222 13.3727 52.2771 13.8021 52.5337 14.1104C55.811 18.0549 57.7682 24.0104 57.7682 30.0415C57.7682 35.8377 55.9455 41.3618 52.4975 46.0169C52.1572 46.4762 52.2534 47.1238 52.7127 47.4642C52.8978 47.6007 53.113 47.6669 53.3272 47.6669C53.6437 47.6669 53.9561 47.5221 54.1599 47.248C57.8737 42.2339 59.8361 36.2834 59.8361 30.0404C59.8361 24.3477 58.1975 18.6911 55.3858 14.4828H59.8361C60.4072 14.4828 60.8707 14.0193 60.8707 13.4483C60.8705 12.8772 60.4071 12.4138 59.836 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.8631 51.5224C47.5001 51.3527 47.0718 51.4055 46.7624 51.6632C42.8169 54.9404 36.8613 56.8977 30.8313 56.8977C25.0341 56.8977 19.51 55.075 14.8548 51.627C14.3955 51.2866 13.748 51.3829 13.4075 51.8421C13.0672 52.3014 13.1634 52.949 13.6227 53.2894C18.6368 57.0032 24.5872 58.9656 30.8303 58.9656C36.523 58.9656 42.1786 57.327 46.3879 54.5153V58.9656C46.3879 59.5366 46.8513 60.0001 47.4224 60.0001C47.9934 60.0001 48.4569 59.5366 48.4569 58.9656V52.4577C48.4569 52.0562 48.2252 51.6911 47.8631 51.5224Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M9.2085 45.8907C5.93123 41.9453 3.97396 35.9907 3.97396 29.9597C3.97396 24.1635 5.7967 18.6394 9.24365 13.9842C9.58396 13.5249 9.48775 12.8774 9.0285 12.5369C8.56924 12.1956 7.92166 12.2928 7.58123 12.7521C3.86744 17.7662 1.90514 23.7165 1.90514 29.9597C1.90514 35.6524 3.54377 41.308 6.35545 45.5172H1.90514C1.33408 45.5172 0.870605 45.9807 0.870605 46.5518C0.870605 47.1228 1.33408 47.5863 1.90514 47.5863H8.41303C8.81439 47.5863 9.1785 47.3546 9.34924 46.9915C9.51998 46.6283 9.46514 46.1989 9.2085 45.8907Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M31.9051 19.6531C31.9041 19.082 31.4406 18.6206 30.8706 18.6206C30.8706 18.6206 30.8695 18.6206 30.8685 18.6206C30.2964 18.6217 29.835 19.0861 29.8361 19.6572L29.8609 30.002C29.862 30.5731 30.3254 31.0344 30.8954 31.0344C30.8965 31.0344 30.8975 31.0344 30.8975 31.0344C31.4697 31.0334 31.931 30.569 31.93 29.9979L31.9051 19.6531Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8954 28.9655H24.6637C24.0926 28.9655 23.6292 29.4289 23.6292 30C23.6292 30.571 24.0926 31.0345 24.6637 31.0345H30.8954C31.4664 31.0345 31.9299 30.571 31.9299 30C31.9299 29.4289 31.4664 28.9655 30.8954 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 8.27594C18.8923 8.27594 9.14648 18.0208 9.14648 30C9.14648 41.9793 18.8923 51.7241 30.8706 51.7241C42.8498 51.7241 52.5947 41.9793 52.5947 30C52.5947 18.0208 42.8498 8.27594 30.8706 8.27594ZM30.8706 49.6552C20.0323 49.6552 11.2154 40.8384 11.2154 30C11.2154 19.1617 20.0323 10.3449 30.8706 10.3449C41.7089 10.3449 50.5257 19.1617 50.5257 30C50.5257 40.8384 41.7089 49.6552 30.8706 49.6552Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M16.3879 28.9655H14.319C13.7479 28.9655 13.2844 29.4289 13.2844 30C13.2844 30.571 13.7479 31.0345 14.319 31.0345H16.3879C16.959 31.0345 17.4224 30.571 17.4224 30C17.4224 29.4289 16.959 28.9655 16.3879 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.4222 28.9655H45.3533C44.7822 28.9655 44.3187 29.4289 44.3187 30C44.3187 30.571 44.7822 31.0345 45.3533 31.0345H47.4222C47.9933 31.0345 48.4567 30.571 48.4567 30C48.4567 29.4289 47.9933 28.9655 47.4222 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 43.4483C30.2995 43.4483 29.8361 43.9118 29.8361 44.4828V46.5518C29.8361 47.1228 30.2995 47.5863 30.8706 47.5863C31.4416 47.5863 31.9051 47.1228 31.9051 46.5518V44.4828C31.9051 43.9117 31.4416 43.4483 30.8706 43.4483Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 12.4138C30.2995 12.4138 29.8361 12.8772 29.8361 13.4483V15.5172C29.8361 16.0883 30.2995 16.5518 30.8706 16.5518C31.4416 16.5518 31.9051 16.0883 31.9051 15.5172V13.4483C31.9051 12.8772 31.4416 12.4138 30.8706 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2572 39.6135C20.8537 39.2089 20.1988 39.2089 19.7944 39.6135L18.4352 40.9718C18.0317 41.3753 18.0317 42.0301 18.4352 42.4345C18.6369 42.6362 18.9017 42.7376 19.1665 42.7376C19.4314 42.7376 19.6962 42.6373 19.8979 42.4345L21.2572 41.0762C21.6606 40.6727 21.6606 40.0179 21.2572 39.6135Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 17.5655C42.9006 17.161 42.2468 17.161 41.8424 17.5655L40.4841 18.9238C40.0795 19.3283 40.0795 19.9821 40.4841 20.3865C40.6857 20.5882 40.9506 20.6896 41.2154 20.6896C41.4803 20.6896 41.7451 20.5882 41.9468 20.3865L43.3051 19.0282C43.7095 18.6238 43.7095 17.97 43.3051 17.5655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 40.9717L41.9468 39.6134C41.5423 39.2088 40.8885 39.2088 40.4841 39.6134C40.0795 40.0179 40.0795 40.6717 40.4841 41.0761L41.8424 42.4344C42.0441 42.6361 42.3089 42.7375 42.5738 42.7375C42.8386 42.7375 43.1034 42.6372 43.3051 42.4344C43.7095 42.03 43.7095 41.3762 43.3051 40.9717Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2571 18.9238L19.8978 17.5655C19.4944 17.161 18.8395 17.161 18.4351 17.5655C18.0306 17.97 18.0306 18.6247 18.4351 19.0282L19.7944 20.3865C19.9961 20.5882 20.2609 20.6896 20.5257 20.6896C20.7906 20.6896 21.0554 20.5882 21.2571 20.3865C21.6616 19.9821 21.6616 19.3273 21.2571 18.9238Z"
-                        fill="#EF2A82"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_335_18">
-                        <rect
-                          width="60"
-                          height="60"
-                          fill="white"
-                          transform="translate(0.870605)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
+              <div className="flex flex-col justify-center absolute top-[304px] items-center">
+                <div className="flex items-center w-full mb-4 justify-center">
+                  <IconTiempo />
                 </div>
                 <div className="px-4">
                   <h4 className="font-bold text-base m-0">Ahorra Tiempo y Esfuerzo</h4>
                   <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
-                  Si no estás familiarizado con los procedimientos o si no tienes tiempo para gestionarlos tú mismo, 
-                  nos encargaremos de todos los detalles administrativos y legales.
+                  Si no estás familiarizado con los procedimientos o si no tenés tiempo para gestionarlos tú mismo, 
+                  me encargaré de todos los detalles administrativos y legales.
                   </p>
                 </div>
               </div>
@@ -755,8 +597,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={960}
                     height={720}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border border-[#8a848b] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0]"
                   >
                   </Image>
 
@@ -768,9 +609,7 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0]"
                   ></Image>
                 </SwiperSlide>
 
@@ -780,108 +619,27 @@ export default function GaleriaFotosCnp({
                     alt="Picture of the author"
                     width={660}
                     height={490}
-                    className="absolute top-[0px] mb-2 flex h-[262px] w-full items-center justify-center [border-radius:_12px_12px_0_0]
-                                border
-                                border-[#858585] bg-[#fff9]  text-4xl font-bold backdrop-blur "
+                    className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0] "
                   ></Image>
                 </SwiperSlide>      
               </Swiper>
-              <div className="flex flex-col justify-center absolute top-[316px] items-center">
-                <div className="flex items-center w-full mb-2 justify-center">
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 61 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_335_18)">
-                      <path
-                        d="M48.1184 6.71074C43.1043 2.99684 37.154 1.03453 30.9108 1.03453C25.2181 1.03453 19.5625 2.67316 15.3532 5.48484V1.03453C15.3532 0.463477 14.8898 0 14.3187 0C13.7477 0 13.2842 0.463477 13.2842 1.03453V7.54242C13.2842 7.94379 13.5159 8.30894 13.879 8.47863C14.2421 8.64937 14.6714 8.59453 14.9798 8.33789C18.9252 5.06063 24.8808 3.10336 30.9108 3.10336C36.707 3.10336 42.2311 4.92609 46.8873 8.3741C47.0725 8.51062 47.2877 8.57684 47.5019 8.57684C47.8184 8.57684 48.1308 8.43199 48.3336 8.15789C48.674 7.69863 48.5778 7.05105 48.1184 6.71074Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M59.836 12.4138H53.3281C52.9268 12.4138 52.5636 12.6465 52.393 13.0097C52.2222 13.3727 52.2771 13.8021 52.5337 14.1104C55.811 18.0549 57.7682 24.0104 57.7682 30.0415C57.7682 35.8377 55.9455 41.3618 52.4975 46.0169C52.1572 46.4762 52.2534 47.1238 52.7127 47.4642C52.8978 47.6007 53.113 47.6669 53.3272 47.6669C53.6437 47.6669 53.9561 47.5221 54.1599 47.248C57.8737 42.2339 59.8361 36.2834 59.8361 30.0404C59.8361 24.3477 58.1975 18.6911 55.3858 14.4828H59.8361C60.4072 14.4828 60.8707 14.0193 60.8707 13.4483C60.8705 12.8772 60.4071 12.4138 59.836 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.8631 51.5224C47.5001 51.3527 47.0718 51.4055 46.7624 51.6632C42.8169 54.9404 36.8613 56.8977 30.8313 56.8977C25.0341 56.8977 19.51 55.075 14.8548 51.627C14.3955 51.2866 13.748 51.3829 13.4075 51.8421C13.0672 52.3014 13.1634 52.949 13.6227 53.2894C18.6368 57.0032 24.5872 58.9656 30.8303 58.9656C36.523 58.9656 42.1786 57.327 46.3879 54.5153V58.9656C46.3879 59.5366 46.8513 60.0001 47.4224 60.0001C47.9934 60.0001 48.4569 59.5366 48.4569 58.9656V52.4577C48.4569 52.0562 48.2252 51.6911 47.8631 51.5224Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M9.2085 45.8907C5.93123 41.9453 3.97396 35.9907 3.97396 29.9597C3.97396 24.1635 5.7967 18.6394 9.24365 13.9842C9.58396 13.5249 9.48775 12.8774 9.0285 12.5369C8.56924 12.1956 7.92166 12.2928 7.58123 12.7521C3.86744 17.7662 1.90514 23.7165 1.90514 29.9597C1.90514 35.6524 3.54377 41.308 6.35545 45.5172H1.90514C1.33408 45.5172 0.870605 45.9807 0.870605 46.5518C0.870605 47.1228 1.33408 47.5863 1.90514 47.5863H8.41303C8.81439 47.5863 9.1785 47.3546 9.34924 46.9915C9.51998 46.6283 9.46514 46.1989 9.2085 45.8907Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M31.9051 19.6531C31.9041 19.082 31.4406 18.6206 30.8706 18.6206C30.8706 18.6206 30.8695 18.6206 30.8685 18.6206C30.2964 18.6217 29.835 19.0861 29.8361 19.6572L29.8609 30.002C29.862 30.5731 30.3254 31.0344 30.8954 31.0344C30.8965 31.0344 30.8975 31.0344 30.8975 31.0344C31.4697 31.0334 31.931 30.569 31.93 29.9979L31.9051 19.6531Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8954 28.9655H24.6637C24.0926 28.9655 23.6292 29.4289 23.6292 30C23.6292 30.571 24.0926 31.0345 24.6637 31.0345H30.8954C31.4664 31.0345 31.9299 30.571 31.9299 30C31.9299 29.4289 31.4664 28.9655 30.8954 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 8.27594C18.8923 8.27594 9.14648 18.0208 9.14648 30C9.14648 41.9793 18.8923 51.7241 30.8706 51.7241C42.8498 51.7241 52.5947 41.9793 52.5947 30C52.5947 18.0208 42.8498 8.27594 30.8706 8.27594ZM30.8706 49.6552C20.0323 49.6552 11.2154 40.8384 11.2154 30C11.2154 19.1617 20.0323 10.3449 30.8706 10.3449C41.7089 10.3449 50.5257 19.1617 50.5257 30C50.5257 40.8384 41.7089 49.6552 30.8706 49.6552Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M16.3879 28.9655H14.319C13.7479 28.9655 13.2844 29.4289 13.2844 30C13.2844 30.571 13.7479 31.0345 14.319 31.0345H16.3879C16.959 31.0345 17.4224 30.571 17.4224 30C17.4224 29.4289 16.959 28.9655 16.3879 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M47.4222 28.9655H45.3533C44.7822 28.9655 44.3187 29.4289 44.3187 30C44.3187 30.571 44.7822 31.0345 45.3533 31.0345H47.4222C47.9933 31.0345 48.4567 30.571 48.4567 30C48.4567 29.4289 47.9933 28.9655 47.4222 28.9655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 43.4483C30.2995 43.4483 29.8361 43.9118 29.8361 44.4828V46.5518C29.8361 47.1228 30.2995 47.5863 30.8706 47.5863C31.4416 47.5863 31.9051 47.1228 31.9051 46.5518V44.4828C31.9051 43.9117 31.4416 43.4483 30.8706 43.4483Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M30.8706 12.4138C30.2995 12.4138 29.8361 12.8772 29.8361 13.4483V15.5172C29.8361 16.0883 30.2995 16.5518 30.8706 16.5518C31.4416 16.5518 31.9051 16.0883 31.9051 15.5172V13.4483C31.9051 12.8772 31.4416 12.4138 30.8706 12.4138Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2572 39.6135C20.8537 39.2089 20.1988 39.2089 19.7944 39.6135L18.4352 40.9718C18.0317 41.3753 18.0317 42.0301 18.4352 42.4345C18.6369 42.6362 18.9017 42.7376 19.1665 42.7376C19.4314 42.7376 19.6962 42.6373 19.8979 42.4345L21.2572 41.0762C21.6606 40.6727 21.6606 40.0179 21.2572 39.6135Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 17.5655C42.9006 17.161 42.2468 17.161 41.8424 17.5655L40.4841 18.9238C40.0795 19.3283 40.0795 19.9821 40.4841 20.3865C40.6857 20.5882 40.9506 20.6896 41.2154 20.6896C41.4803 20.6896 41.7451 20.5882 41.9468 20.3865L43.3051 19.0282C43.7095 18.6238 43.7095 17.97 43.3051 17.5655Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M43.3051 40.9717L41.9468 39.6134C41.5423 39.2088 40.8885 39.2088 40.4841 39.6134C40.0795 40.0179 40.0795 40.6717 40.4841 41.0761L41.8424 42.4344C42.0441 42.6361 42.3089 42.7375 42.5738 42.7375C42.8386 42.7375 43.1034 42.6372 43.3051 42.4344C43.7095 42.03 43.7095 41.3762 43.3051 40.9717Z"
-                        fill="#EF2A82"
-                      />
-                      <path
-                        d="M21.2571 18.9238L19.8978 17.5655C19.4944 17.161 18.8395 17.161 18.4351 17.5655C18.0306 17.97 18.0306 18.6247 18.4351 19.0282L19.7944 20.3865C19.9961 20.5882 20.2609 20.6896 20.5257 20.6896C20.7906 20.6896 21.0554 20.5882 21.2571 20.3865C21.6616 19.9821 21.6616 19.3273 21.2571 18.9238Z"
-                        fill="#EF2A82"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_335_18">
-                        <rect
-                          width="60"
-                          height="60"
-                          fill="white"
-                          transform="translate(0.870605)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
+              <div className="flex flex-col justify-center absolute top-[304px] items-center">
+                <div className="flex items-center w-full mb-4 justify-center">
+                  <IconSeguridad size="33" />
                 </div>
                 <div className="px-4">
                   <h4 className="font-bold text-base m-0">Seguridad y Legalidad</h4>
                   <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
-                  Debidamente habilitada y registrada, garantizamos que todos los trámites se realicen de manera legal y segura,
-                   evitando posibles problemas futuros.
+                  Debidamente habilitada y registrada, garantizo que todos los trámites se realizan de manera legal y segura,
+                   evitando posibles problemas a futuro.
                   </p>
                 </div>
               </div>
             </SwiperSlide>
           </Swiper>
-          <div className="flex flex-col mt-10 md:flex-row">
+          {/* <div className="flex flex-col mt-10 md:flex-row">
 
-            {/* <div className="flex flex-col justify-cente items-center mt-8">
+            <div className="flex flex-col justify-cente items-center mt-8">
               <div className="flex">
                 <svg
                   width="61"
@@ -1291,16 +1049,28 @@ export default function GaleriaFotosCnp({
                   resuelvan tus necesidades mas especificas.
                 </p>
               </div>
-            </div> */}
+            </div> 
 
-          </div>
+          </div>*/}
+          {/* <div className="flex justify-center mb-10 gap-2 pb-6 pt-8 sm:gap-8 ">
+            <Link  
+              href={session ? '/dashboard/' : '/login'} 
+              className="text-white bg-[#300322] text-sm duration-150 text-center px-2 py-[2px] rounded opacity-80 hover:opacity-100 ">
+              Realizá tu consulta
+            </Link>
+            <Link  
+              href={session ? '/dashboard/inicioTramite' : '/login'} 
+              className="text-white bg-[#300322] text-sm duration-150 text-center px-2 py-[2px] rounded opacity-80 hover:opacity-100 ">
+              Iniciá tu trámite
+            </Link>
+          </div> */}
         </SwiperSlide>
 
         {/* Consultas */}
         <SwiperSlide id="cp">
-          <div className="w-full] absolute top-0 z-10 flex h-full flex-col items-start justify-center bg-cover bg-fixed bg-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
-            <Fondo className=" p-4">
-              <div className="my-4 w-full text-xl text-center font-medium ">
+          <div className="w-full absolute top-0 z-10 flex h-full flex-col items-center justify-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
+            <Fondo className="p-4">
+              <div className="mb-4 mt-2.5 w-full text-xl text-center font-medium ">
                 CONSULTAS FRECUENTES
               </div>
               
@@ -1311,14 +1081,14 @@ export default function GaleriaFotosCnp({
                       <Link
                         as={`/consultas/${linkDato.slug}`}
                         href="/consultas/[slug]"
-                        className=" duration-200 opacity-80 hover:opacity-100  "
+                        className=" "
                       >
-                        <Frente className="py-1 px-4 gap-5 flex justify-between items-center ">
-                          <div className="text-base text-start max-[512px]:text-sm">
+                        <Frente className="py-2.5 px-4 gap-5 text-[#1d0215cc] flex justify-between items-center duration-200 hover:bg-[#fffffff2] hover:text-[#1d0215] ">
+                          <p className="text-sm text-start max-[512px]:text-sm">
                             {linkDato.excerpt}
-                          </div>
+                          </p>
                           <div>
-                            <ChevronRightIcon className="w-4 min-[512px]:w-5 "  />
+                            <ChevronRightIcon className="w-4 min-[512px]:w-4 "  />
                           </div>
                         </Frente>
                       </Link>
@@ -1328,40 +1098,20 @@ export default function GaleriaFotosCnp({
                   <p>Ninguna consulta publicado todavía</p>
                 )}
               </div>
-              
-              <div className="mt-8 mb-4 flex flex-col items-center pl-4 gap-3 text-left font-medium min-[500px]:flex-row min-[500px]:items-end min-[500px]:gap-6 ">
-                <div className=" text-[16px] [font-variant-caps:_small-caps] ">
-                  Realizá Tu Consulta Por:
-                </div>
-                <div className="flex items-end gap-6">
-                  <Link
-                    href="https://api.whatsapp.com/send?phone=543476606595"
-                    target="_blank"
-                    data-title="whatsapp"
-                  >
-                    <IconWhatsApp
-                      filter="filterWhatsApp2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="32"
-                      className="opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link>
-                  <Link
-                    href={session ? '/dashboard' : '/login'}
-                    data-title="cnp mandataria"
-                  >
-                    <LogoCnp
-                      filter="filterCnp2"
-                      sombraX="0"
-                      sombraY="1.2"
-                      size="64"
-                      className="bottom-[72px] right-4 opacity-70 duration-200 hover:opacity-95 md:right-12 min-[1280px]:right-[calc((100%_-_1280px)/2_+_48px)]"
-                    />
-                  </Link>
-                </div>
-              </div>
             </Fondo>
+
+            <div className="flex justify-center mb-10 gap-2 pb-6 pt-8 sm:gap-8 ">
+              <Link  
+                href={session ? '/dashboard/' : '/login'} 
+                className="text-white bg-[#50073ae8] text-sm duration-150 text-center px-2 py-[2px] rounded opacity-80 hover:opacity-100 ">
+                Realizá tu consulta
+              </Link>
+              <Link  
+                href={session ? '/dashboard/inicioTramite' : '/login'} 
+                className="text-white bg-[#50073ae8] text-sm duration-150 text-center px-2 py-[2px] rounded opacity-80 hover:opacity-100 ">
+                Iniciá tu trámite
+              </Link>
+            </div>
           </div>
           {/* <Faq /> */}
           <FooterInicio />
