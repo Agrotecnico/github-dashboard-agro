@@ -47,6 +47,6 @@ export default async function Page({
       </div>
     )
       return (
-        <div className="h-[50%] flex items-center justify-center ">Facturas no disponble para este Usuario</div>
+        <div className="h-[50%] flex items-center justify-center ">Página no disponble</div>
       );
 }

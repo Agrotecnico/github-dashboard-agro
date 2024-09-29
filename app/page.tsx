@@ -1,10 +1,7 @@
-
 import { auth } from "auth"
 import GaleriaFotosCnp from './cnp-galeria-fotos';
 import { getAllPosts } from '@/app/lib/getPost';
 import { fetchUserById } from '@/app/lib/data'
-import { User } from '@/app/lib/definitions'
-
 
 
 const allPosts = getAllPosts();

@@ -14,9 +14,10 @@ import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import { useSession } from "next-auth/react"
 import { createUser } from '@/app/lib/actions';
 import Image from 'next/image'
+import { Fondo, Frente } from '@/app/ui/marcos';
 
 
-export default function EditPerfilFormB() {
+export default function EditPerfilMember() {
 
   const { data: session, status } = useSession()
 
@@ -30,7 +31,7 @@ export default function EditPerfilFormB() {
   const uploadToServer = async () => {
     const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`
     const data = new FormData()
-    data.append("image", file)
+    data.append("image", `${file}`)
 
     try {
       const response = await fetch(url, {
@@ -54,7 +55,7 @@ export default function EditPerfilFormB() {
 
   return (
     <>
-      <div className="flex w-full gap-3 flex-col items-center rounded-lg bg-[#ffffff57] p-6 [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row ">
+      <Frente className="flex w-full gap-3 flex-col items-center p-6 min-[800px]:flex-row ">
         <div
           className="min-w-20 relative max-h-[80px] min-h-[80px] min-w-[80px] max-w-[80px]"
           data-testid="image-container"
@@ -89,21 +90,21 @@ export default function EditPerfilFormB() {
           </h2>
           <p>{!email ? session?.user?.email : email}</p>
         </div>
-      </div>
+      </Frente>
 
       {/* Select image */}
       <div className="mt-6 mb-4 gap-6 flex items-center min-[375px]:gap-12 ">
         <div>
-          <div className="bg-[#ffffff57] text-[#374151cc]  flex flex-col items-start gap-4 hover:text-[#374151] hover:bg-[#ffffff78] min-[500px]:flex-row min-[500px]:items-center ">
+          <div className="bg-[#ffffff57] text-[#000000aa] duration-200 flex flex-col items-start gap-4 hover:text-[#111111] hover:bg-[#ffffff78] min-[500px]:flex-row min-[500px]:items-center ">
             <div className="relative">
               <input
                 type="file"
                 className="w-[164px] h-8 px-4 py-1 m-0 absolute text-sm opacity-0 rounded"
                 onChange={handleFileChange}
               />
-              <div className="w-[164px] h-8 px-4 py-1 flex items-center text-sm rounded bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] ">
+              <Frente className="w-[164px] h-9 px-4 py-1 flex items-center text-sm  hover:bg-[#ffffffbb] ">
                 Seleccionar imagen
-              </div>
+              </Frente>
             </div>
           </div>
           <button
@@ -142,85 +143,81 @@ export default function EditPerfilFormB() {
       <form action={dispatch} className="mt-4px">
 
         {/* Nombre */}
-        <div className="mb-4">
-          <label htmlFor="name" className="mt-8 text-start text-[13.5px]">
+        <div className="relative">
+          <label htmlFor="name" className="mt-8 text-start text-xs">
             Cambiar nombre
           </label>
-          <div className="flex flex-col gap-2 mt-1 min-[425px]:flex-row min-[425px]:gap-4">
-            <div className="w-max relative duration-150 rounded text-[#374151cc] hover:bg-[#ffffff78] bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]">
-              <input
-                className="px-4 pt-1 pb-1.5 pl-10 m-0 text-[#374151cc] text-sm h-8 bg-transparent border border-transparent rounded hover:text-[#374151] placeholder:text-[#37415188]"
-                id="name"
-                type="text"
-                name="name"
-                defaultValue={`${!name ? session?.user?.name : name}`}
-                placeholder="Elegí tu nombre..."
-                required
-                onChange={(e) => {
-                  setName(e.target.value)
-                }}
-              />
-              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
+          <Frente className="mb-4 flex items-center justify-start w-max hover:bg-[#ffffffbb]">
+            <input
+              className="!hover:bg-transparent rounded-md peer block w-full border text-[#000000aa] border-transparent bg-transparent py-1.5 pl-10 text-sm outline-2 hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+              id="name"
+              type="text"
+              name="name"
+              defaultValue={`${!name ? session?.user?.name : name}`}
+              placeholder="Nombre"
+              required
+              onChange={(e) => {
+                setName(e.target.value)
+              }}
+            />
+            <UserIcon className="pointer-events-none text-[#1d0215aa] absolute left-3 top-[56%] h-[18px] w-[18px] peer-focus:text-gray-900" />
+          </Frente>{/*  text-gray-900 -translate-y-1/2 */}
         </div>
-
+ 
         {/* Email */}
-        <div className="mb-4">
-          <label htmlFor="email" className="mt-8 text-start text-[13.5px]">
+        <div className="relative">
+          <label htmlFor="email" className="mt-8 text-start text-xs">
             Cambiar email
           </label>
-          <div className="flex flex-col gap-2 mt-1 min-[425px]:flex-row min-[425px]:gap-4">
-            <div className="w-max relative rounded hover:bg-[#ffffff78] bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047]">
-              <input
-                className="px-4 pt-1 pb-1.5 pl-10 m-0  text-[#374151cc] text-sm h-8 bg-transparent border border-transparent rounded placeholder:text-[#37415188] hover:text-[#374151]"
-                id="email"
-                type="email"
-                name="email"
-                defaultValue={`${!email ? session?.user?.email : email}`}
-                placeholder="Agregá tu email..."
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
-              />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-600 peer-focus:text-gray-900" />
-            </div>
-          </div>
+          <Frente className="mb-4 flex items-center justify-start w-max hover:bg-[#ffffffbb] ">
+            <input
+              className="!hover:bg-transparent rounded-md peer block w-full border text-[#000000aa] border-transparent bg-transparent py-1.5 pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+              id="email"
+              type="email"
+              name="email"
+              defaultValue={`${!email ? session?.user?.email : email}`}
+              placeholder="Email"
+              required
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
+            />
+            <AtSymbolIcon className="pointer-events-none text-[#1d0215cc] absolute left-3 top-[56%] h-[18px] w-[18px] peer-focus:text-gray-900" />
+          </Frente>{/*  text-gray-900 -translate-y-1/2 */}
         </div>
 
         {/* Contraseña */}
-        <div>
+        {/* <div>
           <input
             id="password"
             type="hidden"
             name="password"
             value= {`${session?.user?.email}`}
           />
-        </div>
+        </div> */}
 
         {/* Confirmar contraseña */}
-        <div>
+        {/* <div>
           <input
             id="confirmPassword"
             type="hidden"
             name="confirmPassword"
             value= {`${session?.user?.email}`}
           />
-        </div>
+        </div> */}
 
         {/* Image */}
-        <div>
+        {/* <div>
           <input
             id="image"
             type="hidden"
             name="image"
             value= {`${!image ? session?.user?.image : image}`}
           />
-        </div>
+        </div> */}
 
       {/* Massages */}
-      <div
+      {/* <div
         className="mb-3 mt-3 flex items-end space-x-1"
         aria-live="polite"
         aria-atomic="true"
@@ -231,18 +228,18 @@ export default function EditPerfilFormB() {
             <p className="text-sm text-red-500">{state.message}</p>
           </>
         )}
-      </div>
+      </div> */}
 
-      <div className="mt-6 flex justify-end gap-4">
+      <div className="mt-6 flex justify-end items-center gap-4 text-sm">
         <div
           onClick={() => {window.location.reload()}}
-          className="flex h-10 items-center rounded-lg cursor-pointer bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          className="flex h-9 items-center rounded duration-200 bg-[#30032215] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
           > 
             Cancelar
         </div>
         <Button 
           type="submit"
-          className={`p-1 mt-1 leading-4 text-[#374151] text-[15px] w-max h-8 rounded duration-200 hover:bg-[#ffffff99] `}
+          className={`flex items-center h-10 w-max rounded bg-[#ffffffcc]  opacity-70 px-4 font-medium duration-200 hover:opacity-100 `}
           >Guardar cambios
         </Button>
       </div>

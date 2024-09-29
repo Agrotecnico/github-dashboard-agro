@@ -13,7 +13,7 @@ export type IconProps = {
 
 const LogoCNP: React.FC<IconProps> = ({
   size= 160,
-  color= /* "#ddd" */"#000",
+  color= "#000",
   colorC="#ab3aab",
   colorN="#ba6ddb",
   colorP="#de35de",

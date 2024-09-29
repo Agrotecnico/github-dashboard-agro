@@ -1,13 +1,12 @@
 
 import UserButtonHeader from '@/app/ui/user-button-header';
 import Link from 'next/link';
-import LogoCNP from '@/app/ui/logosIconos/logoCNP';
 import LogoCnpColor from '@/app/ui/logosIconos/logo-cnp-color';
 import { auth } from 'auth';
 import IconCuenta from './logosIconos/icon-cuenta';
 
 
-export default async function HeaderConsultas( ) {
+export default async function Header( ) {
 
   const session = await auth();
   return (
@@ -21,24 +20,7 @@ export default async function HeaderConsultas( ) {
             <div className="-ml-3 w-full text-white">
               <LogoCnpColor size="138px"
                 className="ml-3"
-                /* colorC="white"
-                colorN="#ddd"
-                colorP="#ccc"
-                color="#eee"
-                filter="filterCNP"
-                sombraX="0.5"
-                sombraY="0.5" */
               />
-             {/*  <LogoCNP
-                className="hidden w-[184px] md:block"
-                colorC="white"
-                colorN="#ddd"
-                colorP="#ccc"
-                color="#eee"
-                filter="filterCNP2"
-                sombraX="0.5"
-                sombraY="0.5"
-              /> */}
             </div>
           </Link>
         </div>

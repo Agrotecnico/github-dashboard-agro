@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { fetchCustomersPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
 import { auth } from '@/auth';
+import  Error from '@/app/dashboard/customers/error';
 
 export const metadata: Metadata = {
   title: 'Clientes',
@@ -33,6 +34,8 @@ export default async function Page({
       </main>
     );
   return (
-    <div className="h-[50%] flex items-center justify-center ">Clientes no disponble para este Usuario</div>
+    <div className="h-[50%] flex items-center justify-center ">
+       Página no disponble
+    </div>
   );
 }

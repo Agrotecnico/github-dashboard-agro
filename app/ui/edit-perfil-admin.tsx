@@ -17,14 +17,14 @@ import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import Image from 'next/image'
 
-export default function EditPerfilForm({ user }: { user: User }) {
+export default function EditPerfilAdmin({ user }: { user: User | undefined }) {
   const [image, setImage] = useState('');
   const [file, setFile] = useState<File | undefined>();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
   const uploadToServer = async () => {
-    const url = `https://api.imgbb.com/1/upload?key=079cdc2ae90871b46a249403dce9a75a&name=${file?.name}`;
+    const url = `https://api.imgbb.com/1/upload?key=ee8fa06c5117ba2e2d3258db9d352260&name=${file?.name}`;
     const data = new FormData();
     data.append('image', `${file}`);
 
@@ -45,9 +45,9 @@ export default function EditPerfilForm({ user }: { user: User }) {
     setFile(e.target.files?.[0]);
   };
   const initialState = { message: null, errors: {} };
-  const updateUserWithId = updateUser.bind(null, user?.id);
+  const updateUserWithId = updateUser.bind(null, `${user?.id}`);
   const [state, dispatch] = useFormState(updateUserWithId, initialState);
-
+  console.log("image:", image)
   return (
     <>
       <div className="flex w-full flex-col items-center gap-3 rounded-lg bg-[#ffffff57] p-6 [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row ">
@@ -88,15 +88,15 @@ export default function EditPerfilForm({ user }: { user: User }) {
       </div>
 
       {/* Select imagen */}
-      <div className="opacity-40 mb-4 mt-6 flex items-center gap-6 min-[375px]:gap-12 ">
+      <div className="mb-4 mt-6 flex items-center gap-6 min-[375px]:gap-12 ">
         <div>
           <div className="flex flex-col  items-start gap-4 bg-[#ffffff57] text-[#374151cc] hover:bg-[#ffffff78] hover:text-[#374151] min-[500px]:flex-row min-[500px]:items-center ">
             <div className="relative">
-              {/* <input
+              <input
                 type="file"
                 className="absolute m-0 h-8 w-[164px] rounded px-4 py-1 text-sm opacity-0"
                 onChange={handleFileChange}
-              /> */}
+              />
               <div className="flex h-8 w-[164px] items-center rounded bg-[#ffffff57] px-4 py-1 text-sm [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] ">
                 Seleccionar imagen
               </div>
@@ -198,36 +198,6 @@ export default function EditPerfilForm({ user }: { user: User }) {
           </div>
         </div>
 
-        {/* Contraseña */}
-        <div>
-          <input
-            id="password"
-            type="hidden"
-            name="password"
-            value={user.password}
-          />
-        </div>
-
-        {/* Confirmar contraseña */}
-        <div>
-          <input
-            id="confirmPassword"
-            type="hidden"
-            name="confirmPassword"
-            value={user.password}
-          />
-        </div>
-
-        {/* Image */}
-        <div>
-          <input
-            id="image"
-            type="hidden"
-            name="image"
-            value={!image ? user?.image : image}
-          />
-        </div>
-
         {/* Massages */}
         <div
           className="mb-3 mt-3 flex items-end space-x-1"
@@ -242,20 +212,21 @@ export default function EditPerfilForm({ user }: { user: User }) {
           )}
         </div>
 
-        <div className="mt-6 flex justify-end gap-4">
+        <div className="mt-6 flex justify-end items-center gap-4 text-sm">
           <div
             onClick={() => {
               window.location.reload();
             }}
-            className="flex h-10 cursor-pointer items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+            className="flex h-9 items-center rounded duration-200 bg-[#30032215] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
+              /* "flex h-10 cursor-pointer items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200" */
           >
             Cancelar
           </div>
-          <Button
+          <Button  /* mt-1 h-8 w-max rounded p-1 text-[15px] leading-4 text-[#374151] duration-200  */
             type="submit"
-            className={`mt-1 h-8 w-max rounded p-1 text-[15px] leading-4 text-[#374151] duration-200 ${
+            className={`flex items-center h-10 w-max rounded bg-[#ffffffcc]  opacity-70 px-4 font-medium duration-200 hover:opacity-100 ${
               name == '' && email == '' && image == ''
-                ? 'hover:bg-transparent active:bg-transparent'
+                ? 'bg-transparent hover:bg-transparent active:bg-transparent'
                 : ''
             }  disabled:opacity-60 `}
             disabled={name == '' && email == '' && image == ''}

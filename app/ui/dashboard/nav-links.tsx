@@ -1,3 +1,5 @@
+/* "use client" */
+
 import {
   UserGroupIcon,
   HomeIcon,
@@ -10,6 +12,7 @@ import {
 import Link from 'next/link';
 import clsx from 'clsx';
 import { auth } from '@/auth';
+import { Frente } from '@/app/ui/marcos';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -29,68 +32,83 @@ const linkMembers = [
     href: '/dashboard/inicioTramite',
     icon: ClipboardDocumentListIcon,
   },
-  { name: 'Perfil',
+  { name: 'Editar Perfil',
     href: '/dashboard/perfil',
     icon: UserCircleIcon },
 ];
 
 const links = [
-  { name: 'Resumen', href: '/dashboard', icon: HomeIcon },
+  { name: 'Resumen', href: '/dashboard', icon: HomeIcon, },
   { name: 'Facturas', href: '/dashboard/invoices', icon: InboxIcon, },
   { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
   { name: 'Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
   { name: 'Inicio Trámite', href: '/dashboard/inicioTramite', icon: ClipboardDocumentListIcon, },
-  { name: 'Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
+  { name: 'Editar Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
 ];
 
 export default async function NavLinks() {
+  /* const { data: session, update } = useSession()
+   const pathname = usePathname(); */
+  
+  
   const session = await auth();
+   /*console.log("sessionxxx:", session)*/ 
 
   if (session?.user?.email === process.env.ADMIN)
     return (
       <>
-        {links.map((link) => {
+        {links?.map((link) => {
           const LinkIcon = link.icon;
           return (
             <Link
               key={link.name}
               href={link.href}
-              className={clsx(
-                /* 'flex grow items-start flex-row justify-start  gap-1 rounded-md p-1.5 text-sm font-medium text-[#00000099] duration-200 [box-shadow:inset_1px_-1px_#0000002e,inset_-1px_1px_#ffffff45,1px_-1px_#0000002e,-1px_1px_#ffffff45] hover:bg-[#ffffff29] hover:text-[#000000c7] min-[440px]:p-3 min-[440px]:gap-2 md:p-2 md:px-3 min-[824px]:flex-none min-[824px]:justify-start min-[824px]:flex-row ' */
-                'flex h-[40px] items-center bg-[#ffffff66] text-[#30032299] justify-start gap-2 p-3 text-sm font-medium duration-200 [box-shadow:inset_1px_-1px_#0000002e,inset_-1px_2px_#ffffff66,1px_0_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffffaa] hover:text-[#300322ee] md:p-2 md:px-3 min-[824px]:h-12 [&:first-child]:rounded-t-md [&:last-child]:rounded-b-md',
-                {
-                  /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === link.href, *//* [&:first-child]:rounded-tl-lg */
-                },
-              )}
+              className='text-sm flex items-center justify-start gap-2'
             >
-              <LinkIcon className="w-6" />
-              <p className="">{link.name}</p>
+              <button className="bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] rounded-md  w-full py-2 px-2.5 gap-2 flex justify-start text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffcc] hover:text-[#1d0215] focus-within:bg-[#ffffffcc] focus-within:text-[#1d0216]"   /* {clsx(`w-full py-2 px-2.5 gap-2 flex justify-start text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffcc] hover:text-[#1d0215]`,
+                {
+                  'text-[#1d0216] bg-[#ffffffcb] ':  pathname === link.href,
+                }
+                )} */  >
+
+                <LinkIcon className="w-4" />
+                <p className="text-sm text-start ">
+                {link.name}
+                </p>
+
+              </button>
             </Link>
           );
         })}
       </>
     );
 
-  return (
-    <>
-      {linkMembers.map((linkMember) => {
-        const LinkIcon = linkMember.icon;
-        return (
-          <Link
-            key={linkMember.name}
-            href={linkMember.href}
-            className={clsx(
-              'flex h-[40px] items-center bg-[#ffffff66] text-[#30032299] justify-start gap-2 p-3 text-sm font-medium duration-200 [box-shadow:inset_1px_-1px_#0000002e,inset_-1px_2px_#ffffff66,1px_0_#0000002e,-1px_1px_#ffffff36] hover:bg-[#ffffffaa] hover:text-[#300322ee] md:p-2 md:px-3 min-[824px]:h-12 [&:first-child]:rounded-t-md [&:last-child]:rounded-b-md',
-              {
-                /* 'text-[#111111dd] bg-[#ffffff17] ': pathname === linkMember.href, */
-              },
-            )}
-          >
-            <LinkIcon className="w-6" />
-            <p className="">{linkMember.name}</p>{/* hidden md:block */}
-          </Link>
-        );
-      })}
-    </>
-  );
+    return (
+      <>
+        {linkMembers?.map((linkMember) => {
+          const LinkIcon = linkMember.icon;
+          return (
+            <Link
+              key={linkMember.name}
+              href={linkMember.href}
+              className='text-sm flex items-center justify-start gap-2'
+            >
+              <button className="bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] rounded-md  w-full py-2 px-2.5 gap-2 flex justify-start text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffcc] hover:text-[#1d0215] focus-within:bg-[#ffffffcc] focus-within:text-[#1d0216]" 
+              /* "w-full py-2 px-2.5 gap-2 flex justify-start text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffcc] hover:text-[#1d0215"  */
+                                 
+                /* {clsx(`w-full py-2 px-2.5 flex gap-2 justify-start text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffcc] hover:text-[#1d0215] `,
+                {
+                  'text-[#1d0216] !bg-[#ffffffcb] ':  pathname === linkMember.href,
+                }
+                )} */>
+                <LinkIcon className="w-[20px] " />
+                <p className="text-sm text-start ">
+                {linkMember.name}
+                </p>
+              </button>
+            </Link>
+          );
+        })}
+      </>
+    );
 }

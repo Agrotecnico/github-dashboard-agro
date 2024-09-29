@@ -8,6 +8,7 @@ import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
 import { auth } from 'auth';
 import CommentList from '@/app/ui/consultas/comments/list';
 import Image from 'next/image'
+import {Frente} from '@/app/ui/marcos'
 
 export const metadata: Metadata = {
   title: 'Consultas',
@@ -31,8 +32,8 @@ export default async function PostPage({ params }: Params) {
 
   return (
     <>
-      <div>
-        <article className=" mx-1 mb-1 mt-0 rounded-xl bg-[#ffffffcc] px-3 pb-6 pt-6 [box-shadow:0_2px_1px_-1px_#00000033,0_1px_1px_0_#00000024,0_1px_3px_0_#0000001f,0_0_12px_0_#fff_inset] md:px-6">
+      <Frente className="!rounded-lg !bg-[#ffffffaa] ">
+        <article className="px-3 pb-6 pt-6 md:px-6">
           <h1 className="mb-6 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
             {post.excerpt}
           </h1>
@@ -83,7 +84,7 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="text-md mb-6">
-              <time className="mt-2 flex text-[#1d0215aa] ">
+              <time className="mt-2 flex text-[15px] text-[#1d0215aa] ">
                 {distanceToNow(new Date(`${post.date}`))}
               </time>
             </div>
@@ -108,7 +109,7 @@ export default async function PostPage({ params }: Params) {
             cnp mandataria
           </div>
         </article>
-      </div>
+      </Frente>
     </>
   );
 }

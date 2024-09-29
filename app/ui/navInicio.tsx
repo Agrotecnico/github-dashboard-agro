@@ -23,7 +23,7 @@ export default function NavInicio({
                 <span className="hidden text-sm text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
                   {session?.user?.email}
                 </span>
-                <UserButtonHeader session={session} /* user={user} */ />
+                <UserButtonHeader session={session}  />
               </div>
               ) : (
               <Link
@@ -37,7 +37,7 @@ export default function NavInicio({
                   />
                 </div>
                 <div className="flex flex-col items-center leading-3 text-[#ffffffff] min-[500px]:flex-row">
-                  <div className=" text-sm ">Acceso</div>{/* <div className=" [text-shadow:_1px_1px_0px_#000000c9]">tu consulta</div> */}
+                  <div className=" text-sm ">Acceso</div>
                 </div>
               </Link>
             )}

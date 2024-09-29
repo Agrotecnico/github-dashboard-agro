@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from 'auth';
-import EditPerfilFormB from '@/app/ui/edit-form-perfil-b';
+import EditPerfilMember from '@/app/ui/edit-perfil-member'
+import EditPerfilAdmin from '@/app/ui/edit-perfil-admin';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchUserById } from '@/app/lib/data';
 import { Fondo, Frente } from '@/app/ui/marcos';
@@ -15,7 +16,7 @@ export default async function Page() {
   if (session?.user?.email === process.env.ADMIN)
     return (
       <>
-      {/* <main>
+      <main>
         <h1
           className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}
         >
@@ -23,11 +24,11 @@ export default async function Page() {
         </h1>
 
         <div className="mb-4 mt-6 flex w-full resize-y flex-col rounded-lg border-[1px] border-[#fff0] bg-[#0000000d]  px-3 pb-9 pt-3  [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff]    focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none ">
-          <EditPerfilForm user={user} />
+          <EditPerfilAdmin user={user} />
         </div>
-      </main> */}
-      <main>
-        <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl opacity-60`}>
+      </main>
+      {/* <main>
+        <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl opacity-60`}>
           Página Perfil: en desarrollo
         </h1>
         <Fondo className="p-3 mb-4 w-full opacity-50" >
@@ -39,20 +40,18 @@ export default async function Page() {
             <p className="h-6 w-16 bg-slate-200 mb-2"></p> 
           </Frente>
         </Fondo>
-      </main>
+      </main> */}
     </>
     );
   return (
     <main>
-      <h1
-        className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}
-      >
+      <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl`}>
         Editar perfil
       </h1>
 
-      <div className="mb-4 mt-6 flex w-full resize-y flex-col rounded-lg border-[1px] border-[#fff0] bg-[#0000000d]  px-3 pb-9 pt-3  [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff]    focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none ">
+      <div className="mb-4 flex w-full resize-y flex-col border-[1px] border-[#fff0] px-3 pb-9 pt-3  focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none ">
         <SessionProvider session={session}>
-          <EditPerfilFormB />
+          <EditPerfilMember />
         </SessionProvider>
       </div>
     </main>

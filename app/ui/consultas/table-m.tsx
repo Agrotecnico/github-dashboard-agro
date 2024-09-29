@@ -22,7 +22,7 @@ export default async function ConsultasTableM({
 
   return (
     <div>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
+      <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl`}>
         Tus Consultas
       </h1>
 
@@ -30,7 +30,7 @@ export default async function ConsultasTableM({
         {consultas.length ? (
           <div className="text-[#1d0215] ">
             {consultas?.map((consulta) => (
-              <Fondo key={consulta.id } className="mb-8 px-4 pb-3 pt-6 text-[14px] ">
+              <div key={consulta.id } className="mb-8 p-3 text-[13px] leading-[18px] ">
                 <div className="mb-6 rounded-lg ">
                   <div className="mb-1 flex items-end gap-1 text-[#1d0215]">
                     <p className="flex  ">Consulta</p>
@@ -38,16 +38,16 @@ export default async function ConsultasTableM({
                       realizada el día {formatDateToLocal(consulta.created_at)}:
                     </p>
                   </div>
-                  <p className="">{consulta?.consulta}</p>
+                  <p className="px-3">{consulta?.consulta}</p>
                 </div>
-                <Frente className=" p-3  ">
+                <Frente className="p-3 text-[15px] leading-[22px] ">
                   <div>
                     {consulta.respuesta ? (
                       <>
                         <div key= {consulta.id } className="mb-1 flex  text-[#1d0215]">
                           <p className="flex text-[#1d0215] ">Respuesta:</p>
                         </div>
-                        <p>{consulta.respuesta} </p>
+                        <p className="text-[#1d0215cc] ">{consulta.respuesta} </p>
                       </>
                     ) : (
                       <>
@@ -59,7 +59,7 @@ export default async function ConsultasTableM({
                     )}
                   </div>
                 </Frente>
-              </Fondo>/* [box-shadow:inset_0_1px_0_#00000047,inset_0_-1px_0_#ffffffe0] bg-[#0000000d] *//* bg-[#ffffff57]  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] */
+              </div>
             ))}
           </div>
         ) : (

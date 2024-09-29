@@ -1,6 +1,6 @@
 ---
 title: "Compra o venta de un vehículo"
-excerpt: "Ante la compra o venta de un vehículo, ¿que documentación tengo que solicitar o entregar?"
+excerpt: "Ante la compra o venta de un vehículo, ¿Qué documentación tengo que solicitar o entregar?"
 date: "2024-08-01"
 image: "/hero.png"
 avatar: "/carina-blog.jpg"

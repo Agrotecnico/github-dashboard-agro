@@ -1,5 +1,4 @@
 
-
 export const agrotecnico = [
     `<svg
       width="138"
@@ -112,27 +111,4 @@ export const parqueAutomotor = [
   `<div className=" ">
       Patentamiento
   </div>`,
-];
-
-export const dataFaq = [
-  {
-    question: "Ante la compra o venta de un vehículo, ¿que documentación tengo que solicitar o entregar?",
-    answer:
-      'Respuesta 1. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
-  },
-  {
-    question: "¿Cuál es la diferencia entre un Gestor y un Mandatario Nacional del automotor?",
-    answer:
-      'Respuesta 2. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
-  },
-  {
-    question: "¿Qué es y cómo funciona el 08 para transferir un vehículo?",
-    answer:
-      'Respuesta 3. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
-  },
-  {
-    question: "Validez del formulario 08",
-    answer:
-      'Respuesta 4. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here".',
-  },
 ];

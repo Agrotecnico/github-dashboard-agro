@@ -1,7 +1,7 @@
 import SideNavConsultas from '@/app/ui/consultas/sidenav-consultas';
 import { Metadata } from 'next';
 import FooterConsultas from '@/app/ui/footerConsultas';
-import HeaderConsultas from '@/app/ui/header-consultas';
+import Header from '@/app/ui/header';
 import Link from 'next/link';
 import { auth } from 'auth';
 
@@ -16,8 +16,8 @@ export default async function Layout({
 }) {
   const session = await auth();
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[80rem] flex-col justify-between bg-[#30032209] ">
-      <HeaderConsultas />
+    <div className="mx-auto flex min-h-screen w-full max-w-[80rem] flex-col justify-between ">
+      <Header />
       <main className=" mx-auto w-full max-w-[64rem] flex-auto px-2 py-4 md:px-6 md:py-6 lg:px-2">
         <div className="mx-auto flex flex-col pb-16 pt-3 md:px-6 md:pt-6 ">
           <div className="mt-[92px] flex flex-col-reverse gap-8 md:mt-14 min-[1024px]:flex-row md:gap-4 md:overflow-hidden ">

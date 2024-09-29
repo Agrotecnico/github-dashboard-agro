@@ -1,21 +1,17 @@
 'use client';
 
-import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
-import { Fondo } from '@/app/ui/marcos';
-import { Frente } from '@/app/ui/marcos';
-
+import { Fondo, Frente } from '@/app/ui/marcos';
 import { useSession } from 'next-auth/react';
 
 export default function LoginForm() {
@@ -29,14 +25,14 @@ export default function LoginForm() {
         <h1 className={` mb-3 text-center text-4xl`}>Acceso</h1>
         <Fondo>
           <div className="flex flex-col gap-2 p-4 ">
-            <Frente>
+            <Frente className=" hover:bg-[#ffffffbb]">
               <div
                 onClick={async () => {
                   await signIn('google', {
                     callbackUrl: '/dashboard',
                   });
                 }}
-                className=" flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
+                className=" flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200  "
               >
                 <div className="text-[14.3px] ">Continuar con</div>
                 <LogoGoogle
@@ -48,25 +44,6 @@ export default function LoginForm() {
                 />
               </div>
             </Frente>
-            {/* <Frente>
-              <div
-                onClick={async () => {
-                  await signIn('google', {
-                    callbackUrl: '/dashboard',
-                  });
-                }}
-                className="flex cursor-pointer place-items-center items-center justify-start px-10 py-1 duration-200 hover:bg-[#ffffff99]  "
-              >
-                <div className="text-[14.3px]">Continuar con</div>
-                <LogoGoogle
-                  filter="filterGoogle1"
-                  sombraX="2"
-                  sombraY="2"
-                  size="94"
-                  className="ml-4"
-                />
-              </div>
-            </Frente> */}
           </div>
         </Fondo>
 
@@ -80,7 +57,7 @@ export default function LoginForm() {
             <Frente>
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] hover:bg-[#ffffffbb] focus:border-[#2f6feb00] "
                   id="email"
                   type="email"
                   name="email"
@@ -93,7 +70,7 @@ export default function LoginForm() {
             <Frente>
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] hover:bg-[#ffffffbb] focus:border-[#2f6feb00]"
                   id="password"
                   type="password"
                   name="password"
@@ -130,7 +107,6 @@ export default function LoginForm() {
         <p className="text-[#ae09e1] hover:underline hover:underline-offset-2">
           Créala
         </p>
-        {/* <ArrowRightIcon className="text-[#d83af0] ml-2 h-5 w-5" /> */}
       </Link>
     </>
   );
@@ -140,7 +116,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#300322dd] hover:text-[#fff] "
+      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#26021b] hover:text-[#fff] "
       aria-disabled={pending}
     >
       Continuar
