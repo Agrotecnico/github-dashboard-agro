@@ -80,8 +80,8 @@
   margin: 0 !important;
   cursor: pointer;
 }
-.swiper3 .swiper-pagination-bullet:hover > div {
-  background-color: #00000011;
+.swiper3 .swiper-pagination-bullet:hover {
+  color: #1d021500;
 }
 .swiper3 .swiper-pagination-bullet-active {
   color: #1d0215;
@@ -115,7 +115,7 @@
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:hover {
   opacity: 1;
-} 
+}
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet-active {
   color: white;
   opacity: 1;
@@ -255,4 +255,3 @@
     left: calc((100% - 1280px) / 2);
   }
 }
-

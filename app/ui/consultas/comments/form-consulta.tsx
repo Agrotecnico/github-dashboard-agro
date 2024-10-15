@@ -12,7 +12,7 @@ export default function FormConsulta({ session }: { session: Session | null }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createConsulta, initialState);
   return (
-    <div className="p-3 text-sm">
+    <div className="px-3 pb-3 text-sm">
       <form action={dispatch}>
 
         {/* texto consulta */}

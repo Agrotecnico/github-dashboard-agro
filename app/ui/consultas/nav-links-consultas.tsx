@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Frente } from '@/app/ui/marcos';
 import { usePathname } from 'next/navigation';
 import type { Post } from "@/app/lib/definitions"
+import { signIn } from "next-auth/react"
 
 
 export default function NavLinksConsultas({allPosts}:{allPosts:Post}) {

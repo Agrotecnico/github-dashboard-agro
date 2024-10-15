@@ -33,20 +33,22 @@ import {
   Parallax,
 } from 'swiper/modules';
 import { Frente, Fondo } from './ui/marcos';
+import { useSession } from "next-auth/react"
 
 
 export default function GaleriaFotosCnp({
-  session,
+  /* session, */
   linkDatos,
   user,
 }: {
-  session: Session | null;
+  /* session: Session | null; */
   linkDatos: {
     slug: string;
     excerpt: string;
   }[];
   user: User | undefined;
 }) {
+  const { data: session, update } = useSession()
   return (
     <Swiper
       className="swiper1 relative "
@@ -172,10 +174,10 @@ export default function GaleriaFotosCnp({
               <p className="mt-6 mb-4 mx-2 text-xl min-[376px]:text-3xl">Hola! Bienvenido</p>
               <div className="flex flex-col items-start text-[#1d0215dd] text-sm min-[376px]:text-base">
                 <p className="mb-1">
-                  Aqui podés<Link href={session ? '/dashboard/tusConsultas' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver consultas" : "Realizá tu consulta" } </Link>
+                  Aqui podés<Link href={session ? '/dashboard/tusConsultas' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver tus consultas" : "Realizá tu consulta" } </Link>
                 </p>
                 <p className="">o<Link href={session ? '/dashboard/inicioTramite' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
-                {session ? "Ver trámites" : "Iniciá tu trámite" } </Link>automotor o náutico
+                {session ? "Ver tus trámites" : "Iniciá tu trámite" } </Link>automotor o náutico
                 </p>
               </div>
             </div>
@@ -575,13 +577,14 @@ export default function GaleriaFotosCnp({
           <div className="flex justify-center mb-10 gap-2 pb-6 pt-8 sm:gap-8 ">
             <Link  
               href={session ? '/dashboard/tusConsultas' : '/login'} 
-              className="text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white">
-              {session ? "Ver consultas" : "Realizá tu consulta" } 
+              className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] "
+              /* "text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white active:bg-[#300322cc]" */>
+              {session ? "Ver tus consultas" : "Realizá tu consulta" } 
             </Link>
             <Link  
               href={session ? '/dashboard/inicioTramite' : '/login'} 
-              className="text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white">
-              {session ? "Ver trámites" : "Iniciá tu trámite" } 
+              className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
+              {session ? "Ver tus trámites" : "Iniciá tu trámite" } 
             </Link>
           </div>
         </div>
@@ -590,3 +593,4 @@ export default function GaleriaFotosCnp({
     </Swiper>
   );
 }
+

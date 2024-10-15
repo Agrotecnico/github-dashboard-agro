@@ -2,24 +2,34 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
 import { Button } from '@/app/ui/uiRadix/button';
+import { User } from '@/app/lib/definitions';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/app/ui/uiRadix/dropdown-menu';
 import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '@/app/ui/logosIconos/icon-menu';
+import NavLinks from '@/app/ui/dashboard/nav-links'
+/* import { fetchUserById } from '@/app/lib/data'; */
+import { useSession } from "next-auth/react"
 
-export default function UserButtonHeader({
-  session,
-}: {
-  session: Session | null;
-}) {
+
+export default /* async */ function UserButtonHeader({ user}: { user: User | undefined}) {
+
+  const { data: session, update } = useSession()
+
+  
+ /*  const user = await fetchUserById(session?.user?.email); 
+  console.log("user:", user)
+  console.log("session:", session)*/
+  
   const pathname = usePathname();
 
   return (
@@ -28,18 +38,18 @@ export default function UserButtonHeader({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="relative gap-3 h-8 w-full max-w-max rounded-full px-0"
+            className="relative gap-4 h-8 w-full max-w-max rounded-full px-0"
           >
-            <IconMenu width='20' heightx='20' className="fill-[#fff9] duration-200 hover:fill-[#ffffffdd] min-[640px]:hidden" />
-            {session?.user?.image ? (
+            {/* <IconMenu width='20' heightx='20' className="fill-[#fff9] duration-200 hover:fill-[#ffffffdd] min-[640px]:hidden" /> */}
+            {user?.image ? (
               <Avatar className="h-8 w-8">
-                {session?.user.image && (
+                {user?.image && (
                   <AvatarImage
-                    src={session?.user.image}
-                    alt={session?.user.name ?? ''}
+                    src={user?.image}
+                    alt={user?.name ?? ''}
                   />
                 )}
-                <AvatarFallback>{session?.user.email}</AvatarFallback>
+                <AvatarFallback>{session?.user?.email}</AvatarFallback>
               </Avatar>
             ) : (
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eee] text-[#374151] ">
@@ -49,7 +59,7 @@ export default function UserButtonHeader({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="mt-2 w-56 bg-white shadow-md"
+          className="mt-3 bg-white w-56 rounded-md shadow-xl shadow-[#30032222]"
           align="end"
           forceMount
         >
@@ -63,7 +73,10 @@ export default function UserButtonHeader({
               </p>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuItem className="mt-4 flex flex-col">
+
+          <DropdownMenuSeparator className="h-[1px] bg-[#37415122] m-[3px]" />
+
+          <DropdownMenuItem className="flex flex-col">
             <div className="flex w-full flex-col ">
               {pathname == '/' ? (
                 <Link
@@ -115,16 +128,42 @@ export default function UserButtonHeader({
                 </Link>
               )}
             </div>
-            <Button
-              variant={'ghost'}
-              className="ml-auto mt-6 h-auto w-full bg-[#3741511c] p-1 text-[#020817] opacity-[0.85] hover:opacity-100 "
-              onClick={async () => {
-                await signOut({ callbackUrl: '/' });
-              }}
-            >
-              Salir
-            </Button>
           </DropdownMenuItem>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          <Button
+            variant={'ghost'}
+            className="mb-1 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 "
+            onClick={async () => {
+              await signOut({ callbackUrl: '/' });/*  */
+            }}
+          >
+            Salir
+          </Button>
+
         </DropdownMenuContent>
       </DropdownMenu>
     </>

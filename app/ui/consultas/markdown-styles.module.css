@@ -30,5 +30,5 @@
   }
 
   .markdown ul {
-    @apply text-base mt-4 mb-2 ml-6 leading-snug text-[#374151] list-disc;
+    @apply text-base mt-4 mb-2 ml-6 leading-snug list-disc;
   }

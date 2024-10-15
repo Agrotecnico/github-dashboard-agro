@@ -12,10 +12,10 @@ import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
 import { Fondo, Frente } from '@/app/ui/marcos';
-import { useSession } from 'next-auth/react';
+/* import { useSession } from 'next-auth/react'; */
 
 export default function LoginForm() {
-  const { data: session, update } = useSession();
+  /* const { data: session, update } = useSession(); */
 
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 

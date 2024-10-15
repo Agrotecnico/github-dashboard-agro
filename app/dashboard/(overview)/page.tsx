@@ -45,7 +45,7 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl`}>
+      <h1 className={`${lusitana.className} mb-7 text-xl lg:text-2xl`}>
         Realizá tu consulta
       </h1>
       <FormConsulta session={session} />

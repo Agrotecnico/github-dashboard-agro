@@ -57,7 +57,7 @@ const CreateConsulta = FormSchemaConsulta.omit({ created_at: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const UpdateCustomer = FormSchemaCustomer.omit({ id: true });
-const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true });
+const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true });
 const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true });
 
 
@@ -84,8 +84,8 @@ export type StateUser = {
   errors?: {
     name?: string[];
     email?: string[];
-    password?: string[];
-    confirmPassword?: string[];
+    /* password?: string[];
+    confirmPassword?: string[]; */
     image?: string[] | undefined;
   };
   message?: string | null;
@@ -410,8 +410,8 @@ export async function updateUser(
   const validatedFields = UpdateUser.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
-    password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword'),
+    /* password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'), */
     image: formData.get('image'),
   });
 

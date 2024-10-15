@@ -1,14 +1,12 @@
 'use client';
 
 import { User } from '@/app/lib/definitions';
-import Link from 'next/link';
 import {
-  CurrencyDollarIcon,
   AtSymbolIcon,
   CameraIcon,
   UserIcon,
-  ArrowPathIcon,
   ExclamationCircleIcon,
+  CloudArrowUpIcon,
 } from '@heroicons/react/24/outline';
 import { useFormState } from 'react-dom';
 import { Button } from '@/app/ui/button';
@@ -16,50 +14,64 @@ import { updateUser } from '@/app/lib/actions';
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import Image from 'next/image'
+import { Frente } from '@/app/ui/marcos';
 
-export default function EditPerfilAdmin({ user }: { user: User | undefined }) {
-  const [image, setImage] = useState('');
+export default function EditPerfilAdmin( { user }: { user: User | undefined }) {
+  const [imageUrl, setImageUrl] = useState('');
   const [file, setFile] = useState<File | undefined>();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const uploadToServer = async () => {
-    const url = `https://api.imgbb.com/1/upload?key=ee8fa06c5117ba2e2d3258db9d352260&name=${file?.name}`;
-    const data = new FormData();
-    data.append('image', `${file}`);
+
+  const uploadToServer = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!file) return;
 
     try {
-      const response = await fetch(url, {
+      const data = new FormData();
+      data.set('file', file);
+
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: data,
       });
+      console.log('Res:', response);
+
       const responseData = await response.json();
-      setImage(responseData.data.url);
+
+      setImageUrl(responseData.url);
+
+      console.log('responseData:', responseData);
+
+      if (response.ok) {
+        console.log('File uploaded successfully');
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
-
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return;
     setFile(e.target.files?.[0]);
   };
+  
   const initialState = { message: null, errors: {} };
   const updateUserWithId = updateUser.bind(null, `${user?.id}`);
   const [state, dispatch] = useFormState(updateUserWithId, initialState);
-  console.log("image:", image)
+  /* console.log("image:", image) */
+
   return (
     <>
-      <div className="flex w-full flex-col items-center gap-3 rounded-lg bg-[#ffffff57] p-6 [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] min-[800px]:flex-row ">
+      <div className="flex w-full flex-col items-center gap-3 rounded-lg bg-[#ffffff88] p-6 [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] min-[800px]:flex-row ">
         <div
           className="min-w-20 relative max-h-[80px] min-h-[80px] min-w-[80px] max-w-[80px]"
           data-testid="image-container"
         >
-          {image ? (
+          {imageUrl ? (
             <Image
               decoding="async"
-              src={`${image}`}
-              className="bject-cover h-20 w-full rounded-full bg-cover [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e] "
+              src={`${imageUrl}`}
+              className="bject-cover h-20 w-full rounded-full bg-cover [box-shadow:0_1px_#ffffff,_0_-1px_#0000002e] "
               alt="header-image-profile"
               width={80}
               height={80}
@@ -68,13 +80,13 @@ export default function EditPerfilAdmin({ user }: { user: User | undefined }) {
             <Image
               decoding="async"
               src={`${user?.image}`}
-              className="bject-cover h-20 w-full rounded-full bg-cover  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000006e]"
+              className="bject-cover h-20 w-full rounded-full bg-cover [box-shadow:0_1px_#ffffff,_0_-1px_#0000002e]"
               alt="header-image-profile"
               width={80}
               height={80}
             />
           ) : (
-            <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333]  [box-shadow:0_2px_#ffffff9c,_0_-2px_#0000002e] ">
+            <div className="flex h-20 items-center justify-center rounded-full bg-[#ffffffba] text-4xl text-[#333] [box-shadow:0_1px_#ffffff,_0_-1px_#0000002e] ">
               {user?.email?.substring(0, 1).toUpperCase()}
             </div>
           )}
@@ -88,114 +100,138 @@ export default function EditPerfilAdmin({ user }: { user: User | undefined }) {
       </div>
 
       {/* Select imagen */}
-      <div className="mb-4 mt-6 flex items-center gap-6 min-[375px]:gap-12 ">
-        <div>
-          <div className="flex flex-col  items-start gap-4 bg-[#ffffff57] text-[#374151cc] hover:bg-[#ffffff78] hover:text-[#374151] min-[500px]:flex-row min-[500px]:items-center ">
+      <div className="mb-2 mt-6 flex items-start gap-6 min-[375px]:gap-12 ">
+        <form onSubmit={uploadToServer} id="subirImage">
+          <div className={`flex flex-col  bg-[#ffffff57] text-[#374151cc] items-start gap-4 ${!!file && 'opacity-60 hover:bg-[#ffffff57] hover:text-[#374151cc] '} hover:bg-[#ffffff78] hover:text-[#374151] min-[500px]:flex-row min-[500px]:items-center`}>
             <div className="relative">
               <input
                 type="file"
-                className="absolute m-0 h-8 w-[164px] rounded px-4 py-1 text-sm opacity-0"
+                className="absolute m-0 h-8 disabled:-z-10 w-[164px] rounded px-4 py-1 text-sm opacity-0"
                 onChange={handleFileChange}
+                disabled={!!file}
               />
-              <div className="flex h-8 w-[164px] items-center rounded bg-[#ffffff57] px-4 py-1 text-sm [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] ">
+              <button
+                className={`flex h-8 w-[164px] disabled:cursor-default items-center rounded px-4 py-1 text-sm bg-[#ffffff57] [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] `}
+                disabled={!!file}
+              >
                 Seleccionar imagen
-              </div>
+              </button>
             </div>
           </div>
           <button
-            className={`mt-1 h-8 w-max rounded p-1 text-[13.5px] leading-4 duration-200 ${
-              file && 'hover:bg-[#ffffff39]'
-            }  disabled:opacity-60 `}
-            disabled={!file}
-            onClick={uploadToServer}
+            className={`mt-10 cursor-default disabled:cursor-pointer`}
+            disabled={file ? true : false}
           >
-            <div className="flex">
-              <ArrowPathIcon
+            <div className="mb-0.5 text-start text-xs">Cambiar imagen</div>
+            <Frente
+              className={`relative flex w-[164px] flex-col items-center justify-start ${!file === true ? ' opacity-60 hover:bg-[#ffffff88] ' : 'hover:bg-[#ffffffbb]'} `}
+            >
+              <p className="!hover:bg-transparent block w-full rounded-md border border-transparent bg-transparent py-1.5 pl-10 pr-3 text-start text-sm text-[#000000aa] ">
+                {imageUrl ? 'Imagen subida' : 'Subir imagen'}
+              </p>
+              <CloudArrowUpIcon
                 className={`${
-                  file && 'stroke-[#ff00cbaa]'
-                } mr-2 w-4 stroke-2 font-semibold`}
+                  file && 'stroke-[#ff00cbaa] stroke-2 '
+                } w-[18px]font-semibold peer-focus:text-gray-900" pointer-events-none absolute left-3 top-[24%] mr-2 h-[18px] text-[#1d0215aa]`}
               />
-              <p>Cambiar imagen</p>
-            </div>
+            </Frente>
           </button>
-        </div>
-        <div
-          className={`relative flex h-[70px] w-[70px] justify-center rounded bg-[#fff7] shadow-none  ${
-            file && '[box-shadow:0_2px_#0000009c,0_-2px_#ffffff96]'
-          }`}
-          data-testid="image-container"
-        >
-          {file ? (
-            <Image
-              src={URL.createObjectURL(file)}
-              alt="Uploaded file"
-              className="mx-auto items-center justify-center rounded object-cover"
-              width={80}
-              height={80}
-            />
-          ) : (
-            <div className="relative flex">
-              <IconCuenta
-                className="flex items-center justify-center"
-                color="#0006"
-                size="48"
-                filter=""
+        </form>
+        <div 
+          className="text-black flex flex-col items-center opacity-80 ">
+          <div
+            className={`relative flex h-[70px] w-[70px] justify-center rounded bg-[#fff7] 
+              ${file ? '[box-shadow:0_1px_#0000007a,0_-1px_#ffffffaa]' : 'shadow-none '}
+              `}
+            data-testid="image-container"
+            >
+            {imageUrl ? (
+              <Image
+                src={`${imageUrl}`}
+                alt="Uploaded file"
+                className={`mx-auto items-center justify-center rounded object-cover opacity-50 `}
+                width={80}
+                height={80}
               />
-              <CameraIcon className="absolute -right-[6px] top-[2px] w-4 text-[16px] text-[#00000057]" />
-            </div>
-          )}
+            ) : file ? (
+              <Image
+                src={URL.createObjectURL(file)}
+                alt="Uploaded file"
+                className={`mx-auto items-center justify-center rounded object-cover `}
+                width={80}
+                height={80}
+              />
+            ) : (
+              <div className="relative flex">
+                <IconCuenta
+                  className="flex items-center justify-center"
+                  color="#30032244"
+                  size="48"
+                  filter=""
+                />
+                <CameraIcon className="absolute -right-[6px] top-[2px] w-4 text-[16px] text-[#00000057]" />
+              </div>
+            )}
+          </div>
+          <div className="text-xs mt-0.5 ">
+            {file?.name}
+          </div>
         </div>
       </div>
 
-      <form action={dispatch}>
+      <form action={dispatch} id="actualizarPerfil">
         {/* Edit name */}
-        <div className="mb-4">
-          <label htmlFor="name" className="mt-8 text-start text-[13.5px]">
+        <div className="relative">
+          <label htmlFor="name" className="mt-8 text-start text-xs">
             Cambiar nombre
           </label>
-          <div className="mt-1 flex flex-col gap-2 min-[425px]:flex-row min-[425px]:gap-4">
-            <div className="relative w-max rounded bg-[#ffffff57] text-[#374151cc] duration-150 [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] hover:bg-[#ffffff78] hover:text-[#374151]">
-              <input
-                id="name"
-                name="name"
-                type="text"
-                className="m-0 h-8 rounded border border-transparent bg-transparent px-4 py-1 pl-10 text-sm text-[#374151cc] placeholder:text-[#37415188] hover:text-[#374151]"
-                placeholder="Escribe un nombre..."
-                defaultValue={!name ? user?.name : name}
-                required
-                aria-describedby="name-error"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
+          <Frente className="mb-2 flex w-max items-center justify-start hover:bg-[#ffffffbb]">
+            <input
+              className="!hover:bg-transparent peer block w-full rounded-md border border-transparent bg-transparent py-1.5 pl-10 text-sm text-[#000000aa] outline-2 hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+              id="name"
+              type="text"
+              name="name"
+              defaultValue={`${!name ? user?.name : name}`}
+              placeholder="Nombre"
+              required
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <UserIcon className="pointer-events-none absolute left-3 top-[56%] h-[18px] w-[18px] text-[#1d0215aa] peer-focus:text-gray-900" />
+          </Frente>
         </div>
 
         {/* Edit email */}
-        <div className="mb-4">
-          <label htmlFor="email" className="mt-8 text-start text-[13.5px]">
+        <div className="relative">
+          <label htmlFor="email" className="mt-8 text-start text-xs">
             Cambiar email
           </label>
-          <div className="mt-1 flex flex-col gap-2 min-[425px]:flex-row min-[425px]:gap-4">
-            <div className="relative w-max rounded bg-[#ffffff57] text-[#374151cc] duration-150 [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] hover:bg-[#ffffff78] hover:text-[#374151]">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="m-0 h-8 rounded border border-transparent bg-transparent px-4 py-1 pl-10 text-sm text-[#374151cc] placeholder:text-[#37415188] hover:text-[#374151]"
-                placeholder="Escribe un email..."
-                defaultValue={!email ? user?.email : email}
-                required
-                aria-describedby="email-error"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
+          <Frente className="mb-2 flex w-max items-center justify-start hover:bg-[#ffffffbb] ">
+            <input
+              className="!hover:bg-transparent peer block w-full rounded-md border border-transparent bg-transparent py-1.5 pl-10 text-sm text-[#000000aa] outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+              id="email"
+              type="email"
+              name="email"
+              defaultValue={`${!email ? user?.email : email}`}
+              placeholder="Email"
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <AtSymbolIcon className="pointer-events-none absolute left-3 top-[56%] h-[18px] w-[18px] text-[#1d0215cc] peer-focus:text-gray-900" />
+          </Frente>
+        </div>
+
+        {/* Image */}
+        <div className="hidden">
+          <input
+            id="image"
+            type=/* "hidden" */ "text"
+            name="image"
+            defaultValue={imageUrl}
+          />
         </div>
 
         {/* Massages */}
@@ -212,24 +248,23 @@ export default function EditPerfilAdmin({ user }: { user: User | undefined }) {
           )}
         </div>
 
-        <div className="mt-6 flex justify-end items-center gap-4 text-sm">
+        <div className="mt-6 flex items-center justify-end gap-4 text-sm">
           <div
             onClick={() => {
               window.location.reload();
             }}
-            className="flex h-9 items-center rounded duration-200 bg-[#30032215] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
-              /* "flex h-10 cursor-pointer items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200" */
+            className="flex h-9 cursor-pointer items-center rounded bg-[#30032215] px-4 font-medium opacity-70 transition-colors duration-200 hover:opacity-100 "
           >
             Cancelar
           </div>
-          <Button  /* mt-1 h-8 w-max rounded p-1 text-[15px] leading-4 text-[#374151] duration-200  */
+          <Button
             type="submit"
-            className={`flex items-center h-10 w-max rounded bg-[#ffffffcc]  opacity-70 px-4 font-medium duration-200 hover:opacity-100 ${
-              name == '' && email == '' && image == ''
+            className={`flex h-10 w-max items-center rounded bg-[#ffffff00]  px-4 font-medium opacity-70 duration-200 hover:opacity-100 ${
+              name == '' && email == '' && imageUrl == ''
                 ? 'bg-transparent hover:bg-transparent active:bg-transparent'
-                : ''
+                : ' bg-[#ffffffcc]'
             }  disabled:opacity-60 `}
-            disabled={name == '' && email == '' && image == ''}
+            disabled={name == '' && email == '' && imageUrl == ''}
           >
             Guardar cambios
           </Button>

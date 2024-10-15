@@ -21,13 +21,13 @@ export default async function SideNavConsultas() {
       <div className="flex justify-center gap-2 pb-6 pt-8 sm:gap-8 lg:gap-2 ">
         <Link  
           href={session ? '/dashboard/tusConsultas' : '/login'} 
-          className="text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white">
-          {session ? "Ver consultas" : "Realizá tu consulta" } 
+          className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
+          {session ? "Ver tus consultas" : "Realizá tu consulta" } 
         </Link>
         <Link  
           href={session ? '/dashboard/inicioTramite' : '/login'} 
-          className="text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white">
-          {session ? "Ver Trámites" : "Iniciá tu trámite" } 
+          className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
+          {session ? "Ver tus Trámites" : "Iniciá tu trámite" } 
         </Link>
       </div>
     </div>

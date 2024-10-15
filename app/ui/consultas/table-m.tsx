@@ -22,7 +22,7 @@ export default async function ConsultasTableM({
 
   return (
     <div>
-      <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl`}>
+      <h1 className={`${lusitana.className} mb-7 text-xl lg:text-2xl`}>
         Tus Consultas
       </h1>
 
@@ -30,7 +30,7 @@ export default async function ConsultasTableM({
         {consultas.length ? (
           <div className="text-[#1d0215] ">
             {consultas?.map((consulta) => (
-              <div key={consulta.id } className="mb-8 p-3 text-[13px] leading-[18px] ">
+              <div key={consulta.id } className="mb-8 px-3 pb-3 text-[13px] leading-[18px] ">
                 <div className="mb-6 rounded-lg ">
                   <div className="mb-1 flex items-end gap-1 text-[#1d0215]">
                     <p className="flex  ">Consulta</p>

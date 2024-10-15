@@ -24,9 +24,10 @@ export default async function LoginPage() {
       <Header />
       <main className="mx-auto flex h-full min-h-screen justify-center pt-14">
         <div className="relative mx-auto mt-8 flex w-full max-w-[460px] flex-col space-y-2.5 p-4">
-          <SessionProvider session={session}>
+          <LoginForm />
+          {/* <SessionProvider session={session}>
             <LoginForm />
-          </SessionProvider>
+          </SessionProvider> */}
         </div>
       </main>
     </>

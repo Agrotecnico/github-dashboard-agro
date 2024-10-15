@@ -18,12 +18,12 @@ export default function NavInicio({
       <header className=" h-[68px] mt-0px group-hover:bg-tranaparent relative mx-auto h-18 bg-transparent transition-colors duration-200 group-hover:border-gray-200 sm:h-20">
         <nav className=" text-small-regular mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 text-white transition-colors duration-200 sm:px-6">
           <div className="flex w-full items-center justify-end min-[1100px]:mr-0">
-            {session ? (
+            {user ? (
               <div className=" flex items-center gap-2 ">
                 <span className="hidden text-sm text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
-                  {session?.user?.email}
+                  {user?.email}
                 </span>
-                <UserButtonHeader session={session}  />
+                <UserButtonHeader user={user}  />
               </div>
               ) : (
               <Link

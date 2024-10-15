@@ -16,7 +16,8 @@ export default async function InvoicesTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle ">
-        <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] min-[824px]:pt-0 ">
+        {/* <div className="rounded-lg  p-4 bg-[#0000000d] [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] min-[824px]:pt-0 "> */}
+          
           <div className="min-[824px]:hidden">
             {invoices?.map((invoice) => (
               <div
@@ -54,7 +55,8 @@ export default async function InvoicesTable({
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 min-[824px]:table">
+
+          <table className="hidden min-w-full min-[824px]:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -111,7 +113,8 @@ export default async function InvoicesTable({
               ))}
             </tbody>
           </table>
-        </div>
+
+        {/* </div> */}
       </div>
     </div>
   );

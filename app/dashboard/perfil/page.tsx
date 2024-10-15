@@ -7,13 +7,14 @@ import { fetchUserById } from '@/app/lib/data';
 import { Fondo, Frente } from '@/app/ui/marcos';
 import { SessionProvider } from "next-auth/react";
 
+
 export default async function Page() {
 
   const session = await auth();
   const user = await fetchUserById(session?.user?.email);
   /* console.log("session: ", session) */
   /* if (!user) */
-  if (session?.user?.email === process.env.ADMIN)
+  /* if (session?.user?.email === process.env.ADMIN) */
     return (
       <>
       <main>
@@ -23,8 +24,8 @@ export default async function Page() {
           Editar perfil
         </h1>
 
-        <div className="mb-4 mt-6 flex w-full resize-y flex-col rounded-lg border-[1px] border-[#fff0] bg-[#0000000d]  px-3 pb-9 pt-3  [box-shadow:inset_0_1px_0_#4d4d4d59,inset_0_-1px_0_#ffffff]    focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none ">
-          <EditPerfilAdmin user={user} />
+        <div className="mb-4 flex w-full resize-y flex-col rounded-lg border-[1px] border-[#fff0] px-3 pb-9 focus:border focus:border-[#fff0] focus:shadow-none focus-visible:outline-none ">
+          <EditPerfilAdmin  user={user} />
         </div>
       </main>
       {/* <main>
@@ -43,7 +44,7 @@ export default async function Page() {
       </main> */}
     </>
     );
-  return (
+  /* return (
     <main>
       <h1 className={`${lusitana.className} mb-2 text-xl lg:text-2xl`}>
         Editar perfil
@@ -55,5 +56,5 @@ export default async function Page() {
         </SessionProvider>
       </div>
     </main>
-  );
+  ); */
 }

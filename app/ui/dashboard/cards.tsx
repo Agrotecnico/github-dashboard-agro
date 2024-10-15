@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { lusitana } from '@/app/ui/fonts'
 import { fetchCardData } from '@/app/lib/data'
+import { Frente, Fondo } from '@/app/ui/marcos'
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -49,17 +50,17 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <div className="flex flex-col justify-between rounded-xl bg-[#0000000d] p-2 shadow-sm [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] ">
+    <Frente className="flex flex-col justify-between p-2 ">{/*  rounded-xl bg-[#0000000d] shadow-sm [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] */}
       <div className="flex p-4">
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <p
+      <Fondo
         className={`${lusitana.className}
-          truncate rounded-xl px-4 py-8 text-center text-2xl bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e]`}
+          truncate px-4 py-8 text-center text-2xl bg-[#30032210]`}/*  rounded-xl [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] */
       >
         {value}
-      </p>
-    </div>
+      </Fondo>
+    </Frente>
   );
 }
