@@ -16,9 +16,7 @@ import FooterInicio from '@/app/ui/footerInicio';
 import IconTiempo from '@/app/ui/logosIconos/icon-tiempo';
 import IconConocimiento from '@/app/ui/logosIconos/icon-conocimiento';
 import IconSeguridad from '@/app/ui/logosIconos/icon-seguridad';
-import type { Session } from 'next-auth';
 import { agrotecnico, agrotecnico2, tramites, formularios, parqueAutomotor, } from '@/app/constant';
-import { User } from '@/app/lib/definitions';
 import Image from 'next/image'
 import { ChevronRightIcon, } from '@heroicons/react/24/outline';
 import {
@@ -34,19 +32,19 @@ import {
 } from 'swiper/modules';
 import { Frente, Fondo } from './ui/marcos';
 import { useSession } from "next-auth/react"
+import { User } from '@/app/lib/definitions';
+import  IconWhatsApp  from "@/app/ui/logosIconos/icon-whatsApp";
 
 
 export default function GaleriaFotosCnp({
-  /* session, */
-  linkDatos,
   user,
+  linkDatos,
 }: {
-  /* session: Session | null; */
+  user: User | undefined 
   linkDatos: {
     slug: string;
     excerpt: string;
   }[];
-  user: User | undefined;
 }) {
   const { data: session, update } = useSession()
   return (
@@ -97,7 +95,13 @@ export default function GaleriaFotosCnp({
         },
       }}
     >
-      <NavInicio session={session} user={user} />
+      <NavInicio user={user} />
+      
+      <div className= "fixed z-10 flex justify-end bottom-14 w-full lg:max-w-5xl lg:mx-[calc((100vw_-_64rem)_/_2)]">
+        <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank"  className="pr-6 opacity-70 hover:opacity-100 duration-200 " >
+          <IconWhatsApp size="38"/>
+        </Link>
+      </div>
 
       {/* Inicio */}
       <SwiperSlide id="ini" className= "flex flex-col">
@@ -174,10 +178,10 @@ export default function GaleriaFotosCnp({
               <p className="mt-6 mb-4 mx-2 text-xl min-[376px]:text-3xl">Hola! Bienvenido</p>
               <div className="flex flex-col items-start text-[#1d0215dd] text-sm min-[376px]:text-base">
                 <p className="mb-1">
-                  Aqui podés<Link href={session ? '/dashboard/tusConsultas' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver tus consultas" : "Realizá tu consulta" } </Link>
+                  Aqui podés<Link href={session ? '/dashboard/tusConsultas' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver consultas" : "Realizar tu consulta" } </Link>
                 </p>
                 <p className="">o<Link href={session ? '/dashboard/inicioTramite' : '/login'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
-                {session ? "Ver tus trámites" : "Iniciá tu trámite" } </Link>automotor o náutico
+                {session ? "Ver trámites" : "Iniciar tu trámite" } </Link>automotor o náutico
                 </p>
               </div>
             </div>
@@ -205,7 +209,7 @@ export default function GaleriaFotosCnp({
       {/* Trámites */}
       <SwiperSlide id="ev" className="flex flex-col">
         <Swiper
-          className="swiper2 mb-1 mt-8 !h-[572px] !pb-8 !pl-2"
+          className="swiper2 !h-[572px] !pb-8 !pl-2"
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -282,7 +286,6 @@ export default function GaleriaFotosCnp({
             >
               <SwiperSlide>
                 <Image
-                  objectFit='cover'
                   src='/vehicular-4.jpg'
                   alt="Picture of the author"
                   width={960}
@@ -537,6 +540,15 @@ export default function GaleriaFotosCnp({
               </div>
             </div>
           </SwiperSlide>
+
+          <div className="absolute z-10 ml-[calc(100%_/_2_-_62px)] flex justify-center mt-1.5 gap-2 sm:gap-8 ">
+            <Link  
+              href={session ? '/dashboard/inicioTramite' : '/login'} 
+              className=" text-[#ffffffdd] bg-[#300322] flex items-center text-[15px] duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#1d0215] hover:text-white active:bg-[#50073a] ">
+              {session ? "Ver trámites" : "Iniciá tu trámite" } 
+            </Link>
+          </div>
+
         </Swiper>
       </SwiperSlide>
 
@@ -577,14 +589,8 @@ export default function GaleriaFotosCnp({
           <div className="flex justify-center mb-10 gap-2 pb-6 pt-8 sm:gap-8 ">
             <Link  
               href={session ? '/dashboard/tusConsultas' : '/login'} 
-              className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] "
-              /* "text-[#ffffffcc] bg-[#300322] flex items-center text-sm duration-150 text-center px-2 py-0.5 rounded hover:bg-[#26021b] hover:text-white active:bg-[#300322cc]" */>
-              {session ? "Ver tus consultas" : "Realizá tu consulta" } 
-            </Link>
-            <Link  
-              href={session ? '/dashboard/inicioTramite' : '/login'} 
-              className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
-              {session ? "Ver tus trámites" : "Iniciá tu trámite" } 
+              className="text-[#ffffffcc] bg-[#a74994] flex items-center text-[15px] duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#a74994] " >
+              {session ? "Ver consultas" : "Realizá tu consulta"  }
             </Link>
           </div>
         </div>

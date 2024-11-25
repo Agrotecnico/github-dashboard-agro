@@ -22,7 +22,7 @@ import clsx from 'clsx';
 import { auth } from 'auth';
 import Dropdown from '@/app/pruebas/Dropdown';
 
-export default /* async */ function UserButtonMenu() {
+export default /* async */ function UserButtonMenuMember() {
   const { data: session, update } = useSession();
   const pathname = usePathname();
   /* const [pilos]= polos() */
@@ -122,73 +122,12 @@ export default /* async */ function UserButtonMenu() {
           <IconMenu
             width="20"
             heightx="20"
-            className="fill-[#fff9] duration-200 group-hover:fill-[#ffffffdd] sm:hidden"
+            className="fill-[#fff9] duration-200 hover:fill-[#ffffffdd] sm:hidden"
           />
         </Dropdown.Button>
 
         <Dropdown.Menu>
-          <div className="p-4 flex items-center flex-col space-y-1 mx-4 border-b border-[#0000000e]">
-            <p className="text-sm font-medium leading-none ">
-              {session?.user?.name}
-            </p>
-            {/* <p className="text-muted-foreground text-xs leading-none text-[#64748b]">
-              {session?.user?.email}
-            </p> */}
-          </div>
-          {/* <DropdownMenuSeparator className="bg-[#30032215] " />
-          <div className="p-2 flex w-full flex-col ">
-            {pathname == '/' ? (
-              <Link
-                href={'#'}
-                className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
-              >
-                Cnp mandataria
-              </Link>
-            ) : (
-              <Link
-                href={'/'}
-                className="mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 "
-              >
-                Cnp mandataria
-              </Link>
-            )}
-            {pathname.startsWith('/consultas') ? (
-              <Link
-                href={'#'}
-                className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
-              >
-                Consultas frecuentes
-              </Link>
-            ) : (
-              <Link
-                href={'/consultas/dif-gestor-mandatario'}
-                className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100"
-              >
-                Consultas frecuentes
-              </Link>
-            )}
-            {pathname.startsWith('/dashboard') ? (
-              <Link
-                href={'#'}
-                className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188] "
-              >
-                {session?.user?.email == 'agrotecnicog@gmail.com'
-                  ? 'Panel de control'
-                  : 'Realizar consulta'}
-              </Link>
-            ) : (
-              <Link
-                href={'/dashboard'}
-                className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 "
-              >
-                {session?.user?.email == 'agrotecnicog@gmail.com'
-                  ? 'Panel de control'
-                  : 'Realizar consulta'}
-              </Link>
-            )}
-          </div> */}
-          {/* <DropdownMenuSeparator className="bg-[#30032215] " /> */}
-          <div className="flex w-screen flex-col px-2.5 pb-2.5 gap-[2px] rounded-xl ">
+          <div className="flex w-screen flex-col ">
             {linkMembers &&
               linkMembers?.map((link) => {
                 const LinkIcon = link.icon;

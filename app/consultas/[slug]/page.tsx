@@ -61,7 +61,7 @@ export default async function PostPage({ params }: Params) {
                   alt="my desk"
                   width={481}
                   height={361}
-                  className="roundrd"
+                  className="roundrd "
                 />
               ) : null}
             </div>

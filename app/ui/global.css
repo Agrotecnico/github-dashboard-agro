@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--violet-11: #6550b9;
+	--violet-3: #f4f0fe;
+    --violet-4: #ebe4ff;
+    --violet-6: #d4cafe;
+    --violet-9: #6e56cf;
+	--black-a7: #00000080;
+	--mauve-8: #bcbac7;
+  }
+
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
@@ -52,4 +62,25 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  font-family: system-ui;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(330deg, hsl(272, 53%, 50%) 0%, hsl(226, 68%, 56%) 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 120px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+svg {
+  display: block;
+} */

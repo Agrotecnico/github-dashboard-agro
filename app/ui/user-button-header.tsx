@@ -2,7 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
 import { Button } from '@/app/ui/uiRadix/button';
-import { User } from '@/app/lib/definitions';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,27 +10,20 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/app/ui/uiRadix/dropdown-menu';
-import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import IconMenu from '@/app/ui/logosIconos/icon-menu';
-import NavLinks from '@/app/ui/dashboard/nav-links'
-/* import { fetchUserById } from '@/app/lib/data'; */
 import { useSession } from "next-auth/react"
+import { User } from '@/app/lib/definitions';
 
 
-export default /* async */ function UserButtonHeader({ user}: { user: User | undefined}) {
+export default function UserButtonHeader( { user }: { user: User | undefined } ) {
 
-  const { data: session, update } = useSession()
-
-  
- /*  const user = await fetchUserById(session?.user?.email); 
-  console.log("user:", user)
-  console.log("session:", session)*/
+  /* const { data: session, update } = useSession() */
   
   const pathname = usePathname();
-
+ /*  console.log("user:", user)
+  console.log("session:", session) */
   return (
     <>
       <DropdownMenu>
@@ -40,7 +32,6 @@ export default /* async */ function UserButtonHeader({ user}: { user: User | und
             variant="ghost"
             className="relative gap-4 h-8 w-full max-w-max rounded-full px-0"
           >
-            {/* <IconMenu width='20' heightx='20' className="fill-[#fff9] duration-200 hover:fill-[#ffffffdd] min-[640px]:hidden" /> */}
             {user?.image ? (
               <Avatar className="h-8 w-8">
                 {user?.image && (
@@ -49,11 +40,11 @@ export default /* async */ function UserButtonHeader({ user}: { user: User | und
                     alt={user?.name ?? ''}
                   />
                 )}
-                <AvatarFallback>{session?.user?.email}</AvatarFallback>
+                <AvatarFallback>{user?.email}</AvatarFallback>
               </Avatar>
             ) : (
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eee] text-[#374151] ">
-                {session?.user?.email?.substring(0, 1).toUpperCase()}
+                {user?.email?.substring(0, 1).toUpperCase()}
               </span>
             )}
           </Button>
@@ -66,10 +57,10 @@ export default /* async */ function UserButtonHeader({ user}: { user: User | und
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none text-[#374151] ">
-                {session?.user?.name}
+                {user?.name}
               </p>
               <p className="text-muted-foreground text-xs leading-none text-[#64748b]">
-                {session?.user?.email}
+                {user?.email}
               </p>
             </div>
           </DropdownMenuLabel>
@@ -113,7 +104,7 @@ export default /* async */ function UserButtonHeader({ user}: { user: User | und
                   href={'#'}
                   className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188] "
                 >
-                  {session?.user?.email == 'agrotecnicog@gmail.com'
+                  {user?.email == 'agrotecnicog@gmail.com'
                     ? 'Panel de control'
                     : 'Realizar consulta'}
                 </Link>
@@ -122,7 +113,7 @@ export default /* async */ function UserButtonHeader({ user}: { user: User | und
                   href={'/dashboard'}
                   className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 "
                 >
-                  {session?.user?.email == 'agrotecnicog@gmail.com'
+                  {user?.email == 'agrotecnicog@gmail.com'
                     ? 'Panel de control'
                     : 'Realizar consulta'}
                 </Link>

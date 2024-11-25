@@ -1,3 +1,14 @@
+import { auth } from "auth"
+
+import {
+  QuestionMarkCircleIcon,
+  QueueListIcon,
+  UserCircleIcon,
+  ClipboardDocumentListIcon,
+  UserGroupIcon,
+  HomeIcon,
+  InboxIcon,
+} from '@heroicons/react/24/outline';
 
 export const agrotecnico = [
     `<svg
@@ -111,4 +122,79 @@ export const parqueAutomotor = [
   `<div className=" ">
       Patentamiento
   </div>`,
+];
+
+/* export const polos= async () => {
+  const session = await auth()
+  console.log("sessionsss:", session)
+  if (session?.user?.email ===  process.env.ADMIN)
+    
+  return (
+    [
+      {
+        name: 'Realizá tu consulta',
+        href: '/dashboard',
+        icon: QuestionMarkCircleIcon,
+      },
+      {
+        name: 'Tus Consultas',
+        href: '/dashboard/tusConsultas',
+        icon: QueueListIcon,
+      },
+      {
+        name: 'Inicio Trámite',
+        href: '/dashboard/inicioTramite',
+        icon: ClipboardDocumentListIcon,
+      },
+      { name: 'Editar Perfil',
+        href: '/dashboard/perfil',
+        icon: UserCircleIcon },
+    ]
+  );
+
+  return (
+    [
+      { name: 'Resumen', href: '/dashboard', icon: HomeIcon, },
+      { name: 'Facturas', href: '/dashboard/invoices', icon: InboxIcon, },
+      { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
+      { name: 'Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
+      { name: 'Inicio Trámite', href: '/dashboard/inicioTramite', icon: ClipboardDocumentListIcon, },
+      { name: 'Editar Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
+    ]
+  )
+
+}; */
+
+
+
+
+
+export const linkMembers = [
+  {
+    name: 'Realizá tu consulta',
+    href: '/dashboard',
+    icon: QuestionMarkCircleIcon,
+  },
+  {
+    name: 'Tus Consultas',
+    href: '/dashboard/tusConsultas',
+    icon: QueueListIcon,
+  },
+  {
+    name: 'Inicio Trámite',
+    href: '/dashboard/inicioTramite',
+    icon: ClipboardDocumentListIcon,
+  },
+  { name: 'Editar Perfil',
+    href: '/dashboard/perfil',
+    icon: UserCircleIcon },
+];
+
+export const links = [
+  { name: 'Resumen', href: '/dashboard', icon: HomeIcon, },
+  { name: 'Facturas', href: '/dashboard/invoices', icon: InboxIcon, },
+  { name: 'Clientes', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Consultas', href: '/dashboard/tusConsultas', icon: QueueListIcon },
+  { name: 'Inicio Trámite', href: '/dashboard/inicioTramite', icon: ClipboardDocumentListIcon, },
+  { name: 'Editar Perfil', href: '/dashboard/perfil', icon: UserCircleIcon },
 ];

@@ -32,16 +32,3 @@ export function Fondo({ children, className, ...rest }: HTLMElemment) {
       </div>
     );
   }
-
-  /* export function Frente({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
-    return (
-      <div className="bg-[#ffffff94] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002a] rounded ">
-          {children}
-      </div>
-    );
-  } */
-

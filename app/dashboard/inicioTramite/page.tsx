@@ -1,7 +1,7 @@
 import React from 'react';
 import { auth } from '@/auth';
 import { lusitana } from '@/app/ui/fonts';
-import { Fondo, Frente } from '@/app/ui/marcos';
+import { Frente } from '@/app/ui/marcos';
 
 export default async function Page() {
   const session = await auth();

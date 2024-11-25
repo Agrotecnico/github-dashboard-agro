@@ -11,7 +11,6 @@ import {
 import { useFormState } from 'react-dom';
 import { Button } from '@/app/ui/button';
 import { updateUser } from '@/app/lib/actions';
-import { updateUserImage } from '@/app/lib/actions';
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import Image from 'next/image'
@@ -19,7 +18,6 @@ import { Frente } from '@/app/ui/marcos';
 import type { Session } from "next-auth"
 import { useSession } from "next-auth/react"
 import { fetchUserById } from '@/app/lib/data';
-
 
 
 export default /* async */ function EditPerfilAdmin( { user }: { user: User | undefined } ) {
@@ -70,13 +68,8 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
   const updateUserWithId = updateUser.bind(null, `${user?.id}`);
   const [state, dispatch] = useFormState(updateUserWithId, initialState);
 
-  const initialStatex = { message: null, errors: {} };
-  const updateUserWithIdx = updateUserImage.bind(null, `${user?.id}`);
-  const [statex, dispatchx] = useFormState(updateUserWithIdx, initialStatex);
-
   return (
     <>
-      {/* Perfil */}
       <div className="flex w-full flex-col items-center gap-3 rounded-lg bg-[#ffffff88] p-6 [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] min-[800px]:flex-row ">
         <div
           className="min-w-20 relative max-h-[80px] min-h-[80px] min-w-[80px] max-w-[80px]"
@@ -113,10 +106,10 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
           <p>{!email ? user?.email : email}</p>
         </div>
       </div>
-      {/* Editar imagen */}
-      <div className="mb-2 mt-6 flex flex-col items-start gap-6 min-[375px]:gap-12 ">
-        {/* Seleccionar y subir imagen */}
-        <form onSubmit={uploadToServer } id="subirImage" >
+
+      {/* Select imagen */}
+      <div className="mb-2 mt-6 flex items-start gap-6 min-[375px]:gap-12 ">
+        <form onSubmit={uploadToServer } id="subirImage">
           <div className={`flex flex-col  bg-[#ffffff57] text-[#374151cc] items-start gap-4 ${!!file && 'opacity-60 hover:bg-[#ffffff57] hover:text-[#374151cc] '} hover:bg-[#ffffff78] hover:text-[#374151] min-[500px]:flex-row min-[500px]:items-center`}>
             <div className="relative">
               <input
@@ -157,7 +150,6 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
             </Frente>
           </button>
         </form>
-        {/* Mostrar imagen */}
         <div 
           className="text-black flex flex-col items-center opacity-80 ">
           <div
@@ -198,60 +190,8 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
             {file?.name}
           </div>
         </div>
-        {/* Guardar imagen */}
-        <form action={dispatchx} id="actualizarPerfil"  className="w-full">
-          
-          {/* Image */}
-          <div className="">
-            <input
-            className="w-full"
-              id="image"
-              type= "text"
-              name="image"
-              defaultValue=/* { user?.image ? imageUrl : imageUrl} */ {!imageUrl ? user?.image : imageUrl}
-            />
-          </div>
-
-          {/* Massages */}
-          <div
-            className="mb-3 mt-3 flex items-end space-x-1"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            {statex?.message && (
-              <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                <p className="text-sm text-red-500">{statex?.message}</p>
-              </>
-            )}
-          </div>
-
-          {/* Cancelar / Guardar cambio */}
-          <div className="mt-6 flex items-center justify-end gap-4 text-sm">
-            <div
-              onClick={() => {
-                setImageUrl("");
-                window.location.reload();
-              }}
-              className="flex h-9 cursor-pointer items-center rounded bg-[#30032215] px-4 font-medium opacity-70 transition-colors duration-200 hover:opacity-100 "
-            >
-              Cancelar
-            </div>
-            <Button
-              type="submit"
-              className={`flex h-10 w-max items-center rounded bg-[#ffffffee]  px-4 font-medium opacity-70 duration-200 hover:opacity-90 
-                  disabled:opacity-30 `}
-              disabled={/* name == '' && email == '' && */ imageUrl == ''}
-              /* onClick={() => {
-                setImageUrl("");
-              }} */
-            >
-              Guardar cambios
-            </Button>
-          </div>
-        </form>
       </div>
-      {/* Editar nombre/email */}
+
       <form action={dispatch} id="actualizarPerfil">
         {/* Edit name */}
         <div className="relative">
@@ -298,15 +238,15 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
         </div>
 
         {/* Image */}
-        {/* <div className="">
+        <div className="">
           <input
           className="w-full"
             id="image"
             type= "text"
             name="image"
-            defaultValue= {!imageUrl ? user?.image : imageUrl}
+            defaultValue=/* { user?.image ? imageUrl : imageUrl} */ {!imageUrl ? user?.image : imageUrl}
           />
-        </div> */}
+        </div>
 
         {/* Massages */}
         <div
@@ -322,11 +262,10 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
           )}
         </div>
 
-        {/* Cancelar / Guardar cambios */}
         <div className="mt-6 flex items-center justify-end gap-4 text-sm">
           <div
             onClick={() => {
-              /* setImageUrl(""); */
+              setImageUrl("");
               window.location.reload();
             }}
             className="flex h-9 cursor-pointer items-center rounded bg-[#30032215] px-4 font-medium opacity-70 transition-colors duration-200 hover:opacity-100 "
@@ -337,7 +276,7 @@ export default /* async */ function EditPerfilAdmin( { user }: { user: User | un
             type="submit"
             className={`flex h-10 w-max items-center rounded bg-[#ffffffee]  px-4 font-medium opacity-70 duration-200 hover:opacity-90 
                 disabled:opacity-30 `}
-            disabled={name == '' && email == '' /* && imageUrl == '' */}
+            disabled={name == '' && email == '' && imageUrl == ''}
             /* onClick={() => {
               setImageUrl("");
             }} */

@@ -57,8 +57,7 @@ const CreateConsulta = FormSchemaConsulta.omit({ created_at: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const UpdateCustomer = FormSchemaCustomer.omit({ id: true });
-const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true });
-const UpdateUserImage = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, name: true, email: true });
+const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true });
 const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true });
 
 
@@ -86,16 +85,6 @@ export type StateUser = {
     name?: string[];
     email?: string[];
     /* password?: string[];
-    confirmPassword?: string[]; 
-    image?: string[] | undefined;*/
-  };
-  message?: string | null;
-};
-export type StateUserImage = {
-  errors?: {
-    /* name?: string[];
-    email?: string[];
-    password?: string[];
     confirmPassword?: string[]; */
     image?: string[] | undefined;
   };
@@ -421,7 +410,7 @@ export async function updateUser(
   const validatedFields = UpdateUser.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
-    /* image: formData.get('image'), */
+    image: formData.get('image'),
   });
 
   if (!validatedFields.success) {
@@ -431,12 +420,12 @@ export async function updateUser(
     };
   }
 
-  const { name, email/* , image */ } = validatedFields.data;
+  const { name, email, image } = validatedFields.data;
 
   try {
     await sql`
       UPDATE users
-      SET name = ${name}, email = ${email}
+      SET name = ${name}, email = ${email}, image = ${image}
       WHERE id = ${id}
     `;
   } catch (error) {
@@ -466,37 +455,4 @@ export async function authenticate(
     }
     throw error;
   }
-}
-
-
-export async function updateUserImage(
-  id: string,
-  prevState: StateUserImage,
-  formData: FormData,
-) {
-  const validatedFields = UpdateUserImage.safeParse({
-    image: formData.get('image'),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. No se pudo actualizar la imagen del Usuario.',
-    };
-  }
-
-  const { image } = validatedFields.data;
-
-  try {
-    await sql`
-      UPDATE users
-      SET name = image = ${image}
-      WHERE id = ${id}
-    `;
-  } catch (error) {
-    return { message: 'Database Error: No se pudo actualizar la imagen del Usuario.' };
-  }
-
-  revalidatePath('/dashboard/perfil');
-  redirect('/dashboard/perfil');
 }

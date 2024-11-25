@@ -12,10 +12,8 @@ import { signIn } from 'next-auth/react';
 import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
 import { Fondo, Frente } from '@/app/ui/marcos';
-/* import { useSession } from 'next-auth/react'; */
 
 export default function LoginForm() {
-  /* const { data: session, update } = useSession(); */
 
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
@@ -116,7 +114,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#26021b] hover:text-[#fff] "
+      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d2215] hover:text-[#fff] active:bg-[#300322] "
       aria-disabled={pending}
     >
       Continuar

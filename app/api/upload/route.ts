@@ -6,9 +6,9 @@ import { v2 as cloudinary } from 'cloudinary';
 import { rejects } from 'assert';
 
 cloudinary.config({
-  cloud_name: process.env.CLAUDINARY_NAME /* "dchmrl6fc" 'dchmrl6fc' */,
-  api_key: process.env.CLAUDINARY_KEY /*"582311814716175"  '582311814716175' */,
-  api_secret: process.env.CLAUDINARY_SECRET, //'egxKqBsor7mvNbgV3JCOvwfdVvE'  Click 'View API Keys' above to copy your API secret
+  cloud_name: process.env.CLAUDINARY_NAME,
+  api_key: process.env.CLAUDINARY_KEY,
+  api_secret: process.env.CLAUDINARY_SECRET,
 });
 
 export async function POST(request: NextRequest) {
@@ -22,17 +22,9 @@ export async function POST(request: NextRequest) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  // With the file data in the buffer, you can do whatever you want with it.
-  // For this, we'll just write it to the filesystem in a new location
-  //   const filePath = `/tmp/${file.name}`
-
   // Con los datos del archivo en el buffer, puedes hacer lo que quieras con ellos.
   // Para esto, simplemente los escribiremos en el sistema de archivos en una nueva ubicación.
   // const filePath = `/tmp/${file.name}`
-
-  /* const filePath = path.join(process.cwd(), "public/customers", file.name);
-  await writeFile(filePath, buffer);
-  console.log(`open ${filePath} to see the uploaded file`); */
 
   const response = await new Promise((resolve, reject) => {
     cloudinary.uploader
@@ -53,4 +45,8 @@ export async function POST(request: NextRequest) {
     success: true,
     url: response.secure_url,
   });
+
+
+
+  /* return NextResponse.json("imagen subida"); */
 }

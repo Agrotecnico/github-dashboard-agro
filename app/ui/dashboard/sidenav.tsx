@@ -1,7 +1,8 @@
-import NavLinks from '@/app/ui/dashboard/nav-links'
+
 import { auth } from '@/auth'
 import { Fondo } from '@/app/ui/marcos'
-import { SessionProvider } from "next-auth/react"
+import  NavLinksAdmin  from '@/app/ui/dashboard/nav-links-admin'
+import  NavLinksMember  from '@/app/ui/dashboard/nav-links-member'
 
 
 export default async function SideNav() {
@@ -16,11 +17,12 @@ export default async function SideNav() {
             </div>
           </div>
 
-          <div className="hidden flex-col gap-0.5 sm:flex "/* [&:first-child]:rounded-t-md "flex flex-col gap-1 [&:first-child]:rounded-t-md [&:last-child]:rounded-b-md" */>
-              <NavLinks />
-              {/* <SessionProvider session={session}>
-                <NavLinks />
-              </SessionProvider> */}
+          <div className="flex-col gap-0.5 ">
+            {session?.user?.email === process.env.ADMIN ? (
+              <NavLinksAdmin />
+              ) : (
+              <NavLinksMember />
+              )}
           </div>
         </Fondo>
       </div>

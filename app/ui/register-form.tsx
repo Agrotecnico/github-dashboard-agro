@@ -143,7 +143,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#26021b] hover:text-[#fff] "
+      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d2215] hover:text-[#fff] active:bg-[#300322] "
       aria-disabled={pending}
     >
       Continuar
