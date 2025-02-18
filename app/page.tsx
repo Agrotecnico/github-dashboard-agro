@@ -1,7 +1,8 @@
 import { auth } from "auth"
-import GaleriaFotosCnp from './cnp-galeria-fotos';
-import { getAllPosts } from '@/app/lib/getPost';
 import { SessionProvider } from "next-auth/react"
+
+import CNPMandataria from './CNP-mandataria';
+import { getAllPosts } from '@/app/lib/getPost';
 import { fetchUserById } from '@/app/lib/data'; 
 
 
@@ -20,7 +21,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col justify-between w-full h-full min-h-screen">
       <SessionProvider /* session={session} */>
-        <GaleriaFotosCnp user={user}  linkDatos={linkDatos} />
+        <CNPMandataria user={user}  linkDatos={linkDatos} />
       </SessionProvider>
     </div>
     

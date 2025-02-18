@@ -25,7 +25,7 @@ export default function NavLinksAdmin() {
               )}
             >
               <button className="w-full py-2 px-2.5 gap-2 flex justify-start items-center" >
-                <LinkIcon className="w-4 text-[#1d0215dd]" />
+                <LinkIcon className="w-[18px] text-[#50073aaa]" />
                 <p className="text-sm text-start ">
                 {link.name}
                 </p>

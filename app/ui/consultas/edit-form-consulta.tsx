@@ -1,78 +1,50 @@
 'use client';
 
-import { Consulta } from '@/app/lib/definitions';
 import Link from 'next/link';
-import { UserCircleIcon, AtSymbolIcon } from '@heroicons/react/24/outline';
-import { Button } from '@/app/ui/button';
-import { updateConsulta } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 
-export default function EditConsultaForm({ consulta }: { consulta: Consulta }) {
+import { Consulta } from '@/app/lib/definitions';
+import { Button } from '@/app/ui/button';
+import { updateConsulta } from '@/app/lib/actions';
+import { User } from '@/app/lib/definitions';
+
+
+export default function EditConsultaForm({
+   consulta,
+   userMember,
+  }: { 
+    consulta: Consulta;
+    userMember: User | undefined
+  }) {
+
   const initialState = { message: null, errors: {} };
   const updateConsultaWithId = updateConsulta.bind(null, consulta.id);
   const [state, dispatch] = useFormState(updateConsultaWithId, initialState);
 
+
   return (
     <form action={dispatch}>
       <div className="flex flex-col justify-between rounded-xl bg-[#0000000d] px-4 py-6 shadow-sm [box-shadow:inset_0_1px_#00000047,inset_0_-1px_#ffffffe0] ">
-        {/* Consulta user Name */}
-        <div className="mb-4">
-          <label htmlFor="name" className="mb-1 ml-3 block text-sm font-medium">
-            Editar nombre
-          </label>
-          <div className="relative rounded-md">
-            <div className="relative ">
-              <input
-                id="name"
-                name="name"
-                type="text"
-                defaultValue={consulta.name}
-                placeholder="Ingrese el nombre"
-                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   p-6 py-2.5 pl-10 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#bbb] min-[800px]:flex-row   "
-                aria-describedby="name-error"
-              />
-              <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
+        <div className="flex items-center justify-center mb-6 ">
+          <div className=" relative mr-4" data-testid="image-container">
+            {userMember?.image ? (
+                <img
+                  decoding="async" 
+                  src= {userMember?.image}
+                  className="rounded-full cursor-pointer bg-cover h-14 bject-cover w-full " alt="header-image-profile">
+                  
+                </img>
+              ) : (
+                <div className="flex w-10 h-10 text-2xl items-center justify-center rounded-full bg-[#ffffffba] text-[#666] ">
+                  {userMember?.email?.substring(0, 1).toUpperCase()}
+                </div>
+              )}
           </div>
-
-          <div id="name-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.name &&
-              state.errors.name.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
+          <div className=" text-sm">
+            <div className="font-medium">{userMember?.name} </div>
+            <div className=" text-[13px]">{userMember?.email}</div>
           </div>
-        </div>
-
-        {/* Consulta user Email */}
-        <div className="mb-4">
-          <label htmlFor="email" className="-1 ml-3 block text-sm font-medium">
-            Editar email
-          </label>
-          <div className="relative rounded-md">
-            <div className="relative ">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                defaultValue={consulta.email}
-                placeholder="Ingrese el email"
-                className="peer block w-full flex-col items-center rounded border border-[#0000] bg-[#ffffff57]   p-6 py-2.5 pl-10 text-sm outline-2  [box-shadow:inset_0_1px_#ffffffd4,inset_0_-1px_#00000047] placeholder:text-[#bbb] min-[800px]:flex-row   "
-                aria-describedby="email-error"
-              />
-              <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-            </div>
-          </div>
-
-          <div id="email-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.email &&
-              state.errors.email.map((error: string) => (
-                <p className="mt-2 text-sm text-red-500" key={error}>
-                  {error}
-                </p>
-              ))}
-          </div>
+          
         </div>
 
         {/* Consulta consulta */}
@@ -97,14 +69,14 @@ export default function EditConsultaForm({ consulta }: { consulta: Consulta }) {
             </div>
           </div>
 
-          <div id="consulta-error" aria-live="polite" aria-atomic="true">
+          {/* <div id="consulta-error" aria-live="polite" aria-atomic="true">
             {state.errors?.name &&
               state.errors.name.map((error: string) => (
                 <p className="mt-2 text-sm text-red-500" key={error}>
                   {error}
                 </p>
               ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Consulta respuesta */}
@@ -130,14 +102,14 @@ export default function EditConsultaForm({ consulta }: { consulta: Consulta }) {
             </div>
           </div>
 
-          <div id="respuesta-error" aria-live="polite" aria-atomic="true">
+          {/* <div id="respuesta-error" aria-live="polite" aria-atomic="true">
             {state.errors?.name &&
               state.errors.name.map((error: string) => (
                 <p className="mt-2 text-sm text-red-500" key={error}>
                   {error}
                 </p>
               ))}
-          </div>
+          </div> */}
         </div>
 
         <div aria-live="polite" aria-atomic="true">

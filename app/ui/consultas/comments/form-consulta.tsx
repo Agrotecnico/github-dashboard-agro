@@ -12,15 +12,24 @@ export default function FormConsulta({ session }: { session: Session | null }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createConsulta, initialState);
   return (
-    <div className="px-3 pb-3 text-sm">
+    <>
+    <Frente className=" py-4 px-3 sm:px-4 text-small-regular" >
       <form action={dispatch}>
-
+        <div className="flex w-full justify-end  ">
+          <Button
+            onClick={() => {window.location.reload()}}
+            className="relative mb-3 h-[30px] min-h-[24px] w-[140px] justify-center border border-[#dddddd] bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215cc] hover:bg-[#ffffff] hover:text-[#1d0215ee] active:!bg-[#eee] "
+            // className="flex h-9 items-center rounded duration-200 bg-[#1d021511 bg-[#1d021519] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
+            > 
+            Cancelar
+          </Button>
+        </div>
         {/* texto consulta */}
         <div className="relative">
-          <label htmlFor="name" className="text-start text-sm">
+          {/* <label htmlFor="name" className="text-start text-sm">
             Consulta
-          </label>
-          <Frente className="my-3 h-40 flex max-h-40 w-full ">
+          </label> */}
+          <Frente className="mb-3 h-40 flex max-h-40 w-full ">
             <textarea
               className="!hover:bg-transparent rounded-md p-3 italic resize-y peer block w-full border text-[#000000aa] border-transparent bg-transparent text-sm outline-2 hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
               id="consulta"
@@ -41,50 +50,12 @@ export default function FormConsulta({ session }: { session: Session | null }) {
         </div>
 
         {/* boton cancelar y enviar */}
-        <div className="my-4 flex justify-end items-center gap-4 text-sm">
-          <div
-            onClick={() => {window.location.reload()}}
-            className="flex h-9 items-center rounded duration-200 bg-[#1d021511 bg-[#1d021519] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
-            > 
-              Cancelar
-          </div>
+        <div className="flex items-center justify-end gap-4 text-sm">
           <Button 
             type="submit"
-            className={`flex items-center h-10 w-max rounded bg-[#ffffffee]  opacity-70 px-4 font-medium duration-200 hover:opacity-100 `}
-            >Enviar
+            className="small:max-w-[140px] flex h-[26px] w-max items-center justify-center rounded-md bg-[#300322dd] !px-2.5 text-center text-[13px] text-[#d9d9d9] duration-150 hover:bg-[#300322] hover:text-[#eee] active:!bg-[#300322aa] disabled:opacity-40 disabled:hover:bg-[#300322dd] disabled:hover:text-[#d9d9d9] disabled:active:!bg-[#300322dd]"
+            >Enviar consulta
           </Button>
-        </div>
-
-        <h3 className="opacity-30 pl-3 ">
-          Adjuntar archivos a la consulta
-        </h3>
-
-        {/* subir archivos */}
-        <div className= "opacity-30 mt-3">
-          <div className="flex w-full flex-col gap-4 sm:flex-row ">
-            {/*  boton seleccion */}
-            <div className="flex flex-col gap-2">
-              <Frente className="flex text-[#1d0215cc] items-start gap-4 min-[500px]:flex-row min-[500px]:items-center ">
-                <div className="flex h-8 w-[172px] items-center rounded px-4 py-1 text-sm ">
-                  Seleccionar archivos
-                </div>
-              </Frente>
-              <Frente className="flex text-[#1d0215cc] items-start gap-4 min-[500px]:flex-row min-[500px]:items-center ">
-                <div className="flex h-8 w-[172px] items-center rounded px-4 py-1 text-sm ">
-                  Subir archivos
-                </div>
-              </Frente>
-            </div>
-            {/* mostrar archivos  */}
-            <div
-              className={`relative flex h-[310px] w-full items-center justify-center rounded bg-[#ffffffcc] shadow-none  `}
-              data-testid="image-container"
-              >
-              <div>
-                <ClipboardDocumentCheckIcon className="flex w-12 items-center justify-center stroke-1 text-[#1d021566] " />
-              </div>
-            </div>
-          </div>
         </div>
 
         <input
@@ -102,6 +73,40 @@ export default function FormConsulta({ session }: { session: Session | null }) {
           readOnly
         />
       </form>
-    </div>
+    </Frente>
+    <Frente className="mt-8 py-4 px-3 sm:px-4 text-small-regular ">
+      {/* subir archivos */}
+      <h3 className=" pl-3 ">
+        Adjuntar archivos a la consulta
+      </h3>
+      <div className= " mt-3 ">
+        <div className="flex w-full flex-col gap-4 sm:flex-row ">
+          {/*  boton seleccion */}
+          <div className="flex flex-col gap-2">
+            <Frente className="flex text-[#1d0215cc] items-start gap-4 min-[500px]:flex-row min-[500px]:items-center ">
+              <div className="flex h-8 w-[172px] items-center rounded px-4 py-1 text-sm ">
+                Seleccionar archivos
+              </div>
+            </Frente>
+            <Frente className="flex text-[#1d0215cc] items-start gap-4 min-[500px]:flex-row min-[500px]:items-center ">
+              <div className="flex h-8 w-[172px] items-center rounded px-4 py-1 text-sm ">
+                Subir archivos
+              </div>
+            </Frente>
+          </div>
+          {/* mostrar archivos  */}
+          <div
+            className={`relative flex h-[310px] w-full items-center justify-center rounded bg-[#ffffffcc] shadow-none  `}
+            data-testid="image-container"
+            >
+            <div>
+              <ClipboardDocumentCheckIcon className="flex w-12 items-center justify-center stroke-1 text-[#1d021566] " />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Frente>
+    
+    </>
   );
 }

@@ -14,7 +14,7 @@ export default async function RegisterPage() {
   return (
     <>
     <SessionProvider>
-      <Header user={user} />
+      <Header />
     </SessionProvider> 
     <main className="mx-auto flex h-full min-h-screen justify-center pt-14">
       <div className="relative mx-auto mt-8 flex w-full max-w-[460px] flex-col space-y-2.5 p-4">

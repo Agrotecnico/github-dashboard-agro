@@ -13,12 +13,12 @@ export default async function CustomersTable({
   currentPage: number;
 }) {
   const customers = await fetchFilteredCustomers(query, currentPage);
-  
+
   return (
     <div className="">
-      <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>
+      <h1 className={` mb-4 text-xl md:mb-8 lg:text-2xl`}>
         Clientes
-      </h1>
+      </h1>{/* ${lusitana.className} */}
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Buscar cliente..." />
         <CreateCustomer />
@@ -43,7 +43,7 @@ export default async function CustomersTable({
                         />
                         <div>
                         <p className="font-semibold ">{customer.name}</p>
-                        <p>{customer.email}</p>
+                        <p className="text-[#1d0215aa] ">{customer.email}</p>
                         </div>
                       </div>
                     </div>
@@ -101,7 +101,7 @@ export default async function CustomersTable({
                           />
                           <div>
                             <p className="font-semibold ">{customer.name}</p>
-                            <p>{customer.email}</p>
+                            <p className="text-[#1d0215aa] ">{customer.email}</p>
                           </div>
                         </div>
                       </td>

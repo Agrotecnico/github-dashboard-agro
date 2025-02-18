@@ -30,8 +30,9 @@ export type Invoice = {
 
 export type Consulta = {
   id: string;
-  name: string;
-  email: string;
+  user_id: string;
+  codigo_consulta: string;
+  archivos_url: string | undefined;
   consulta: string;
   respuesta: string | undefined;
   created_at: string;
@@ -64,6 +65,18 @@ export type InvoicesTable = {
   date: string;
   amount: number;
   status: 'pending' | 'paid';
+};
+
+export type ConsultasTable = {
+  id: string;
+  consulta: string;
+  respuesta: string;
+  created_at: string;
+  user_id: string;
+  codigo_consulta: string;
+  name: string;
+  email: string;
+  image: string | undefined;
 };
 
 export type CustomersTableType = {
@@ -107,4 +120,16 @@ export type Post = {
   excerpt?: string;
   [key: string]: any;
   image?: string;
+};
+
+export type Tramite = {
+  slug?: string;
+  tramite?: string;
+  date?: string;
+  content?: string;
+  resumen?: string;
+  estado?: string;
+  [key: string]: any;
+  image?: string;
+  documentos?: string
 };

@@ -6,12 +6,13 @@ import {
   ExclamationCircleIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
-import { createUser } from '@/app/lib/actions';
 import Link from 'next/link';
-import { Fondo, Frente } from '@/app/ui/marcos';
 import { signIn } from 'next-auth/react';
+
+import { Button } from './button';
+import { createUser } from '@/app/lib/actions';
+import { Fondo, Frente } from '@/app/ui/marcos';
 import LogoGoogle from './logosIconos/logo-google';
 
 
@@ -143,7 +144,7 @@ function LoginButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d2215] hover:text-[#fff] active:bg-[#300322] "
+      className="mt-4 w-full justify-center bg-[#300322] text-base  text-[#ffffffcc] duration-150 hover:bg-[#1d2215] hover:text-[#fff] active:!bg-[#300322dd] "
       aria-disabled={pending}
     >
       Continuar

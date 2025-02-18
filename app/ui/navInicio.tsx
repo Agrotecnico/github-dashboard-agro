@@ -1,14 +1,13 @@
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import UserButtonHeader from './user-button-header';
-import { useSession } from 'next-auth/react';
-import { fetchUserById } from '@/app/lib/data'; 
 import { User } from '@/app/lib/definitions';
 
 
-export default /* async */ function NavInicio({ user }: { user: User | undefined }) {
+export default function NavInicio({ user }: { user: User | undefined }) {
   const { data: session, update } = useSession();
-  /* const user = await fetchUserById(session?.user?.email) */
 
   return (
     <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#300322] backdrop-blur-md ">

@@ -43,8 +43,11 @@ const FormSchemaUser = z.object({
 
 const FormSchemaConsulta = z.object({
   id: z.string(),
-  name: z.string().min(3, { message: "Must be 3 or more characters long" }),
-  email: z.string(),
+  userId: z.string(),
+  codigoConsulta: z.string(),
+  archivos_url: z.string().min(5, { message: "Must be 5 or more characters long" }),
+  // name: z.string().min(3, { message: "Must be 3 or more characters long" }),
+  // email: z.string(),
   consulta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   respuesta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   created_at: z.string(),
@@ -53,13 +56,22 @@ const FormSchemaConsulta = z.object({
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const CreateCustomer = FormSchemaCustomer.omit({ id: true });
 const CreateUser = FormSchemaUser.omit({ id: true, role: true, image: true });
-const CreateConsulta = FormSchemaConsulta.omit({ created_at: true,  id: true });
+
+const CreateConsulta = FormSchemaConsulta.omit({ created_at: true, respuesta: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const UpdateCustomer = FormSchemaCustomer.omit({ id: true });
-const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true });
+
+const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true, codigoConsulta: true, archivos_url: true,  userId: true });
+
+
+// const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true });
+const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true, name: true });
 const UpdateUserImage = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, name: true, email: true });
-const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true });
+const UpdateUserName = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true, email: true });
+const UpdateUserEmail = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true, name: true });
+
+
 
 
 // This is temporary
@@ -85,31 +97,55 @@ export type StateUser = {
   errors?: {
     name?: string[];
     email?: string[];
-    /* password?: string[];
-    confirmPassword?: string[]; 
-    image?: string[] | undefined;*/
-  };
-  message?: string | null;
-};
-export type StateUserImage = {
-  errors?: {
-    /* name?: string[];
-    email?: string[];
     password?: string[];
-    confirmPassword?: string[]; */
+    confirmPassword?: string[]; 
     image?: string[] | undefined;
   };
   message?: string | null;
 };
-export type StateConsulta = {
+
+export type StateUserImage = {
+  errors?: {
+    image?: string[] | undefined;
+  };
+  message?: string | null;
+};
+
+export type StateUserName = {
   errors?: {
     name?: string[];
+  };
+  message?: string | null;
+};
+
+export type StateUserEmail = {
+  errors?: {
     email?: string[];
+  };
+  message?: string | null;
+};
+
+export type StateConsulta = {
+  errors?: {
+    userId?: string[];
+    codigoConsulta?: string[];
+    archivos_url?: string[] | undefined;
+    consulta?: string[];
+    // respuesta?: string[] | undefined;
+  };
+  message?: string | null;
+};
+
+export type StateUpdateConsulta = {
+  errors?: {
+    // userId?: string[];
+    // codigoConsulta?: string[];
     consulta?: string[];
     respuesta?: string[] | undefined;
   };
   message?: string | null;
 };
+
 
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form fields using Zod
@@ -198,6 +234,7 @@ export async function deleteInvoice(id: string) {
 }
 
 
+
 export async function createCustomer(prevStateCustomer: StateCustomer, formData: FormData) {
   // Validate form fields using Zod
   const validatedFieldsCustomer = CreateCustomer.safeParse({
@@ -280,13 +317,15 @@ export async function deleteCustomer(id: string) {
 }
 
 
+
 export async function createConsulta(prevState: StateConsulta, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateConsulta.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
+    userId: formData.get('userId'),
+    codigoConsulta: formData.get('codigoConsulta'),
+    archivos_url: formData.get('archivos_url'),
     consulta: formData.get('consulta'),
-    respuesta: formData.get('respuesta'),
+    // respuesta: formData.get('respuesta'),
   });
 
   // If form validation fails, return errors early. Otherwise, continue.
@@ -298,18 +337,18 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
   }
 
   // Prepare data for insertion into the database
-  const { email, consulta, respuesta, name } = validatedFields.data;
+  const { userId, codigoConsulta, archivos_url, /* respuesta, */ consulta } = validatedFields.data;
 
   // Insert data into the database 
   try {
     await sql`
-      INSERT INTO consultas (email, consulta, respuesta, name)
-      VALUES (${email}, ${consulta}, ${respuesta}, ${name})
+      INSERT INTO consultas (user_Id, codigo_consulta, archivos_url, /* respuesta, */consulta )
+      VALUES (${userId}, ${codigoConsulta}, ${archivos_url}, ${consulta})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database Error: Failed to Create Consulta.',
+      message: 'Database Error: Error al crear consulta.',
     };
   }
 
@@ -319,12 +358,12 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
 }
 export async function updateConsulta(
   id: string,
-  prevState: StateConsulta,
+  prevState: StateUpdateConsulta,
   formData: FormData,
 ) {
   const validatedFields = UpdateConsulta.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
+    // name: formData.get('name'),
+    // email: formData.get('email'),
     consulta: formData.get('consulta'),
     respuesta: formData.get('respuesta'),
   });
@@ -336,12 +375,12 @@ export async function updateConsulta(
     };
   }
 
-  const { name, email, consulta, respuesta } = validatedFields.data;
+  const { /* name, email, */ consulta, respuesta } = validatedFields.data;
 
   try {
     await sql`
       UPDATE consultas
-      SET name = ${name}, email = ${email}, consulta = ${consulta}, respuesta = ${respuesta}
+      SET consulta = ${consulta}, respuesta = ${respuesta}
       WHERE id = ${id}
     `;
   } catch (error) {
@@ -419,7 +458,7 @@ export async function updateUser(
   formData: FormData,
 ) {
   const validatedFields = UpdateUser.safeParse({
-    name: formData.get('name'),
+    // name: formData.get('name'),
     email: formData.get('email'),
     /* image: formData.get('image'), */
   });
@@ -431,12 +470,12 @@ export async function updateUser(
     };
   }
 
-  const { name, email/* , image */ } = validatedFields.data;
+  const { /* name, */ email/* , image */ } = validatedFields.data;
 
   try {
     await sql`
       UPDATE users
-      SET name = ${name}, email = ${email}
+      SET email = ${email}
       WHERE id = ${id}
     `;
   } catch (error) {
@@ -490,11 +529,75 @@ export async function updateUserImage(
   try {
     await sql`
       UPDATE users
-      SET name = image = ${image}
+      SET image = ${image}
       WHERE id = ${id}
     `;
   } catch (error) {
     return { message: 'Database Error: No se pudo actualizar la imagen del Usuario.' };
+  }
+
+  revalidatePath('/dashboard/perfil');
+  redirect('/dashboard/perfil');
+}
+
+export async function updateUserName(
+  id: string,
+  prevState: StateUserName,
+  formData: FormData,
+) {
+  const validatedFields = UpdateUserName.safeParse({
+    name: formData.get('name'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. No se pudo actualizar el nombre del Usuario.',
+    };
+  }
+
+  const { name } = validatedFields.data;
+
+  try {
+    await sql`
+      UPDATE users
+      SET name = ${name}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: No se pudo actualizar el nombre  del Usuario.' };
+  }
+
+  revalidatePath('/dashboard/perfil');
+  redirect('/dashboard/perfil');
+}
+
+export async function updateUserEmail(
+  id: string,
+  prevState: StateUserEmail,
+  formData: FormData,
+) {
+  const validatedFields = UpdateUserEmail.safeParse({
+    email: formData.get('email'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. No se pudo actualizar el nombre del Usuario.',
+    };
+  }
+
+  const { email } = validatedFields.data;
+
+  try {
+    await sql`
+      UPDATE users
+      SET email = ${email}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: 'Database Error: No se pudo actualizar el nombre  del Usuario.' };
   }
 
   revalidatePath('/dashboard/perfil');

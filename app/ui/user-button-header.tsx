@@ -1,7 +1,5 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
-import { Button } from '@/app/ui/uiRadix/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,17 +11,17 @@ import {
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { useSession } from "next-auth/react"
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
+import { Button } from '@/app/ui/uiRadix/button';
 import { User } from '@/app/lib/definitions';
 
 
 export default function UserButtonHeader( { user }: { user: User | undefined } ) {
-
-  /* const { data: session, update } = useSession() */
   
   const pathname = usePathname();
- /*  console.log("user:", user)
-  console.log("session:", session) */
+
+
   return (
     <>
       <DropdownMenu>
@@ -33,7 +31,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             className="relative gap-4 h-8 w-full max-w-max rounded-full px-0"
           >
             {user?.image ? (
-              <Avatar className="h-8 w-8">
+              <Avatar className="h-11 w-11">
                 {user?.image && (
                   <AvatarImage
                     src={user?.image}
@@ -72,84 +70,91 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
               {pathname == '/' ? (
                 <Link
                   href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
                 >
-                  Cnp mandataria
+                  <div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Cnp mandataria</div>
                 </Link>
               ) : (
                 <Link
                   href={'/'}
-                  className="mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 "
                 >
-                  Cnp mandataria
+                  <div className="rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 ">Cnp mandataria</div>
                 </Link>
               )}
-              {pathname.startsWith('/consultas') ? (
+
+              {pathname.startsWith('/faq') ? (
                 <Link
                   href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
                 >
-                  Consultas frecuentes
+                  <div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Consultas frecuentes</div>
                 </Link>
               ) : (
                 <Link
-                  href={'/consultas/dif-gestor-mandatario'}
-                  className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100"
+                  href={'/faq/dif-gestor-mandatario'}
                 >
-                  Consultas frecuentes
+                  <div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100">Consultas frecuentes</div>
                 </Link>
               )}
+
+              {pathname == '/dashboard/consultas' ? (
+                <Link
+                  href={'#'}
+                >
+                  {user?.email == 'agrotecnicog@gmail.com'
+                    ? ''
+                    : (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Consultas</div>) }
+                </Link>
+              ) : (
+                <Link
+                  href={'/dashboard/consultas'}
+                >
+                  {user?.email == 'agrotecnicog@gmail.com'
+                    ? ''
+                    : (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Consultas</div>)}
+                </Link>
+              )}
+
+              {pathname == '/dashboard/tramites' ? (
+                <Link
+                  href={'#'}
+                >
+                  {user?.email == 'agrotecnicog@gmail.com'
+                    ? ''
+                    : (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Trámites</div>)}
+                </Link>
+              ) : (
+                <Link
+                  href={'/dashboard/tramites'}
+                >
+                  {user?.email == 'agrotecnicog@gmail.com'
+                    ? ''
+                    : (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Trámites</div>)}
+                </Link>
+              )}
+
               {pathname.startsWith('/dashboard') ? (
                 <Link
                   href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188] "
                 >
                   {user?.email == 'agrotecnicog@gmail.com'
-                    ? 'Panel de control'
-                    : 'Realizar consulta'}
+                    ? (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Panel Admin</div>)
+                    : ''}
                 </Link>
               ) : (
                 <Link
                   href={'/dashboard'}
-                  className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 "
                 >
                   {user?.email == 'agrotecnicog@gmail.com'
-                    ? 'Panel de control'
-                    : 'Realizar consulta'}
+                    ? (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Panel Admin</div>)
+                    : ''}
                 </Link>
               )}
             </div>
           </DropdownMenuItem>
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
           <Button
             variant={'ghost'}
-            className="mb-1 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 "
+            className="mb-1 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 active:bg-transparent"
             onClick={async () => {
-              await signOut({ callbackUrl: '/' });/*  */
+              await signOut({ callbackUrl: '/' });
             }}
           >
             Salir

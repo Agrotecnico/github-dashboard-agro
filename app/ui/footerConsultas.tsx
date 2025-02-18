@@ -1,9 +1,12 @@
 import CustomLink from "@/app/ui/custom-link"
 import { auth } from "auth"
+import { fetchUserById } from '@/app/lib/data';
+
 
 export default async function FooterConsultas() {
   const session = await auth()
-  const polo= session?.user?.email
+  const user = await fetchUserById(session?.user?.email);
+  // const polo= session?.user?.email
   return (
     <footer className="bg-[#30032219] w-[100vw] px-2 border border-[#ccc]  py-4 mx-0 min-[1280px]:[margin-left:_calc(((100vw_-_1262px)/2)*-1)] flex flex-col gap-4 text-sm sm:flex-row sm:justify-center sm:items-center sm:px-6 sm:mr-0 max-[1280px]:w-full ">
       <div className="flex w-full px-2 h-full flex-col gap-2 max-w-[1280px] mx-auto ">
@@ -22,12 +25,18 @@ export default async function FooterConsultas() {
             CNP
           </CustomLink>
             {session ? (
-              session.user?.email == process.env.ADMIN ?
-              <CustomLink href="/dashboard" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Panel de control</CustomLink> 
+              user?.email == process.env.ADMIN ?
+              <CustomLink href="/dashboard" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Panel Admin</CustomLink> 
                 : 
-                <CustomLink href="/dashboard" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Realizar consulta</CustomLink> 
+                <>
+                  <CustomLink href="/dashboard/consultas" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Consultas</CustomLink>
+                  <CustomLink href="/dashboard/tramites" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Trámites</CustomLink>
+                </>
             ) : (
-                <CustomLink href="/login" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Realizar Consulta</CustomLink> 
+              <>
+                <CustomLink href="/realizar-consulta" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Realizar Consulta</CustomLink> 
+                <CustomLink href="/iniciar-tramite" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Iniciar trámite</CustomLink>
+              </>
             )}
           
         </div>

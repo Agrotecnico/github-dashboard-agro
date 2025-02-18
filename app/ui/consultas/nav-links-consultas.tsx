@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import clsx from 'clsx';
+
 import { Frente } from '@/app/ui/marcos';
 import { usePathname } from 'next/navigation';
 import type { Post } from "@/app/lib/definitions"
-import { signIn } from "next-auth/react"
 
 
 export default function NavLinksConsultas({allPosts}:{allPosts:Post}) {
@@ -17,13 +17,13 @@ export default function NavLinksConsultas({allPosts}:{allPosts:Post}) {
         allPosts.map((post:Post) => (
           <article key={post.slug} className="mb-2 rounded-md duration-200 ">
             <Link
-              as={`/consultas/${post.slug}`}
-              href="/consultas/[slug]"
+              as={`/faq/${post.slug}`}
+              href="/faq/[slug]"
               className='text-sm '
             >
               <Frente className={clsx(`py-2 px-2.5 gap-5 flex justify-between text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffbb] hover:text-[#1d0215]`,
                 {
-                  'text-[#1d0216] bg-[#ffffffbc] ': pathname === `/consultas/${post.slug}`
+                  'text-[#1d0216] bg-[#ffffffbc] ': pathname === `/faq/${post.slug}`
                 }
               )}>
                 <p className="text-sm text-start max-[512px]:text-sm ">

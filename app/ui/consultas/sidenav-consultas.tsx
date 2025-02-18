@@ -3,6 +3,8 @@ import NavLinksConsultas from '@/app/ui/consultas/nav-links-consultas';
 import {auth} from "auth"
 import { Fondo } from '@/app/ui/marcos';
 import { getAllPosts } from '@/app/lib/getPost';
+import { ChevronRightIcon, } from '@heroicons/react/24/outline';
+import { ButtonA } from '@/app/ui/button';
 
 
 export default async function SideNavConsultas() {
@@ -14,21 +16,17 @@ export default async function SideNavConsultas() {
         <div className="mb-4 mt-2.5 w-full text-base text-center font-medium ">
           CONSULTAS FRECUENTES
         </div>
-
         <NavLinksConsultas allPosts={allPosts} />
-
       </Fondo> 
+
       <div className="flex justify-center gap-2 pb-6 pt-8 sm:gap-8 lg:gap-2 ">
-        <Link  
-          href={session ? '/dashboard/tusConsultas' : '/login'} 
-          className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
-          {session ? "Ver tus consultas" : "Realizá tu consulta" } 
+        <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
+          <ButtonA 
+            className={`h-8 text-[14.5px] w-max`}>
+            {session ? "Tus consultas" : "Realizar consulta" } 
+            <ChevronRightIcon className="ml-3 w-4 stroke-[3] opacity-60" />
+          </ButtonA>
         </Link>
-        {/* <Link  
-          href={session ? '/dashboard/inicioTramite' : '/login'} 
-          className="text-[#ffffffdd] bg-[#a74994] flex items-center text-sm duration-150 text-center px-3 h-[26px] rounded-xl hover:bg-[#883b79] hover:text-white active:bg-[#843a75cc] ">
-          {session ? "Ver tus Trámites" : "Iniciá tu trámite" } 
-        </Link> */}
       </div>
     </div>
   );

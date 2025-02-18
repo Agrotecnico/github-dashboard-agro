@@ -50,17 +50,17 @@ export function Card({
   const Icon = iconMap[type];
 
   return (
-    <Frente className="flex flex-col justify-between p-2 ">{/*  rounded-xl bg-[#0000000d] shadow-sm [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] */}
-      <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
+    <div className="flex flex-col justify-between ">{/*  rounded-xl bg-[#0000000d] shadow-sm [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] */}
+      <div className="flex p-2 pl-0">
+        {Icon ? <Icon className="h-5 w-[18px] text-[#50073aaa]" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <Fondo
-        className={`${lusitana.className}
-          truncate px-4 py-8 text-center text-2xl bg-[#30032210]`}/*  rounded-xl [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] */
+      <Frente
+        className={`
+          truncate p-8 text-center text-lg bg-[#30032210] sm:text-xl sm:py-8`}/*  rounded-xl [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] */
       >
         {value}
-      </Fondo>
-    </Frente>
+      </Frente>{/* ${lusitana.className} */}
+    </div>
   );
 }

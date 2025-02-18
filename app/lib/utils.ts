@@ -3,9 +3,9 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString('en-US', {
+  return (amount / 100).toLocaleString("es-AR"/* 'en-US' */, {
     style: 'currency',
-    currency: 'USD',
+    currency: "ARS" /* 'USD' */,
   });
 };
 
@@ -73,4 +73,27 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export const isUrl= (texto: string) : boolean => { 
+  const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-./?%&=]*)?$/; 
+  return regex.test(texto); 
+}
+
+//Generación de una Cadena Aleatoria
+export const generarClaveUnica= (longitud: number) => { 
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; 
+  let clave = ''; 
+  for (let i = 0; i < longitud; i++) { 
+    const index = Math.floor(Math.random() * caracteres.length); 
+    clave += caracteres[index]; 
+  } 
+  return clave; 
+}
+
+
+
+
+export const guardarConsulta = (buttonRef): void => {
+  if (buttonRef.current) buttonRef.current.click();
+};
 

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { auth } from 'auth';
+
 import { SessionProvider } from 'next-auth/react';
 import LoginForm from '@/app/ui/login-form';
 import { redirect } from 'next/navigation';
@@ -25,14 +26,11 @@ export default async function LoginPage() {
   return (
     <>
       <SessionProvider>
-        <Header user= {user} />
+        <Header />
       </SessionProvider> 
       <main className="mx-auto flex h-full min-h-screen justify-center pt-14">
         <div className="relative mx-auto mt-8 flex w-full max-w-[460px] flex-col space-y-2.5 p-4">
           <LoginForm />
-          {/* <SessionProvider session={session}>
-            <LoginForm />
-          </SessionProvider> */}
         </div>
       </main>
     </>

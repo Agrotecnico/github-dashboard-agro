@@ -1,9 +1,6 @@
-import { writeFile } from 'fs/promises';
-import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
+import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
-import { rejects } from 'assert';
 
 cloudinary.config({
   cloud_name: process.env.CLAUDINARY_NAME,
@@ -14,6 +11,8 @@ cloudinary.config({
 export async function POST(request: NextRequest) {
   const data = await request.formData();
   const file: File | null = data.get('file') as unknown as File;
+
+  console.log("fileqqqq:", file)
 
   if (!file) {
     return NextResponse.json({ success: false });
@@ -39,14 +38,11 @@ export async function POST(request: NextRequest) {
 
   //guardar en base datos
   //procesar imagen
-  console.log("response:", response.secure_url )
+  console.log("response:", response )
 
   return NextResponse.json({
     success: true,
     url: response.secure_url,
   });
 
-
-
-  /* return NextResponse.json("imagen subida"); */
 }

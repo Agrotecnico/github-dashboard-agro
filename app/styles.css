@@ -45,18 +45,15 @@
 }
 .swiper2 .swiper-pagination-bullet {
   opacity: 1;
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   background: #f9d1fa;
   margin: 0 10px !important;
   transition: 0.2s;
 }
 .swiper2 .swiper-pagination-bullet-active {
-  background-color:#e746e7ad;  /* #e746e7 */
+  background-color:#e746e7ad;
 }
-/* .swiper2 .swiper-pagination-bullet:hover {
-  color: #000000dd;
-} */
 .swiper3 > .swiper-pagination {
   bottom: 536px;
   position: relative;

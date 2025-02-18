@@ -35,7 +35,7 @@ export default async function InvoicesTable({
                     />
                     <div>
                       <p className="font-semibold ">{invoice.name}</p>
-                      <p>{invoice.email}</p>
+                      <p className="text-[#1d0215aa] ">{invoice.email}</p>
                     </div>
                   </div>
                   <p>{formatDateToLocal(invoice.date)}</p>
@@ -90,7 +90,7 @@ export default async function InvoicesTable({
                       />
                       <div>
                         <p className="font-semibold ">{invoice.name}</p>
-                        <p>{invoice.email}</p>
+                        <p className="text-[#1d0215aa] ">{invoice.email}</p>
                       </div>
                     </div>
                   </td>

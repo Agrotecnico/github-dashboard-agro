@@ -25,10 +25,81 @@
     @apply text-lg mt-4 mb-2 leading-snug text-[#1f2632];
   }
 
-  .markdown li {
+  .markdown ul {
+    @apply  mt-4 mb-2 pl-4 leading-snug;
+  }
+
+  .markdown ol {
+    @apply text-base mt-4 mb-2 ;
+  }
+
+  .markdown ul li {
     @apply  mt-4 mb-2 leading-snug list-disc marker:text-[#d477e7];
   }
 
-  .markdown ul {
-    @apply text-base mt-4 mb-2 ml-6 leading-snug list-disc;
+  .markdown ol li {
+    @apply text-base mt-4 mb-2 ml-4 leading-snug list-decimal;
+  }
+
+  .markdown li {
+    @apply text-base mt-4 mb-2;
+  }
+  
+
+
+
+
+ 
+  
+  #pol {
+    background: #ccc;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+  }
+  
+  #pol ol {
+    padding-left: 0;
+  }
+  
+  #pol li,
+  div > #pol2 {
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+  }
+  
+  #pol img {
+    height: 64px;
+    order: 1;
+  }
+  
+  #pol #pol2 {
+    line-height: 32px;
+    padding-left: 10px;
+  }
+  
+  #pol label,
+  #pol button {
+    background-color: #7f9ccb;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px ridge black;
+    font-size: 0.8rem;
+    height: auto;
+  }
+  
+  #pol label:hover,
+  #pol button:hover {
+    background-color: #2d5ba3;
+    color: white;
+  }
+  
+  #pol label:active,
+  #pol button:active {
+    background-color: #0d3f8f;
+    color: white;
   }

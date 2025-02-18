@@ -10,7 +10,7 @@ export type IconProps = {
 } & React.SVGAttributes<SVGElement>
 
 const IconEmail: React.FC<IconProps> = ({
-  size= 58,
+  size= 40,
   color= "#eee",
   sombraX= "1",
   sombraY= "1",
@@ -20,7 +20,7 @@ const IconEmail: React.FC<IconProps> = ({
   return (
     <svg
       width={size}
-      viewBox="0 0 58 35"
+      viewBox="0 0 60 60"
       xmlns="http://www.w3.org/2000/svg"
       {...attributes}
       >

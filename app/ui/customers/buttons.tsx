@@ -19,7 +19,7 @@ export function UpdateCustomer({ id }: { id: string }) {
   return (
     <Link
       href={`/dashboard/customers/${id}/edit`}
-      className="rounded-md w-[38px] border border-[#30032215] p-2 opacity-70 bg-[#ffffff24] hover:opacity-100 hover:bg-[#ffffff66] "
+      className="rounded-md w-[38px] p-2 opacity-80 bg-[#ffffff55] hover:opacity-100 hover:bg-[#ffffff77] "
     >
       <PencilIcon className="w-5 text-[#2c3c8a]" />
     </Link>
@@ -31,7 +31,7 @@ export function DeleteCustomer({ id }: { id: string }) {
 
   return (
     <form action={deleteCustomerWithId}>
-      <button className="rounded-md border border-[#30032215] p-2 opacity-70 bg-[#ffffff24] hover:opacity-100 hover:bg-[#ffffff66] ">
+      <button className="rounded-md p-2 opacity-80 bg-[#ffffff55] hover:opacity-100 hover:bg-[#ffffff77] ">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5 text-[#b53f51] " />
       </button>
