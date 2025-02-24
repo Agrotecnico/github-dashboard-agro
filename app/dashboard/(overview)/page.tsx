@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const session = await auth();
-  const user = await fetchUserById(session?.user?.email);
+  // const user = await fetchUserById(session?.user?.email);
 
   if (session?.user?.email === process.env.ADMIN )
   return (

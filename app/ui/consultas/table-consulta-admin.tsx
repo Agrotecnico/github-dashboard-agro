@@ -10,14 +10,18 @@ import { User } from 'next-auth';
 export default async function TableConsultaAdmin({
   query,
   currentPage,
-  user,
+  // user,
 }: {
   query: string;
   currentPage: number;
-  user: User | undefined
+  // user: User | undefined
 }) {
 
   const AllConsultas = await fetchFilteredConsultas(query, currentPage);
+
+  console.log("query: ",query  )
+  console.log("currentPage: ",currentPage )
+  console.log("AllConsultas: ",AllConsultas )
 
   return (
     <div>
@@ -25,7 +29,7 @@ export default async function TableConsultaAdmin({
         <Search placeholder="Buscar consultas..." />
       </div>
 
-      <div className="mt-6 flow-root">
+      {/* <div className="mt-6 flow-root">
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden rounded-md">
             <div className="md:hidden">
@@ -132,7 +136,7 @@ export default async function TableConsultaAdmin({
             </table>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

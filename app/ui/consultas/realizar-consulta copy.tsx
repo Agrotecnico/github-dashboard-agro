@@ -21,18 +21,6 @@ import { ButtonB, ButtonA } from '@/app/ui/button';
 import RegistrarEmail from '@/app/ui/registrar-email';
 
 
-import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
-import IconEmail2 from "@/app/ui/logosIconos/icon-email2"
-import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
-import IconRegistro from "@/app/ui/logosIconos/icon-registro"
-import { createUser } from '@/app/lib/actions';
-
-
-
-
-
-
-
 export default function RealizarConsulta( /* { user }: { user: User | undefined } */ ) {
   
   const [consulta, setConsulta] = useState('');
@@ -42,11 +30,8 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
   const [spin, setSpin] = useState(false);
   const [images, setImages] = useState<ImageListType>([]);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [statex, setStatex] = useState(false);
-  // const [statexx, setStatexx] = useState(true);
-
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
 
   const { state, close, toggle } = useToggleState()
   const maxNumber = 5;
@@ -57,11 +42,6 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
   })
 
   const buttonyRef = useRef<HTMLButtonElement>(null);
-
-  // const statexx = useRef(false);
-  // const stat = (polo: boolean) => {
-  //   statexx.current = polo;
-  // }
 
   const handleClickButton= () => {
     if (buttonyRef.current) buttonyRef.current.click()
@@ -78,7 +58,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
     setTimeout(() => toggle(), 100);
   };
   
-  // const codigoConsulta: string = useMemo(() => generarClaveUnica(16), [] );
+  const codigoConsulta: string = useMemo(() => generarClaveUnica(16), [] );
 
   const clearState = () => {
     setSuccessState(false)
@@ -100,7 +80,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
       });
       const responseData = await response.json();
 
-      const polo: string[]= responseData.urls
+  const polo: string[]= responseData.urls
 
       const respon= JSON.stringify(polo )
 
@@ -151,19 +131,8 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
     setImages(imageList);
   };
 
-
-  const initialStatex = { message: null, errors: {} };
-  const [estadox, dispatchx] = useFormState(createUser, initialStatex);
-  const polo= estadox?.message
-  // const polo= "null"
-
-
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createConsulta, initialState);
-
-  // console.log("consulta:", consulta)
-  // console.log("imageUrl:", imageUrl)
-  // console.log("email:", email)
 
 
   return (
@@ -337,186 +306,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
         </Disclosure>
       </Frente>
 
-      {/* <RegistrarEmail registroEmail="la respuesta" /> */}
-
-      {/* registrar email */}
-      { polo === null || polo !== "usuario" ? (
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
-          <div className="flex items-center justify-between gap-5">
-            <div className="mt-1.5 ">
-              <IconRegistro className="opacity-60 w-[24px] ml-3 " />
-            </div>
-            {/* {statexx === false ? (
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${statex ? "opacity-100" : "opacity-0"  } `}>
-                Registrá un e-mail para mandarte la respuesta
-              </div>
-            ) : (
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300 `}>
-                Hola {name} se registro el e-mail: {email}
-              </div>
-            )} */}
-
-            <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${statex ? "opacity-100" : "opacity-0"  } `}>
-              Registrá un e-mail para mandarte la respuesta
-            </div>
-              
-            <ButtonB
-              className={`h-8 text-[13px]  w-max`}/*  ${statexx && "hidden"} */
-              onClick={() => { setStatex(!statex)/* handleToggle() */; setEmail(""); setName("")}}
-              // type={state ? "reset" : "button"}
-              data-testid="edit-button"
-              data-active={statex}
-            >
-              {statex ? "Cancelar" :  <div className="text-[12px] overflow-auto whitespace-nowrap"> Registrar EMAIL</div>  }
-            </ButtonB>
-          </div>
-          
-          <div
-              className={clsx(
-                "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
-                {
-                  "max-h-[1000px] opacity-100": statex,
-                  "max-h-0 opacity-0": !statex,
-                }
-              )}
-            >
-              <div className="flex flex-col gap-y-2 pt-4">
-                <div>
-                  {/* Registrar name/email */}
-                  <form action={dispatchx} /* id="actualizarPerfil" */>
-
-                    {/*input nombre/email */}
-                    <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
-                      <InputCnp
-                        className="text-sm h-8"
-                        id="name"
-                        type="text"
-                        name="name"
-                        minLength={3}
-                        maxLength={100}
-                        value={name}
-                        placeholder= "Nombre"
-                        required
-                        disabled={ !statex }
-                        onChange={(e) => {
-                          setName(e.target.value);
-                      }} >
-                        <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
-                        </div>
-                        <IconCuenta  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
-                      </InputCnp>
-
-                      <InputCnp
-                        className="text-sm h-8"
-                        id="email"
-                        type="email"
-                        name="email"
-                        minLength={3}
-                        maxLength={100}
-                        value={email}
-                        placeholder= "Email"
-                        required
-                        disabled={ !statex }
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }} >
-                        <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
-                        </div>
-                        <IconEmail2  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
-                      </InputCnp>
-                    </fieldset>
-
-                    <input
-                      // className="hidden"
-                      id="password"
-                      type="hidden"
-                      name="password"
-                      value="Cnp-Mandataria-25"
-                      // autoComplete="new password"
-                      // required
-                      readOnly
-                      // minLength={6}
-                    />
-
-                    <input
-                      className="hidden"
-                      id="password"
-                      type="hidden"
-                      name="confirmPassword"
-                      value="Cnp-Mandataria-25"
-                      // autoComplete="new password"
-                      // required
-                      readOnly
-                      // minLength={6}
-                    />
-
-                    <input
-                      className="hidden"
-                      id="role"
-                      type="hidden"
-                      name="role"
-                      value="member"
-                      // autoComplete="new password"
-                      // required
-                      readOnly
-                      // minLength={6}
-                    />
-
-                    {/* Massages erros */}
-                    <div
-                      className="flex items-end relative space-x-8"
-                      aria-live="polite"
-                      aria-atomic="true"
-                    >
-                      {estadox?.message && (
-                        <>
-                          <ExclamationCircleIcon className="absolute top-4 h-5 w-5 text-red-500" />
-                          <p className="pt-4 text-sm text-red-500">{estadox?.message}</p>
-                        </>
-                      )}
-                    </div>
-
-                    {/* button submit */}
-                    <div className=" flex items-center justify-end gap-4 mt-4 text-sm">
-
-
-
-                      
-
-
-
-
-                      <ButtonA
-                        // type="submit"
-                        // ref={buttonyRef}
-                        className={`h-8 text-[13px] w-max`}
-                        disabled={ email == "" && name == ""}
-                        // onClick={() => {
-                        //   setStatex(false);
-                        // }}
-                      >
-                        Registrar
-                      </ButtonA>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            {/* </DisclosurePanel>
-          </Disclosure> */}
-          </div>
-        </Frente>
-      ) : (
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
-          <div className="flex items-center justify-between gap-5">
-            <div className="mt-1.5 ">
-              <IconRegistro className="opacity-60 w-[24px] ml-3 " />
-            </div>
-            <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  `}>
-              Hola {name} se registro el e-mail: {email}
-            </div>
-          </div>
-        </Frente>
-      ) }
+      <RegistrarEmail registroEmail="la respuesta" />
 
       {/* Massages error consult */}
       <div
@@ -531,8 +321,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
           </>
         )}
       </div>
-      
-      {/* crear consulta */}
+
       <form action={dispatch}>
         {/* archivos Adjuntos */}
         <input
@@ -542,20 +331,22 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
           value={imageUrl}
           readOnly
         />
-        {/* consulta */}
+
+        {/* clave */}
         <input
           type="hidden"
-          id="consulta"
-          name="consulta"
-          value={consulta}
+          id="codigoConsulta"
+          name="codigoConsulta"
+          value={codigoConsulta}
           readOnly
         />
-        {/* email */}
+
+        {/* userId */}
         <input
           type="hidden"
-          id="email"
-          name="email"
-          value={email}
+          id="userId"
+          name="userId"
+          value=/* {`${user?.id}`} */""
           readOnly
         />
 
@@ -580,10 +371,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
           <ButtonA
             className={`w-[200px] h-8 text-sm !justify-start  ${!consulta ? 'opacity-40' :  'opacity-100'}`}
             type="submit"
-            disabled={!consulta && true }
-            onClick={() => {
-              setSpin(true);
-            }}
+            disabled={!consulta && true  }
           >
             <IconCambio
               className={`${spin && "animate-spin"} mr-2 w-[22px] h-[22px] `}

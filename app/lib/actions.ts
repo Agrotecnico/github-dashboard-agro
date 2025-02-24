@@ -35,7 +35,7 @@ const FormSchemaUser = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string().min(5, { message: "Must be 5 or more characters long" }),
   confirmPassword: z.string().min(5, { message: "Must be 5 or more characters long" }),
-  role: z.enum(['admin', 'member', 'developer'], {
+  role: z.enum(['admin', 'member', 'memberAccount'], {
     invalid_type_error: 'Seleccione un rol de usuario.',
   }),
   image: z.string(),
@@ -43,26 +43,27 @@ const FormSchemaUser = z.object({
 
 const FormSchemaConsulta = z.object({
   id: z.string(),
-  userId: z.string(),
-  codigoConsulta: z.string(),
+  // userId: z.string(),
+  // codigoConsulta: z.string(),
   archivos_url: z.string().min(5, { message: "Must be 5 or more characters long" }),
   // name: z.string().min(3, { message: "Must be 3 or more characters long" }),
-  // email: z.string(),
+  user_id: z.string(),
   consulta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   respuesta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   created_at: z.string(),
+  // updated_at: z.string(),
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const CreateCustomer = FormSchemaCustomer.omit({ id: true });
-const CreateUser = FormSchemaUser.omit({ id: true, role: true, image: true });
+const CreateUser = FormSchemaUser.omit({ id: true, image: true });/*  role: true, */
 
 const CreateConsulta = FormSchemaConsulta.omit({ created_at: true, respuesta: true,  id: true });
 
 const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 const UpdateCustomer = FormSchemaCustomer.omit({ id: true });
 
-const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true,  id: true, codigoConsulta: true, archivos_url: true,  userId: true });
+const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true, updated_at: true, id: true, user_id: true, archivos_url: true });
 
 
 // const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true });
@@ -98,7 +99,8 @@ export type StateUser = {
     name?: string[];
     email?: string[];
     password?: string[];
-    confirmPassword?: string[]; 
+    confirmPassword?: string[];
+    role?: string[] | undefined;
     image?: string[] | undefined;
   };
   message?: string | null;
@@ -127,8 +129,9 @@ export type StateUserEmail = {
 
 export type StateConsulta = {
   errors?: {
-    userId?: string[];
-    codigoConsulta?: string[];
+    // userId?: string[];
+    // codigoConsulta?: string[];
+    user_id?: string[];
     archivos_url?: string[] | undefined;
     consulta?: string[];
     // respuesta?: string[] | undefined;
@@ -318,11 +321,11 @@ export async function deleteCustomer(id: string) {
 
 
 
-export async function createConsulta(prevState: StateConsulta, formData: FormData) {
+export async function createConsulta(prevStateConsulta: StateConsulta, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateConsulta.safeParse({
-    userId: formData.get('userId'),
-    codigoConsulta: formData.get('codigoConsulta'),
+    // userId: formData.get('userId'),
+    user_id: formData.get('user_id'),
     archivos_url: formData.get('archivos_url'),
     consulta: formData.get('consulta'),
     // respuesta: formData.get('respuesta'),
@@ -337,13 +340,13 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
   }
 
   // Prepare data for insertion into the database
-  const { userId, codigoConsulta, archivos_url, /* respuesta, */ consulta } = validatedFields.data;
+  const { user_id, archivos_url, consulta } = validatedFields.data;
 
   // Insert data into the database 
   try {
     await sql`
-      INSERT INTO consultas (user_Id, codigo_consulta, archivos_url, /* respuesta, */consulta )
-      VALUES (${userId}, ${codigoConsulta}, ${archivos_url}, ${consulta})
+      INSERT INTO consultas ( user_id, archivos_url, consulta )
+      VALUES ( ${user_id}, ${archivos_url}, ${consulta})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -358,7 +361,7 @@ export async function createConsulta(prevState: StateConsulta, formData: FormDat
 }
 export async function updateConsulta(
   id: string,
-  prevState: StateUpdateConsulta,
+  prevStateConsulta: StateUpdateConsulta,
   formData: FormData,
 ) {
   const validatedFields = UpdateConsulta.safeParse({
@@ -403,13 +406,14 @@ export async function deleteConsulta(id: string) {
 }
 
 
-export async function createUser(prevStateCustomer: StateUser, formData: FormData) {
+export async function createUser(prevStateUser: StateUser, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateUser.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
+    role: formData.get('role'),
     /* image: formData.get('image'), */
   });
   
@@ -432,15 +436,18 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   }
   
   // Prepare data for insertion into the database
-  const { name, email, password  } = validatedFields.data;
+  const { name, email, password, role  } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10); 
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO users (name, email, password )
-      VALUES (${name}, ${email}, ${hashedPassword} )
+      INSERT INTO users (name, email, password, role )
+      VALUES (${name}, ${email}, ${hashedPassword}, ${role} )
     `;
+    return {
+      message: `usuario`,
+    };
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
@@ -449,12 +456,16 @@ export async function createUser(prevStateCustomer: StateUser, formData: FormDat
   }
 
   // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath('/login');
-  redirect('/login');
+  // revalidatePath('/login');
+  // redirect('/login');
+  
+  revalidatePath('/realizar-consulta');
+  redirect('/realizar-consulta');
+  
 }
 export async function updateUser(
   id: string,
-  prevState: StateUser,
+  prevStateUser: StateUser,
   formData: FormData,
 ) {
   const validatedFields = UpdateUser.safeParse({
@@ -485,32 +496,9 @@ export async function updateUser(
   revalidatePath('/dashboard/perfil');
   redirect('/dashboard/perfil');
 }
-
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  
-  try {
-    await signIn('credentials', formData );
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Credenciales no válidas.';
-        default:
-          return 'Algo salió mal.';
-      }
-    }
-    throw error;
-  }
-}
-
-
 export async function updateUserImage(
   id: string,
-  prevState: StateUserImage,
+  prevStateUserImage: StateUserImage,
   formData: FormData,
 ) {
   const validatedFields = UpdateUserImage.safeParse({
@@ -539,10 +527,9 @@ export async function updateUserImage(
   revalidatePath('/dashboard/perfil');
   redirect('/dashboard/perfil');
 }
-
 export async function updateUserName(
   id: string,
-  prevState: StateUserName,
+  prevStateUserName: StateUserName,
   formData: FormData,
 ) {
   const validatedFields = UpdateUserName.safeParse({
@@ -571,10 +558,9 @@ export async function updateUserName(
   revalidatePath('/dashboard/perfil');
   redirect('/dashboard/perfil');
 }
-
 export async function updateUserEmail(
   id: string,
-  prevState: StateUserEmail,
+  prevStateUserEmail: StateUserEmail,
   formData: FormData,
 ) {
   const validatedFields = UpdateUserEmail.safeParse({
@@ -603,3 +589,25 @@ export async function updateUserEmail(
   revalidatePath('/dashboard/perfil');
   redirect('/dashboard/perfil');
 }
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  
+  try {
+    await signIn('credentials', formData );
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Credenciales no válidas.';
+        default:
+          return 'Algo salió mal.';
+      }
+    }
+    throw error;
+  }
+}
+
+

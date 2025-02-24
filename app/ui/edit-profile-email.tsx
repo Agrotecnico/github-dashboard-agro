@@ -91,7 +91,7 @@ export default function EditPerfilEmail( { user }: { user: User | undefined } ) 
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }} >
-                        <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#e580d022] $ `}></div>
+                        <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
                     </InputCnp>
 
                   </div>

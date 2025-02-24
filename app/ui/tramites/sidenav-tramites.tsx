@@ -1,7 +1,8 @@
 
 import NavLinksTramites from '@/app/ui/tramites/nav-links-tramites';
 import { getAllTramites } from '@/app/lib/getTramite';
-import TramiteButtonMenu from '@/app/pruebas/components/tramite-button-menu';
+// import TramiteButtonMenu from '@/app/pruebas/components/tramite-button-menu';
+import TramiteButtonMenu from '@/app/ui/tramites/tramite-button-menu';
 import { SessionProvider } from "next-auth/react"
 
 

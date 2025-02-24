@@ -89,7 +89,7 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
                       onChange={(e) => {
                         setName(e.target.value);
                       }} >
-                      <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#e580d022] $ `}></div>
+                      <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
                     </InputCnp>
                   </div>
                   {/* Massages nombre */}

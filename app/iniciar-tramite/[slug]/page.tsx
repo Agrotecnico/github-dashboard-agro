@@ -6,7 +6,7 @@ import { getTramiteBySlug } from '@/app/lib/getTramite';
 import markdownToHtml from '@/app/lib/markdownToHtml';
 import {Frente} from '@/app/ui/marcos'
 import  TabsTramite  from '@/app/ui/tramites/tabsTramite';
-import  RegistrarEmailConsulta  from "@/app/ui/consultas/registrar-email-consulta";
+import  RegistrarEmail  from "@/app/ui/registrar-email";
 import { ButtonB, ButtonA } from '@/app/ui/button';
 import  IconCambio  from "@/app/ui/logosIconos/icon-cambio";
 import { fetchUserById } from '@/app/lib/data';
@@ -24,7 +24,7 @@ type Params = {
   };
 };
 
-export default async function TramitePage({ params }: Params) {
+export default async function Page({ params }: Params) {
 
   const session = await auth();
   const user = await fetchUserById(session?.user?.email)
@@ -55,7 +55,7 @@ export default async function TramitePage({ params }: Params) {
           <TabsTramite tramite={tramite} content={content} />
         </Frente>
 
-        <Frente className="!bg-[#e6e0e3] p-4 mt-2">
+        {/* <Frente className="hidden !bg-[#e6e0e3] p-4 mt-2">
           <div className="flex flex-col gap-y-1">
             <div className=" text-[15px] text-[#1d0215bb]">Información adicional y comentarios</div>
             <textarea
@@ -67,16 +67,16 @@ export default async function TramitePage({ params }: Params) {
               rows={2}
               maxLength={1024}
               wrap="hard"
-              // value={consulta}
-              // disabled={ !state }
-              // onChange={(e) => {
-              //   setConsulta(e.target.value);
-              // }}
+              value={consulta}
+              disabled={ !state }
+              onChange={(e) => {
+                setConsulta(e.target.value);
+              }}
             />
           </div>
-        </Frente>
+        </Frente> */}
 
-        {!user &&<RegistrarEmailConsulta registroEmail="el presupuesto" />}
+        {!user && <RegistrarEmail registroEmail="el presupuesto" />}
 
         <div className="w-full flex justify-end mt-4">
           <ButtonA

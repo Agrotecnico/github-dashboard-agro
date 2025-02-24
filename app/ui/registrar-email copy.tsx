@@ -16,13 +16,16 @@ import IconEmail2 from "@/app/ui/logosIconos/icon-email2"
 import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
 import { ButtonB, ButtonA } from '@/app/ui/button';
 import { createCustomer } from '@/app/lib/actions';
+import { createUser } from '@/app/lib/actions';
+import { fetchUserById } from '@/app/lib/data';
 
 
-export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: string}  ) {
+export default function RegistrarEmail( {registroEmail}:{registroEmail: string}  ) {
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [successState, setSuccessState] = useState(false)
+  
   const { state, close, toggle } = useToggleState()
 
   const clearState = () => {
@@ -40,29 +43,36 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
     }
   }, [successState, close])
 
+  // const initialState = { message: null, errors: {} };
+  // const [estado, dispatch] = useFormState(createCustomer, initialState);
+
   const initialState = { message: null, errors: {} };
-  const [estado, dispatch] = useFormState(createCustomer, initialState);
+  const [estado, dispatch] = useFormState(createUser, initialState);
+
+
+  // const session = await auth();
+  // const user = await fetchUserById(email)
 
 
   return (
     <>
       <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
         <div className="flex items-center justify-between gap-5">
-              <div className="mt-1.5 ">
-                <IconRegistro className="opacity-60 w-[24px] ml-3 " />
-              </div>
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${state ? "opacity-100" : "opacity-0"  }`}>
-                Registrá un e-mail para mandarte {registroEmail}
-              </div>
-            <ButtonB
-              className={`h-8 text-[13px]  w-max`}
-              onClick={() => { handleToggle(); setEmail("")}}
-              // type={state ? "reset" : "button"}
-              data-testid="edit-button"
-              data-active={state}
-            >
-              {state ? "Cancelar" :  <div className="text-[12px] overflow-auto whitespace-nowrap"> Registrar EMAIL</div>  }
-            </ButtonB>
+          <div className="mt-1.5 ">
+            <IconRegistro className="opacity-60 w-[24px] ml-3 " />
+          </div>
+          <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${state ? "opacity-100" : "opacity-0"  }`}>
+            Registrá un e-mail para mandarte {registroEmail}
+          </div>
+          <ButtonB
+            className={`h-8 text-[13px]  w-max`}
+            onClick={() => { handleToggle(); setEmail(""); setName("")}}
+            // type={state ? "reset" : "button"}
+            data-testid="edit-button"
+            data-active={state}
+          >
+            {state ? "Cancelar" :  <div className="text-[12px] overflow-auto whitespace-nowrap"> Registrar EMAIL</div>  }
+          </ButtonB>
         </div>
 
         <Disclosure>
@@ -79,7 +89,7 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
             <div className="flex flex-col gap-y-2 pt-4">
               <div>
                 {/* Registrar name/email */}
-                <form action={dispatch} id="actualizarPerfil">
+                <form action={dispatch} /* id="actualizarPerfil" */>
 
                   {/*input nombre/email */}
                   <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
@@ -88,6 +98,8 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
                       id="name"
                       type="text"
                       name="name"
+                      minLength={3}
+                      maxLength={100}
                       value={name}
                       placeholder= "Nombre"
                       required
@@ -105,6 +117,8 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
                       id="email"
                       type="email"
                       name="email"
+                      minLength={3}
+                      maxLength={100}
                       value={email}
                       placeholder= "Email"
                       required
@@ -118,6 +132,30 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
                     </InputCnp>
                   </fieldset>
 
+                  <input
+                    className="hidden"
+                    id="password"
+                    type="password"
+                    name="password"
+                    value="Cnp-Mandataria-25"
+                    autoComplete="new password"
+                    required
+                    readOnly
+                    minLength={6}
+                  />
+
+                  <input
+                    className="hidden"
+                    id="password"
+                    type="password"
+                    name="confirmPassword"
+                    value="Cnp-Mandataria-25"
+                    autoComplete="new password"
+                    required
+                    readOnly
+                    minLength={6}
+                  />
+
                   {/* Massages erros */}
                   <div
                     className="flex items-end relative space-x-8"
@@ -127,7 +165,7 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
                     {estado?.message && (
                       <>
                         <ExclamationCircleIcon className="absolute top-4 h-5 w-5 text-red-500" />
-                        <p className="pt-4 text-sm text-red-500">{estado?.message}</p>
+                        <p className="pt-4 text-sm text-red-500">polo{estado?.message}</p>
                       </>
                     )}
                   </div>
@@ -137,10 +175,13 @@ export default function RegistrarEmailConsulta( {registroEmail}:{registroEmail: 
                     <ButtonA
                       type="submit"
                       className={`h-8 text-[13px] w-max`}
-                      disabled={ email === ''}
-                      onClick={async () => {
-                        await signOut({ callbackUrl: '/login' });
-                      }}
+                      disabled={ email == "" && name == ""}
+                      /* onClick={() => {
+                        setSpin(true);
+                      }} */
+                        // onClick={() => {
+                        //   handleToggle();
+                        // }}
                     >
                       Registrar
                     </ButtonA>

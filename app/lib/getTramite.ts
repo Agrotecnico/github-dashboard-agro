@@ -1,4 +1,4 @@
-import type { Tramite } from "@/app/lib/definitions";
+import type { TramiteMd } from "@/app/lib/definitions";
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
@@ -14,10 +14,10 @@ export function getTramiteBySlug(slug: string ) {
   const fullPath = join(tramitesDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
-  return { ...data, slug: realSlug, content } as Tramite;
+  return { ...data, slug: realSlug, content } as TramiteMd;
 }
 
-export function getAllTramites(): Tramite[] {
+export function getAllTramites(): TramiteMd[] {
   const slugs = getTramiteSlugs();
   const tramites = slugs
     .map((slug) => getTramiteBySlug(slug))

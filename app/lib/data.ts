@@ -168,7 +168,6 @@ export async function fetchFilteredConsultas(query: string, currentPage: number,
     consultas.respuesta,
     consultas.created_at,
     consultas.user_id,
-    consultas.codigo_consulta,
     users.name,
     users.email,
     users.image
@@ -177,7 +176,6 @@ export async function fetchFilteredConsultas(query: string, currentPage: number,
     WHERE
       users.name ILIKE ${`%${query}%`} OR
       users.email ILIKE ${`%${query}%`} OR
-      consultas.codigo_consulta ILIKE ${`%${query}%`}
       ORDER BY consultas.created_at DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
@@ -199,7 +197,7 @@ export async function fetchFilteredConsultasM(id: string | null | undefined, cur
       consulta,
       respuesta,
       created_at,
-      codigo_consulta,
+      -- codigo_consulta,
       archivos_url
       FROM consultas 
       WHERE
@@ -271,7 +269,6 @@ export async function fetchConsultasPages(query: string) {
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
-
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);

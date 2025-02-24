@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation';
 import { ChevronRightIcon, } from '@heroicons/react/24/outline';
 
 import { Frente } from '@/app/ui/marcos';
-import type { Tramite } from "@/app/lib/definitions"
+import type { TramiteMd } from "@/app/lib/definitions"
 
 
-export default function NavLinksTramites({allTramites }:{allTramites:Tramite[]}) {
+export default function NavLinksTramites({allTramites }:{allTramites:TramiteMd[]}) {
 
   const pathname = usePathname();
   
@@ -21,7 +21,7 @@ export default function NavLinksTramites({allTramites }:{allTramites:Tramite[]})
       </h1>
       <Frente className='!bg-[#e6e0e3] p-[3px] flex flex-col gap-0.5 '>
 
-        {allTramites.map((tramite:Tramite) => (
+        {allTramites.map((tramite:TramiteMd) => (
           <Link
               as={`/iniciar-tramite/${tramite.slug}`}
               href="/iniciar-tramite/[slug]"

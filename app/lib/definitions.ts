@@ -7,15 +7,15 @@ export type User = {
   name: string;
   email: string;
   password: string;
-  role: 'admin' | 'member' | 'developer';
+  role: 'admin' | 'member' | 'memberAccount';
   image: string | undefined;
 };
 
 export type Customer = {
   id: string;
-  name: string;
+  name: string | undefined;
   email: string;
-  image_url: string;
+  image_url: string | undefined;
 };
 
 export type Invoice = {
@@ -31,11 +31,25 @@ export type Invoice = {
 export type Consulta = {
   id: string;
   user_id: string;
-  codigo_consulta: string;
   archivos_url: string | undefined;
   consulta: string;
   respuesta: string | undefined;
   created_at: string;
+  // updated_at: string;
+};
+
+export type Tramite = {
+  id: string;
+  user_id: string;
+  tramite: string;
+  documentos_url: string;
+  informacion: string;
+  estado: string;
+  presupuesto: number;
+  created_at: string;
+  updated_at: string;
+  canceled_at: string | undefined;
+  deleted_at: string | undefined;
 };
 
 export type Revenue = {
@@ -73,7 +87,7 @@ export type ConsultasTable = {
   respuesta: string;
   created_at: string;
   user_id: string;
-  codigo_consulta: string;
+  // codigo_consulta: string;
   name: string;
   email: string;
   image: string | undefined;
@@ -122,7 +136,7 @@ export type Post = {
   image?: string;
 };
 
-export type Tramite = {
+export type TramiteMd = {
   slug?: string;
   tramite?: string;
   date?: string;

@@ -7,6 +7,7 @@ import { ButtonB, ButtonA } from '@/app/ui/button';
 import  IconCambio  from "@/app/ui/logosIconos/icon-cambio";
 import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import * as Tabs  from "@radix-ui/react-tabs";
+import { fetchUserById } from '@/app/lib/data';
 
 
 export const metadata: Metadata = {
@@ -21,8 +22,9 @@ type Params = {
   };
 };
 
-export default async function TramitePage({ params }: Params) {
+export default async function Page({ params }: Params) {
   const session = await auth();
+  const user = await fetchUserById(session?.user?.email)
 
   return (
     <>
@@ -108,23 +110,7 @@ export default async function TramitePage({ params }: Params) {
           </Tabs.Root>
         </Frente>
 
-        <Frente className="!bg-[#e6e0e3] p-4 mt-2 opacity-60">
-          <div className="flex flex-col gap-y-1">
-            <div className=" text-[15px] text-[#1d0215bb]">Información adicional y comentarios</div>
-            <textarea
-              className={`w-full rounded-[4px] p-3 border border-[#e9dae9] bg-[#ffffff] text-[#000] opacity-70 transition-[opacity,shadow]  duration-150 ease-in hover:opacity-90 hover:border-[#e9dae9] focus:border-[rgba(195,123,195,0)] focus:opacity-100 focus:[box-shadow:_0px_0px_0px_1px_#c37bc3cc] focus:outline-2 focus:outline-[#c37bc336] focus:outline-offset-2 focus:placeholder:opacity-30 placeholder:text-sm  placeholder:text-[#858585]`}
-              // id="consulta"
-              // name="consulta"
-              placeholder= "comentarios..."
-              // required
-              // rows={2}
-              // maxLength={1024}
-              // wrap="hard"
-            />
-          </div>{/* */}
-        </Frente>
-
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] opacity-60">
+        {/* <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] opacity-60">
           <div className="flex items-center justify-between gap-5 h-[39px] min-[940px]:h-[32px] ">
             <div className="mt-1.5 ">
               <IconRegistro className="opacity-60 w-[24px] ml-3 " />
@@ -135,8 +121,8 @@ export default async function TramitePage({ params }: Params) {
               </div>
             </ButtonB>
           </div>
-        </Frente>
-
+        </Frente> */}
+  
         <div className="w-full flex justify-end mt-4 opacity-40">
           <ButtonA
             className={`w-[200px] h-8 text-sm !justify-start`}

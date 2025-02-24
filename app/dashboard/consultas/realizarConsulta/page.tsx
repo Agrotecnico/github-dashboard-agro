@@ -2,7 +2,7 @@ import { auth } from 'auth';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import RealizarConsulta from '@/app/ui/consultas/realizar-consulta';
+import RealizarConsulta from '@/app/ui/consultas/realizar-consulta-user';
 import { fetchUserById } from '@/app/lib/data';
 
 
