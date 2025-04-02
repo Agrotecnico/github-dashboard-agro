@@ -14,10 +14,10 @@ export function InputCnp({ children, className, ...rest }: InputProps) {
         <input
           {...rest}
           className={clsx(
-              'w-full rounded-[4px] pl-10 pr-4 py-0 border border-[#e9dae9] bg-[#ffffff] text-[#000000] opacity-70 transition-[opacity,shadow] duration-150 ease-in hover:opacity-100 hover:border-[#e9dae9] focus:border-[rgba(195,123,195,0)] focus:opacity-100 focus:[box-shadow:_0px_0px_0px_1px_#c37bc3cc] focus:outline-2 focus:outline-[#c37bc336] focus:outline-offset-2 focus:placeholder:opacity-40 placeholder:text-sm  placeholder:text-[#858585] ${name && "bg-[#ffffff]"}',
+              'w-full rounded-[4px] pl-10 pr-4 py-0 border border-[#e9dae9] bg-[#ffffff] text-[#000000] opacity-70 transition-[opacity,shadow] duration-150 ease-in hover:opacity-100 hover:border-[#e9dae9] focus:border-[rgba(195,123,195,0)] focus:opacity-100 focus:[box-shadow:_0px_0px_0px_1px_#c737c7cc] focus:outline-2 focus:outline-[#c37bc336] focus:outline-offset-2 focus:placeholder:opacity-40 placeholder:text-sm  placeholder:text-[#858585] ${name && "bg-[#ffffff]"}',
               className,
           )}
-        />
+        />{/*  #c737c7cc  #c37bc3cc*/}
           {children}
       </div>
     </div>

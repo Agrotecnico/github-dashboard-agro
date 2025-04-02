@@ -62,7 +62,7 @@ function DropdownMenu({ children }: { children: ReactNode }) {
           <RadixDropdownMenu.Portal forceMount>
             <RadixDropdownMenu.Content
               align="start"
-              className="mt-4 overflow-hidden rounded-b-lg bg-white text-left shadow-xl shadow-[#30032222]"
+              className="mt-1 overflow-hidden rounded-b-lg bg-white text-left shadow-xl shadow-[#30032222] md:mt-4"
               asChild
             >
               <motion.div
@@ -122,7 +122,7 @@ function DropdownMenuItem({
         await closeMenu();
         onSelect();
       }}
-      className="w-full select-none rounded px-2 py-1.5 data-[highlighted]:focus:outline-none"
+      className="w-full select-none rounded data-[highlighted]:focus:outline-none"
       asChild
     >
       <motion.div animate={controls}>{children}</motion.div>

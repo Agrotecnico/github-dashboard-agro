@@ -17,9 +17,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   const user = await fetchUserById(session?.user?.email);
   const id = params.id;
   const consulta = await fetchConsultaById(id);
-
-  const userMember = await fetchUserByEmail(consulta.user_id);
-
+  const pilo= consulta.email_id
+  const userMember = await fetchUserByEmail(pilo);
+  
+  // console.log("userMember:", userMember)
+  // console.log("consulta:", consulta)
+  // console.log("user:", user)
 
   if (!consulta) {
     notFound();
@@ -30,15 +33,15 @@ export default async function Page({ params }: { params: { id: string } }) {
       <main>
         <Breadcrumbs
           breadcrumbs={[
-            { label: 'Consultas', href: '/dashboard/tusConsultas' },
+            { label: 'Consultas', href: '/dashboard/consultas' },
             {
               label: 'Editar Consulta',
-              href: `/dashboard/tusConsultas/${id}/edit`,
+              href: `/dashboard/consultas/${id}/edit`,
               active: true,
             },
           ]}
         />
-        <Form consulta={consulta} userMember={userMember} />
+        <Form consulta={consulta} /* user={user} */ userMember={userMember} />
       </main>
     );
   return notFound();

@@ -16,9 +16,11 @@ export default  function UserButtonMenu() {
 
   const pathname = usePathname();
 
+  // console.log("pathname:", pathname)
+
 
   return (
-    <>
+    <div className={`${pathname.startsWith('/faq') && "hidden" } `}>
       <Dropdown>
         <Dropdown.Button>
           <IconMenu
@@ -62,6 +64,6 @@ export default  function UserButtonMenu() {
           </div>
         </Dropdown.Menu>
       </Dropdown>
-    </>
+    </div>
   );
 }

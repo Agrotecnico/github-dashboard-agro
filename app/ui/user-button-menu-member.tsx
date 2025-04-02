@@ -18,7 +18,7 @@ export default  function UserButtonMenuMember() {
 
 
   return (
-    <>
+    <div className={`${pathname.startsWith('/faq') && "hidden" } `}>
       <Dropdown>
         <Dropdown.Button>
           <IconMenu
@@ -62,7 +62,7 @@ export default  function UserButtonMenuMember() {
           </div>
         </Dropdown.Menu>
       </Dropdown>
-    </>
+    </div>
   );
   
 }

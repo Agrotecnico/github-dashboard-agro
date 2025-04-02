@@ -1,15 +1,16 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { auth } from 'auth';
+import Image from 'next/image'
 
 import { getPostBySlug } from '@/app/lib/getPost';
 import markdownToHtml from '@/app/lib/markdownToHtml';
 import distanceToNow from '@/app/lib/dateRelative';
 import markdownStyles from '@/app/ui/consultas/markdown-styles.module.css';
-import CommentFormConsulta from '@/app/ui/consultas/comments/form-comment';
-import CommentList from '@/app/ui/consultas/comments/list';
-import Image from 'next/image'
+import FormComment from '@/app/ui/consultas/comments/form-comment';
+import ListComment from '@/app/ui/consultas/comments/list-comment';
 import {Frente} from '@/app/ui/marcos'
+import { fetchUserById } from '@/app/lib/data';
 
 
 export const metadata: Metadata = {
@@ -26,7 +27,10 @@ type Params = {
 
 export default async function PostPage({ params }: Params) {
   const session = await auth();
+  const user = await fetchUserById(session?.user?.email)
   const post = getPostBySlug(params.slug);
+
+  // console.log("post:", post)
 
   if (!post) {
     return notFound();
@@ -64,7 +68,7 @@ export default async function PostPage({ params }: Params) {
                   alt="my desk"
                   width={481}
                   height={361}
-                  className="roundrd "
+                  className="roundrd w-96 h-auto "
                 />
               ) : null}
             </div>
@@ -100,16 +104,9 @@ export default async function PostPage({ params }: Params) {
             />
           </div>
 
-           {/*<div id="consulta" className="pt-12">
-              <h6>COMENTARIOS</h6>
-          </div>
-
-           <CommentList session={session} />
-          
-          <CommentFormConsulta session={session} /> */}
-
-          <div className=" flex items-center justify-center bg-[#c160ad87] text-center text-[#ffffff88] [border-radius:_0_0_12px_12px] [text-shadow:_1px_1px_#00000069] ">
-            cnp mandataria
+          <div className="my-20 mx-auto text-sm max-w-2xl sm:text-[15px]">
+            <FormComment user={user} post={post} />
+            <ListComment post={post} />
           </div>
         </article>
       </Frente>

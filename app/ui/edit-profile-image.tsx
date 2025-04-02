@@ -216,12 +216,20 @@ export default function EditProfileImage({ user }: { user: User | undefined }) {
                           disabled= {!state}
                         >
                           <div className={`relative label-dnd  ${!images.length ? 'rounded-lg' : 'rounded-t-lg'} bg-[#1d0215] text-[#ffffffdd] w-full p-4 duration-150 text-sm flex flex-col justify-center items-center active:opacity-60  `}>
-                            <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
+                            <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100 min-[512px]:flex-row ">
+                              <IconDragDrop className= "w-9 opacity-80  min-[512px]:mr-7" />
+                              <div>
+                                Click y elegí un archivo o arrastralo y sueltá aquí <br />
+                                <p className="text-[13px] mt-1.5 text-[#ffffffbb]">Tipo de imagen: <b>jpg</b> o <b>png</b> <br />Tamaño Max de la imagen: <b>4 MB</b>
+                                </p>
+                              </div>
+                            </div>
+                            {/* <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
                               <IconDragDrop className= "mb-2 w-9 opacity-80 " />
                               Click y elegí una imagen o arrastrá y sueltá aquí <br />
                               <p className="text-xs mt-1.5  text-[#ffffffbb]">Tipo de imagen: <b>jpg</b> o <b>png</b><br />Tamaño Max de la imagen: <b>4 MB</b>
                               </p>
-                            </div>
+                            </div> */}
                             {errors && (
                               <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] ${!state && "hidden"} border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#913591] rounded-xl `}>
                                 {errors.maxNumber && (

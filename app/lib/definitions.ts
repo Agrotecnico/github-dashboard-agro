@@ -30,26 +30,28 @@ export type Invoice = {
 
 export type Consulta = {
   id: string;
-  user_id: string;
+  // user_id: string;
+  email_id: string;
   archivos_url: string | undefined;
   consulta: string;
   respuesta: string | undefined;
   created_at: string;
-  // updated_at: string;
+  updated_at: string;
 };
 
 export type Tramite = {
   id: string;
-  user_id: string;
+  email_id: string;
   tramite: string;
-  documentos_url: string;
-  informacion: string;
-  estado: string;
+  documentos_url: string | undefined;
+  informacion: string | undefined;
+  estado: 'presupuestar' | 'presupuestado' | 'iniciado' | 'cancelado' | 'terminado';
   presupuesto: number;
   created_at: string;
-  updated_at: string;
+  started_at: string | undefined;
   canceled_at: string | undefined;
-  deleted_at: string | undefined;
+  budgeted_at: string | undefined;
+  finished_at: string | undefined;
 };
 
 export type Revenue = {
@@ -84,12 +86,28 @@ export type InvoicesTable = {
 export type ConsultasTable = {
   id: string;
   consulta: string;
-  respuesta: string;
+  respuesta: string | undefined;
+  email_id: string;
   created_at: string;
-  user_id: string;
-  // codigo_consulta: string;
+  updated_at: string;
   name: string;
-  email: string;
+  // email: string;
+  image: string | undefined;
+};
+export type TramitesTable = {
+  id: string;
+  email_id: string;
+  tramite: string;
+  documentos_url: string | undefined;
+  informacion: string | undefined;
+  estado: 'presupuestar' | 'presupuestado' | 'iniciado' | 'cancelado' | 'terminado';
+  presupuesto: number;
+  created_at: string;
+  budgeted_at: string | undefined;
+  started_at: string | undefined;
+  canceled_at: string | undefined;
+  finished_at: string | undefined;
+  name: string;
   image: string | undefined;
 };
 
@@ -145,5 +163,25 @@ export type TramiteMd = {
   estado?: string;
   [key: string]: any;
   image?: string;
-  documentos?: string
+  documentos?: string;
+  documentacion?: string;
+  informacion: string;
+};
+
+export type Comment = {
+  id: string;
+  created_at: string;
+  post_slug: string;
+  comment: string;
+  email_id: string;
+};
+
+export type CommentsPost = {
+  id: string;
+  email_id: string;
+  post_slug: string;
+  comment: string;
+  created_at: string;
+  name: string;
+  image: string | undefined;
 };

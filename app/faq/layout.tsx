@@ -29,7 +29,7 @@ export default async function Layout({
         <div className="mx-auto flex flex-col pb-16 pt-3 md:px-6 md:pt-6 ">
           <div className="mt-[92px] flex flex-col-reverse gap-8 md:mt-14 min-[1024px]:flex-row md:gap-4 md:overflow-hidden ">
             <SideNavConsultas />
-            <div className="flex-grow flex-col justify-between first-line:flex md:mt-6 md:overflow-y-auto">
+            <div className="w-full ml-auto flex-col justify-between first-line:flex md:mt-6 md:overflow-y-auto lg:w-[calc(100%_-_19rem)]">{/*  flex-grow */}
               {children}
             </div>
           </div>

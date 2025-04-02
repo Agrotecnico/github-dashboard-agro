@@ -47,9 +47,13 @@ export default function EditPerfilEmail( { user }: { user: User | undefined } ) 
       <Frente className="py-4 px-3 mt-4 text-small-regular sm:px-4">
 
         <div className="flex items-center justify-between">
-          <div className="opacity-80 ">
-            <IconEmail2 className="opacity-80 w-[22px] " color="#50073aaa" />
+          <div className={`flex items-center ${state ? "opacity-0" : "opacity-80 delay-0 duration-150" } `}>
+            <IconEmail2 className={`w-[22px] mr-4 duration-100 `} color="#50073aaa" />
+            <p>{user?.email} </p>
           </div>
+          {/* <div className="opacity-80 ">
+            <IconEmail2 className={`w-[26px] ${state ? "opacity-0" : "opacity-80 delay-150 duration-[50ms]" } delay-0 duration-100 `} color="#50073aaa" />
+          </div> */}
           <ButtonB
             className={`h-8 text-[13px] w-max`}
             onClick={() => { handleToggle(); setEmail("")}}
@@ -93,7 +97,7 @@ export default function EditPerfilEmail( { user }: { user: User | undefined } ) 
                         }} >
                         <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
                     </InputCnp>
-
+                    <IconEmail2 className="absolute w-[16px] left-[8px] top-[8px] " color="#50073a66"  />
                   </div>
 
                   {/* Massages nombre */}
@@ -111,10 +115,10 @@ export default function EditPerfilEmail( { user }: { user: User | undefined } ) 
                   </div>
 
                   {/* Cancelar / Guardar cambios nombre */}
-                  <div className=" flex items-center justify-end gap-4 mt-4 text-sm">
+                  <div className=" flex items-center justify-end gap-4 text-sm">
                     <ButtonA
                       type="submit"
-                      className={`h-8 text-[13px] w-max  disabled:opacity-40 `}
+                      className={`h-8 text-[13px] w-max  disabled:opacity-40 mt-4 `}
                       disabled={ email === ''}
                       onClick={async () => {
                         await signOut({ callbackUrl: '/login' });

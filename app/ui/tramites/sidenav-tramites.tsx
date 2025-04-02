@@ -11,10 +11,10 @@ export default async function SideNavTramites() {
   const allTramites = getAllTramites();
 
   return (
-    <div className="flex h-max flex-col w-[268px] min-w-[268px] max-[900px]:w-full">
-      <SessionProvider basePath={"/auth"}  /* session={session} */>
+    <div className="flex h-max flex-col w-[268px] min-w-[268px] max-[900px]:w-full">{/* session={session} */}
+      {/* <SessionProvider basePath={"/auth"}  > */}
           <TramiteButtonMenu allTramites={allTramites} />
-      </SessionProvider>
+      {/* </SessionProvider> */}
       <NavLinksTramites  allTramites={allTramites} />
     </div>
   );

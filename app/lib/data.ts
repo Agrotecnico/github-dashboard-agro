@@ -3,13 +3,17 @@ import {
   CustomerField,
   CustomersTableType,
   Consulta,
+  Tramite,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
   User,
   Revenue,
   Customer,
-  ConsultasTable
+  ConsultasTable,
+  TramitesTable,
+  Comment,
+  CommentsPost
 } from './definitions'
 import { formatCurrency } from './utils'
 import { unstable_noStore as noStore } from 'next/cache'
@@ -19,8 +23,8 @@ export async function fetchRevenue() {
   noStore()
 
   try {
-
-    const data = await sql<Revenue>`SELECT * FROM revenue`;
+    const data = await sql<Revenue>`SELECT * FROM revenue
+    ORDER BY revenue.id ASC`;
 
     return data.rows;
   } catch (error) {
@@ -59,23 +63,63 @@ export async function fetchCardData() {
          SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
          FROM invoices`;
+    const consultaCountPromise = sql`SELECT COUNT(*) FROM consultas`;
+    const tramiteCountPromise = sql`SELECT COUNT(*) FROM tramites`;
 
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise,
       invoiceStatusPromise,
+      consultaCountPromise,
+      tramiteCountPromise,
     ]);
 
     const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
     const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
     const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
     const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? '0');
+    const numberOfConsultas = Number(data[3].rows[0].count ?? '0');
+    const numberOfTramites = Number(data[4].rows[0].count ?? '0');
 
     return {
       numberOfCustomers,
       numberOfInvoices,
       totalPaidInvoices,
       totalPendingInvoices,
+      numberOfConsultas,
+      numberOfTramites
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch card data.');
+  }
+}
+export async function fetchCardDataMember(email: string) {
+  noStore()
+  try {
+    const consultaCountPromise = sql`SELECT COUNT(*) FROM consultas WHERE email_id = ${email}`;
+    const tramiteCountPromise = sql`SELECT COUNT(*) FROM tramites WHERE email_id = ${email}`;
+    // const invoiceStatusPromise = sql`SELECT
+    //      SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
+    //      SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+    //      FROM invoices`;
+
+    const data = await Promise.all([
+      consultaCountPromise,
+      tramiteCountPromise,
+      // invoiceStatusPromise,
+    ]);
+
+    const numberOfConsultas = Number(data[0].rows[0].count ?? '0');
+    const numberOfTramites = Number(data[1].rows[0].count ?? '0');
+    // const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
+    // const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? '0');
+
+    return {
+      numberOfConsultas,
+      numberOfTramites,
+      // totalPaidInvoices,
+      // totalPendingInvoices,
     };
   } catch (error) {
     console.error('Database Error:', error);
@@ -167,15 +211,15 @@ export async function fetchFilteredConsultas(query: string, currentPage: number,
     consultas.consulta,
     consultas.respuesta,
     consultas.created_at,
-    consultas.user_id,
+    consultas.updated_at,
+    consultas.email_id,
     users.name,
-    users.email,
     users.image
     FROM consultas
-    JOIN users ON consultas.user_id = users.id
+    JOIN users ON consultas.email_id = users.email
     WHERE
       users.name ILIKE ${`%${query}%`} OR
-      users.email ILIKE ${`%${query}%`} OR
+      users.email ILIKE ${`%${query}%`}
       ORDER BY consultas.created_at DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
@@ -183,6 +227,41 @@ export async function fetchFilteredConsultas(query: string, currentPage: number,
   } catch (error) {
     console.error('Failed to fetch consultas:', error);
     throw new Error('No se pudieron recuperar las consultas.');
+  }
+}
+export async function fetchFilteredTramites(query: string, currentPage: number,) {
+  noStore()
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const tramites = await sql<TramitesTable>`
+    SELECT
+    tramites.id,
+    tramites.tramite,
+    tramites.documentos_url,
+    tramites.informacion,
+    tramites.presupuesto,
+    tramites.estado,
+    tramites.created_at,
+    tramites.budgeted_at,
+    tramites.started_at,
+    tramites.canceled_at,
+    tramites.finished_at,
+    tramites.email_id,
+    users.name,
+    users.image
+    FROM tramites
+    JOIN users ON tramites.email_id = users.email
+    WHERE
+      users.name ILIKE ${`%${query}%`} OR
+      users.email ILIKE ${`%${query}%`}
+      ORDER BY tramites.created_at DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return tramites.rows;
+  } catch (error) {
+    console.error('Failed to fetch trámites:', error);
+    throw new Error('No se pudieron recuperar las trámites.');
   }
 }
 
@@ -197,11 +276,10 @@ export async function fetchFilteredConsultasM(id: string | null | undefined, cur
       consulta,
       respuesta,
       created_at,
-      -- codigo_consulta,
       archivos_url
       FROM consultas 
       WHERE
-      user_id = ${id}
+      email_id = ${id}
       ORDER BY created_at DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
@@ -209,6 +287,36 @@ export async function fetchFilteredConsultasM(id: string | null | undefined, cur
   } catch (error) {
     console.error('Failed to fetch consultas:', error);
     throw new Error('No se pudieron recuperar las consultas.');
+  }
+}
+export async function fetchFilteredTramitesM(email: string | null | undefined, currentPage: number,) {
+  noStore()
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  try {
+    const tramites = await sql<Tramite>`
+      SELECT
+      id,
+      tramite,
+      documentos_url,
+      informacion,
+      email_id,
+      estado,
+      presupuesto,
+      created_at,
+      budgeted_at,
+      started_at,
+      canceled_at,
+      finished_at
+      FROM tramites 
+      WHERE
+      email_id = ${email}
+      ORDER BY created_at DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+    return tramites.rows;
+  } catch (error) {
+    console.error('Failed to fetch tramites:', error);
+    throw new Error('No se pudieron recuperar los trámites.');
   }
 }
 
@@ -262,7 +370,25 @@ export async function fetchConsultasPages(query: string) {
   try {
     const count = await sql`SELECT COUNT(*)
     FROM consultas
-    JOIN users ON consultas.user_id = users.id
+    JOIN users ON consultas.email_id = users.email
+    WHERE
+    users.name ILIKE ${`%${query}%`} OR
+    users.email ILIKE ${`%${query}%`}
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('No se pudo recuperar el número total de consultas.');
+  }
+}
+export async function fetchTramitesPages(query: string) {
+  noStore()
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM tramites
+    JOIN users ON tramites.email_id = users.email
     WHERE
     users.name ILIKE ${`%${query}%`} OR
     users.email ILIKE ${`%${query}%`}
@@ -281,7 +407,7 @@ export async function fetchConsultasPagesM(id: string | null | undefined) {
   try {
     const count = await sql`SELECT COUNT(*)
     FROM consultas
-    WHERE user_id = ${id}
+    WHERE email_id = ${id}
   `;
 
     const totalPagesMember = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
@@ -292,6 +418,24 @@ export async function fetchConsultasPagesM(id: string | null | undefined) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('No se pudo recuperar el número total de consultas.');
+  }
+}
+export async function fetchTramitesPagesM(email: string | null | undefined) {
+  noStore()
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM tramites
+    WHERE email_id = ${email}
+  `;
+
+    const totalPagesMember = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    const countcon = Math.ceil(Number(count.rows[0].count) / 1);
+
+    // return totalPages;
+    return {totalPagesMember, countcon};
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('No se pudo recuperar el número total de trámites.');
   }
 }
 
@@ -359,8 +503,9 @@ export async function fetchConsultaById(id: string) {
       consulta,
       respuesta,
       created_at,
-      codigo_consulta,
-      user_id
+      updated_at,
+      archivos_url,
+      email_id
       FROM consultas
       WHERE id = ${id};
     `;
@@ -378,6 +523,93 @@ export async function fetchConsultaById(id: string) {
   }
 }
 
+export async function fetchTramiteById(id: string) {
+  noStore()
+  try {
+    const data = await sql<Tramite>`
+      SELECT
+      id,
+      tramite,
+      presupuesto,
+      informacion,
+      estado,
+      created_at,
+      budgeted_at,
+      started_at,
+      canceled_at,
+      finished_at,
+      documentos_url,
+      email_id
+      FROM tramites
+      WHERE id = ${id};
+    `;
+
+    const tramite = data.rows.map((tramite) => ({
+      ...tramite,
+    }));
+
+    return tramite[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch consulta.');
+  }
+}
+
+
+
+export async function fetchCommentById(id: string) {
+  noStore()
+  try {
+    const comments = await sql<Comment>`
+      SELECT
+      id,
+      email_id,
+      post_slug,
+      comment,
+      created_at
+      FROM comments
+      WHERE post_slug = ${id};
+    `;
+
+    // const comment = data.rows.map((comment) => ({
+    //   ...comment,
+    // }));
+
+    // return comment[0];
+    return comments.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch comment.');
+  }
+}
+export async function fetchFilteredComments(id: string/* query: string, currentPage: number */) {
+  noStore()
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const comments = await sql<CommentsPost>`
+    SELECT
+    comments.id,
+    comments.email_id,
+    comments.post_slug,
+    comments.comment,
+    comments.created_at,
+    users.name,
+    users.image
+    FROM comments
+    JOIN users ON comments.email_id = users.email
+    WHERE comments.post_slug = ${id}
+      ORDER BY comments.created_at DESC
+    `;
+    return comments.rows;
+  } catch (error) {
+    console.error('Failed to fetch comments:', error);
+    throw new Error('No se pudieron recuperar los comentarios.');
+  }
+}
+
+
+
 
 export async function fetchUserById(email: string | null | undefined): Promise<User | undefined> {
   try {
@@ -390,7 +622,7 @@ export async function fetchUserById(email: string | null | undefined): Promise<U
 }
 export async function fetchUserByEmail(id: string | null | undefined): Promise<User | undefined> {
   try {
-    const user = await sql<User>`SELECT * FROM users WHERE id=${id}`;
+    const user = await sql<User>`SELECT * FROM users WHERE email=${id}`;
     return user.rows[0];
   } catch (error) {
     console.error('Failed to fetch user:', error);

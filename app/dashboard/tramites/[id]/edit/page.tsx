@@ -1,6 +1,6 @@
-import Form from '@/app/ui/consultas/edit-form-consulta';
+import Form from '@/app/ui/tramites/edit-form-tramite';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
-import { fetchConsultaById } from '@/app/lib/data';
+import { fetchTramiteById } from '@/app/lib/data';
 import { Metadata } from 'next';
 import { auth } from '@/auth';
 import { notFound } from 'next/navigation';
@@ -9,21 +9,23 @@ import { fetchUserByEmail } from '@/app/lib/data';
 
 
 export const metadata: Metadata = {
-  title: 'Editar Consulta',
+  title: 'Editar Trámite',
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await auth();
-  const user = await fetchUserById(session?.user?.email);
+  const emailx= session?.user?.email
+  const user = await fetchUserById(emailx);
   const id = params.id;
-  const consulta = await fetchConsultaById(id);
+  const tramite = await fetchTramiteById(id);
+  const email= tramite.email_id
 
   // const polo= consulta.user_id
-  const userMember = await fetchUserByEmail(consulta.user_id);
+  const userMember = await fetchUserByEmail(email);
 
-  // console.log("consulta:", userMember)
+  // console.log("tramite:", tramite)
 
-  if (!consulta) {
+  if (!tramite) {
     notFound();
   }
 
@@ -32,20 +34,21 @@ export default async function Page({ params }: { params: { id: string } }) {
       <main>
         <Breadcrumbs
           breadcrumbs={[
-            { label: 'Consultas', href: '/dashboard/tusConsultas' },
+            { label: 'Tramites', href: '/dashboard/tramites' },
             {
-              label: 'Editar Consulta',
-              href: `/dashboard/tusConsultas/${id}/edit`,
+              label: 'Editar Tramite',
+              href: `/dashboard/tramites/${id}/edit`,
               active: true,
             },
           ]}
         />
-        <Form consulta={consulta} userMember={userMember} />
+        <Form tramite={tramite} userMember={userMember} />
       </main>
     );
-  return notFound(); /* (
-    <div className="flex h-[50%] items-center justify-center ">
-      No editar las consultas
-    </div>
-  ); */
+
+    return notFound(); /* (
+      <div className="flex h-[50%] items-center justify-center ">
+        No editar las consultas
+      </div>
+    ); */
 }

@@ -4,7 +4,6 @@ import {
   UserGroupIcon,
   InboxIcon,
 } from '@heroicons/react/24/outline'
-import { lusitana } from '@/app/ui/fonts'
 import { fetchCardData } from '@/app/lib/data'
 import { Frente, Fondo } from '@/app/ui/marcos'
 
@@ -13,6 +12,8 @@ const iconMap = {
   customers: UserGroupIcon,
   pending: ClockIcon,
   invoices: InboxIcon,
+  consultas: UserGroupIcon,
+  tramites: InboxIcon,
 };
 
 export default async function CardWrapper() {
@@ -21,19 +22,17 @@ export default async function CardWrapper() {
     numberOfCustomers,
     totalPaidInvoices,
     totalPendingInvoices,
+    numberOfConsultas,
+    numberOfTramites,
   } = await fetchCardData();
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
       <Card title="Cobradas" value={totalPaidInvoices} type="collected" />
       <Card title="Pendientes" value={totalPendingInvoices} type="pending" />
       <Card title="Total facturas" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Clientes"
-        value={numberOfCustomers}
-        type="customers"
-      />
+      <Card title="Total clientes" value={numberOfCustomers} type="customers"/>
+      <Card title="Total consultas" value={numberOfConsultas} type="consultas" />
+      <Card title="Total trámites" value={numberOfTramites} type="tramites"/>
     </>
   );
 }
@@ -45,22 +44,22 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  type: 'invoices' | 'customers' | 'pending' | 'collected' | 'consultas' | 'tramites';
 }) {
   const Icon = iconMap[type];
 
   return (
-    <div className="flex flex-col justify-between ">{/*  rounded-xl bg-[#0000000d] shadow-sm [box-shadow:inset_0_1px_#0000002e,inset_0_-1px_#ffffff] */}
+    <div className="flex flex-col justify-between ">
       <div className="flex p-2 pl-0">
         {Icon ? <Icon className="h-5 w-[18px] text-[#50073aaa]" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
+        <h3 className="ml-2 text-[13px] font-medium sm:text-sm">{title}</h3>
       </div>
       <Frente
         className={`
-          truncate p-8 text-center text-lg bg-[#30032210] sm:text-xl sm:py-8`}/*  rounded-xl [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] */
+          truncate p-4 text-center text-sm bg-[#30032210] sm:text-base sm:p-6 lg:text-lg`}
       >
         {value}
-      </Frente>{/* ${lusitana.className} */}
+      </Frente>
     </div>
   );
 }

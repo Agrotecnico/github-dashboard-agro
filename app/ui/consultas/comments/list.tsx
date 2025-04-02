@@ -1,8 +1,9 @@
 /* import distanceToNow from '@/app/lib/dateRelative'; */
 import type { Session } from 'next-auth';
 import Image from 'next/image'
+import { User } from '@/app/lib/definitions';
 
-export default function CommentList({ session }: { session: Session | null }) {
+export default function CommentList({ user }: { user: User | undefined }) {
   const isAuthor = true;
   const isAdmin = true;
   return (
@@ -17,6 +18,20 @@ export default function CommentList({ session }: { session: Session | null }) {
             className="rounded-full"
           />
         </div>
+        {user ? (
+            <div className="flex w-full items-center gap-2">
+              <Image
+                src={`${user?.image}`}
+                alt={`${user?.name}`}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <div className="">
+                <b>{user ? user?.name : null} </b>
+              </div>
+            </div>
+          ) : null}
 
         <div className="flex-grow">
           <div className="flex flex-col">

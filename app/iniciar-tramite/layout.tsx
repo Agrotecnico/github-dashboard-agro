@@ -23,7 +23,7 @@ export default async function Layout({
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[80rem] flex-col justify-between ">
       <Providers>
-        <Header /* user={user} */ />
+        <Header />
       </Providers>
       <main className=" mx-auto w-full max-w-[64rem] flex-auto px-3 pt-[68px] sm:pt-20 md:px-6 lg:px-2">
         <div className="mx-auto flex flex-col pb-[72px] md:px-6 ">

@@ -83,49 +83,119 @@ export const agrotecnico2 = [
 ];
 
 
+export const tramites1 = [
+  `<img 
+    src= "/dnrpa.png" 
+    alt="icono trámites" 
+    width="14px"
+    height="14px"
+    style="margin: 0 8px 0 8px;"
+  />
+  <a href= "/iniciar-tramite/baja-de-vehiculo" style="color: #50073acc; font-size: 16px";>
+      Baja de vehículo
+  </a>
+  `,
 
-export const tramites = [
-  `
-  <div className=" ">
-      Altas y Bajas de Dominio
-  </div>`,
+  `<img 
+    src= "/dnrpa.png" 
+    alt="icono trámites" 
+    width="14px"
+    height="14px"
+    style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/cambio-de-radicacion" style="color: #50073acc; font-size: 16px";>
+      Cambio de radicación y domicilio
+  </a>
+  `,
 
-  `<div className=" ">
-      Verificaciones
-  </div>`,
-
-  `<div className=" ">
-      Denuncias de Venta
-  </div>
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/denuncia-de-venta" style="color: #50073acc; font-size: 16px";>
+      Denuncia de venta
+  </a>
   `,
 ];
 
-export const formularios = [
-  `<div className=" ">
-      F-08 Transferencias
-  </div>`,
+export const tramites2 = [
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/duplicado-titulo-o-cedula" style="color: #50073acc; font-size: 16px";>
+      Duplicado de título o cédula
+  </a>
+  `,
 
-  `<div className=" ">
-      Otros formularios
-  </div>`,
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/informe-estado-dominio" style="color: #50073acc; font-size: 16px";>
+      Informe de Estado de Dominio
+  </a>
+  `,
 
-  `<div className=" ">
-      F-03 Inscripción Contrato Prendario
-  </div>`,
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/inscripcion-inicial" style="color: #50073acc; font-size: 16px";>
+      Inscripción inicial
+  </a>
+  `,
 ];
 
-export const parqueAutomotor = [
-  `<div className=" ">
-      Parque Vehículos
-  </div>`,
+export const tramites3 = [
 
-  `<div className=" ">
-      Resolución de infracciones
-  </div>`,
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/reempadronamiento" style="color: #50073acc; font-size: 16px";>
+      Reempadronamiento
+  </a>
+  `,
 
-  `<div className=" ">
-      Patentamiento
-  </div>`,
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/renovacion-de-cedula" style="color: #50073acc; font-size: 16px";>
+      Renovación de Cédula
+  </a>
+  `,
+
+  `<img 
+  src= "/dnrpa.png" 
+  alt="icono trámites" 
+  width="14px"
+  height="14px"
+  style="margin: 0 8px;"
+  />
+  <a href= "/iniciar-tramite/transferencia-dominio" style="color: #50073acc; font-size: 16px";>
+      Transferencia de dominio
+  </a>
+  `,
 ];
 
 

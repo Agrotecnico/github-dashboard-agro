@@ -20,7 +20,7 @@ export default async function FooterConsultas() {
             <div className="opacity-80 ">cnp.mandataria@gmail.com</div>
           </div>
         </div>
-        <div className="flex flex-col gap-1 mt-2 justify-center items-center sm:flex-row sm:gap-6 ">
+        <div className="flex gap-3 mt-2 justify-center items-center sm:flex-row sm:gap-6 ">
           <CustomLink href="/" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215] ">
             CNP
           </CustomLink>

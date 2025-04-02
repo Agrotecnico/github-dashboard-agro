@@ -5,6 +5,7 @@ import { FormEvent, useState, useEffect, useMemo, useRef } from 'react';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { Disclosure, DisclosurePanel } from '@headlessui/react';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation'
 
 import { User } from '@/app/lib/definitions';
 import IconConsultaRight from "@/app/ui/logosIconos/icon-consulta-right"
@@ -33,8 +34,11 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
   // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const router = useRouter()
+  // const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
   const { state, close, toggle } = useToggleState()
-  const maxNumber = 5;
+  const maxNumber = 3;
 
   const files: File[]= []
   images.map((image) => {
@@ -48,8 +52,13 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
   };
 
   const enviarConsulta= () => {
+    // wait().then(() => router.push('/dashboard/consultas'))
     setTimeout(handleClickButton, 200) 
-    setSpin(false)
+    
+    setTimeout(() => setSpin(false), 200) 
+    // setTimeout(() => router.push('/dashboard/consultas'), 1000) 
+    
+    // setSpin(false)
     // location.reload()
   }
 
@@ -64,7 +73,7 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
     setSuccessState(false)
   }
 
-  const uploadToServer = async (e: FormEvent<HTMLFormElement>) => {
+  /* const uploadToServer = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (files.length === 0) return;
 
@@ -95,7 +104,64 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
       console.error(error);
     }
     setSpin(false)
+  }; */
+
+
+
+
+
+  const uploadToServer1 = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      setImageUrl(`["https://res.cloudinary.com/dchmrl6fc/image/upload/v1740640515/sin-adjuntos_ut7col.png"]`);
+      
+      enviarConsulta();
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const uploadToServer2 = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (files.length === 0) return;
+
+    try {
+      const data = new FormData();
+
+      {files.map((file, index) => {
+        data.append(`file${index}`, file );
+      })}
+      const response = await fetch('/api/upload-query', {
+        method: 'POST',
+        body: data,
+      });
+      const responseData = await response.json();
+
+      const polo: string[]= responseData.urls
+
+      const respon= JSON.stringify(polo )
+
+      setImageUrl(respon);
+      if (response.ok) {
+        console.log('File uploaded successfully');
+      }
+
+      enviarConsulta();
+
+    } catch (error) {
+      console.error(error);
+    }
+    setSpin(false)
+  };
+
+
+
+
+
+
+
+
+
 
   const renderFilePreview = (file: File ) => { 
     const fileType = file?.type; 
@@ -134,11 +200,13 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createConsulta, initialState);
 
+  console.log("imageUrl:", imageUrl)
+
 
   return (
     <>
       {/* consult */}
-      <Frente className="py-4 px-3 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
+      <Frente className="py-4 px-3 text-small-regular sm:px-4 !bg-[#1d021513] ">
         <div  className="flex items-center justify-between sm:flex-row" >
           <div className="relative">
             <IconConsultaRight className="opacity-70 ml-3 h-[36px] w-[30px] stroke-1 " />
@@ -176,7 +244,7 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
       </Frente>
 
       {/* adjuntar archivos */}
-      <Frente className={`flex flex-col mt-2 text-small-regular px-4 py-4 !bg-[#e6e0e3] `}>
+      <Frente className={`flex flex-col mt-2 text-small-regular px-4 py-4 !bg-[#1d021513] ${!state && 'mb-0'} `}>
         <div className={`flex items-center justify-between mb-0`} >
           <IconArchivo className="opacity-80 ml-3 w-[26px] stroke-1 " />
           <ButtonB
@@ -242,12 +310,20 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
                     disabled= {!state}
                   >
                     <div className={`relative label-dnd  ${!images.length ? 'rounded-lg' : 'rounded-t-lg'} bg-[#1d0215] text-[#ffffffdd] w-full p-4 duration-150 text-sm flex flex-col justify-center items-center active:opacity-80  `}>
-                      <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
+                      <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100 min-[512px]:flex-row ">
+                        <IconDragDrop className= "w-9 opacity-80  min-[512px]:mr-7" />
+                        <div>
+                          Click y elegí un archivo o arrastralo y sueltá aquí <br />
+                          <p className="text-xs mt-1.5 text-[#ffffffbb]">Cantidad Máx: <b>5</b> archivos <b>jpg</b>, <b>png</b> o <b>pdf</b> <span className="">(de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
+                            </p>
+                        </div>
+                      </div>
+                      {/* <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
                         <IconDragDrop className= "mb-2 w-9 opacity-80 " />
                         Click y elegí un archivo o arrastralo y sueltá aquí <br />
                         <p className="text-xs mt-1.5 text-[#ffffffbb]">Cantidad Máx: <b>5</b> archivos <b>jpg</b>, <b>png</b> o <b>pdf</b> <span className="">(de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
                           </p>
-                      </div>
+                      </div> */}
                       {errors && (
                         <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] ${!state && "hidden"} border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#913591] rounded-xl `}>
                           {errors.maxNumber && (
@@ -315,7 +391,7 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
         aria-live="polite"
         aria-atomic="true"
       >
-        {estado?.message && (
+        {estado?.message && estado?.message !== "consultaCreada" && (
           <>
             <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{estado?.message}</p>
@@ -329,7 +405,8 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
           type="hidden"
           id="archivos_url"
           name="archivos_url"
-          value={imageUrl}
+          // value={imageUrl}
+          value= {imageUrl ? imageUrl : `["https://res.cloudinary.com/dchmrl6fc/image/upload/v1740640515/sin-adjuntos_ut7col.png"]` }
           readOnly
         />
         {/* consulta */}
@@ -343,21 +420,20 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
         {/* email */}
         <input
           type="hidden"
-          id="user_id"
-          name="user_id"
-          value={`${user?.id}`}
+          id="email_id"
+          name="email_id"
+          value={`${user?.email}`}
           readOnly
         />
 
         <button
-          // form="form1"
           type="submit"
           ref={buttonyRef}
           className= "hidden font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-[#fff] aria-disabled:cursor-not-allowed aria-disabled:opacity-50 w-max small:max-w-[140px] bg-[#300322dd] text-[#d9d9d9] justify-center items-center text-[13px] duration-150 text-center !px-2.5 h-[26px] rounded-md hover:bg-[#300322] hover:text-[#eee] active:!bg-[#300322aa] disabled:opacity-40 disabled:hover:bg-[#300322dd] disabled:hover:text-[#d9d9d9] disabled:active:!bg-[#300322dd]" 
           disabled={ consulta === ''}
           // onClick={() => { location.reload() }}
           // onClick={() => {
-          //   setImageUrl("");
+          //   wait().then(() => router.push('/dashboard/consultas'));
           // }}
         >
           Enviar Consulta
@@ -365,7 +441,7 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
       </form>
 
       {/* Enviar consult */}
-      <form onSubmit={uploadToServer} >
+      <form onSubmit={ files.length === 0 ? uploadToServer1 : uploadToServer2 } >
         <div className="w-full flex justify-end mt-3">
           <ButtonA
             className={`w-[200px] h-8 text-sm !justify-start  ${!consulta ? 'opacity-40' :  'opacity-100'}`}
@@ -373,6 +449,8 @@ export default function RealizarConsultaUser( { user }: { user: User | undefined
             disabled={!consulta && true  }
             onClick={() => {
               setSpin(true);
+              // wait().then(() => router.push('/dashboard/consultas'));
+              router.push('http://localhost:3000/realizar-consulta');
             }}
           >
             <IconCambio

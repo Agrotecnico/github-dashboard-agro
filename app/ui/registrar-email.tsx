@@ -56,7 +56,7 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
 
   return (
     <>
-      <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
+      <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#1d021514] ">
         <div className="flex items-center justify-between gap-5">
           <div className="mt-1.5 ">
             <IconRegistro className="opacity-60 w-[24px] ml-3 " />
@@ -165,7 +165,7 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
                     {estado?.message && (
                       <>
                         <ExclamationCircleIcon className="absolute top-4 h-5 w-5 text-red-500" />
-                        <p className="pt-4 text-sm text-red-500">polo{estado?.message}</p>
+                        <p className="pt-4 text-sm text-red-500">{estado?.message}</p>
                       </>
                     )}
                   </div>

@@ -11,15 +11,19 @@ import {
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
 import { Button } from '@/app/ui/uiRadix/button';
+// import { Button } from '@/app/ui/button';
 import { User } from '@/app/lib/definitions';
 
 
 export default function UserButtonHeader( { user }: { user: User | undefined } ) {
   
   const pathname = usePathname();
+
+  const polo= process.env.ADMIN
 
 
   return (
@@ -47,6 +51,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             )}
           </Button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent
           className="mt-3 bg-white w-56 rounded-md shadow-xl shadow-[#30032222]"
           align="end"
@@ -65,92 +70,121 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
 
           <DropdownMenuSeparator className="h-[1px] bg-[#37415122] m-[3px]" />
 
-          <DropdownMenuItem className="flex flex-col">
-            <div className="flex w-full flex-col ">
-              {pathname == '/' ? (
-                <Link
-                  href={'#'}
-                >
-                  <div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Cnp mandataria</div>
-                </Link>
-              ) : (
-                <Link
-                  href={'/'}
-                >
-                  <div className="rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 ">Cnp mandataria</div>
-                </Link>
-              )}
+          {pathname == '/' ? (
+            <Link
+              href={'#'}
+            >
+              {/* <DropdownMenuItem></DropdownMenuItem> */}
+                <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Cnp mandataria</div>
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/'}
+            >
+              <DropdownMenuItem>
+                <div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 ">Cnp mandataria</div>
+              </DropdownMenuItem>
+            </Link>
+          )}
 
-              {pathname.startsWith('/faq') ? (
-                <Link
-                  href={'#'}
-                >
-                  <div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Consultas frecuentes</div>
-                </Link>
-              ) : (
-                <Link
-                  href={'/faq/dif-gestor-mandatario'}
-                >
-                  <div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100">Consultas frecuentes</div>
-                </Link>
-              )}
+          {pathname.startsWith('/faq') ? (
+            <Link
+              href={'#'}
+            >
+              {/* <DropdownMenuItem></DropdownMenuItem> */}
+                <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Consultas frecuentes</div>
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/faq/dif-gestor-mandatario'}
+            >
+              <DropdownMenuItem>
+                <div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100">Consultas frecuentes</div>
+              </DropdownMenuItem>
+            </Link>
+          )}
+            
+          {pathname == '/dashboard/consultas' ? (
+            <Link
+              href={'#'}
+            >
+              {/* <DropdownMenuItem></DropdownMenuItem> */}
+                {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
+                  ? ''
+                  : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Consultas</div>) }
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard/consultas'}
+            >
+              <DropdownMenuItem>
+                {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
+                  ? ''
+                  : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Consultas</div>)}
+              </DropdownMenuItem>
+            </Link>
+          )}
 
-              {pathname == '/dashboard/consultas' ? (
-                <Link
-                  href={'#'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? ''
-                    : (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Consultas</div>) }
-                </Link>
-              ) : (
-                <Link
-                  href={'/dashboard/consultas'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? ''
-                    : (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Consultas</div>)}
-                </Link>
-              )}
+          {pathname == '/dashboard/tramites' ? (
+            <Link
+              href={'#'}
+            >
+              {/* <DropdownMenuItem></DropdownMenuItem> */}
+              {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
+                ? ''
+                : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Trámites</div>)}
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard/tramites'}
+            >
+              <DropdownMenuItem>
+              {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
+                ? ''
+                : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Trámites</div>)}
+              </DropdownMenuItem>
+            </Link>
+          )}
 
-              {pathname == '/dashboard/tramites' ? (
-                <Link
-                  href={'#'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? ''
-                    : (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Trámites</div>)}
-                </Link>
-              ) : (
-                <Link
-                  href={'/dashboard/tramites'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? ''
-                    : (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Trámites</div>)}
-                </Link>
-              )}
-
-              {pathname.startsWith('/dashboard') ? (
-                <Link
-                  href={'#'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? (<div className="cursor-default rounded-md p-1 pl-2 text-[#37415188] ">Panel Admin</div>)
-                    : ''}
-                </Link>
-              ) : (
-                <Link
-                  href={'/dashboard'}
-                >
-                  {user?.email == 'agrotecnicog@gmail.com'
-                    ? (<div className=" rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Panel Admin</div>)
-                    : ''}
-                </Link>
-              )}
-            </div>
-          </DropdownMenuItem>
+          {pathname.startsWith('/dashboard') ? (
+            <Link
+              href={'#'}
+            >
+              {/* <DropdownMenuItem></DropdownMenuItem> */}
+                {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
+                  ? (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Panel Admin</div>)
+                  : ''}
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard'}
+            >
+              <DropdownMenuItem>
+                {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
+                  ? (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Panel Admin</div>)
+                  : ''}
+              </DropdownMenuItem>
+            </Link>
+          )}
+          
           <Button
+            variant={'ghost'}
+            className=" mt-3 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 active:bg-transparent"
+            onClick={async () => {
+              await signOut({ callbackUrl: '/' });
+            }}
+          >
+            <DropdownMenuItem>
+              <p>Salir</p>
+            </DropdownMenuItem>
+          </Button>
+          
+          {/* <Button
             variant={'ghost'}
             className="mb-1 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 active:bg-transparent"
             onClick={async () => {
@@ -158,7 +192,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             }}
           >
             Salir
-          </Button>
+          </Button> */}
 
         </DropdownMenuContent>
       </DropdownMenu>

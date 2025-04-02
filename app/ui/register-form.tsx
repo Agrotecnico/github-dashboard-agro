@@ -9,6 +9,7 @@ import {
 import { useFormState, useFormStatus } from 'react-dom';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 import { Button } from './button';
 import { createUser } from '@/app/lib/actions';
@@ -104,7 +105,7 @@ export default function RegisterForm() {
               <div className="relative">
                 <input
                   className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
-                  id="password"
+                  id="confirmPassword"
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirmá la contraseña"
@@ -115,6 +116,18 @@ export default function RegisterForm() {
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-900 peer-focus:text-gray-900" />
               </div>
             </Frente>
+
+            <input
+              // className="hidden"
+              id="role"
+              type="hidden"
+              name="role"
+              value="memberAccount"
+              // autoComplete="new password"
+              // required
+              readOnly
+              // minLength={6}
+            />
           </div>
         </Fondo>
         <LoginButton />
@@ -124,12 +137,24 @@ export default function RegisterForm() {
       aria-live="polite"
       aria-atomic="true"
     >
-      {state.message && (
+      {state.message === "usuario" ? redirect('/dashboard') : state.message && (
         <>
           <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
           <p className="text-sm text-red-500">{state.message}</p>
         </>
       )}
+      {/* {state.message === "usuario" || !state.message ? null : (
+        <>
+        <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+        <p className="text-sm text-red-500">{state.message}</p>
+      </>
+      )} */}
+      {/* {state.message && (
+        <>
+          <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+          <p className="text-sm text-red-500">{state.message}</p>
+        </>
+      )} */}
     </div>
     <Link
       href={'/login'}

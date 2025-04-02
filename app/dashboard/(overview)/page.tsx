@@ -8,8 +8,10 @@ import {
   RevenueChartSkeleton,
   LatestInvoicesSkeleton,
   CardsSkeleton,
+  CardsMemberSkeleton,
 } from '@/app/ui/skeletons';
 import CardWrapper from '@/app/ui/dashboard/cards';
+import CardWrapperMember from '@/app/ui/dashboard/cards-member';
 import { fetchUserById } from '@/app/lib/data';
 
 
@@ -29,7 +31,7 @@ export default async function Page() {
       >
         Resumen
       </h1>
-      <div className="grid gap-x-6 gap-y-3 grid-cols-2 sm:gap-6 lg:grid-cols-4">
+      <div className="grid gap-x-3 gap-y-1.5 grid-cols-2 min-[512px]:gap-6 min-[512px]:grid-cols-3">
         <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
         </Suspense>
@@ -52,9 +54,9 @@ export default async function Page() {
       >
         Resumen
       </h1>
-      <div className="grid gap-x-6 gap-y-3 grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        <Suspense fallback={<CardsSkeleton />}>
-          <CardWrapper />
+      <div className="grid gap-x-6 gap-y-3 grid-cols-3 sm:gap-6 lg:grid-cols-4">
+        <Suspense fallback={<CardsMemberSkeleton />}>
+          <CardWrapperMember />
         </Suspense>
       </div>
     </main>

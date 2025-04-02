@@ -24,7 +24,7 @@ import { useState } from 'react';
 
 export default  function TramiteButtonMenu({allTramites }:{allTramites:TramiteMd[]}) {
 
-  const { data: session, update } = useSession();
+  // const { data: session, update } = useSession();
 
   const [bookmarksChecked, setBookmarksChecked] = useState(true);
 	const [urlsChecked, setUrlsChecked] = useState(false);
@@ -46,7 +46,7 @@ export default  function TramiteButtonMenu({allTramites }:{allTramites:TramiteMd
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild /* className="bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e]py-4" */>
           <button
-            className="inline-flex size-[35px] opacity-70 text-[17px] py-1 px-4 items-center justify-center rounded-md bg-[#ffffffdd] text-[#50073a] duration-150 outline-none hover:opacity-100"
+            className="inline-flex size-[35px] opacity-70 font-semibold text-[20px] py-1 px-4 items-center justify-center rounded-md bg-[#ffffffdd] text-[#50073acc] duration-150 outline-none hover:opacity-100 sm:text-[22]"
             aria-label="Customise options"
           >{/* shadow-[0_2px_10px] shadow-blackA4 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e]*/}
             Seleccioná uno

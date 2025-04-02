@@ -39,8 +39,6 @@ export default async function Page(/* {
                   ) : (
                   <RealizarConsulta />
                 )}
-                  {/* <RealizarConsulta /> */}
-                  {/* <RealizarConsultaUser user= {user} /> */}
             </div>
           </div>
         </div>

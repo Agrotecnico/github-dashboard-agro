@@ -27,6 +27,8 @@ import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
 import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import { createUser } from '@/app/lib/actions';
 
+// import {sinAdjuntos} from "@/app/constant"
+
 
 
 
@@ -49,7 +51,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
 
 
   const { state, close, toggle } = useToggleState()
-  const maxNumber = 5;
+  const maxNumber = 3;
 
   const files: File[]= []
   images.map((image) => {
@@ -69,7 +71,8 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
 
   const enviarConsulta= () => {
     setTimeout(handleClickButton, 200) 
-    setSpin(false)
+    setTimeout(() => setSpin(false), 200) 
+    // setSpin(false)
     // location.reload()
   }
 
@@ -84,7 +87,49 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
     setSuccessState(false)
   }
 
-  const uploadToServer = async (e: FormEvent<HTMLFormElement>) => {
+  // const uploadToServer = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   if (files.length === 0) return;
+
+  //   try {
+  //     const data = new FormData();
+
+  //     {files.map((file, index) => {
+  //       data.append(`file${index}`, file );
+  //     })}
+  //     const response = await fetch('/api/upload-query', {
+  //       method: 'POST',
+  //       body: data,
+  //     });
+  //     const responseData = await response.json();
+
+  //     const polo: string[]= responseData.urls
+
+  //     const respon= JSON.stringify(polo )
+
+  //     setImageUrl(respon);
+  //     if (response.ok) {
+  //       console.log('File uploaded successfully');
+  //     }
+
+  //     enviarConsulta();
+
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  //   setSpin(false)
+  // };
+
+  const uploadToServer1 = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      enviarConsulta();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const uploadToServer2 = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (files.length === 0) return;
 
@@ -124,14 +169,14 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
         <img 
           src={URL.createObjectURL(file)} 
           alt={file.name} 
-          className="min-h-[80px] object-contain bg-[#ffffffaa] w-24 border border-[#1d021544] [border-radius:_6px_6px_0_6px] " />
+          className="min-h-[80px] object-contain bg-[#ffffffaa] w-20 border border-[#1d021544] [border-radius:_6px_6px_0_6px] " />
       ); 
       } else if ( fileType === 'application/pdf' ) { 
         return ( 
         <embed 
           src={URL.createObjectURL(file)} 
           type="application/pdf" 
-          className="min-h-[80px] object-contain bg-[#ffffffaa] w-[96px] h-[120px]  border border-[#1d021544]  [border-radius:_6px_6px_0_6px] " />
+          className="min-h-[80px] object-contain bg-[#ffffffaa] w-[80px] h-[100px]  border border-[#1d021544]  [border-radius:_6px_6px_0_6px] " />
         ); 
       } else { return ( 
       <p className=" text-[#fff] break-words p-2 text-xs text-left">
@@ -154,22 +199,18 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
 
   const initialStatex = { message: null, errors: {} };
   const [estadox, dispatchx] = useFormState(createUser, initialStatex);
-  const polo= estadox?.message
-  // const polo= "null"
+  const polox= estadox?.message
 
 
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createConsulta, initialState);
-
-  // console.log("consulta:", consulta)
-  // console.log("imageUrl:", imageUrl)
-  // console.log("email:", email)
+  const polo= estado?.message
 
 
   return (
     <>
       {/* consult */}
-      <Frente className="py-4 px-3 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
+      <Frente className="py-4 px-3 text-small-regular sm:px-4 !bg-[#1d021513] ">
         <div  className="flex items-center justify-between sm:flex-row" >
           <div className="relative">
             <IconConsultaRight className="opacity-70 ml-3 h-[36px] w-[30px] stroke-1 " />
@@ -206,7 +247,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
       </Frente>
 
       {/* adjuntar archivos */}
-      <Frente className={`flex flex-col mt-2 text-small-regular px-4 py-4 !bg-[#e6e0e3] `}>
+      <Frente className={`flex flex-col mt-2 text-small-regular px-4 py-4 !bg-[#1d021513] ${!state && 'pb-0'} `}>
         <div className={`flex items-center justify-between mb-0`} >
           <IconArchivo className="opacity-80 ml-3 w-[26px] stroke-1 " />
           <ButtonB
@@ -272,11 +313,13 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
                     disabled= {!state}
                   >
                     <div className={`relative label-dnd  ${!images.length ? 'rounded-lg' : 'rounded-t-lg'} bg-[#1d0215] text-[#ffffffdd] w-full p-4 duration-150 text-sm flex flex-col justify-center items-center active:opacity-80  `}>
-                      <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
-                        <IconDragDrop className= "mb-2 w-9 opacity-80 " />
-                        Click y elegí un archivo o arrastralo y sueltá aquí <br />
-                        <p className="text-xs mt-1.5 text-[#ffffffbb]">Cantidad Máx: <b>5</b> archivos <b>jpg</b>, <b>png</b> o <b>pdf</b> <span className="">(de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
-                          </p>
+                      <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100 min-[512px]:flex-row ">
+                        <IconDragDrop className= "w-9 opacity-80  min-[512px]:mr-7" />
+                        <div>
+                          Click y elegí un archivo o arrastralo y sueltá aquí <br />
+                          <p className="text-xs mt-1.5 text-[#ffffffbb]">Cantidad Máx: <b>3</b> archivos <b>jpg</b>, <b>png</b> o <b>pdf</b> <span className="">(de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
+                            </p>
+                        </div>
                       </div>
                       {errors && (
                         <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] ${!state && "hidden"} border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#913591] rounded-xl `}>
@@ -301,7 +344,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
                     </div>
                   </button>
                   <div className= "flex flex-col rounded-b-lg bg-[#1d0215] ">
-                    <div className= {`flex items-baseline justify-start px-10 gap-x-6 flex-wrap text-sm w-full cursor-default max-[512px]:justify-center`}>
+                    <div className= {`flex items-baseline justify-start px-10 gap-x-4 flex-wrap text-sm w-full cursor-default max-[512px]:justify-center`}>
                       { images.map((image, index) => (
                         <div key={index} className="flex flex-col items-center pb-4 pt-5">
                           <div className="image-item flex justify-start">
@@ -337,27 +380,17 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
         </Disclosure>
       </Frente>
 
-      {/* <RegistrarEmail registroEmail="la respuesta" /> */}
-
       {/* registrar email */}
-      { polo === null || polo !== "usuario" ? (
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
+      { polox === null || polox !== "usuario" && polo === "Database Error: El email ya existe." ? (
+        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#1d021513] ">
           <div className="flex items-center justify-between gap-5">
             <div className="mt-1.5 ">
               <IconRegistro className="opacity-60 w-[24px] ml-3 " />
             </div>
-            {/* {statexx === false ? (
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${statex ? "opacity-100" : "opacity-0"  } `}>
-                Registrá un e-mail para mandarte la respuesta
-              </div>
-            ) : (
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300 `}>
-                Hola {name} se registro el e-mail: {email}
-              </div>
-            )} */}
 
-            <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${statex ? "opacity-100" : "opacity-0"  } `}>
-              Registrá un e-mail para mandarte la respuesta
+            <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  ${statex ? "opacity-0" : "opacity-100"  } `}>
+              {/* Registrá un e-mail para mandarte la respuesta */}
+              Regístrate para realizar una consulta y enviarte la respuesta
             </div>
               
             <ButtonB
@@ -367,7 +400,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
               data-testid="edit-button"
               data-active={statex}
             >
-              {statex ? "Cancelar" :  <div className="text-[12px] overflow-auto whitespace-nowrap"> Registrar EMAIL</div>  }
+              {statex ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Registrar {/* Registrar EMAIL */}</div>  }
             </ButtonB>
           </div>
           
@@ -439,8 +472,8 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
                     />
 
                     <input
-                      className="hidden"
-                      id="password"
+                      // className="hidden"
+                      id="confirmPassword"
                       type="hidden"
                       name="confirmPassword"
                       value="Cnp-Mandataria-25"
@@ -451,7 +484,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
                     />
 
                     <input
-                      className="hidden"
+                      // className="hidden"
                       id="role"
                       type="hidden"
                       name="role"
@@ -479,13 +512,6 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
                     {/* button submit */}
                     <div className=" flex items-center justify-end gap-4 mt-4 text-sm">
 
-
-
-                      
-
-
-
-
                       <ButtonA
                         // type="submit"
                         // ref={buttonyRef}
@@ -505,17 +531,21 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
           </Disclosure> */}
           </div>
         </Frente>
-      ) : (
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] ">
-          <div className="flex items-center justify-between gap-5">
-            <div className="mt-1.5 ">
-              <IconRegistro className="opacity-60 w-[24px] ml-3 " />
+        ) : (
+          <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e0e6e1] ">{/* !bg-[#e6e0e3] */}
+            <div className={`w-full text-start text-[14px] text-[#1d0215dd] transition-[opacity] duration-300  `}>
+              <span className="font-semibold  text-[15px] ">{name}</span>, se registró el e-mail <span className="font-semibold  text-[15px] mx-1 ">{email}</span> para mandarte la respuesta.
             </div>
-            <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300  `}>
-              Hola {name} se registro el e-mail: {email}
-            </div>
+          </Frente> 
+        )
+      }
+
+      {polo === "consultaCreada" && (
+        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e0e6e1] ">
+          <div className={`w-full text-start text-[15px] text-[#1d0215dd] transition-[opacity] duration-300  `}>
+            Recibimos tu consulta. Te enviaremos la respuesta a la brevedad.
           </div>
-        </Frente>
+        </Frente> 
       ) }
 
       {/* Massages error consult */}
@@ -524,7 +554,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
         aria-live="polite"
         aria-atomic="true"
       >
-        {estado?.message && (
+        {estado?.message && estado?.message !== "consultaCreada" && (
           <>
             <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{estado?.message}</p>
@@ -539,7 +569,7 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
           type="hidden"
           id="archivos_url"
           name="archivos_url"
-          value={imageUrl}
+          value={imageUrl ? imageUrl :  `["https://res.cloudinary.com/dchmrl6fc/image/upload/v1740640515/sin-adjuntos_ut7col.png"]` }
           readOnly
         />
         {/* consulta */}
@@ -553,8 +583,8 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
         {/* email */}
         <input
           type="hidden"
-          id="email"
-          name="email"
+          id="email_id"
+          name="email_id"
           value={email}
           readOnly
         />
@@ -575,29 +605,47 @@ export default function RealizarConsulta( /* { user }: { user: User | undefined 
       </form>
 
       {/* Enviar consult */}
-      <form onSubmit={uploadToServer} >
-        <div className="w-full flex justify-end mt-3">
+      {estado?.message !== "consultaCreada" &&
+        <form onSubmit={ files.length === 0 ? uploadToServer1 : uploadToServer2 } >
+          <div className="w-full flex justify-end mt-3">
+            <ButtonA
+              className={`w-[200px] h-8 text-sm !justify-start  ${!consulta ? 'opacity-40' :  'opacity-100'}`}
+              type="submit"
+              // disabled={!consulta && true }
+              disabled={consulta && polox ? false : true }
+              onClick={() => {
+                setSpin(true);
+              }}
+            >
+              <IconCambio
+                className={`${spin && "animate-spin"} mr-2 w-[22px] h-[22px] `}
+                fill2="#fffc"
+                fill="#ff00ff"
+              />
+              <div
+                className="w-full"
+              >
+                Enviar consulta
+              </div>
+            </ButtonA>
+          </div>
+        </form>
+      }
+
+      {estado?.message === "consultaCreada" && 
+        <div className="w-full flex justify-end">
           <ButtonA
-            className={`w-[200px] h-8 text-sm !justify-start  ${!consulta ? 'opacity-40' :  'opacity-100'}`}
-            type="submit"
-            disabled={!consulta && true }
+            className="h-8 text-sm !justify-start"
+            type="button"
             onClick={() => {
-              setSpin(true);
+              location.reload()
             }}
           >
-            <IconCambio
-              className={`${spin && "animate-spin"} mr-2 w-[22px] h-[22px] `}
-              fill2="#fffc"
-              fill="#ff00ff"
-            />
-            <div
-              className="w-full"
-            >
-              Enviar consulta
-            </div>
+            Nueva consulta
           </ButtonA>
         </div>
-      </form>
+      }
+      
     </>
   );
 }

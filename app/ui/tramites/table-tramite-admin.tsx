@@ -1,134 +1,126 @@
-import { User } from 'next-auth';
 
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { UpdateConsulta, DeleteConsulta } from '@/app/ui/consultas/buttons';
+import { UpdateTramite, DeleteTramite } from '@/app/ui/tramites/buttons';
 import Search from '@/app/ui/search';
-import { fetchFilteredConsultas } from '@/app/lib/data';
+import { fetchFilteredTramites } from '@/app/lib/data';
+import Image from 'next/image'
+import distanceToNow from '@/app/lib/dateRelative';
 
 
-export default async function TableConsultaAdmin({
+export default async function TableTramiteAdmin({
   query,
   currentPage,
-  user,
 }: {
   query: string;
   currentPage: number;
-  user: User | undefined
 }) {
 
-  const AllConsultas = await fetchFilteredConsultas(query, currentPage);
+  const AllTramites = await fetchFilteredTramites(query, currentPage);
 
   return (
     <div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Buscar consultas..." />
+        <Search placeholder="Buscar trámites..." />
       </div>
 
       <div className="mt-6 flow-root">
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden rounded-md">
-            <div className="md:hidden">
-              {AllConsultas?.map((AllConsulta) => (
+            <div className="">
+              {AllTramites?.map((AllTramite, index) => (
                 <div
-                  key={AllConsulta.id}
-                  className="mb-2 w-full text-sm rounded-lg p-4 md:bg-white  bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e]"
-                >
-                  <div className="flex pb-2 items-center w-full rounded-lg min-[800px]:flex-row ">
-                    <div className=" relative" data-testid="image-container">
-                      { AllConsulta.image ? (
-                          <img
-                            decoding="async" 
-                            src= {AllConsulta.image}
-                            className="rounded-full cursor-pointer bg-cover h-10 bject-cover w-full " alt="header-image-profile">
-                            
-                          </img>
-                        ) : (
-                          <div className="flex w-10 h-10 text-2xl items-center justify-center rounded-full bg-[#ffffffba] text-[#666] ">
-                            {AllConsulta?.email?.substring(0, 1).toUpperCase()}
-                          </div>
-                        )} 
+                  key={AllTramite.id}
+                  className="flex flex-col gap-3 mb-2 w-full text-sm rounded-lg p-4 bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] "
+                  >
+                  <div className="flex flex-col gap-3 rounded-lg ">
+                    <div className="flex items-center">
+                      <div className="" data-testid="image-container">
+                        { AllTramite.image ? (
+                            <Image
+                              // decoding="async" 
+                              src= {AllTramite.image}
+                              width={20}
+                              height={20}
+                              className="w-11 max-w-2xl rounded-full " alt="avatar user">
+                              
+                            </Image>
+                          ) : (
+                            <div className="flex w-12 h-12 text-2xl items-center justify-center rounded-full bg-[#1d021511] text-[#666] ">
+                              {AllTramite?.email_id?.substring(0, 1).toUpperCase()}
+                            </div>
+                          )} 
+                      </div>
+                      <div className="flex flex-col justify-center items-start ml-4 ">
+                        <h2 className="text-md font-semibold m-0" data-testid="username-test">
+                          {AllTramite?.name}
+                        </h2>
+                        <p className="text-[#1d0215aa] ">{AllTramite?.email_id}</p>
+                      </div>
                     </div>
-                    <div className="flex flex-col justify-center items-start ml-4 w-full min-[800px]:items-start min-[800px]:my-1 ">
-                      <h2 className="text-md font-semibold m-0" data-testid="username-test">
-                        {AllConsulta?.name}
-                      </h2>
-                      <p className="text-[#1d0215aa] ">{AllConsulta?.email}</p>
+
+                    <div className="flex items-center my-2 ">
+                      <Image
+                        src= "/dnrpa.png" 
+                        alt="icono trámites" 
+                        width={26} 
+                        height={26}
+                        className="opacity-50 h-[14px] w-[14px] mr-1.5 sm:mr-2 " 
+                      />
+                      <h1 className=" text-start text-[#50073a88] font-semibold leading-tight tracking-tighter text-base sm:text-lg sm:text-[23px] md:leading-none ">
+                        {AllTramite.tramite}
+                      </h1>
                     </div>
                   </div>
 
-                  <div className="flex w-full items-center justify-star gap-4 border-y border-[#00000014] py-2">
-                    <div>
-                      Consulta:
+                  <div className="flex flex-col w-full text-[#1d0215] py-2 gap-2 border-y border-[#1d021514]">
+                    <div className={`flex items-center `}>
+                      <div className="mr-2 text-[12.5px] px-[5px] bg-[#dd00dd00] rounded-[4px]">1</div>{/* &#10003; */}
+                      <div className={``}>
+                        Solicitó presupuesto el día <span  className="font-medium text-[13px] bg-[#ffffffdd] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(AllTramite.created_at)}</span><span className="opacity-70 text-[13px] ">{distanceToNow(new Date(AllTramites[index].created_at))}</span> 
+                      </div>
                     </div>
-                    {AllConsulta?.respuesta ? (
-                        <div className="text-center rounded text-sm ">
-                          Respondida
+
+                    <div className={`flex items-center `}>
+                      <div className={`mr-2 text-[12.5px] px-[5px] rounded-[4px]  ${AllTramite.estado === "presupuestar" && "text-[#ffffff] bg-[#e580d0]"}`}>2</div>
+                      { AllTramite.estado === "presupuestado" || AllTramite.estado === "iniciado" || AllTramite.estado === "cancelado" || AllTramite.estado === "terminado" ? (
+                        <div className={``}>
+                          Presupuesto enviado el día <span className="font-medium text-[13px] bg-[#ffffffdd] px-1.5 py-0.5 mr-1  rounded-[4px]" > {formatDateToLocal(AllTramite.budgeted_at!)}</span><span className="opacity-70 text-[13px] mr-1.5">{distanceToNow(new Date(AllTramites[index].budgeted_at!))} </span> Precio: <span className="font-medium text-[14px] bg-[#ffffffdd] ">{formatCurrency(Number(AllTramites[index].presupuesto))}</span>
                         </div>
                         ) : (
-                          <div className="text-center rounded text-[#cf0000] text-sm ">
-                            Sin responder
-                          </div>
+                          <div>Calcular presupuesto</div>
+                        ) }
+                    </div>
+
+                    <div className={`flex items-center `}>
+                      <div className={`mr-2 text-[12.5px] px-[5px] rounded-[4px] ${AllTramite.estado === "presupuestado" ? "text-[#ffffff] bg-[#e580d0]" : AllTramite.estado === "presupuestar" ? "opacity-40" : "opacity-100"}`}>3</div>
+                      {AllTramite.estado === "iniciado" || AllTramite.estado === "cancelado" || AllTramite.estado === "terminado" ? (
+                        <div className={``}>
+                          Pago realizado el día <span  className="font-medium text-[13px] bg-[#ffffffdd] px-1.5 py-0.5 mr-1  rounded-[4px]" > {formatDateToLocal(AllTramite.started_at!)}</span> <span className="opacity-70 text-[13px] " >{distanceToNow(new Date(AllTramites[index].started_at!))} </span>
+                        </div>
+                        ) : (
+                          <div className={`${AllTramite.estado === "presupuestar" ? "opacity-40" : "opacity-100"} `}>Chequear pago</div>
                         )}
+                    </div>
+
+                    <div className={`flex items-center `}>
+                      <div className={`mr-2 text-[12.5px] px-[5px] rounded-[4px] ${AllTramite.estado === "iniciado" ? "text-[#ffffff] bg-[#e580d0]" : AllTramite.estado === "presupuestar" ||  AllTramite.estado === "presupuestado" ? "opacity-40" : "opacity-100" }`}>4</div>
+                      {AllTramite.estado === "cancelado" || AllTramite.estado === "terminado" ? (
+                        <div className={``}>
+                          Trámite {AllTramite.estado === "cancelado" ? "cancelado" : AllTramite.estado === "terminado" && "terminado" } el día <span  className="font-medium text-[13px] bg-[#ffffffdd] px-1.5 py-0.5 mr-1  rounded-[4px]" > {formatDateToLocal(AllTramite.finished_at!)}</span>  <span className="opacity-70 text-[13px] ">{distanceToNow(new Date(AllTramites[index].finished_at!))}</span>
+                        </div>
+                        ) : (
+                          <div className={`${AllTramite.estado === "presupuestar" ||  AllTramite.estado === "presupuestado" ? "opacity-40" : "opacity-100"} `}>Realizar el trámite</div>
+                        )}
+                    </div>
                   </div>
-                  <div className="flex justify-between pt-2">
-                    <div>
-                      <p>Fecha</p>
-                      <p className="text-sm">{formatDateToLocal(AllConsulta.created_at)}</p>
-                    </div>
-                    <div className="flex items-end">
-                      <UpdateConsulta id={AllConsulta.id} />
-                      <DeleteConsulta id={AllConsulta.id} />
-                    </div>
+
+                  <div className="flex gap-2 justify-end items-end">
+                    <UpdateTramite id={AllTramite.id} />
+                    <DeleteTramite id={AllTramite.id} />
                   </div>
                 </div>
               ))}
             </div>
-            
-            <table className="hidden min-w-full rounded-md md:table">
-              <thead className="rounded-md text-left text-sm font-normal">
-                <tr>
-                  <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                    Mombre
-                  </th>
-                  <th scope="col" className="px-3 py-5 font-medium">
-                    Fecha
-                  </th>
-                  <th scope="col" className="px-3 py-5 font-medium">
-                    Respuesta
-                  </th>
-                </tr>
-              </thead>
-              <tbody >
-                {AllConsultas?.map((AllConsulta) => (
-                  <tr key={AllConsulta?.id} className="w-full py-3 bg-[#ffffff94] [box-shadow:inset_0_1px_#ffffff,inset_0_-1px_#0000002e] text-sm last-of-type:border-none [&:first-child]:rounded-tl-lg [&:first-child]:rounded-tr-lg [&:last-child]:rounded-bl-lg [&:last-child]:rounded-br-lg [&:first-child>td:first-child]:rounded-tl-lg  [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg  ">
-                    <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm group-first-of-type:[border-radius:_8px_0_0_0] group-last-of-type:[border-radius:_0_0_0_8px] sm:pl-6">
-                    <div className="flex items-center gap-3">
-                        <div> 
-                          <p className="font-semibold ">{AllConsulta.name}</p>
-                          <p className="text-[#1d0215aa] ">{AllConsulta.email}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-5 text-sm">
-                    <p>{formatDateToLocal(AllConsulta.created_at)}</p>
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-5 text-sm">
-                      {AllConsulta?.respuesta ? (
-                        <div className="text-center rounded ">Respondida</div>
-                        ) : (
-                          <div className="text-center rounded text-[#cf0000] ">Sin resonder</div>
-                        )}
-                    </td>
-                    <td className="whitespace-nowrap py-3 pl-6 pr-3 group-first-of-type:[border-radius:_0_8px_0_0] group-last-of-type:[border-radius:_0_0_8px_0]">
-                      <div className="flex justify-end gap-3  items-end flex-col">
-                        <UpdateConsulta id={AllConsulta.id} />
-                        <DeleteConsulta id={AllConsulta.id} />
-                      </div>
-                    </td>
-                  </tr>
-                ))} 
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

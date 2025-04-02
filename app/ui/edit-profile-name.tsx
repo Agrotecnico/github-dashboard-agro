@@ -45,8 +45,9 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
     <>
       <Frente className="py-4 px-3 mt-4 text-small-regular sm:px-4" >
         <div  className="flex items-center justify-between" >
-          <div className="opacity-80">
-            <IconCuenta className="opacity-80 w-[26px] " color="#50073aaa" />
+          <div className={`flex items-center ${state ? "opacity-0" : "opacity-80 delay-0 duration-150" } `}>
+            <IconCuenta className={`w-[26px] mr-4 duration-100 `} color="#50073aaa" />
+            <p>{user?.name} </p>
           </div>
           <ButtonB
             className={`h-8 text-[13px] w-max`}
@@ -64,7 +65,7 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
           <DisclosurePanel
             static
             className={clsx(
-              "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+              "transition-[max-height,opacity] duration-0 ease-in-out overflow-visible",
               {
                 "max-h-[1000px] opacity-100": state,
                 "max-h-0 opacity-0": !state,
@@ -90,6 +91,8 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
                         setName(e.target.value);
                       }} >
                       <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
+                      {/* <IconCuenta className={`w-[26px] ${state ? "opacity-0" : "opacity-80" } `} color="#50073aaa" /> */}
+                      <IconCuenta  className="absolute w-[20px] left-[6px] top-[6px] " color="#50073a66" />
                     </InputCnp>
                   </div>
                   {/* Massages nombre */}
@@ -105,8 +108,8 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
                       </>
                     )}
                   </div>
-                  {/* Cancelar / Guardar cambios nombre */}
-                  <div className="flex items-center justify-end gap-4 mt-4 text-sm">
+                  {/* Guardar cambios nombre */}
+                  <div className={`flex items-center justify-end gap-4 mt-4 text-sm ${!state && "hidden"}`}>
                     <ButtonA
                       type="submit"
                       className={`h-8 text-[13px] w-max  disabled:opacity-40  `}
