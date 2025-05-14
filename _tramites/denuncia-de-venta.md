@@ -5,7 +5,7 @@ date: "Febrero-2024"
 image: "/hero.png"
 estado: ""
 documentacion: "Documento de identidad del vendedor y del comprador, Formulario de Denuncia de Venta (F11 o TP), Libre deuda de infracciones, Constancia de la venta (si se tiene)"
-documentos: "Título del vehículo, Cédula del vehículo"
+documentos: "Título del vehículo"
 informacion: "Radicacion"
 ---
 

@@ -83,6 +83,7 @@ export const agrotecnico2 = [
 ];
 
 
+
 export const tramites1 = [
   `<img 
     src= "/dnrpa.png" 
@@ -91,7 +92,7 @@ export const tramites1 = [
     height="14px"
     style="margin: 0 8px 0 8px;"
   />
-  <a href= "/iniciar-tramite/baja-de-vehiculo" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/baja-de-vehiculo" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Baja de vehículo
   </a>
   `,
@@ -103,7 +104,7 @@ export const tramites1 = [
     height="14px"
     style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/cambio-de-radicacion" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/cambio-de-radicacion" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Cambio de radicación y domicilio
   </a>
   `,
@@ -115,7 +116,7 @@ export const tramites1 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/denuncia-de-venta" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/denuncia-de-venta" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Denuncia de venta
   </a>
   `,
@@ -129,7 +130,7 @@ export const tramites2 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/duplicado-titulo-o-cedula" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/duplicado-titulo-o-cedula" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Duplicado de título o cédula
   </a>
   `,
@@ -141,7 +142,7 @@ export const tramites2 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/informe-estado-dominio" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/informe-estado-dominio" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Informe de Estado de Dominio
   </a>
   `,
@@ -153,7 +154,7 @@ export const tramites2 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/inscripcion-inicial" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/inscripcion-inicial" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Inscripción inicial
   </a>
   `,
@@ -168,7 +169,7 @@ export const tramites3 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/reempadronamiento" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/reempadronamiento" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Reempadronamiento
   </a>
   `,
@@ -180,7 +181,7 @@ export const tramites3 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/renovacion-de-cedula" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/renovacion-de-cedula" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Renovación de Cédula
   </a>
   `,
@@ -192,11 +193,12 @@ export const tramites3 = [
   height="14px"
   style="margin: 0 8px;"
   />
-  <a href= "/iniciar-tramite/transferencia-dominio" style="color: #50073acc; font-size: 16px";>
+  <a href= "/iniciar-tramite/transferencia-dominio" style="color: #50073acc; font-size: 16px; width: 100%; text-align: start";>
       Transferencia de dominio
   </a>
   `,
 ];
+
 
 
 export const linkMembers = [

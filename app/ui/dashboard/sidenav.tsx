@@ -44,7 +44,7 @@ export default async function SideNav({
   if (session)
     return (
       <div className="flex h-full flex-col fixed w-60">
-        <Fondo className=" p-3 pb-6 ">
+        <Fondo className=" p-3 ">
           <div className="mb-2.5 flex flex-col-reverse font-medium items-center text-sm min-[824px]:[margin:_18px_0_34px]  ">
             <div className="">
               {/* {session?.user?.name} */}{session.user?.name}
@@ -58,19 +58,27 @@ export default async function SideNav({
               <NavLinksMember />
               )}
           </div>
+
+          <div className={`flex flex-col gap-[1px] text-[14px] mt-10 ${session.user?.email === process.env.ADMIN && "hidden"}`}>
+            <Link href="/iniciar-tramite/baja-de-vehiculo">
+              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 w-full rounded-none rounded-t-[4px] !justify-start hover:!opacity-100`}>
+                <div className="flex gap-2 items-center ">
+                  <p>Iniciar trámite</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
+                </div>
+              </ButtonA>
+            </Link>
+
+            <Link href="/realizar-consulta">
+              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-b-[4px] !justify-start hover:!opacity-100`}>
+                <div className="flex gap-2 items-center ">
+                  <p>Realizar consulta</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
+                </div>
+              </ButtonA>
+            </Link>
+          </div>
         </Fondo>
-
-
-        {/* <Link href="/realizar-consulta">
-          <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
-            <div className="flex gap-2 items-center ">
-              <p>{lengthConsultas !== 0 ? "Nueva" : "Realizar"} consulta</p>
-              <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-            </div>
-          </ButtonA>
-        </Link> */}
-
-
       </div>
     );
   return null;

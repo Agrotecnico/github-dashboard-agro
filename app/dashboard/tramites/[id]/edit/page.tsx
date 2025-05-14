@@ -20,10 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const tramite = await fetchTramiteById(id);
   const email= tramite.email_id
 
-  // const polo= consulta.user_id
   const userMember = await fetchUserByEmail(email);
-
-  // console.log("tramite:", tramite)
 
   if (!tramite) {
     notFound();
@@ -46,9 +43,5 @@ export default async function Page({ params }: { params: { id: string } }) {
       </main>
     );
 
-    return notFound(); /* (
-      <div className="flex h-[50%] items-center justify-center ">
-        No editar las consultas
-      </div>
-    ); */
+    return notFound(); 
 }

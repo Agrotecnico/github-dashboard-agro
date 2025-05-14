@@ -12,6 +12,8 @@ import { fetchUserById } from '@/app/lib/data';
 import { fetchTramitesPagesM } from '@/app/lib/data';
 import { fetchFilteredTramitesM } from '@/app/lib/data';
 import { ButtonA } from '@/app/ui/button';
+import { fetchFilteredTramites } from '@/app/lib/data';
+import Search from '@/app/ui/search';
 
 
 export const metadata: Metadata = {
@@ -36,6 +38,9 @@ export default async function Page({
 
   const totalPages = await fetchTramitesPages(query);
 
+  const AllTramites = await fetchFilteredTramites(query, currentPage);
+  // console.log("AllTramites:", AllTramites)
+
 
   const {totalPagesMember, countcon} = await fetchTramitesPagesM(email);
 
@@ -52,7 +57,16 @@ export default async function Page({
           Trámites
         </h1>
 
-        <TableTramiteAdmin query={query} currentPage={currentPage}   />
+        <div className="mb-8 flex items-center justify-between gap-2 md:mb-12">
+          <Search placeholder="Buscar trámites..." />
+        </div>
+
+        {AllTramites?.map((AllTramite, idx) => (
+          <div key={idx } className=" text-[13px] leading-[18px] ">
+            <TableTramiteAdmin AllTramite={AllTramite} /* idx={idx} lengthTramites={lengthTramites} */ />
+          </div>
+        ))}
+        {/* <TableTramiteAdmin  AllTramites={AllTramites}   /> */}
 
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />
@@ -62,19 +76,10 @@ export default async function Page({
 
     return (
       <main>
-        <div className="flex items-center justify-between text-wrap mb-8">
+        <div className=" mb-8">
           <h1 className={` text-xl lg:text-2xl`}>
             Trámites
           </h1>
-
-          <Link href="/iniciar-tramite">
-            <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
-              <div className="flex gap-2 items-center ">
-                <p>{lengthTramites !== 0 ? "Nuevo" : "Iniciar"} trámite</p>
-                <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-              </div>
-            </ButtonA>
-          </Link>
         </div>
         
         {tramites.length ? (
@@ -84,6 +89,7 @@ export default async function Page({
                 <TableTramiteMember tramite={tramite} idx={idx} lengthTramites={lengthTramites} />
               </div>
             ))}
+
             <div className="mt-5 flex w-full justify-center">
               <Pagination totalPages={totalPagesMember} />
             </div>

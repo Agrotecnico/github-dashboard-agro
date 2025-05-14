@@ -6,7 +6,7 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  password: string;
+  password: string | undefined;
   role: 'admin' | 'member' | 'memberAccount';
   image: string | undefined;
 };
@@ -30,7 +30,6 @@ export type Invoice = {
 
 export type Consulta = {
   id: string;
-  // user_id: string;
   email_id: string;
   archivos_url: string | undefined;
   consulta: string;
@@ -91,7 +90,6 @@ export type ConsultasTable = {
   created_at: string;
   updated_at: string;
   name: string;
-  // email: string;
   image: string | undefined;
 };
 export type TramitesTable = {

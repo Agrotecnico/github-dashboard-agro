@@ -65,19 +65,19 @@ export default async function Page({
 
     return (
       <main>
-        <div className="flex items-center justify-between text-wrap mb-8">
+        <div className=" mb-8">{/* flex items-center justify-between text-wrap */}
           <h1 className={` text-xl lg:text-2xl`}>
             Consultas
           </h1>
 
-          <Link href="/realizar-consulta">
+          {/* <Link href="/realizar-consulta">
             <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
               <div className="flex gap-2 items-center ">
                 <p>{lengthConsultas !== 0 ? "Nueva" : "Realizar"} consulta</p>
                 <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
               </div>
             </ButtonA>
-          </Link>
+          </Link> */}
         </div>
         
         {consultas.length ? (

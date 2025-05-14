@@ -16,26 +16,29 @@ export default async function SideNavConsultas() {
         <div className="mb-4 mt-2.5 w-full text-base text-center font-medium ">
           CONSULTAS FRECUENTES
         </div>
-        <NavLinksConsultas allPosts={allPosts} />
-      </Fondo> 
 
-      <div className="flex justify-center gap-2 pb-6 pt-8 sm:gap-8 lg:gap-2 ">
-        <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-          <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
-            <div className="flex gap-2 items-center ">
-            <p>{session ? "Consultas" : "Realizar consulta" }</p>
-            <ChevronRightIcon className="w-4 stroke-[3] opacity-60" />
-            </div>
-          </ButtonA>
-        </Link>
-        {/* <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-          <ButtonA 
-            className={`h-8 text-[14.5px] w-max`}>
-            {session ? "Tus consultas" : "Realizar consulta" } 
-            <ChevronRightIcon className="ml-3 w-4 stroke-[3] opacity-60" />
-          </ButtonA>
-        </Link> */}
-      </div>
+        <NavLinksConsultas allPosts={allPosts} />
+
+        <div className="flex flex-col gap-[1px] text-[14px] mt-10">
+          <Link href="/iniciar-tramite/baja-de-vehiculo">
+            <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 w-full rounded-none rounded-t-[4px] !justify-start hover:!opacity-100`}>
+              <div className="flex gap-2 items-center ">
+                <p>Iniciar trámite</p>
+                <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
+              </div>
+            </ButtonA>
+          </Link>
+
+          <Link href="/realizar-consulta">
+            <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-b-[4px] !justify-start hover:!opacity-100`}>
+              <div className="flex gap-2 items-center ">
+                <p>Realizar consulta</p>
+                <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
+              </div>
+            </ButtonA>
+          </Link>
+        </div>
+      </Fondo> 
     </div>
   );
 }

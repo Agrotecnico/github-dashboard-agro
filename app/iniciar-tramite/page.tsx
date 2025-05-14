@@ -89,8 +89,6 @@ export default async function Page({ params }: Params) {
               value="tab2"
             >
               <p className="mb-5">
-                {/* Documentación requerida para presupuestar el trámite. */}
-                {/* Para realizar el presupuesto adjuntá los siguientes documentos: */}
                  Adjuntá los siguientes documentos para realizar el presupuesto:
               </p>
               <p className="mb-2 mt-1 text-base font-medium text-[#50073a88] ">
@@ -102,8 +100,7 @@ export default async function Page({ params }: Params) {
               className="grow rounded-b-md p-4 outline-none text-sm text-[#1d0215bb] md:text-[15px]"
               value="tab3"
             >
-              <p className="mb-5">{/*  underline decoration-[#0002]  underline-offset-4 */}
-                {/* Información y datos necesarios para realizar el presupuesto. */}
+              <p className="mb-5">
                 Información necesaria para realizar el presupuesto
               </p>
               <p className="mb-2 mt-1 text-base font-medium text-[#50073a88] ">
@@ -112,19 +109,6 @@ export default async function Page({ params }: Params) {
             </Tabs.Content>
           </Tabs.Root>
         </Frente>
-
-        {/* <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e6e0e3] opacity-60">
-          <div className="flex items-center justify-between gap-5 h-[39px] min-[940px]:h-[32px] ">
-            <div className="mt-1.5 ">
-              <IconRegistro className="opacity-60 w-[24px] ml-3 " />
-            </div>
-            <ButtonB className={`h-8 text-[13px]  w-max`}>
-              <div className="text-[12px] overflow-auto whitespace-nowrap">
-                Registrar EMAIL
-              </div>
-            </ButtonB>
-          </div>
-        </Frente> */}
   
         <div className="w-full flex justify-end mt-4 opacity-80">
           <ButtonA

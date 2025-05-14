@@ -19,8 +19,8 @@ export default async function Page() {
 
 
   return (
-    <div className="flex flex-col justify-between w-full h-full min-h-screen">
-      <SessionProvider /* session={session} */>
+    <div className=" w-full h-full min-h-screen">{/* flex flex-col justify-between */}
+      <SessionProvider>
         <CNPMandataria user={user}  linkDatos={linkDatos} />
       </SessionProvider>
     </div>

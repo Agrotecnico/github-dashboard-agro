@@ -27,10 +27,10 @@ export default function NavInicio({ user }: { user: User | undefined }) {
                 className="flex flex-col items-center opacity-80 duration-200 hover:opacity-100"
               >
                 <div className="max-w-max ">
-                  <IconCuenta className="w-7 text-[30px]" color={'#fff9'} />
+                  <IconCuenta className="w-6 sm:w-7" color={'#fff9'} />
                 </div>
-                <div className="flex flex-col items-center leading-3 text-[#ffffffff] min-[500px]:flex-row">
-                  <div className=" text-sm ">Acceso</div>
+                <div className="flex flex-col items-center text-[#ffffffff] min-[500px]:flex-row">
+                  <div className="text-[13px] leading-none sm:text-sm sm:leading-none">Acceso</div>
                 </div>
               </Link>
             )}

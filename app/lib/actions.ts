@@ -7,6 +7,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from "bcrypt";
+import { sendEmail } from "@/app/lib/brevo";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -44,7 +45,6 @@ const FormSchemaUser = z.object({
 const FormSchemaConsulta = z.object({
   id: z.string(),
   archivos_url: z.string().min(5, { message: "Must be 5 or more characters long" }),
-  // user_id: z.string(),
   email_id: z.string(),
   consulta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   respuesta: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
@@ -57,7 +57,6 @@ const FormSchemaTramite = z.object({
   documentos_url: z.string().min(5, { message: "Must be 5 or more characters long" }),
   email_id: z.string(),
   informacion: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
-  // presupuesto: z.string().max(1024, { message: "Must be 2048 or fewer characters long" }),
   presupuesto: z.coerce
     .number()
     .gt(0, { message: 'Por favor ingrese una cantidad mayor a $0.' }),
@@ -83,7 +82,7 @@ const FormSchemaComment = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const CreateCustomer = FormSchemaCustomer.omit({ id: true });
-const CreateUser = FormSchemaUser.omit({ id: true, image: true });/*  role: true, */
+const CreateUser = FormSchemaUser.omit({ id: true, image: true, role: true  });
 const CreateConsulta = FormSchemaConsulta.omit({ created_at: true, respuesta: true,  id: true,  updated_at: true });
 const CreateTramite = FormSchemaTramite.omit({ id: true, presupuesto: true, created_at: true, budgeted_at: true, started_at: true, canceled_at: true, finished_at: true, estado: true });
 const CreateComment = FormSchemaComment.omit({ id: true, created_at: true });
@@ -96,11 +95,6 @@ const UpdateUserName = FormSchemaUser.omit({ role: true, id: true, password: tru
 const UpdateUserEmail = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true, name: true });
 const UpdateConsulta = FormSchemaConsulta.omit({  created_at: true, id: true, email_id: true, archivos_url: true });
 const UpdateTramite = FormSchemaTramite.omit({ created_at: true, id: true, email_id: true, documentos_url: true, tramite: true, informacion: true });
-
-// const UpdateUser = FormSchemaUser.omit({ role: true, id: true, password: true, confirmPassword: true, image: true });
-
-
-
 
 
 // This is temporary
@@ -157,11 +151,9 @@ export type StateUserEmail = {
 
 export type StateConsulta = {
   errors?: {
-    // user_id?: string[];
     email_id?: string[];
     archivos_url?: string[] | undefined;
     consulta?: string[];
-    // respuesta?: string[] | undefined;
   };
   message?: string | null;
 };
@@ -577,7 +569,7 @@ export async function createUser(prevStateUser: StateUser, formData: FormData) {
     email: formData.get('email'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword'),
-    role: formData.get('role'),
+    // role: formData.get('role'),
     /* image: formData.get('image'), */
   });
   
@@ -599,14 +591,17 @@ export async function createUser(prevStateUser: StateUser, formData: FormData) {
   }
   
   // Prepare data for insertion into the database
-  const { name, email, password, role  } = validatedFields.data;
+  const { name, email, password  } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10); 
+  
+  let rol= ""
+  password === "xxxxxx" ? rol = "member" : rol = "memberAccount"
 
   // Insert data into the database
   try {
     await sql`
       INSERT INTO users (name, email, password, role )
-      VALUES (${name}, ${email}, ${hashedPassword}, ${role} )
+      VALUES (${name}, ${email}, ${hashedPassword}, ${rol} )
     `;
     return {
       message: `usuario`,
@@ -815,4 +810,27 @@ export async function authenticate(
   }
 }
 
+
+
+export async function handleForm(formData: FormData) {
+  const title= formData.get("title")
+  const to_name= formData.get("to_name")
+  const to_email= formData.get("to_email")
+  const content= formData.get("content")
+  const validez= formData.get("validez")
+
+  if (!title || !to_name || !to_email || !content || !validez) {
+    return console.log("Por favoe llene todos los campos")
+  }
+  
+  await sendEmail({
+    subject: title as string,
+    to: [{
+      name: to_name as string,
+      email: to_email as string
+      }],
+    htmlContent: content as string,
+    validez: validez as string
+  })
+}
 

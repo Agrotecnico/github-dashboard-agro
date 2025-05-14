@@ -80,7 +80,21 @@ export default async function TableConsultaAdmin({
                     <div className={`flex items-center `}>
                       <div className="mr-2 px-[5px] bg-[#dd00dd00] rounded-[4px]">&#10003;</div>
                       <div className={``}>
-                        Consulta realizada el día <span className="font-medium text-[15px] text-[#1d0215] " > {formatDateToLocal(AllConsulta.created_at)}</span>  ({distanceToNow(new Date(AllConsulta.created_at))})
+                        Consulta realizada 
+
+                        <span className={`text-[13px] bg-[#22ff0014] px-1.5 py-0.5 mx-1 rounded-lg ${!AllConsulta.respuesta && "hidden"} `} >
+                          {formatDateToLocal(AllConsulta.created_at)}
+                        </span>
+                        <span className={`text-[13px] ml-1 px-1.5 py-0.5 rounded-lg bg-[#ff000014] ${AllConsulta.respuesta && "hidden"}`}>
+                          {distanceToNow(new Date(AllConsulta.created_at))}
+                        </span> 
+
+
+                        {/* <span className="font-medium ml-1 text-[15px] text-[#1d0215] " >
+                          {AllConsulta.respuesta ? formatDateToLocal(AllConsulta.created_at) : distanceToNow(new Date(AllConsulta.created_at))}
+                        </span> */}
+
+
                       </div>
                     </div>
 
@@ -88,7 +102,18 @@ export default async function TableConsultaAdmin({
                       <div className={`mr-2 px-[5px] rounded-[4px]  ${!AllConsulta.respuesta && "text-[#ffffff] bg-[#e580d0]"}`}>&#10003;</div>
                       { AllConsulta.respuesta  ? (
                         <div className={``}>
-                          Respuesta enviado el día <span className="font-medium text-[15px] text-[#1d0215]" > {formatDateToLocal(AllConsulta.updated_at)}</span>  ({distanceToNow(new Date(AllConsultas[index].updated_at))})
+                          Respuesta enviado el día 
+
+
+                          <span className={`text-[13px] bg-[#22ff0014] px-1.5 py-0.5 mx-1 rounded-lg ${!AllConsulta.respuesta && "hidden"} `} >
+                            {formatDateToLocal(AllConsulta.created_at)}
+                          </span>
+
+
+
+                          {/* <span className="font-medium text-[15px] text-[#1d0215]" >
+                            {formatDateToLocal(AllConsulta.updated_at)}
+                          </span>  ({distanceToNow(new Date(AllConsultas[index].updated_at))}) */}
                         </div>
                         ) : (
                           <div>Enviar respuesta</div>

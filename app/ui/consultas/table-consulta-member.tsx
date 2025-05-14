@@ -12,16 +12,19 @@ import IconConsultaRight from "@/app/ui/logosIconos/icon-consulta-right"
 import useToggleState from "@/app/lib/hooks/use-toggle-state"
 import { formatDateToLocal } from '@/app/lib/utils';
 import distanceToNow from '@/app/lib/dateRelative';
+import { Underline } from 'lucide-react';
 
 
 export default function TableConsultaMember( { 
   consulta,
   idx,
   lengthConsultas,
+  // currentPage,
 }: { 
   consulta: Consulta;
   idx: number;
   lengthConsultas: number;
+  // currentPage: number;
 } ) {
   
   const [palabrasConsulta, setTextconsulta] = useState(consulta.consulta.split(" "))
@@ -49,26 +52,50 @@ export default function TableConsultaMember( {
   }, [successState, close])
 
   const tituloConsulta= palabrasConsulta.slice(0, 12)
+  // const paginaActual= currentPage === undefined ? currentPage = 1 : currentPage
+
+  // console.log("paginaActual:", consulta)
 
 
   return (
-    <Frente  className="py-4 px-4 text-sm sm:px-4" >
-      <div className="flex flex-col items-center " >
-        <div className="w-full items-start flex gap-3 justify-between sm:items-center sm:mb-0">
-          <div className="flex w-full ">
-            <div className="relative">
-              <IconConsultaRight className="opacity-[0.55] text-[#50073a] mr-4 w-8 "/>
-              <span className="text-white absolute -top-0.5 left-[20px] text-[11px]  ">
-                {(lengthConsultas - idx) }
+    <Frente  className="p-2 text-sm sm:p-4" >
+      <div className="flex flex-col items-start " >
+        <div className="w-full items-start flex gap-4 justify-between">
+          <div className="relative">
+            <IconConsultaRight className="opacity-[0.55] text-[#50073a] w-8 "/>
+            <span className="text-white absolute -top-0.5 left-[20px] text-[11px]  ">
+              {/* {(lengthConsultas - idx) } */} ?
+            </span>
+          </div>{/* <p className=""><span className="text-[12.5px] ">CONSULTA-</span>00{(lengthConsultas - idx) }</p> */}
+
+          <div className="w-full mt-12 -ml-7 -mr-20 sm:px-1 sm:m-0 ">
+            <div className="text-[#50073a7d] w-full mb-2 font-medium text-[13.5px] sm:text-[14.5px] ">
+              CONSULTA
+              <span className={`ml-1 ${!consulta.respuesta && "hidden"}`}>
+                respondida el
+                <span className="text-[#1d0215aa] text-[13px] bg-[#22ff0014] ml-1  px-1.5 py-0.5 rounded-lg "  >
+                  {formatDateToLocal(consulta.updated_at)}
+                </span>
+              </span>
+
+              <span className={`ml-1 ${consulta.respuesta && "hidden"}`}>
+                realizada
+                <span className={` text-[#1d0215aa] text-[13px] bg-[#ff000014] ml-1 px-1.5 py-0.5 rounded-lg ${consulta.respuesta && "hidden"}`}>
+                  {distanceToNow(new Date(consulta.created_at))}
+                </span> 
               </span>
             </div>
-            <div className=" text-sm  ">
-              <div className="flex items-start flex-col leading-tight">
-                <p className=""><span className="text-[12.5px] ">CONSULTA-</span>00{(lengthConsultas - idx) }</p>
-                <p className="text-[13px] text-[#50073a7d] font-medium  ">
-                  Realizada {distanceToNow(new Date(`${consulta.created_at}`))} - {`${formatDateToLocal(consulta.created_at)}`}
-                </p>
-              </div>
+
+            <div className={`mb-2`}>
+              <span className={` decoration-[#1d021544] underline underline-offset-[3px] ${state && "underline-offset-0 no-underline"}`}>
+                {tituloConsulta.join(" ") }
+              </span>
+              <span className=" ">
+                { tituloConsulta.length < 12 ? "" :
+                  !state ? " ... " :
+                  ` ${palabrasConsulta.slice(12).join(" ")}` 
+                }
+              </span>
             </div>
           </div>
 
@@ -81,17 +108,7 @@ export default function TableConsultaMember( {
             {state ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
           </Button>
         </div>
-        <div className={`w-full pb-1.5 pt-3 px-5 sm:px-12`}>
-          <span className={` decoration-[#1d021544] underline underline-offset-[3px]`}>{/*  */}
-            {tituloConsulta.join(" ") }
-          </span>
-          <span className=" ">
-            { tituloConsulta.length < 12 ? "" :
-              !state ? " ... " :
-              ` ${palabrasConsulta.slice(12).join(" ")}` 
-            }
-          </span>
-        </div>
+
       </div>
       <Disclosure>
         <DisclosurePanel
@@ -106,16 +123,17 @@ export default function TableConsultaMember( {
         >
           <div className={`flex flex-col gap-4 mb-4 text-sm cursor-default transition-[visibility] duration-300 ease-in-out ${!state && "invisible"}`}>
             <div className="mt-4 text-[14.5px]">
-              <div className="text-[#50073a7d] mb-0.5 font-medium text-[13.5px] ">
-                RESPUESTA
+              <div className="text-[#50073a7d] mb-0.5 font-medium text-[13.5px] sm:text-[14.5px] ">
+                RESPUESTA{/* <span className={`ml-1 font-medium ${!consulta.updated_at && "hidden"} `}> enviada el {`${formatDateToLocal(consulta.updated_at)}`}</span> */}
               </div>
+
               <div>
                 { consulta.respuesta ? (
-                  <p className="p-4 border border-[#50073a22] bg-[#ffffffdd] rounded-[2px]">{ consulta.respuesta } </p>
+                  <p className="p-1 border border-[#50073a22] bg-[#ffffffdd] rounded-[2px] sm:p-4">{ consulta.respuesta } </p>
                 ) : (
-                  <p className="p-4  border border-[#50073a22] bg-[#ffffffdd] rounded-[2px]">
-                    Hemos recibido tu consulta.<br></br>
-                    Te responderemos a la brevedad.
+                  <p className="p-2  border border-[#50073a22] bg-[#ffffffdd] rounded-[2px] sm:p-4">
+                    Recibimos la consulta.<br></br>
+                    Te enviaremos la respuesta en la mayor brevedad.
                   </p>
                 )}
               </div>

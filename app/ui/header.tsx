@@ -5,6 +5,7 @@ import UserButtonHeader from '@/app/ui/user-button-header';
 import UserButtonMenu from '@/app/ui/user-button-menu';
 import UserButtonMenuMember from '@/app/ui/user-button-menu-member';
 import UserButtonMenuFaq from '@/app/ui/user-button-menu-faq';
+import UserButtonMenuIni from '@/app/ui/user-button-menu-ini';
 import LogoCnpColor from '@/app/ui/logosIconos/logo-cnp-color';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import { fetchUserById } from '@/app/lib/data'; 
@@ -36,20 +37,28 @@ export default async function Header( ) {
           </Link>
         </div>
 
-        <div className="flex flex-col text-center text-[18px] font-black leading-6 text-[#ffffffd4] [text-shadow:_1px_1px_0_#00000082] md:flex-row md:leading-7">
+        <div className="flex flex-col text-center text-[18px] leading-6 text-[#ffffffd4] [text-shadow:_1px_1px_0_#00000082] md:flex-row md:leading-7">
 
           {user?.email === process.env.ADMIN ? (
             <>
-              <UserButtonMenu />
               <UserButtonMenuFaq  allPosts={allPosts} />
+              <UserButtonMenu />
+              
+              {/* <UserButtonMenuIni /> */}
             </>
             ) : user ? (
-              <>
-                <UserButtonMenuMember />
-                <UserButtonMenuFaq  allPosts={allPosts} />
-              </>
-            // ) : null}
-           ) : <UserButtonMenuFaq  allPosts={allPosts} />}
+            <>
+              <UserButtonMenuMember />
+              <UserButtonMenuFaq  allPosts={allPosts} />
+              <UserButtonMenuIni />
+            </>
+            ) : (
+            <>
+              <UserButtonMenuFaq  allPosts={allPosts} />
+              <UserButtonMenuIni />
+            </>
+            )
+          }
 
         </div>
 
@@ -67,11 +76,12 @@ export default async function Header( ) {
           >
             <div className="max-w-max ">
               <IconCuenta
-                className="w-7"
+                className="w-6 sm:w-7"
                 color={'#fff9'}
               />
             </div>
-            <div className="text-sm text-[#fffffff2] [text-shadow:_1px_1px_0px_#000000c9] sm:inline-flex">
+            <div 
+              className="text-[13px] text-[#fffffff2] leading-none sm:text-sm sm:leading-none">
               Acceso
             </div>
           </Link>

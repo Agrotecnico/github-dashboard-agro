@@ -41,9 +41,9 @@ export default async function PostPage({ params }: Params) {
     <>
       <Frente className="!rounded-lg !bg-[#ffffffaa] ">
         <article className="px-3 pb-6 pt-6 md:px-6">
-          <h1 className="mb-6 text-center text-2xl font-bold leading-tight tracking-tighter md:text-left md:text-2xl md:leading-none lg:text-2xl">
+          <h1 className="mb-6 text-xl font-bold md:text-2xl">
             {post.excerpt}
-          </h1>
+          </h1>{/*  leading-tight tracking-tighter  md:leading-none*/}
 
           <div className="hidden md:mb-6 md:block">
             <div className="flex items-center">

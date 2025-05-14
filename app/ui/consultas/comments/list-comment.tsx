@@ -51,8 +51,8 @@ export default async function ListComment({
               <Fondo key={comment.id} className="flex space-x-4 w-full p-3 pb-2 !bg-[#30032209] !rounded-[6px] ">
                 <div className="flex-grow">
                   <div className="flex items-center">
-                    <div className="flex flex-wrap gap-2">
-                      <p className="font-semibold">{comment.name}</p>
+                    <div className="flex flex-wrap">
+                      <p className="font-semibold mr-2">{comment.name}</p>
                     
                       <time className="text-[#1d021566]">
                         {distanceToNow(new Date(`${comment.created_at}`))}
@@ -69,7 +69,7 @@ export default async function ListComment({
                     )}
                   </div>
 
-                  <div className="text-[#1d0215cc] leading-relaxed">
+                  <div className="text-[#1d0215cc] mt-1 leading-relaxed">
                     {comment.comment}
                   </div>
                 </div>

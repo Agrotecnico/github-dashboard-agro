@@ -60,7 +60,7 @@ export default function RegisterForm() {
             <Frente className=" hover:bg-[#ffffffbb] ">
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] duration-150 pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:bg-[#ffffff3d] hover:[box-shadow:_0_0_0_1px_#c737c739] focus:[box-shadow:_0_0_0_1px_#c737c7ee] focus:bg-[#ffffffbb] focus:border-[#2f6feb00] focus:outline-1 focus:outline-[#c37bc336] "
                   id="name"
                   type="text"
                   name="name"
@@ -74,7 +74,7 @@ export default function RegisterForm() {
             <Frente className=" hover:bg-[#ffffffbb] ">
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00] "
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] duration-150 pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:bg-[#ffffff3d] hover:[box-shadow:_0_0_0_1px_#c737c739] focus:[box-shadow:_0_0_0_1px_#c737c7ee] focus:bg-[#ffffffbb] focus:border-[#2f6feb00] focus:outline-1 focus:outline-[#c37bc336] "
                   id="email"
                   type="email"
                   name="email"
@@ -88,7 +88,7 @@ export default function RegisterForm() {
             <Frente className=" hover:bg-[#ffffffbb] ">
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] duration-150 pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:bg-[#ffffff3d] hover:[box-shadow:_0_0_0_1px_#c737c739] focus:[box-shadow:_0_0_0_1px_#c737c7ee] focus:bg-[#ffffffbb] focus:border-[#2f6feb00] focus:outline-1 focus:outline-[#c37bc336] "
                   id="password"
                   type="password"
                   name="password"
@@ -104,7 +104,7 @@ export default function RegisterForm() {
             <Frente className=" hover:bg-[#ffffffbb] ">
               <div className="relative">
                 <input
-                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:border-[#2f6feb55] focus:border-[#2f6feb00]"
+                  className="!hover:bg-transparent rounded-md peer block w-full border border-transparent bg-transparent py-[9px] duration-150 pl-10 text-sm outline-2 placeholder:text-[#1d021599] hover:bg-[#ffffff3d] hover:[box-shadow:_0_0_0_1px_#c737c739] focus:[box-shadow:_0_0_0_1px_#c737c7ee] focus:bg-[#ffffffbb] focus:border-[#2f6feb00] focus:outline-1 focus:outline-[#c37bc336] "
                   id="confirmPassword"
                   type="password"
                   name="confirmPassword"

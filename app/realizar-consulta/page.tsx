@@ -5,7 +5,6 @@ import FooterConsultas from '@/app/ui/footerConsultas';
 import Header from '@/app/ui/header';
 import { Providers } from '@/app/dashboard/providers'
 import { fetchUserById } from '@/app/lib/data';
-import RealizarConsultaUser from '@/app/ui/consultas/realizar-consulta-user';
 import RealizarConsulta from '@/app/ui/consultas/realizar-consulta';
 
 
@@ -13,11 +12,7 @@ export const metadata: Metadata = {
   title: 'Consultas',
 };
 
-export default async function Page(/* {        
-  children,
-}: {
-  children: React.ReactNode;
-} */) {
+export default async function Page() {
   const session = await auth();
   const user = await fetchUserById(session?.user?.email)
 
@@ -34,11 +29,7 @@ export default async function Page(/* {
                 <h1  className={` my-4 text-xl lg:my-8 lg:text-2xl`}>
                     Realizá tu consulta
                 </h1>
-                {user ? (
-                  <RealizarConsultaUser user= {user} />
-                  ) : (
-                  <RealizarConsulta />
-                )}
+                  <RealizarConsulta user= {user} />
             </div>
           </div>
         </div>

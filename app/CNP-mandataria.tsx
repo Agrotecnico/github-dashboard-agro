@@ -113,22 +113,18 @@ export default function CNPMandataria({
       </div> */}
 
       {/* Inicio */}
-      <SwiperSlide id="ini" className= "flex flex-col">
-        <div className="mb-8 flex flex-col w-full ">
-          <h2 className="font-bold  text-3xl mt-12 mx-auto mb-5 ">
+      <SwiperSlide id="ini" className= "flex flex-col !justify-start">
+        <div className="mb-8 flex flex-col w-full pt-24 sm:pt-32 ">
+          <h1 className="font-bold  text-3xl mx-auto mb-5 ">
             CNP mandataria
-          </h2>
+          </h1>
           <p className="text-sm px-4 leading-snug max-w-[700px] my-0 mx-auto text-center md:text-base">
           Un servicio con la facultad de representación legal, asesoramiento y gestión en la compra y venta de vehículos terrestres o náuticos. 
           Esto incluye la transferencia de dominio, el trámite de la cédula verde y azul, y otras diligencias importantes
-            {/* CNPmandataria es un sistema de gestion empresarial diseñado
-            especificamente para mandatarios , nuestro objetivo es que puedas
-            administrar tu negocio desde la comodidad de tu computadora o
-            dispositivo movil, desde cualquier parte del mundo. */}
           </p>
         </div>
         <Swiper
-          className="swiper2 mb-1 !h-[344px] "
+          className="swiper2 !h-[50vh] "
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -179,17 +175,32 @@ export default function CNPMandataria({
           {/* Manos */}
           <SwiperSlide className="">
             <div
-              className="absolute top-0 flex h-[300px] w-full flex-col items-center justify-start rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://res.cloudinary.com/dchmrl6fc/image/upload/v1740689220/mano-b_dq8ctv.jpg')] bg-cover bg-fixed bg-center text-4xl backdrop-blur "
-            >{/* https://lh3.googleusercontent.com/pw/AP1GczNB_LOmDwneOypSdbXJYhH1BPPrHIOOo_VXGnGfQKpcPqU0qO9HHps0NgJyfMxdako6Tybj61v7ywgT-mNiom_VQWx_3kDB9WLjqc2SjD03oV3axhbT=w1920-h1080 */}
-              
-              <p className="mt-6 mb-4 mx-2 text-xl min-[376px]:text-3xl">Hola! Bienvenido</p>
-              <div className="mx-2.5 flex flex-col items-start text-[#1d0215dd] text-sm min-[376px]:text-base sm:mx-10">
-                <p className="mb-1 w-full text-center">
-                  Aqui podés<Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}  className=" px-1.5 rounded-md duration-200 underline decoration-[#1d021581] underline-offset-2 hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver las consultas" : "Realizar consultas" } </Link>
-                </p>
-                <p className="w-full text-center">{/* {session ? 'o' : 'e'} */}o<Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
-                {session ? "Ver los trámites" : "Iniciar trámites" } </Link>de registros y propiedad del automotor
-                </p>
+              className="absolute top-0 flex w-full h-[40vh] flex-col items-center justify-start rounded-xl text-4xl  bg-cover   bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005)]"
+              >
+              <Image
+                src='https://res.cloudinary.com/dchmrl6fc/image/upload/v1740689220/mano-b_dq8ctv.jpg'
+                alt="Reempadronamiento"
+                width={960}
+                height={720}
+                objectFit={"container"}
+                className="absolute -z-10 object-cover top-[0px] flex h-full w-full items-center justify-center rounded-[10px]"
+              >{/* */}
+              </Image>
+
+              <div className='h-[23vh] absolute mx-4 flex items-center justify-center'>
+                <div className='flex flex-col'>
+                  <h1 className="mb-2.5 text-xl min-[376px]:text-3xl">
+                    Hola! Bienvenido
+                  </h1>
+                  <div className="flex flex-col items-start text-[#1d0215dd] text-sm min-[376px]:text-base sm:mx-10">
+                    <p className="mb-1 w-full text-center">
+                      Aqui podés<Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}  className=" px-1.5 rounded-md duration-200 underline decoration-[#1d021581] underline-offset-2 hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver las consultas" : "Realizar consultas" } </Link>
+                    </p>
+                    <p className="w-full text-center">{/* {session ? 'o' : 'e'} */}o<Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
+                    {session ? "Ver los trámites" : "Iniciar trámites" } </Link>de registros y propiedad del automotor
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </SwiperSlide>
@@ -197,13 +208,23 @@ export default function CNPMandataria({
           {/* Oficina */}
           <SwiperSlide className="">
             <div
-              className="absolute top-0 flex h-[300px] w-full items-end justify-center rounded-xl bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://res.cloudinary.com/dchmrl6fc/image/upload/v1740689272/carina-oficina_whue5m.jpg')] bg-cover bg-fixed bg-center text-4xl font-bold backdrop-blur "
-            >{/* https://lh3.googleusercontent.com/pw/AP1GczPpnEMmNa_UiSaqjOnb20pW4mEaVtPjGlIAa5K7tiHyeAizSCi6Sem_snmJyaNqaapQ_lOXnrJuongSiXqx_Y2fm8eNgdPxBm-RgKMp-vqeUx6zRT0b=w1920-h1080 */}
+              className="absolute top-0 flex w-full h-[40vh] flex-col items-center justify-start rounded-xl text-4xl  bg-cover   bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005)]"
+            >
+              <Image
+                src='https://res.cloudinary.com/dchmrl6fc/image/upload/v1740689272/carina-oficina_whue5m.jpg'
+                alt="Reempadronamiento"
+                width={960}
+                height={720}
+                objectFit={"container"}
+                className="absolute -z-10 object-cover top-[0px] mb-2 flex h-full w-full items-center justify-center rounded-[10px]"
+              >{/* */}
+              </Image>
+
               <Link 
                 href={"https://www.dnrpa.gov.ar/portal_dnrpa/mandatarios2.php?CONSULTAS2=true"} 
                 target='_blank'
-                className="w-full text-[#ffffffdd] decoration-[#ffffffdd] underline underline-offset-2 duration-150 opacity-60 hover:opacity-80">
-                <p className="w-full h-7 leading-5 rounded-[0_0_12px_12px] border border-[#111] bg-[#000d] text-[12.5px] font-normal backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
+                className="w-full text-[#ffffffdd] decoration-[#ffffff77] underline underline-offset-2 duration-150 opacity-60 hover:opacity-80 hover:decoration-[#ffffffdd]">
+                <p className="w-full h-6 leading-5 rounded-t-xl border border-[#111] bg-[#000d] text-[12.5px] font-normal backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
                   Mandataria Nacional{' '}
                   <span className="ml-2 text-[11px]">
                     {/* Mat:{' '} */}
@@ -221,9 +242,9 @@ export default function CNPMandataria({
       </SwiperSlide>
 
       {/* Trámites */}
-      <SwiperSlide id="ev" className="flex flex-col">
+      <SwiperSlide id="ev" className="flex flex-col !justify-start">
         <Swiper
-          className="swiper2 !h-[572px] !pb-8 !pl-2"
+          className="swiper2 !pt-24 sm:!pt-32"
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -238,33 +259,33 @@ export default function CNPMandataria({
             clickable: true,
           }}
           slidesPerView={1}
-          spaceBetween={4}
+          spaceBetween={0}
           speed={600}
           breakpoints={{
             320: {
               slidesPerView: 1.25,
-              spaceBetween: 4,
+              spaceBetween: 0,
               centeredSlides: true,
             },
             524: {
               slidesPerView: 1.5,
-              spaceBetween: 4,
+              spaceBetween: 0,
               centeredSlides: true,
             },
             768: {
               slidesPerView: 2.5,
-              spaceBetween: 4,
+              spaceBetween: 0,
               centeredSlides: true,
             },
             880: {
               slidesPerView: 2.75,
-              spaceBetween: 4,
+              spaceBetween: 0,
               centeredSlides: true,
               keyboard: true,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 4,
+              spaceBetween: 0,
               centeredSlides: false,
               keyboard: true,
               grabCursor: true,
@@ -304,8 +325,8 @@ export default function CNPMandataria({
                   alt="Baja de vehículo"
                   width={960}
                   height={720}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
-                >
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
+                >{/*  h-[240px] */}
                 </Image>
               </SwiperSlide>
 
@@ -315,7 +336,7 @@ export default function CNPMandataria({
                   alt="Cambio de radicación y domicilio"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
                 ></Image>
               </SwiperSlide>
 
@@ -325,17 +346,17 @@ export default function CNPMandataria({
                   alt="Denuncia de venta"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_10px_0_0_10px]"
+                  className="absolute object-fill h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
                 ></Image>
               </SwiperSlide>  
             </Swiper>
-            <div className="flex flex-col justify-center absolute z-10 top-[304px] items-center">
-              <div className="flex items-center w-full mb-4 justify-center">
+            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
+              <div className="flex items-center w-full mb-[1vh] justify-center">
                 <IconConocimiento size="33" />
               </div>
               <div className="px-4">
                 <h4 className="font-bold text-base m-0">Conocimiento Especializado</h4>
-                <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
+                <p className="mt-[2vh] mx-0 mb-0 font-normal text-sm text-center">
                 Profesional matriculada  por la <dfn title="Dirección Nacional de Registros y Propiedad del Automotor" className="text-[#2e37e6] font-medium ">DNRPA</dfn>.
                 Capacitada para realizar los trámites de la manera más eficiente en los Registros Seccionales.
                 </p>
@@ -366,9 +387,9 @@ export default function CNPMandataria({
               }}
               modules={[EffectFade, Navigation, Pagination, Autoplay]}
               autoplay={{
-                  delay: 3000,
-                  disableOnInteraction: false,
-                }}
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
             >
               <SwiperSlide>
                 <Image
@@ -376,7 +397,7 @@ export default function CNPMandataria({
                   alt="Duplicado de título o cédula"
                   width={960}
                   height={720}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center "
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
                 >
                 </Image>
 
@@ -388,46 +409,9 @@ export default function CNPMandataria({
                   alt="Informe de Estado de Dominio"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center"
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
                 ></Image>
-                  {/* <div className="absolute flex h-full w-full flex-col justify-center px-10 text-[11px] font-medium uppercase leading-none ">
-                    <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur ">
-                      <div className="flex">
-                        <div className="mr-2 text-[15px] font-bold">04</div>
-                      </div>
-                      <div>Trámites Declaracion Deudas y Gravamenes</div>
-                    </div>
-                    <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <div className="flex">
-                        <div className="mr-2 text-[15px] font-bold">08</div>
-                      </div>
-                      <div>
-                        Contrato de Transferencia - Inscripción de Dominio
-                      </div>
-                    </div>
-                    <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <div className="flex">
-                        <div className="mr-2 text-[15px] font-bold">03</div>
-                      </div>
-                      <div>Inscripción Contrato Prendario</div>
-                    </div>
-                    <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <div className="flex">
-                        <div className="mr-2 text-[15px] font-bold">05</div>
-                      </div>
-                      <div>Solicitud de Inscripción Inicial</div>
-                    </div>
-                    <div className="mb-1.5 flex items-center rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <div className="flex">
-                        <div className="mr-2 text-[15px] font-bold">59</div>
-                      </div>
-                      <div>Mandatario, Mero Presentante y Comerciante</div>
-                    </div>
-                    <p className="mb-1.5 rounded-md text-[#221322] bg-[#ffffff00] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-bold">C</span>
-                      onsultar por otros formularios...
-                    </p>
-                  </div> */}
+                  
               </SwiperSlide>
 
               <SwiperSlide>
@@ -436,38 +420,13 @@ export default function CNPMandataria({
                   alt="Inscripción inicial"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center"
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
                 ></Image>
-                  {/* <div className=" z-10 w-full px-10 text-[14px] font-medium [line-height:_1] ">
-                    <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-bold ">I</span>
-                      nscripción inicial
-                    </p>
-                    <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-bold ">B</span>
-                      aja por destrucción total, robo, hurto e incendio
-                    </p>
-                    <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur ">
-                      <span className="font-bold ">D</span>
-                      enuncia de compra y poseción - Venta
-                    </p>
-                    <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-bold ">A</span>
-                      ltas/Bajas municipales
-                    </p>
-                    <p className="mb-1.5 rounded-sm bg-[#ffffffc9] px-1.5 py-[3px] text-start backdrop-blur">
-                      <span className="font-bold ">D</span>
-                      uplicado de chapa patente
-                    </p>
-                    <p className="mb-1.5 text-[#291a29] rounded-sm bg-[#ffffff00] px-1.5 py-[3px] text-start text-[13px] backdrop-blur">
-                      <span className="font-medium">C</span>
-                      onsultar por otras gestiones...
-                    </p>
-                  </div> */}
+                  
               </SwiperSlide>  
 
             </Swiper>
-            <div className="flex flex-col justify-center absolute top-[304px] items-center">
+            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
               <div className="flex items-center w-full mb-4 justify-center">
                 <IconTiempo />
               </div>
@@ -514,8 +473,8 @@ export default function CNPMandataria({
                   alt="Reempadronamiento"
                   width={960}
                   height={720}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0] "
-                >{/* */}
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
+                >
                 </Image>
 
               </SwiperSlide>
@@ -526,7 +485,7 @@ export default function CNPMandataria({
                   alt="Renovación de Cédula"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0]"
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
                 ></Image>
               </SwiperSlide>
 
@@ -536,11 +495,11 @@ export default function CNPMandataria({
                   alt="Transferencia de dominio"
                   width={660}
                   height={490}
-                  className="absolute top-[0px] mb-2 flex h-[240px] w-full items-center justify-center [border-radius:_0_10px_10px_0] "
+                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
                 ></Image>
               </SwiperSlide>      
             </Swiper>
-            <div className="flex flex-col justify-center absolute top-[304px] items-center">
+            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
               <div className="flex items-center w-full mb-4 justify-center">
                 <IconSeguridad size="33" />
               </div>
@@ -554,20 +513,21 @@ export default function CNPMandataria({
             </div>
           </SwiperSlide>
 
-          <div className={`absolute z-10  flex justify-center gap-2 ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_162px)]" : "ml-[calc(100%_/_2_-_122px)]"  } `}>
-            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} >
-              <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
+          <div className={`absolute z-10 bottom-[4vh] text-sm flex justify-center gap-[1px] ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_146px)]" : "ml-[calc(100%_/_2_-_108px)]"  } `}>
+            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}>
+              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 w-full rounded-none rounded-l-md !justify-start hover:!opacity-100`}>
                 <div className="flex gap-2 items-center ">
                   <p>{session ? "Trámites" : "Iniciar trámite" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-60" />
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
                 </div>
               </ButtonA>
             </Link>
-            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-              <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
+
+            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}>
+              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-r-md !justify-start hover:!opacity-100`}>
                 <div className="flex gap-2 items-center ">
-                <p>{session ? "Consultas" : "Realizar consulta" }</p>
-                <ChevronRightIcon className="w-4 stroke-[3] opacity-60" />
+                  <p>{session ? "Consultas" : "Realizar consulta" }</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
                 </div>
               </ButtonA>
             </Link>
@@ -609,20 +569,21 @@ export default function CNPMandataria({
             </div>
           </Fondo>
 
-          <div className="flex justify-center mb-10 gap-2 pb-6 pt-8 ">
-            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-              <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
+          <div className="flex absolute bottom-16 gap-[1px] text-[14px]">
+            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}>
+              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 w-full rounded-none rounded-l-md !justify-start hover:!opacity-100`}>
                 <div className="flex gap-2 items-center ">
-                <p>{session ? "Consultas" : "Realizar consulta" }</p>
-                <ChevronRightIcon className="w-4 stroke-[3] opacity-60" />
+                  <p>{session ? "Trámites" : "Iniciar trámite" }</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
                 </div>
               </ButtonA>
             </Link>
-            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} >
-              <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
+
+            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}>
+              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-r-md !justify-start hover:!opacity-100`}>
                 <div className="flex gap-2 items-center ">
-                  <p>{session ? "Trámites" : "Iniciar trámite" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-60" />
+                  <p>{session ? "Consultas" : "Realizar consulta" }</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
                 </div>
               </ButtonA>
             </Link>

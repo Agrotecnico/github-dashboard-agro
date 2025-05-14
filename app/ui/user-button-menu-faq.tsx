@@ -3,18 +3,18 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { ChevronRightIcon, } from '@heroicons/react/24/outline';
+import { useSession } from 'next-auth/react';
 
 import IconMenu from '@/app/ui/logosIconos/icon-menu';
-import { useSession } from 'next-auth/react';
-import { links, linkMembers } from '@/app/constant';
 import Dropdown from '@/app/ui/Dropdown';
 import type { Post } from "@/app/lib/definitions"
-import { Frente } from '@/app/ui/marcos';
+import { ButtonA } from '@/app/ui/button';
 
 
 export default  function UserButtonMenuFaq({allPosts}:{allPosts:Post}) {
 
-  // const { data: session, update } = useSession();
+  const { data: session, update } = useSession();
 
   const pathname = usePathname();
 
@@ -23,81 +23,61 @@ export default  function UserButtonMenuFaq({allPosts}:{allPosts:Post}) {
     <div className={`${pathname.startsWith('/faq') ? "block" : "hidden" }  min-[1024px]:hidden`}>
       <Dropdown>
         <Dropdown.Button>
-          <div className="flex flex-col items-center gap-1 duration-200  opacity-75 hover:opacity-[0.9] ">
-            <IconMenu
-              width="18"
-              heightx="18"
-              className="fill-[#fff] min-[1024px]:hidden"
-            />
-            <p className="text-xs text-[#fff] font-medium leading-none flex flex-col min-[512px]:flex-row min-[512px]:gap-1"><span>Consultas </span><span>Frecuentes</span></p>
-          </div>
+          <p className="text-sm text-[#fff] font-medium duration-200 opacity-75 hover:opacity-[0.9] ">
+            FAQ
+          </p>
         </Dropdown.Button>
 
         <Dropdown.Menu>
-          <div className="px-4 py-6 flex items-center flex-col space-y-1 mx-4">
+          <div className="px-4 pt-8 pb-2 flex items-center flex-col space-y-1 mx-4 sm:pt-10 sm:pb-0 md:pt-8 md:pb-1">
             <p className="text-sm font-medium leading-none ">
-              {/* {session?.user?.email} */} CONSULTAS FRECUENTES
+              CONSULTAS FRECUENTES
             </p>
           </div>
-          <div className="flex w-screen flex-col px-2.5 pb-2.5 gap-[2px] rounded-xl ">
+
+          <div className="flex w-screen flex-col pt-2.5 px-4 pb-6 gap-[1px] rounded-xl">
             {allPosts.length ? (
               allPosts.map((post:Post) => (
-                // <article key={post.slug} className="mb-2 rounded-md duration-200 ">
-                  <Link
-                    as={`/faq/${post.slug}`}
-                    href="/faq/[slug]"
-                    key={post.slug}
-                    className={clsx(
-                      'flex items-center justify-start px-4 text-sm text-[#1d0215bb] duration-200 first:rounded-t-md last:rounded-b-md hover:text-[#1d0215] hover:bg-[#0000000a]',
-                      {
-                        'bg-[#00000009] text-[#1d0216] ':
-                          pathname === `/faq/${post.slug}`,
-                      },
-                    )}
-                  >
-                    {/* <Frente className={clsx(`py-2 px-2.5 gap-5 flex justify-between text-[#1d0215bb] items-center duration-200 hover:bg-[#ffffffbb] hover:text-[#1d0215]`,
-                      {
-                        'text-[#1d0216] bg-[#ffffffbc] ': pathname === `/faq/${post.slug}`
-                      }
-                    )}> */}
-                      <Dropdown.MenuItem>
-                      <p className="text-sm py-1.5 -indent-3 text-start max-[512px]:text-sm ">
-                       - {post.excerpt}
-                      </p>
-                      </Dropdown.MenuItem>
-                    {/* </Frente> */}
-                    
-                  </Link>
-                // </article>
+                <Link
+                  as={`/faq/${post.slug}`}
+                  href="/faq/[slug]"
+                  key={post.slug}
+                  className={clsx(
+                    'flex items-center justify-start px-4 bg-[#1d02150a] text-sm text-[#1d0215bb] duration-200 first:rounded-t-md last:rounded-b-md hover:text-[#1d0215] hover:bg-[#1d021519]',
+                    {
+                      'bg-[#1d02151a] text-[#1d0216]': pathname === `/faq/${post.slug}`,
+                    },
+                  )}
+                >
+                  <Dropdown.MenuItem>
+                    <p className="text-sm py-1.5 text-start max-[512px]:text-sm ">
+                      {post.excerpt}
+                    </p>
+                  </Dropdown.MenuItem>
+                </Link>
               ))
             ) : (
-              <p>No blog posted yet :/</p>
+              <p>Aún no hay ningúna consulta publicado</p>
             )}
+          </div>
+          <div className={`flex flex-col gap-[1px] text-[14px] mb-6 mx-6  ${session?.user?.email === process.env.ADMIN && "hidden"}`}>
+            <Link href="/iniciar-tramite/baja-de-vehiculo">
+              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 !bg-transparent !text-[#1d0215ee] pr-2 w-full rounded-none rounded-t-[4px] !justify-start hover:!opacity-100`}>
+                <div className="flex gap-2 items-center ">
+                  <p>Iniciar trámite</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-70" />
+                </div>
+              </ButtonA>
+            </Link>
 
-            {/* {links &&
-              links?.map((link) => {
-                const LinkIcon = link.icon;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={clsx(
-                      'flex items-center justify-start text-sm text-[#1d0215bb] duration-200 first:rounded-t-md last:rounded-b-md hover:text-[#1d0215] hover:bg-[#0000000a]',
-                      {
-                        'bg-[#00000009] text-[#1d0216] ':
-                          pathname === link.href,
-                      },
-                    )}
-                  >
-                    <Dropdown.MenuItem>
-                    <div className="flex w-full items-center justify-start gap-2 px-2.5 py-2">
-                      <LinkIcon className="w-5 text-[#50073aaa]" />
-                      <p className="text-start text-sm ">{link.name}</p>
-                    </div>
-                    </Dropdown.MenuItem>
-                  </Link>
-                );
-              })} */}
+            <Link href="/realizar-consulta">
+              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 !bg-transparent !text-[#1d0215ee] pr-2 w-full rounded-none rounded-b-[4px] !justify-start hover:!opacity-100`}>
+                <div className="flex gap-2 items-center ">
+                  <p>Realizar consulta</p>
+                  <ChevronRightIcon className="w-4 stroke-[3] opacity-70" />
+                </div>
+              </ButtonA>
+            </Link>
           </div>
         </Dropdown.Menu>
       </Dropdown>
