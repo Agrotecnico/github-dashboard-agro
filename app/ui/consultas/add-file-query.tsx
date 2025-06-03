@@ -72,12 +72,9 @@ export default function AddFileQuery() {
         <div className={`flex items-center justify-between mb-0`} >
           <IconArchivo className="opacity-60 ml-1 w-[26px] items-center justify-center stroke-1 sm:flex " />
           <Button
-            // type="button"
             className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[140px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
             onClick={() => {
               handleToggle();
-              // setImageUrl('');
-              // setFiles([]);
               setImages([]);
             }}
             type={state ? 'reset' : 'button'}

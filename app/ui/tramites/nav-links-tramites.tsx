@@ -16,8 +16,8 @@ export default function NavLinksTramites({allTramites }:{allTramites:TramiteMd[]
   return (
 
     <div className="hidden min-[900px]:block ">
-      <h1 className="flex items-center text-start pl-5 py-2 font-semibold text-[16px] text-[#50073a88] md:leading-none ">
-        Seleccioná uno:{/* <ChevronRightIcon className="w-4 ml-3 rotate-90" /> */}
+      <h1 className="flex items-center text-start pl-2 pt-1 pb-3 font-semibold text-lg text-[#50073a88] md:leading-none ">
+        Seleccioná un trámite:
       </h1>
       <Frente className='!bg-[#1d021514] p-[3px] flex flex-col gap-0.5 '>
 
@@ -25,14 +25,21 @@ export default function NavLinksTramites({allTramites }:{allTramites:TramiteMd[]
           <Link
               as={`/iniciar-tramite/${tramite.slug}`}
               href="/iniciar-tramite/[slug]"
-              className={clsx(`py-[5px] px-2 bg-[#ffffff0e] first:rounded-t-md last:rounded-b-md flex justify-between text-[#1d0215dd] items-center duration-200 hover:bg-[#ffffff77] hover:text-[#1d0215] `,
+              className={clsx(`py-[5px] pl-1.5 pr-2 bg-[#ffffff0e] first:rounded-t-md last:rounded-b-md flex gap-1.5 text-[#1d0215bb] items-start duration-200 hover:bg-[#ffffff88] hover:text-[#1d0215] `,
                   {
-                    'text-[#1d0216] bg-[#ffffff78] ': pathname === `/iniciar-tramite/${tramite.slug}`
+                    'text-[#1d0216] bg-[#ffffff89] ': pathname === `/iniciar-tramite/${tramite.slug}`
                   }
-                )}
+                )}/* justify-between */
               key={tramite.slug} 
           >
-              <p className="text-[14px] ml-2 text-start md:text-[15px] ">{tramite.tramite} {tramite.estado === "Derogado" && <span className="text-xs text-[#e42f2fc9] ">
+              <img 
+                src= "/dnrpa.png" 
+                alt="icono trámites" 
+                width={12} 
+                height={"auto"}
+                className="opacity-90 h-[9px] w-[9px] mt-[6px]" 
+              />
+              <p className="text-[14px] text-start md:text-[15px] ">{tramite.tramite} {tramite.estado === "Derogado" && <span className="text-xs text-[#e42f2fc9] ">
                   {`(${tramite.estado})`}</span>}
               </p>
           </Link>

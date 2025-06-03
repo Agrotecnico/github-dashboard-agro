@@ -1,8 +1,8 @@
 import React from "react"
 
-const IconMenu = ({ width = "24", heightx = "24", /* onClick ,*/ className="" }) => {
+const IconMenu = ({ width = "24", heightx = "24", className="" }) => {
   return (
-    <div /* onClick={onClick} */ className={className}>
+    <div  className={className}>
       <svg
         width={width}
         height={heightx}

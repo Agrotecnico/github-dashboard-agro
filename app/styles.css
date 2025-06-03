@@ -40,28 +40,25 @@
   z-index: 60;
   position: fixed;
 }
-/* .swiper2 > .swiper-pagination {
-  top: 500px;
-} */
 #ini .swiper2 .swiper-pagination {
   bottom: 0vh;
 }
 .swiper2 .swiper-pagination {
-  bottom: 10vh;
+  bottom: 12vh;
 }
 .swiper2 .swiper-pagination-bullet {
   opacity: 1;
   height: 14px;
   width: 14px;
-  background: #f9d1fa;
-  margin: 0 10px !important;
+  background: #b2439a55;
+  margin: 0 8px !important;
   transition: 0.2s;
 }
 .swiper2 .swiper-pagination-bullet {
   bottom: 9vh;
 }
 .swiper2 .swiper-pagination-bullet-active {
-  background-color:#e746e7ad;
+  background-color:#b2439acc;
 }
 .swiper3 > .swiper-pagination {
   justify-content: flex-end;
@@ -173,23 +170,15 @@
 #ini .swiper3 .swiper-pagination-bullet {
   display: none;
 }
-/* .swiper1 > .swiper-wrapper > .swiper-slide:nth-child(2) {
-  margin-top: 56px;
-} */
-/* .swiper1 > .swiper-wrapper > .swiper-slide:nth-child(1) > .swiper2 > .swiper-pagination {
-  top: 548px;
-} */
 .swiper1 > .swiper-wrapper > .swiper-slide:nth-child(1) > .swiper2 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) {
   position: absolute;
-  /* top: -222px; */
   bottom: 0;
-  left: calc((100vw / 2) - 36px);
+  left: calc((100vw / 2) - 30px);
 }
 .swiper1 > .swiper-wrapper > .swiper-slide:nth-child(1) > .swiper2 > .swiper-pagination > .swiper-pagination-bullet:nth-child(2) {
   position: absolute;
-  /* top: -222px; */
   bottom: 0;
-  right: calc((100vw / 2) - 36px);
+  right: calc((100vw / 2) - 30px);
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(2) {
   padding-left: 30px;
@@ -215,9 +204,6 @@
 .swiper3 > .swiper-pagination > .swiper-pagination-bullet:nth-child(3) > div {
   top: 86px;
 }
-/* .swiper3 > .swiper-pagination > .swiper-pagination-bullet {
-  top: -266px;
-} */
 
 
 @media (min-width: 320px) {
@@ -239,11 +225,14 @@
     padding-left: 24px;
   }
   .swiper1 > .swiper-pagination {
-      top: 40px !important;
+    top: 40px !important;
   }
   .swiper3 .swiper-pagination-bullet {
     top: 34vh;
   }
+  .swiper2 .swiper-pagination {
+  bottom: 10vh;
+}
 }
 
 @media (min-width: 880px) {

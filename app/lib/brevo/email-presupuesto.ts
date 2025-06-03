@@ -11,10 +11,10 @@ interface Params {
     subject: string;
     to: {email: string; name: string}[]
     htmlContent: string;
-    // validez: string;
+    validez: string;
 }
 
-export async function sendEmail( {subject, to, htmlContent/* , validez, */}: Params ) {
+export async function emailPresupuesto( {subject, to, htmlContent, validez,}: Params ) {
     try {
         const smtpEmail = new brevo.SendSmtpEmail()
 
@@ -33,7 +33,7 @@ export async function sendEmail( {subject, to, htmlContent/* , validez, */}: Par
                 <br>
                 <p>Trámite: <b>${subject}</b></p>
                 <p>Presupuesto: <b>Precio $ ${htmlContent}</b></p>
-                <p>Validez: <b> 7 días</b></p>
+                <p>Validez: <b> ${validez} días</b></p>
             </body>
         </html>
         `

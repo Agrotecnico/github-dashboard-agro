@@ -1,7 +1,4 @@
-// import React from 'react';
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { ChevronRightIcon, } from '@heroicons/react/24/outline';
 import { auth } from '@/auth';
 
 import Pagination from '@/app/ui/invoices/pagination';
@@ -11,7 +8,6 @@ import TableConsultaMember from '@/app/ui/consultas/table-consulta-member';
 import { fetchUserById } from '@/app/lib/data';
 import { fetchConsultasPagesM } from '@/app/lib/data';
 import { fetchFilteredConsultasM } from '@/app/lib/data';
-import { ButtonA } from '@/app/ui/button';
 
 
 export const metadata: Metadata = {
@@ -29,7 +25,6 @@ export default async function Page({
   const session = await auth();
   const user = await fetchUserById(session?.user?.email);
   const id= user?.email
-  // const email= user?.email
 
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
@@ -40,12 +35,6 @@ export default async function Page({
 
   const consultas = await fetchFilteredConsultasM( id, currentPage );
   const lengthConsultas= consultas.length
-
-
-  // console.log("query: ",query  )
-  // console.log("currentPage: ",currentPage )
-  // console.log("AllConsultas: ",AllConsultas )
-
 
 
   if (user?.email === process.env.ADMIN)
@@ -65,19 +54,10 @@ export default async function Page({
 
     return (
       <main>
-        <div className=" mb-8">{/* flex items-center justify-between text-wrap */}
+        <div className=" mb-8">
           <h1 className={` text-xl lg:text-2xl`}>
             Consultas
           </h1>
-
-          {/* <Link href="/realizar-consulta">
-            <ButtonA className={`h-7 pl-3 pr-2 text-[14.5px] w-max`}>
-              <div className="flex gap-2 items-center ">
-                <p>{lengthConsultas !== 0 ? "Nueva" : "Realizar"} consulta</p>
-                <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-              </div>
-            </ButtonA>
-          </Link> */}
         </div>
         
         {consultas.length ? (
@@ -87,7 +67,7 @@ export default async function Page({
                 <TableConsultaMember consulta={consulta} idx={idx} lengthConsultas={lengthConsultas} />
               </div>
             ))}
-            <div className="mt-5 flex w-full justify-center">
+            <div className="-z-10 mt-5 flex w-full justify-center">
               <Pagination totalPages={totalPagesMember} />
             </div>
           </div>

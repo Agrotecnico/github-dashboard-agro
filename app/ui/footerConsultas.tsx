@@ -1,28 +1,18 @@
 import CustomLink from "@/app/ui/custom-link"
 import { auth } from "auth"
 import { fetchUserById } from '@/app/lib/data';
+import IconLink from "./logosIconos/icon-link";
 
 
 export default async function FooterConsultas() {
   const session = await auth()
   const user = await fetchUserById(session?.user?.email);
   return (
-    <footer className="bg-[#30032219] w-[100vw] px-2 border border-[#ccc]  pb-4 pt-3 mx-0 min-[1280px]:[margin-left:_calc(((100vw_-_1262px)/2)*-1)] flex flex-col gap-4 text-sm sm:flex-row sm:justify-center sm:items-center sm:px-6 sm:mr-0 max-[1280px]:w-full ">
-      <div className="flex w-full px-2 h-full flex-col gap-1 max-w-[1280px] mx-auto ">
-        <div className="flex gap-2 items-center justify-center">
-          <div className="flex flex-col justify-center opacity-80 items-center text-[13.5px] min-[425px]:text-[16px] max-w-[1100px] mx-auto w-full h-full min-[375px]:flex-row max-[500px]:justify-center">
-            <div className="flex items-center min-[375px]:mr-4">
-              <span className="font-medium">C</span><div className="opacity-80 mr-1 flex h-full items-center">arina</div>
-              <span className="font-medium">N</span><div className="opacity-80 mr-1 flex h-full items-center">oemi</div>
-              <span className="font-medium">P</span><div className="opacity-80 mr-1 flex h-full items-center">acheco</div>
-            </div>
-            <div className="opacity-80 ">cnp.mandataria@gmail.com</div>
-          </div>
-        </div>
-
-        <div className="flex gap-3 mb-3 justify-center items-center sm:flex-row sm:gap-6 ">
-          <CustomLink href="/" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215] ">
-            CNP
+    <footer className="bg-[#30032219] w-[100vw] pt-2 pb-1.5 border text-[13px]  border-[#ccc] sm:text-sm">
+      <div className="flex w-full h-full flex-col gap-3 max-w-[1280px] mx-auto ">
+        <div className="flex gap-2 justify-center items-center sm:gap-12 ">
+          <CustomLink href="/" className="flex gap-1.5 [text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215] ">
+            CNP <IconLink width="12" />
           </CustomLink>
           {session ? (
             user?.email == process.env.ADMIN ?
@@ -36,13 +26,22 @@ export default async function FooterConsultas() {
               </>
           ) : (
             <>
-              <CustomLink href="/realizar-consulta" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Realizar Consulta</CustomLink> 
-              <CustomLink href="/iniciar-tramite/baja-de-vehiculo" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Iniciar trámite</CustomLink>
+              <CustomLink href="/realizar-consulta" className="text-center [text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Realizar consulta</CustomLink> 
+              <CustomLink href="/iniciar-tramite/baja-de-vehiculo" className="text-center [text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215]">Pedir presupuesto</CustomLink>
             </>
           )}
-          <CustomLink href="/faq/dif-gestor-mandatario" className="[text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215] ">
-            FAQ
+          <CustomLink href="/faq/dif-gestor-mandatario" className="flex gap-1.5 [text-shadow:1px_1px_0_#ffffff] duration-150 underline decoration-[#1d021555] underline-offset-2 hover:decoration-[#1d0215] ">
+            FAQ <IconLink width="12" />
           </CustomLink>
+        </div>
+
+        <div className="flex flex-col justify-center opacity-[0.85] items-center leading-[1.1rem] text-[#50073a]  max-w-[1100px] mx-auto">
+          <div className="flex items-center">
+            <span className="font-semibold">C</span><div className="opacity-80 mr-1 flex h-full items-center">arina</div>
+            <span className="font-semibold">N</span><div className="opacity-80 mr-1 flex h-full items-center">oemí</div>
+            <span className="font-semibold">P</span><div className="opacity-80 mr-1 flex h-full items-center">acheco</div>
+          </div>
+          <div className=" ">cnp.mandataria@gmail.com</div>
         </div>
       </div>
     </footer>

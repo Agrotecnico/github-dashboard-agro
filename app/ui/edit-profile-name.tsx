@@ -91,7 +91,6 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
                         setName(e.target.value);
                       }} >
                       <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
-                      {/* <IconCuenta className={`w-[26px] ${state ? "opacity-0" : "opacity-80" } `} color="#50073aaa" /> */}
                       <IconCuenta  className="absolute w-[20px] left-[6px] top-[6px] " color="#50073a66" />
                     </InputCnp>
                   </div>

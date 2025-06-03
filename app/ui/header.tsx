@@ -22,7 +22,7 @@ export default async function Header( ) {
 
 
   return (
-    <header className=" fixed left-0 z-10 flex h-[68px] w-[100vw] items-center justify-center bg-[#300322]  sm:h-20 ">{/* backdrop-blur-lg */}
+    <header className=" fixed left-0 z-10 flex h-[68px] w-[100vw] items-center justify-center bg-[#300322]  sm:h-20 ">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-4 opacity-80 duration-200 hover:opacity-100 ">
           <Link
@@ -43,8 +43,6 @@ export default async function Header( ) {
             <>
               <UserButtonMenuFaq  allPosts={allPosts} />
               <UserButtonMenu />
-              
-              {/* <UserButtonMenuIni /> */}
             </>
             ) : user ? (
             <>

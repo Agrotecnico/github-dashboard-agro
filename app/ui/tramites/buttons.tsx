@@ -6,7 +6,7 @@ export function UpdateTramite({ id }: { id: string }) {
   return (
     <Link
       href={`/dashboard/tramites/${id}/edit`}
-      className="rounded-md w-[38px] p-2 opacity-80 bg-[#ffffff55] hover:opacity-100  hover:bg-[#ffffff77] "
+      className="rounded-md w-[38px] p-2 opacity-70 bg-[#ffffff99] hover:opacity-100  hover:bg-[#ffffffdd] "
     >
       <PencilIcon className="w-5 text-[#2c3c8a]" />
     </Link>

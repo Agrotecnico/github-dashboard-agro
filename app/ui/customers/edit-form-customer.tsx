@@ -1,16 +1,11 @@
 'use client';
 
-import { Customer } from '@/app/lib/definitions';
 import Link from 'next/link';
-import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline';
-import { UpdateInvoice } from '@/app/ui/invoices/buttons';
-import { updateCustomer } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+
+import { Customer } from '@/app/lib/definitions';
+import { updateCustomer } from '@/app/lib/actions';
 import { Button } from '@/app/ui/button'
 
 

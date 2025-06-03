@@ -59,22 +59,16 @@ export default async function SideNav({
               )}
           </div>
 
-          <div className={`flex flex-col gap-[1px] text-[14px] mt-10 ${session.user?.email === process.env.ADMIN && "hidden"}`}>
+          <div className={`flex flex-col gap-[1px] text-[14px] mt-3  ${session?.user?.email === process.env.ADMIN && "hidden"}`}>
             <Link href="/iniciar-tramite/baja-de-vehiculo">
-              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 w-full rounded-none rounded-t-[4px] !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>Iniciar trámite</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
+              <ButtonA className={`h-6 w-full rounded-none !rounded-t-[4px] sm:h-[26px]`}>
+                <p className="w-full">Pedir presupuesto</p>
               </ButtonA>
             </Link>
 
             <Link href="/realizar-consulta">
-              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-b-[4px] !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>Realizar consulta</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
+              <ButtonA className={`h-6 !bg-[#b74ab7] !text-[#ffffff] w-full rounded-none !rounded-b-[4px] sm:h-[26px]`}>
+                <p className="w-full">Realizar consulta</p>
               </ButtonA>
             </Link>
           </div>

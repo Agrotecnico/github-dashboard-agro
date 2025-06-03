@@ -11,19 +11,15 @@ import {
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
 import { Button } from '@/app/ui/uiRadix/button';
-// import { Button } from '@/app/ui/button';
 import { User } from '@/app/lib/definitions';
 
 
 export default function UserButtonHeader( { user }: { user: User | undefined } ) {
   
   const pathname = usePathname();
-
-  const polo= process.env.ADMIN
 
 
   return (
@@ -74,8 +70,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             <Link
               href={'#'}
             >
-              {/* <DropdownMenuItem></DropdownMenuItem> */}
-                <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Cnp mandataria</div>
+              <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Cnp mandataria</div>
               
             </Link>
           ) : (
@@ -92,8 +87,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             <Link
               href={'#'}
             >
-              {/* <DropdownMenuItem></DropdownMenuItem> */}
-                <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Consultas frecuentes</div>
+              <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Consultas frecuentes</div>
               
             </Link>
           ) : (
@@ -110,10 +104,9 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             <Link
               href={'#'}
             >
-              {/* <DropdownMenuItem></DropdownMenuItem> */}
-                {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
-                  ? ''
-                  : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Consultas</div>) }
+              {user?.role === "admin"
+                ? ''
+                : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Consultas</div>) }
               
             </Link>
           ) : (
@@ -121,7 +114,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
               href={'/dashboard/consultas'}
             >
               <DropdownMenuItem>
-                {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
+                {user?.role === "admin"
                   ? ''
                   : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Consultas</div>)}
               </DropdownMenuItem>
@@ -132,8 +125,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             <Link
               href={'#'}
             >
-              {/* <DropdownMenuItem></DropdownMenuItem> */}
-              {user?.role === "admin" /* 'agrotecnicog@gmail.com' */
+              {user?.role === "admin"
                 ? ''
                 : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Trámites</div>)}
               
@@ -143,7 +135,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
               href={'/dashboard/tramites'}
             >
               <DropdownMenuItem>
-              {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
+              {user?.role === "admin"
                 ? ''
                 : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Trámites</div>)}
               </DropdownMenuItem>
@@ -154,10 +146,9 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             <Link
               href={'#'}
             >
-              {/* <DropdownMenuItem></DropdownMenuItem> */}
-                {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
-                  ? (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Panel Admin</div>)
-                  : ''}
+              {user?.role === "admin"
+                ? (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Panel Admin</div>)
+                : ''}
               
             </Link>
           ) : (
@@ -165,7 +156,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
               href={'/dashboard'}
             >
               <DropdownMenuItem>
-                {user?.role === "admin"/* 'agrotecnicog@gmail.com' */
+                {user?.role === "admin"
                   ? (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Panel Admin</div>)
                   : ''}
               </DropdownMenuItem>
@@ -183,17 +174,6 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
               <p>Salir</p>
             </DropdownMenuItem>
           </Button>
-          
-          {/* <Button
-            variant={'ghost'}
-            className="mb-1 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 active:bg-transparent"
-            onClick={async () => {
-              await signOut({ callbackUrl: '/' });
-            }}
-          >
-            Salir
-          </Button> */}
-
         </DropdownMenuContent>
       </DropdownMenu>
     </>

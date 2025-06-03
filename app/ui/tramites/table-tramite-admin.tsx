@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { UpdateTramite, DeleteTramite } from '@/app/ui/tramites/buttons';
+import EliminarTramite from '@/app/ui/tramites/eliminar-tramite';
 import Search from '@/app/ui/search';
 import { fetchFilteredTramites } from '@/app/lib/data';
 import Image from 'next/image'
@@ -215,57 +216,10 @@ export default /* async */ function TableTramiteAdmin({
                         </div>
                       </div>
 
-                      {/* <div className={`text-[#50073aaa] mb-4 text-[13px] border-b border-[#1d021514]`}>
-                        ADJUNTOS
-                      </div>
-                      <div className="flex flex-wrap mb-3 text-[#1d0215cc] gap-2">
-                        <div className="bg-[#1d0215] p-2 rounded-lg flex flex-col gap-2 flex-wrap justify-start sm:p-3">
-                          <div className="text-[15px] text-[#ffffffcc] sm:text-base">
-                            Documentos
-                          </div>
-                          <div className="text-[#1d0215dd] flex gap-5 items-baseline ">
-                            {archivos?.map((archivo, index) => (
-                              <div key={index } className=" text-[13px] leading-[18px] opacity-80 hover:opacity-100 ">
-                                
-                                <Link 
-                                  href={archivo.slice(-4) === ".pdf" ? 
-                                    archivo.replace(".pdf", ".png") 
-                                    : 
-                                    archivo
-                                  } 
-                                  target="_blank">
-                                  <img 
-                                    src={archivo.slice(-4) === ".pdf" ? 
-                                      archivo.replace(".pdf", ".png") 
-                                      : 
-                                      archivo
-                                    } 
-                                    alt="imagen archivo"
-                                    width={96}
-                                    height={96}
-                                    className="rounded w-14 border border-[#777] " />
-                                </Link>
-                              </div> 
-                            ))}
-                          </div>
-                        </div>
-                        <div className="bg-[#ffffffcc] p-2 rounded-lg flex flex-col gap-2 flex-wrap justify-start sm:p-3">
-                          <div className="text-[15px] sm:text-base">
-                            Información
-                          </div>
-                          <div className="flex flex-col gap-1 ">
-                            {infoAdjuntos?.map((infoAdjunto, index) => (
-                              <div key={index } className=" text-sm  ">
-                                {infoAdjunto.startsWith("undefined") ? "" : infoAdjunto}
-                              </div> 
-                            ))}
-                          </div>
-                        </div>
-                      </div> */}
-
                       <div className="flex gap-2 justify-end items-end">
                         <UpdateTramite id={AllTramite.id} />
-                        <DeleteTramite id={AllTramite.id} />
+                        {/* <DeleteTramite id={AllTramite.id} /> */}
+                        <EliminarTramite id={AllTramite.id} />
                       </div>
 
                     </DisclosurePanel>

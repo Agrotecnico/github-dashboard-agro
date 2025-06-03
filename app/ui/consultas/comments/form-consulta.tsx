@@ -1,10 +1,11 @@
 'use client';
 
-import { Button } from '@/app/ui/button';
-import { createConsulta } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 import type { Session } from 'next-auth';
 import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/outline';
+
+import { Button } from '@/app/ui/button';
+import { createConsulta } from '@/app/lib/actions';
 import { Fondo, Frente } from '@/app/ui/marcos';
 
 
@@ -19,16 +20,12 @@ export default function FormConsulta({ session }: { session: Session | null }) {
           <Button
             onClick={() => {window.location.reload()}}
             className="relative mb-3 h-[30px] min-h-[24px] w-[140px] justify-center border border-[#dddddd] bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215cc] hover:bg-[#ffffff] hover:text-[#1d0215ee] active:!bg-[#eee] "
-            // className="flex h-9 items-center rounded duration-200 bg-[#1d021511 bg-[#1d021519] opacity-70 cursor-pointer px-4 font-medium transition-colors hover:opacity-100 "
             > 
             Cancelar
           </Button>
         </div>
         {/* texto consulta */}
         <div className="relative">
-          {/* <label htmlFor="name" className="text-start text-sm">
-            Consulta
-          </label> */}
           <Frente className="mb-3 h-40 flex max-h-40 w-full ">
             <textarea
               className="!hover:bg-transparent rounded-md p-3 italic resize-y peer block w-full border text-[#000000aa] border-transparent bg-transparent text-sm outline-2 hover:border-[#2f6feb55] focus:border-[#2f6feb00] "

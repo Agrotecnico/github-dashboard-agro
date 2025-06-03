@@ -31,13 +31,13 @@ export default  function UserButtonMenuMember() {
         </Dropdown.Button>
 
         <Dropdown.Menu>
-          <div className="px-4 pt-8 pb-2 flex items-center flex-col space-y-1 mx-4 sm:pt-10 sm:pb-0 md:pt-8 md:pb-1" >
+          <div className="px-4 pt-8 flex items-center flex-col space-y-1 mx-4 sm:pt-10 sm:pb-0 md:pt-8 md:pb-1" >
             <p className="text-sm font-medium leading-none ">
               {session?.user?.email}
             </p>
           </div>
           
-          <div className="flex w-screen flex-col px-4 pt-2.5 pb-6 gap-[1px] rounded-xl" >
+          <div className="flex w-screen flex-col p-4 gap-[1px] rounded-xl" >
             {linkMembers &&
               linkMembers?.map((link) => {
                 const LinkIcon = link.icon;
@@ -46,9 +46,9 @@ export default  function UserButtonMenuMember() {
                     key={link.name}
                     href={link.href}
                     className={clsx(
-                      'flex items-center justify-start px-4 bg-[#1d021519] text-sm text-[#1d0215bb] duration-200 first:rounded-t-md last:rounded-b-md hover:text-[#1d0215fe] hover:bg-[#1d02150b]',
+                      'flex items-center justify-start px-4 bg-[#1d02150b] text-sm text-[#1d0215aa] duration-200 first:rounded-t-lg last:rounded-b-lg hover:text-[#1d0215fe] hover:bg-[#1d02151c]',
                       {
-                        'bg-[#1d02150c] text-[#1d0214fd]':
+                        'bg-[#1d02151c] text-[#1d0214ee]':
                         pathname === link.href,
                       },
                     )}
@@ -61,25 +61,19 @@ export default  function UserButtonMenuMember() {
                     </Dropdown.MenuItem>
                   </Link>
                 );
-              })}
+              })
+            }
           </div>
-
-          <div className={`flex flex-col gap-[1px] text-[14px] mb-6 mx-8  ${session?.user?.email === process.env.ADMIN && "hidden"}`}>
+          <div className={`flex flex-col gap-[1px] text-[14px] mx-3 mb-3  ${session?.user?.email === process.env.ADMIN && "hidden"}`}>
             <Link href="/iniciar-tramite/baja-de-vehiculo">
-              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 !bg-transparent !text-[#1d0215ee] pr-2 w-full rounded-none rounded-t-[4px] !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>Iniciar trámite</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-70" />
-                </div>
+              <ButtonA className={`h-6 !text-[#ffffff] w-full rounded-none !rounded-t-[4px] !justify-start sm:h-[26px]`}>
+                <p className="w-full">Pedir presupuesto</p>
               </ButtonA>
             </Link>
 
             <Link href="/realizar-consulta">
-              <ButtonA className={`h-[26px] pb-0.5 !opacity-75 pl-3 !bg-transparent !text-[#1d0215ee] pr-2 w-full rounded-none rounded-b-[4px] !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>Realizar consulta</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-70" />
-                </div>
+              <ButtonA className={`h-6 !bg-[#b74ab7] w-full rounded-none !rounded-b-[4px] !justify-start sm:h-[26px]`}>
+                <p className="w-full">Realizar consulta</p>
               </ButtonA>
             </Link>
           </div>

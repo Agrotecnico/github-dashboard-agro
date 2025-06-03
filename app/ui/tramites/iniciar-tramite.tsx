@@ -55,6 +55,11 @@ export default function IniciarTramite( {
   const [info2, setInfo2] = useState<string | undefined>("")
   const [info3, setInfo3] = useState<string | undefined>("")
 
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const emailValid= emailRegex.test(email)
+  // console.log("emailValid: ", emailRegex.test(email));
+
+
   const info= [info0, info1, info2, info3]
 
    const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
@@ -160,7 +165,7 @@ export default function IniciarTramite( {
   }
 
   useEffect(() => {
-    setTramite(`${tramiteMd.tramite}`);
+    !tramite && setTramite(`${tramiteMd.tramite}`);
     sessionStorage.getItem('name') && setName(`${sessionStorage.getItem('name')}`)
     sessionStorage.getItem('email') && setEmail(`${sessionStorage.getItem('email')}`)
     if (sessionStorage.getItem('email')) {
@@ -178,8 +183,7 @@ export default function IniciarTramite( {
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createTramite, initialState);
 
-  // const info= [info0, info1, info2, info3]
-
+  // console.log("tramite: ", tramite)
 
 
   return (
@@ -190,9 +194,9 @@ export default function IniciarTramite( {
           alt="icono trámites" 
           width={26} 
           height={"auto"}
-          className="opacity-50 h-[20px] w-[20px] mr-1.5 " 
+          className="opacity-80 h-[16px] w-[16px] mr-1.5 sm:h-[18px] sm:w-[18px] " 
         />
-        <h1 className=" text-start text-[20px] text-[#50073a88] font-semibold leading-tight tracking-tighter sm:text-[22px] md:leading-none ">
+        <h1 className=" text-start text-lg text-[#50073a88] font-semibold leading-tight tracking-tighter sm:text-[22px] md:leading-none ">
           {tramiteMd.tramite}
         </h1>
       </div>
@@ -231,7 +235,7 @@ export default function IniciarTramite( {
           </Tabs.List>
 
           <Tabs.Content
-            className="grow rounded-b-md p-4 outline-none text-sm text-[#1d0215cc] md:text-[15px]"
+            className="grow rounded-b-md p-2 outline-none text-sm text-[#1d0215cc] sm:p-4 md:text-[15px]"
             value="tab1"
           >
             <p className="mb-3">
@@ -247,6 +251,7 @@ export default function IniciarTramite( {
                     name="tramite"
                     placeholder= "Detallá el trámite..."
                     required
+                    value={tramite}
                     rows={4}
                     maxLength={1024}
                     wrap="hard"
@@ -286,11 +291,11 @@ export default function IniciarTramite( {
           </Tabs.Content>
 
           <Tabs.Content
-            className="grow rounded-b-md p-4 outline-none text-[13px] text-[#1d0215cc] md:text-sm"
+            className="grow rounded-b-md p-2 outline-none text-[13px] text-[#1d0215cc] sm:p-4 md:text-sm"
             value="tab2"
           >
             <p className="mb-3">
-                Adjuntá los siguientes documentos para realizar el presupuesto:
+                Cargá los siguientes documentos:
             </p>
 
             <div className="py-2 px-3 mb-4 rounded-sm bg-[#ffffff65]">
@@ -333,12 +338,12 @@ export default function IniciarTramite( {
                     {...dragProps}
                     className={`group rounded-lg w-full disabled:!cursor-default `}
                   >
-                    <div className={`relative label-dnd  ${!images.length ? 'rounded-lg' : 'rounded-t-lg'} bg-[#1d0215] text-[#ffffffdd] w-full p-4 duration-150 text-sm flex flex-col justify-center items-center active:opacity-80  `}>
+                    <div className={`relative label-dnd  ${!images.length ? 'rounded-lg' : 'rounded-t-lg'} bg-[#1d0215] text-[#ffffffdd] w-full p-2 duration-150 text-sm flex flex-col justify-center items-center active:opacity-80 sm:p-4 `}>
                       <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100 min-[512px]:flex-row ">
                         <IconDragDrop className= "w-9 opacity-80  min-[512px]:mr-7" />
                         <div>
                           Click y elegí un archivo o arrastralo y sueltá aquí <br />
-                          <p className="text-xs mt-1.5 text-[#ffffffbb]">Cantidad Máx: <b>{maxNumber}</b> archivos <b>jpg</b>, <b>png</b> o <b>pdf</b> <span className="">(de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
+                          <p className="text-xs mt-1.5 text-[#ffffffbb]">Máximo: <b>{maxNumber}</b> arch. <b>jpg</b>, <b>png</b> o <b>(pdf</b> <span className="">de una sola página)</span>  <br />Tamaño Max de cada archivo: <b>4 MB</b>
                             </p>
                         </div>
                       </div>
@@ -346,7 +351,8 @@ export default function IniciarTramite( {
                       {errors && (
                         <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#91359185] rounded-xl `}>
                           {errors.maxNumber && (
-                            <span>La cantidad excede el máximo permitido</span>
+                            // <span>La cantidad excede el máximo permitido</span>
+                            <span>Cantidad máxima: {maxNumber} arch.</span>
                           )}
                           {errors.acceptType && (
                             <span>El tipo de archivo no está permitido</span>
@@ -366,7 +372,7 @@ export default function IniciarTramite( {
                     </div>
                   </button>
                   <div className= "flex flex-col rounded-b-lg bg-[#1d0215] ">
-                    <div className= {`flex items-baseline justify-start px-8 gap-x-2 flex-wrap text-sm w-full cursor-default max-[512px]:justify-center`}>
+                    <div className= {`flex items-baseline justify-start px-3 gap-x-2 flex-wrap text-sm w-full cursor-default max-[512px]:justify-center sm:px-9 sm:gap-x-4`}>
                       { images.map((image, index) => (
                         <div key={index} className="flex flex-col pb-4 pt-5">
                           <div className="image-item flex justify-start">
@@ -388,7 +394,7 @@ export default function IniciarTramite( {
                               </div>
                             </div>
                           </div>
-                          <div className="text-sm break-words w-44 text-[#ffffffee] mt-[3px] opacity-80 text-start ">
+                          <div className="text-xs break-words w-36 text-[#ffffffee] mt-[3px] opacity-80 text-start sm:text-sm sm:w-44">
                             {/* {image.file?.name }  */}
                             {documentos?.length && documentos[index].toLocaleUpperCase() }
                           </div>
@@ -402,11 +408,12 @@ export default function IniciarTramite( {
           </Tabs.Content>
 
           <Tabs.Content
-            className="grow rounded-b-md p-4 outline-none text-sm text-[#1d0215cc] md:text-[15px]"
+            className="grow rounded-b-md p-2 outline-none text-sm text-[#1d0215cc] sm:p-4 md:text-[15px]"
             value="tab3"
           >
             <p className="mb-3">
-              Información necesaria para realizar el presupuesto
+              {/* Información necesaria para realizar el presupuesto */}
+              Llena el formulario con la información:
             </p>
             <div className="grid grid-cols-1 gap-3  sm:grid-cols-2">
               {informations.map((information, index) => (
@@ -472,23 +479,29 @@ export default function IniciarTramite( {
       {/* registrar email */}
       {!user && (
          emailSession === false  ? (
-          <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#1d021513] ">
-            <div className="flex items-center justify-between gap-5">
+          <Frente className="p-2 mt-4 text-small-regular sm:p-4 !bg-[#1d021513] ">
+            <div className="flex items-center justify-between gap-3 sm:gap-5">
               <div className="mt-1.5 ">
-                <IconRegistro className="opacity-60 w-[24px] ml-3 " />
+                <IconRegistro className="opacity-80 w-[24px] ml-1.5 sm:ml-3 " />
               </div>
   
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity] duration-300 ${open ? "opacity-0" : "opacity-100 "  }  `}>
-                Regístrate para iniciar un trámite y enviarte el presupuesto <span className=" text-[#d400aa]">*</span> 
+              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity, display] duration-300   `}>{/* ${open ? "hidden" : "block"  } */}
+                {/* Regístrate para iniciar un trámite y */}Dejá tu e-mail para enviarte el presupuesto <span className=" text-[#d400aa]">*</span> 
               </div>
                 
               <ButtonB
                 className={`h-8 text-[13px]  w-max`}
-                onClick={() => { setOpen(!open); setEmail(""); setName("")}}
+                onClick={() => { 
+                  setOpen(!open); 
+                  setEmail(""); 
+                  setName("")
+                  sessionStorage.removeItem("email")
+                  sessionStorage.removeItem("name")
+                }}
                 data-testid="edit-button"
                 data-active={open}
               >
-                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Registrar</div>  }
+                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Anotar{/* Registrar */}</div>  }
               </ButtonB>
             </div>
             
@@ -502,7 +515,7 @@ export default function IniciarTramite( {
                 )}
               >
                 {/* create user*/}
-                <div className="pt-4">
+                <div className="pt-2 sm:pt-4">
                   <form action={dispatchx}>
                     <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
                       <InputCnp
@@ -548,8 +561,12 @@ export default function IniciarTramite( {
                         </div>
                         <IconEmail2  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
                       </InputCnp>
+                      {/* {!emailValid && (
+                        <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>
+                          Emeil invalido
+                        </div>
+                      )} */}
                     </fieldset>
-
                     <input
                       id="password"
                       type="hidden"
@@ -581,15 +598,15 @@ export default function IniciarTramite( {
                     </div>
 
                     {/* button submit */}
-                    <div className="  mt-4 text-sm">
+                    <div className="mt-2 text-sm sm:mt-4">
                       <ButtonA
                         className={`h-8 text-[13px] w-max ml-auto`}
-                        disabled={ email == "" && name == ""}
+                        // disabled={ email == "" && name == ""}
                         onClick={ () => {
-                          setTimeout(() => setOpen(!open), 200) 
+                          emailValid && name && setTimeout(() => setOpen(!open), 200) 
                           // setEmailSession(true)
-                          sessionStorage.setItem('name', `${name}`);
-                          sessionStorage.setItem('email', `${email}`);
+                          emailValid && name && sessionStorage.setItem('name', `${name}`);
+                          emailValid && name && sessionStorage.setItem('email', `${email}`);
                         }}
                       >
                         Registrar
@@ -600,9 +617,9 @@ export default function IniciarTramite( {
             </div>
           </Frente>
           ) : (
-            <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e0e6e1] ">
-              <div className={`w-full text-start text-[14px] text-[#1d0215dd] transition-[opacity] duration-300  `}>
-                <span className="font-semibold  text-[15px] ">{ !estadox.message ? "" : name }</span> Te enviaremos el presupuesto al email  <span className="font-semibold  text-[15px] mx-1 ">{email}</span>
+            <Frente className="p-2 mt-2 text-small-regular sm:p-4 !bg-[#e0e6e1] ">
+              <div className={`w-full text-start text-[13px] text-[rgba(29,2,21,0.87)] transition-[opacity] duration-300  sm:text-sm `}>
+                <span className="font-semibold text-sm sm:text-[15px] ">{ !estadox.message ? "" : name }</span> {/* Te enviaremos el presupuesto al */} Para enviarte el presupuesto se registró el e-mail  <span className="font-semibold  mx-1 text-sm sm:text-[15px]">{email}</span>
               </div>
             </Frente> 
           ) 
@@ -610,9 +627,9 @@ export default function IniciarTramite( {
       }
 
       {estado?.message === "tramiteIniciado" && (
-        <Frente className="py-4 px-3 mt-2 text-small-regular sm:px-4 !bg-[#e0e6e1] ">
-          <div className={`w-full text-start text-[15px] text-[#1d0215dd] transition-[opacity] duration-300  `}>
-            Recibimos el pedido. Pronto enviaremos el presupuesto a tu email.
+        <Frente className="!p-2 mt-2 !bg-[#d7e5d9] sm:!p-4 ">
+          <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>
+            Recibimos el pedido. Te enviaremos el presupuesto a la brevedad. {/* Pronto enviaremos el presupuesto a tu email */}
           </div>
         </Frente> 
       )}
@@ -685,13 +702,13 @@ export default function IniciarTramite( {
 
       {/* Enviar tramite */}
       <div className=" w-full flex justify-between items-center gap-4">
-        <p className={`text-xs ml-4 text-[#1d0215cc] ${images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== ""  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
+        <p className={`text-xs ml-2 text-[#1d0215cc] ${images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && sessionStorage.getItem('email')  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
 
         <div className="flex">
-          <div className={`mr-4 text-[#1d0215bb] rounded-md ${!emailSession && "hidden"} bg-[#1d02150d] duration-150 hover:bg-[#1d021517] hover:text-[#1d0215]`} >
+          <div className={`mr-2 text-[#1d0215bb] rounded-md ${!emailSession && "hidden"} bg-[#1d02150d] duration-150 hover:bg-[#1d021517] hover:text-[#1d0215] sm:mr-4`} >
             <button
               type="button"
-              className={` py-1 px-5`}
+              className={` py-1 px-3 sm:px-5`}
               // onClick={() => logout({ returnTo: window.location.origin })}
               onClick={() => {
                 sessionStorage.removeItem("email")
@@ -705,9 +722,10 @@ export default function IniciarTramite( {
 
           {estado?.message !== "tramiteIniciado" ? (
             <form onSubmit={ /* files.length === 0 ? uploadToServer1 : */ uploadToServer2 } className="w-full" >
-              <div className="w-full flex justify-between">
+              <div className="group relative w-full flex justify-between">
+                <span className={`opacity-0 invisible text-xs text-[#1d0215] absolute bottom-[150%] bg-[#ffffff] pt-[3px] pb-[5px] pl-1.5 pr-3 rounded-xl duration-150 shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2),_0px_-5px_10px_#00000012] ${images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && sessionStorage.getItem('email') ? "" : "group-hover:opacity-100"} sm:text-[13px] group-hover:visible`}><span className="text-base text-[#d400aa]">* </span>Completar requeridos</span>
                 <ButtonA
-                  className={`h-8 text-sm !justify-start  ${!tramite ? 'opacity-40' :  'opacity-100'}`}
+                  className={`h-8 !px-2 text-sm !justify-start sm:!px-4  disabled:!opacity-60`}/* ${!tramite ? 'opacity-40' :  'opacity-100'} *//*  disabled:!cursor-no-drop */
                   type="submit"
                   disabled={images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && emailSession ? false : true }
                   onClick={() => {
@@ -719,11 +737,7 @@ export default function IniciarTramite( {
                     fill2="#fffc"
                     fill="#ff00ff"
                   />
-                  <div
-                    className="w-full"
-                  >
-                    Pedir presupuesto
-                  </div>
+                  <p className="w-full" >Pedir presupuesto</p>
                 </ButtonA>
               </div>
             </form>
@@ -747,7 +761,7 @@ export default function IniciarTramite( {
                   location.reload()
                 }}
               >
-                Nuevo trámite
+                Nuevo pedido
               </ButtonA>
             </div>
             )

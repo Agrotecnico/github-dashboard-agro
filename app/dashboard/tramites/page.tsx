@@ -1,17 +1,14 @@
 
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { auth } from '@/auth';
-import Pagination from '@/app/ui/invoices/pagination';
-import { ChevronRightIcon, } from '@heroicons/react/24/outline';
 
+import Pagination from '@/app/ui/invoices/pagination';
 import { fetchTramitesPages } from '@/app/lib/data';
 import TableTramiteAdmin from '@/app/ui/tramites/table-tramite-admin';
 import TableTramiteMember from '@/app/ui/tramites/table-tramite-member';
 import { fetchUserById } from '@/app/lib/data';
 import { fetchTramitesPagesM } from '@/app/lib/data';
 import { fetchFilteredTramitesM } from '@/app/lib/data';
-import { ButtonA } from '@/app/ui/button';
 import { fetchFilteredTramites } from '@/app/lib/data';
 import Search from '@/app/ui/search';
 
@@ -35,12 +32,9 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
-
   const totalPages = await fetchTramitesPages(query);
 
   const AllTramites = await fetchFilteredTramites(query, currentPage);
-  // console.log("AllTramites:", AllTramites)
-
 
   const {totalPagesMember, countcon} = await fetchTramitesPagesM(email);
 
@@ -63,10 +57,9 @@ export default async function Page({
 
         {AllTramites?.map((AllTramite, idx) => (
           <div key={idx } className=" text-[13px] leading-[18px] ">
-            <TableTramiteAdmin AllTramite={AllTramite} /* idx={idx} lengthTramites={lengthTramites} */ />
+            <TableTramiteAdmin AllTramite={AllTramite} />
           </div>
         ))}
-        {/* <TableTramiteAdmin  AllTramites={AllTramites}   /> */}
 
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

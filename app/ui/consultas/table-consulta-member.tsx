@@ -12,19 +12,16 @@ import IconConsultaRight from "@/app/ui/logosIconos/icon-consulta-right"
 import useToggleState from "@/app/lib/hooks/use-toggle-state"
 import { formatDateToLocal } from '@/app/lib/utils';
 import distanceToNow from '@/app/lib/dateRelative';
-import { Underline } from 'lucide-react';
 
 
 export default function TableConsultaMember( { 
   consulta,
   idx,
   lengthConsultas,
-  // currentPage,
 }: { 
   consulta: Consulta;
   idx: number;
   lengthConsultas: number;
-  // currentPage: number;
 } ) {
   
   const [palabrasConsulta, setTextconsulta] = useState(consulta.consulta.split(" "))
@@ -52,9 +49,6 @@ export default function TableConsultaMember( {
   }, [successState, close])
 
   const tituloConsulta= palabrasConsulta.slice(0, 12)
-  // const paginaActual= currentPage === undefined ? currentPage = 1 : currentPage
-
-  // console.log("paginaActual:", consulta)
 
 
   return (
@@ -64,9 +58,9 @@ export default function TableConsultaMember( {
           <div className="relative">
             <IconConsultaRight className="opacity-[0.55] text-[#50073a] w-8 "/>
             <span className="text-white absolute -top-0.5 left-[20px] text-[11px]  ">
-              {/* {(lengthConsultas - idx) } */} ?
+              ?
             </span>
-          </div>{/* <p className=""><span className="text-[12.5px] ">CONSULTA-</span>00{(lengthConsultas - idx) }</p> */}
+          </div>
 
           <div className="w-full mt-12 -ml-7 -mr-20 sm:px-1 sm:m-0 ">
             <div className="text-[#50073a7d] w-full mb-2 font-medium text-[13.5px] sm:text-[14.5px] ">
@@ -124,7 +118,7 @@ export default function TableConsultaMember( {
           <div className={`flex flex-col gap-4 mb-4 text-sm cursor-default transition-[visibility] duration-300 ease-in-out ${!state && "invisible"}`}>
             <div className="mt-4 text-[14.5px]">
               <div className="text-[#50073a7d] mb-0.5 font-medium text-[13.5px] sm:text-[14.5px] ">
-                RESPUESTA{/* <span className={`ml-1 font-medium ${!consulta.updated_at && "hidden"} `}> enviada el {`${formatDateToLocal(consulta.updated_at)}`}</span> */}
+                RESPUESTA
               </div>
 
               <div>
@@ -183,4 +177,3 @@ export default function TableConsultaMember( {
     </Frente>
   );
 }
-

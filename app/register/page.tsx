@@ -1,8 +1,8 @@
+import { auth } from 'auth';
+import { SessionProvider } from 'next-auth/react';
 
 import RegisterForm from '@/app/ui/register-form';
 import Header from '@/app/ui/header';
-import { SessionProvider } from 'next-auth/react';
-import { auth } from 'auth';
 import { fetchUserById } from '@/app/lib/data';
 
 

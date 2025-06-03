@@ -7,12 +7,9 @@ import clsx from 'clsx';
 
 import { User } from "@/app/lib/definitions";
 import { createComment } from '@/app/lib/actions';
-import { Fondo } from "@/app/ui/marcos";
 import { Post } from '@/app/lib/definitions'
-import  AlertDialog  from "@/app/ui/uiRadix/alert-dialog";
 import { Frente } from '@/app/ui/marcos';
 import { createUser } from '@/app/lib/actions';
-import { createConsulta } from '@/app/lib/actions';
 import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import { ButtonB, ButtonA } from '@/app/ui/button';
 import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
@@ -47,13 +44,10 @@ export default function FormComment({
 
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createComment, initialState);
-  // const polo= estado?.message
 
   const initialStatex = { message: null, errors: {} };
   const [estadox, dispatchx] = useFormState(createUser, initialStatex);
-  // const polox= estadox?.message
 
-  // console.log("name:", name)
 
   return (
     <>
@@ -141,13 +135,13 @@ export default function FormComment({
             </form>
           </div>
         ) : (
-          <Frente className="py-4 px-3 w-full mt-2 text-small-regular sm:px-4 !bg-[#30032211] ">
-            <div className="flex items-center justify-between gap-5">
+          <Frente className="!p-2 w-full mt-2 text-small-regular sm:!p-4 !bg-[#30032211] ">
+            <div className="flex items-center justify-between gap-2.5 sm:gap-5">
               <div className="mt-1.5 ">
-                <IconRegistro className="opacity-60 w-[24px] ml-3 " />
+                <IconRegistro className="opacity-80 w-[24px] ml-1.5 sm:ml-3 " />
               </div>
   
-              <div className={`w-full text-start delay-50 text-[15px] text-[#50073aaa] transition-[opacity] duration-300 ${open && "opacity-0"} `}>
+              <div className={`w-full text-start delay-50 text-sm text-[#50073aaa] transition-[opacity] duration-300 ${open && "opacity-0"} sm:text-[15px]`}>
                 Regístrate para dejar comentarios
               </div>
                 
@@ -171,7 +165,7 @@ export default function FormComment({
               )}
             >
               {/* Crear user */}
-              <div className="pt-4"> 
+              <div className="pt-2 sm:pt-4"> 
                 <form action={dispatchx}>
                   <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
                     <InputCnp
@@ -251,8 +245,6 @@ export default function FormComment({
                   {/* button submit */}
                   <div className=" flex items-center justify-end gap-4 mt-4 text-sm">
                     <ButtonA
-                      // type="submit"
-                      // ref={buttonyRef}
                       className={`h-8 text-[13px] w-max`}
                       disabled={ email == "" && name == ""}
                       onClick={() => {

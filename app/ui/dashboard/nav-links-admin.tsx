@@ -18,9 +18,9 @@ export default function NavLinksAdmin() {
             <Link
               key={link.name}
               href={link.href}
-              className={clsx('text-sm flex items-center justify-start first:rounded-t-md last:rounded-b-md duration-200 text-[#1d0215bb] bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] hover:bg-[#ffffffcc] hover:text-[#1d0215]',
+              className={clsx('text-sm flex items-center justify-start first:rounded-t-md last:rounded-b-md duration-200 text-[#1d0215bb] bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] hover:bg-[#ffffffe3] hover:text-[#1d0215]',
                 {
-                  'text-[#1d0216] bg-[#ffffffcd] ':  pathname === link.href,
+                  'text-[#1d0216] bg-[#ffffffe3] ':  pathname === link.href,
                 }
               )}
             >

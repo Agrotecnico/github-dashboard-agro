@@ -16,9 +16,10 @@ export default function NavLinksMember() {
             <Link
               key={linkMember.name}
               href={linkMember.href}
-              className={clsx('text-sm flex items-center justify-start first:rounded-t-[4px] last:rounded-b-[4px] duration-200 text-[#1d0215bb] bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] hover:bg-[#ffffffcc] hover:text-[#1d0215]',
+              className={clsx(
+                'text-sm flex items-center justify-start first:rounded-t-lg last:rounded-b-lg duration-200 text-[#1d0215bb] bg-[#ffffff88] [box-shadow:_inset_0_1px_#ffffff,inset_0_-1px_#0000002e] hover:bg-[#ffffffe3] hover:text-[#1d0215]',
                 {
-                  'text-[#1d0216] bg-[#ffffffcd] ':  pathname === linkMember.href,
+                  'text-[#1d0216] bg-[#ffffffe3] ':  pathname === linkMember.href,
                 }
               )}
             >

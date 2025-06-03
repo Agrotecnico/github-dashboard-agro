@@ -1,5 +1,4 @@
-/* import distanceToNow from '@/app/lib/dateRelative'; */
-import type { Session } from 'next-auth';
+
 import Image from 'next/image'
 import { User } from '@/app/lib/definitions';
 

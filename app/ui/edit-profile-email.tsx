@@ -51,9 +51,6 @@ export default function EditPerfilEmail( { user }: { user: User | undefined } ) 
             <IconEmail2 className={`w-[22px] mr-4 duration-100 `} color="#50073aaa" />
             <p>{user?.email} </p>
           </div>
-          {/* <div className="opacity-80 ">
-            <IconEmail2 className={`w-[26px] ${state ? "opacity-0" : "opacity-80 delay-150 duration-[50ms]" } delay-0 duration-100 `} color="#50073aaa" />
-          </div> */}
           <ButtonB
             className={`h-8 text-[13px] w-max`}
             onClick={() => { handleToggle(); setEmail("")}}

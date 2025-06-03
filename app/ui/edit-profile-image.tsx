@@ -184,7 +184,7 @@ export default function EditProfileImage({ user }: { user: User | undefined }) {
               },
             )}
             >
-            <div className={`flex flex-col gap-y-2 pt-4 delay-200 ${!state && "invisible"}`}>
+            <div className={`flex flex-col gap-y-2 pt-4 delay-200 ${!state && "hidden"}`}>
               <div className="flex flex-wrap">
                 <div className="w-full flex flex-col items-center bg-[#1d0215] rounded-lg">
                   <ImageUploading
@@ -224,12 +224,6 @@ export default function EditProfileImage({ user }: { user: User | undefined }) {
                                 </p>
                               </div>
                             </div>
-                            {/* <div className="flex flex-col items-center duration-150 opacity-80 group-hover:opacity-100">
-                              <IconDragDrop className= "mb-2 w-9 opacity-80 " />
-                              Click y elegí una imagen o arrastrá y sueltá aquí <br />
-                              <p className="text-xs mt-1.5  text-[#ffffffbb]">Tipo de imagen: <b>jpg</b> o <b>png</b><br />Tamaño Max de la imagen: <b>4 MB</b>
-                              </p>
-                            </div> */}
                             {errors && (
                               <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] ${!state && "hidden"} border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#913591] rounded-xl `}>
                                 {errors.maxNumber && (
@@ -252,37 +246,38 @@ export default function EditProfileImage({ user }: { user: User | undefined }) {
                             </div>
                           </div>
                         </button>
+
                         <div 
                           className= "flex flex-col rounded-b-lg bg-[#1d0215] "
                           >
                           { file ? (
-                              <div className="flex flex-col items-center p-4">
-                                <div className="image-item flex justify-start">
+                            <div className="flex flex-col items-center p-4">
+                              <div className="image-item flex justify-start">
 
-                                  {renderFilePreview( file! )} 
+                                {renderFilePreview( file! )} 
 
-                                  <div className="flex flex-col text-[13px] justify-end gap-0.5 ">
-                                    <div onClick={() => {
-                                      onImageUpdate(0)
-                                      }} className="border border-[#e9dae9] border-l-0 bg-[#d7d7d7] px-2 py-0.5 cursor-pointer rounded-e-md duration-200 text-[#1d0215aa] hover:border-[#d8c0d7] hover:text-[#1d0215dd]  hover:bg-[#ffffff] active:opacity-70 "
-                                    >
-                                      Cambiar
-                                    </div>
-                                    <div onClick={() => {
-                                      onImageRemove(0)
-                                      }} className="border border-[#e9dae9] border-l-0 bg-[#d7d7d7] px-2 py-0.5 cursor-pointer rounded-e-md duration-200 text-[#1d0215aa] hover:text-[#1d0215dd] hover:border-[#d8c0d7] hover:bg-[#ffffff] active:opacity-70 "
-                                      >
-                                      Eliminar
-                                    </div>
+                                <div className="flex flex-col text-[13px] justify-end gap-0.5 ">
+                                  <div onClick={() => {
+                                    onImageUpdate(0)
+                                    }} className="border border-[#e9dae9] border-l-0 bg-[#d7d7d7] px-2 py-0.5 cursor-pointer rounded-e-md duration-200 text-[#1d0215aa] hover:border-[#d8c0d7] hover:text-[#1d0215dd]  hover:bg-[#ffffff] active:opacity-70 "
+                                  >
+                                    Cambiar
                                   </div>
+                                  <div onClick={() => {
+                                    onImageRemove(0)
+                                    }} className="border border-[#e9dae9] border-l-0 bg-[#d7d7d7] px-2 py-0.5 cursor-pointer rounded-e-md duration-200 text-[#1d0215aa] hover:text-[#1d0215dd] hover:border-[#d8c0d7] hover:bg-[#ffffff] active:opacity-70 "
+                                    >
+                                    Eliminar
+                                  </div>
+                                </div>
 
-                                </div>
-                                <div className="text-xs text-[#ffffff] break-words w-44 mt-[3px] opacity-60 text-start ">{file?.name } 
-                                </div>
-                              </div> 
-                            ) : (""
-                            )
-                          }
+                              </div>
+                              <div className="text-xs text-[#ffffff] break-words w-44 mt-[3px] opacity-60 text-start ">{file?.name } 
+                              </div>
+                            </div> 
+                          ) : (
+                              ""
+                          )}
                         </div>
                       </div>
                     )}
@@ -351,7 +346,8 @@ export default function EditProfileImage({ user }: { user: User | undefined }) {
                     className="flex items-center gap-3 "
                   >
                     <IconCambio
-                      className={`${spin && "animate-spin"} opacity-70 ${!file && 'opacity-40 '}  w-[18px] font-semibold peer-focus:text-gray-900" pointer-events-none h-[18px] text-[#1d0215aa] `}
+                      fill2={"#ffffffcc"}
+                      className={`${spin && "animate-spin"} opacity-80 ${!file && 'opacity-40 '}  w-[18px] font-semibold peer-focus:text-gray-900" pointer-events-none h-[18px] text-[#1d0215aa] `}
                     />
                     <p>
                       Guardar cambios

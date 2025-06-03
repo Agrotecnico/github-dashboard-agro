@@ -7,7 +7,8 @@ import { redirect, useRouter } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from "bcrypt";
-import { sendEmail } from "@/app/lib/brevo";
+import { emailPresupuesto } from "@/app/lib/brevo/email-presupuesto";
+import { emailRespuesta } from "@/app/lib/brevo/email-respuesta";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -597,11 +598,19 @@ export async function createUser(prevStateUser: StateUser, formData: FormData) {
   let rol= ""
   password === "xxxxxx" ? rol = "member" : rol = "memberAccount"
 
+  // let passw= ""
+  // password !== "xxxxxx" ? passw = password : passw = "xxxxxx"
+
   // Insert data into the database
   try {
     await sql`
       INSERT INTO users (name, email, password, role )
       VALUES (${name}, ${email}, ${hashedPassword}, ${rol} )
+      ON CONFLICT(email)
+      DO UPDATE SET
+      name = EXCLUDED.name,
+      password = EXCLUDED.password,
+      role = EXCLUDED.role
     `;
     return {
       message: `usuario`,
@@ -619,7 +628,7 @@ export async function createUser(prevStateUser: StateUser, formData: FormData) {
   
   revalidatePath('/realizar-consulta');
   redirect('/realizar-consulta');
-  
+
 }
 export async function updateUser(
   id: string,
@@ -812,7 +821,7 @@ export async function authenticate(
 
 
 
-export async function handleForm(formData: FormData) {
+export async function handleFormPresupuesto(formData: FormData) {
   const title= formData.get("title")
   const to_name= formData.get("to_name")
   const to_email= formData.get("to_email")
@@ -823,7 +832,7 @@ export async function handleForm(formData: FormData) {
     return console.log("Por favoe llene todos los campos")
   }
   
-  await sendEmail({
+  await emailPresupuesto({
     subject: title as string,
     to: [{
       name: to_name as string,
@@ -831,6 +840,26 @@ export async function handleForm(formData: FormData) {
       }],
     htmlContent: content as string,
     validez: validez as string
+  })
+}
+
+export async function handleFormRespuesta(formData: FormData) {
+  const title= formData.get("title")
+  const to_name= formData.get("to_name")
+  const to_email= formData.get("to_email")
+  const content= formData.get("content")
+
+  if (!title || !to_name || !to_email || !content ) {
+    return console.log("Por favoe llene todos los campos")
+  }
+  
+  await emailRespuesta({
+    subject: title as string,
+    to: [{
+      name: to_name as string,
+      email: to_email as string
+      }],
+    htmlContent: content as string
   })
 }
 

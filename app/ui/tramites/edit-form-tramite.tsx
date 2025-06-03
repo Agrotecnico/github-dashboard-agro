@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { Disclosure, DisclosurePanel } from '@headlessui/react'
 import clsx from 'clsx';
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 import { Tramite } from '@/app/lib/definitions';
 import { Button } from '@/app/ui/button';
@@ -24,9 +24,12 @@ import { ButtonA } from "@/app/ui/button";
 import { PartyPopper } from 'lucide-react';
 import  {FormatearInput}  from "@/app/ui/tramites/input-tramite-number";
 import { setDefaultHighWaterMark } from 'stream';
-import { handleForm } from "@/app/pruebas/action";
+// import { handleForm } from "@/app/pruebas/action";
+import { handleFormPresupuesto } from "@/app/lib/actions";
+// import { emailPresupuesto } from "@/app/lib/brevo/email-presupuesto";
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2";
 import IconEnvioEmail from '../logosIconos/icon-envio-email';
+import IconAdjunto from "@/app/ui/logosIconos/icon-adjunto";
 
 
 
@@ -51,7 +54,7 @@ export default function EditTramiteForm({
     const [gastos, setGastos] = useState("")
     const [impuestos, setImpuestos] = useState("")
 
-    // const [validez, setValidez] = useState("")
+    const [validez, setValidez] = useState("7")
 
     const { state, close, toggle } = useToggleState()
 
@@ -66,8 +69,12 @@ export default function EditTramiteForm({
       setTimeout(() => toggle(), 100)
     }
 
-
   const id= tramite.id
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const handleClickButton= () => {
+    if (buttonRef.current) buttonRef.current.click()
+  };
 
   const archivosAdjuntos= tramite?.documentos_url
   const archivos: string[] = JSON.parse(`${archivosAdjuntos}`)
@@ -91,7 +98,7 @@ export default function EditTramiteForm({
                   <img
                     decoding="async" 
                     src= {userMember?.image}
-                    className="rounded-full cursor-pointer bg-cover h-14 bject-cover w-full " alt="header-image-profile">
+                    className="rounded-full bg-cover h-14 bject-cover w-full " alt="header-image-profile">
                     
                   </img>
                 ) : (
@@ -142,8 +149,9 @@ export default function EditTramiteForm({
         {/* adjuntos*/}
         <Frente className="py-4 mb-4 px-4 text-sm sm:px-4" >
           <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
-            <div className={`flex w-full text-[15px] sm:text-base`}>{/*  ${state && "hidden"} */}
-              Documentos e Información adjuntos
+            <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>
+              <IconAdjunto className="w-5 " />
+              <p>Documentos e Información adjuntos</p>
             </div>
 
             <Button
@@ -268,68 +276,6 @@ export default function EditTramiteForm({
           </Disclosure>
         </Frente>
 
-        {/* estados*/}
-        {/* <Frente className="py-4 mb-4 px-4 text-sm sm:px-4" >
-          <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
-            <div className={`flex items-center w-full text-[15px] sm:text-base `}>
-              Estado 
-              <div className="flex gap-0.5 w-32 h-4 ml-4 bg-[#ffffff] rounded-lg">
-                <div className="flex items-center justify-center text-[10px] text-white text-center w-8 h-4 bg-[#e580d0] rounded-l-lg ">
-                  1
-                </div>
-                <div className={`flex items-center justify-center text-[10px] text-center w-8 h-4  ${tramite.estado === "presupuestado" || tramite.estado === "iniciado" || tramite.estado === "cancelado" || tramite.estado === "terminado"  ? "bg-[#e580d0] text-white" : "bg-white text-[#1d0215cc]" } `}>
-                  2
-                </div>
-                <div className={`flex items-center justify-center text-[10px] text-center w-8 h-4 ${ tramite.estado === "iniciado" || tramite.estado === "cancelado" || tramite.estado === "terminado" ? "bg-[#e580d0] text-white" : "bg-white text-[#1d0215cc]" } `}>
-                  3
-                </div>
-                <div className={`flex items-center justify-center text-[10px] text-center w-8 h-4 ${ tramite.estado === "cancelado" || tramite.estado === "terminado"  ? "bg-[#e580d0] text-white" : "bg-white text-[#1d0215cc]" } rounded-r-lg `}>
-                  4
-                </div>
-              </div>
-            </div>
-
-            <Button
-              className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[72px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
-              onClick={() => { setEstadox(!estadox)}}
-              data-testid="edit-button"
-              data-active={state}
-              type='button'
-            >
-              {estadox ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
-            </Button>
-          </div>
-          <Disclosure>
-            <DisclosurePanel
-              static
-              className={clsx(
-                "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
-                {
-                  "max-h-[1000px] opacity-100 pt-4": estadox,
-                  "max-h-0 opacity-0": !estadox,
-                  "invisible": !estadox,
-                }
-              )}
-            >
-              {tramite.created_at && (
-                <div className={`${estadox ? "my-2" : "my-0"}`}>- Solicitó presupuesto el día <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(tramite.created_at)}</span>
-                </div>)}
-              {tramite.budgeted_at && (
-                <div className="my-2">- Presupuesto enviado el día <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(tramite.budgeted_at!)}</span> Precio: <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px] ">{formatCurrency(Number(tramite.presupuesto))}</span>
-                </div>)}
-              {tramite.started_at && (
-                <div className="my-2">- Se chequeó el pago el día <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(tramite.started_at!)}</span>
-                </div>)}
-              {tramite.canceled_at && (
-                <div className="my-2">- Se canceló el día <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(tramite.canceled_at!)}</span>
-                </div>)}
-              {tramite.finished_at && (
-                <div className="my-2">- Trámite terminado el día <span className="font-medium bg-[#ffffff64] px-1.5 py-0.5 mr-1 rounded-[4px]" > {formatDateToLocal(tramite.finished_at!)}</span>
-                </div>)}
-            </DisclosurePanel>
-          </Disclosure>
-        </Frente> */}
-
         {/* Tarea estado*/}
         {tramite.estado === "cancelado" || tramite.estado === "terminado" ? (
           <Frente className="py-4 mb-4 px-4 text-[15px] sm:text-base sm:px-4" >
@@ -341,7 +287,7 @@ export default function EditTramiteForm({
               <div className={`flex w-full text-[15px] sm:text-base `}>
                 {tramite.estado === 'presupuestar' && (
                   <div className="flex ">
-                    <div className={`mr-2 text-[12.5px] px-[8px] rounded-[4px] text-[#ffffff] bg-[#50073abf]`}>2</div>Calcular y editar el presupuesto
+                    <div className={`mr-2 text-[12.5px] px-[8px] rounded-[4px] text-[#ffffff] bg-[#50073abf]`}>2</div>Calcular el presupuesto
                   </div>
                 )}
                 {tramite.estado === 'presupuestado' && (
@@ -639,9 +585,174 @@ export default function EditTramiteForm({
             </Disclosure>
           </Frente>
         )}
+
+        {tramite.estado === "presupuestar" && (
+          <Frente className={`py-4 mb-4 px-4 text-sm sm:px-4 `} >
+            <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
+              <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>{/*  ${state && "hidden"} */}
+                <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
+                <p>Email - Presupuesto</p>
+              </div>
+
+              <Button
+                className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[72px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
+                onClick={() => { setEstadoRegistrar(!estadoRegistrar)}}
+                data-testid="edit-button"
+                data-active={state}
+                type='button'
+              >
+                {estadoRegistrar ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
+              </Button>
+            </div>
+            <Disclosure>
+              <DisclosurePanel
+                static
+                className={clsx(
+                  "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+                  {
+                    "max-h-[1000px] opacity-100 pt-4": estadoRegistrar,
+                    "max-h-0 opacity-0": !estadoRegistrar,
+                    "invisible": !estadoRegistrar,
+                  }
+                )}
+              >
+                <form action= /*{emailPresupuesto} */ {handleFormPresupuesto} /* method="POST" */  className="rounded-lg w-full p-4 ">
+                  <div className="flex items-start w-full mb-4 gap-3">
+                    <p className="mt-2 leading-none text-[13px]">
+                      Para
+                    </p>
+                    <div className="flex flex-col gap-1 w-full">
+                      <InputCnp 
+                        type="text" 
+                        name="to_name" 
+                        placeholder="Nombre" 
+                        className="h-8 !text-sm "
+                        value={userMember?.name}
+                        autoFocus
+                        required
+                        readOnly
+                        >
+                        <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                          <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
+                          </span>
+                          <IconCuenta 
+                            color="#50073a50"
+                            className="w-5 absolute top-[7px] left-[5px]"
+                          />
+                        </div>
+                      </InputCnp>
+                      <InputCnp 
+                        type="email" 
+                        name="to_email" 
+                        placeholder="Email" 
+                        className="h-8 !text-sm " 
+                        defaultValue={userMember?.email}
+                        required
+                        // readOnly
+                        >
+                        <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                          <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599] `}>
+                          </span>
+                          <IconEmail2 
+                            color="#50073a50"
+                            className="w-4 absolute top-[9px] left-1.5"
+                            />
+                        </div>
+                      </InputCnp>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 mb-4">
+                    <fieldset className="flex flex-col">
+                      <label
+                        className="text-start text-[13px] "
+                        htmlFor="title"
+                      >
+                        Trámite
+                      </label>
+                      <InputCnp 
+                        type="text" 
+                        name="title" 
+                        placeholder="Asunto" 
+                        className="h-8 !pl-4 !text-sm"
+                        value={tramite.tramite}
+                        required
+                        readOnly
+                        >
+                        <div className="w-0" >
+                        </div>
+                      </InputCnp>
+                    </fieldset>
+
+                    <fieldset className="flex flex-col">
+                      <label
+                        className="text-start text-[13px] "
+                        htmlFor="content"
+                      >
+                        Precio $
+                      </label>
+                      <InputCnp 
+                        type="text" 
+                        name="content" 
+                        placeholder="Asunto" 
+                        className="h-8 !pl-4 !text-sm"
+                        value={presupuesto.toLocaleString("es-Ar")}
+                        required
+                        readOnly
+                        >
+                        <div className="w-0" >
+                        </div>
+                      </InputCnp>
+                    </fieldset>
+
+                    <fieldset className="flex flex-col">
+                      <label
+                        className="text-start text-[13px]"
+                        htmlFor="validez"
+                      >
+                        Validez (días)
+                      </label>
+                      <InputCnp
+                        type="text" 
+                        name="validez" 
+                        placeholder="7" 
+                        className="h-8 !pl-4 !text-sm"
+                        value={validez}
+                        onChange={(e) => {
+                          setValidez(e.target.value)
+                        }}
+                        // required
+                        // readOnly
+                        >
+                        <div className="w-0" >
+                        </div>
+                      </InputCnp>
+                    </fieldset>
+
+                    {/* <TextareaCnp
+                      name="content" 
+                      placeholder="Mensaje" 
+                      value={presupuesto.toLocaleString("es-Ar")}
+                      rows={6}
+                      required
+                      className=""
+                    /> */}
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    ref={buttonRef}
+                    className="hidden py-1">
+                    Enviar
+                  </button>
+                </form>
+              </DisclosurePanel>
+            </Disclosure>
+          </Frente>
+        )}
       </div>
 
-      <form action={dispatch}>
+      <form action={dispatch} >
         {/* Campos datos*/}
         <div className="hidden flex-col ">
           <input
@@ -713,339 +824,15 @@ export default function EditTramiteForm({
           <ButtonA 
             type="submit" 
             className={`${tramite.estado === "cancelado" || tramite.estado === "terminado" && "hidden"}`}
+            onClick={() => {
+              handleClickButton()
+            }}
             disabled= {pago === "pendiente" && !presupuesto && !finalizado ? true : false}
           >
             Editar Tramite
           </ButtonA>
         </div>
       </form>
-
-      {tramite.estado === "presupuestar" && (
-
-        <>
-
-        <Frente className={`py-4 mb-4 mt-12 px-4 text-sm sm:px-4 `} >
-          <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
-            {/* <div className={`flex w-full text-[15px] sm:text-base `}>
-              {tramite.estado === 'presupuestar' && (
-                <div className="flex ">
-                  <div className={`mr-2 text-[12.5px] px-[8px] rounded-[4px] text-[#ffffff] bg-[#50073abf]`}>2</div>Calcular y enviar el presupuesto
-                </div>
-              )}
-              {tramite.estado === 'presupuestado' && (
-                <div className="flex ">
-                  <div className={`mr-2 text-[12.5px] px-[8px] rounded-[4px] text-[#ffffff] bg-[#50073abf]`}>3</div>Chequear pago
-                </div>
-              )}
-              {tramite.estado === 'iniciado' && (
-                <div className="flex ">
-                  <div className={`mr-2 text-[12.5px] px-[8px] rounded-[4px] text-[#ffffff] bg-[#50073abf]`}>4</div>Trámite en ejecución
-                </div>
-              )}
-            </div> */}
-
-            <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>{/*  ${state && "hidden"} */}
-              <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
-              <p>Enviar presupuesto por email</p>
-            </div>
-
-            <Button
-              className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[72px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
-              onClick={() => { setEstadoRegistrar(!estadoRegistrar)}}
-              data-testid="edit-button"
-              data-active={state}
-              type='button'
-            >
-              {estadoRegistrar ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
-            </Button>
-          </div>
-          <Disclosure>
-            <DisclosurePanel
-              static
-              className={clsx(
-                "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
-                {
-                  "max-h-[1000px] opacity-100 pt-4": estadoRegistrar,
-                  "max-h-0 opacity-0": !estadoRegistrar,
-                  "invisible": !estadoRegistrar,
-                }
-              )}
-            >
-              <form action={handleForm} method="POST"  className="rounded-lg w-full p-4 ">
-                <div className="flex items-start w-full mb-4 gap-3">
-                  <p className="mt-2 leading-none text-[13px]">
-                    Para
-                  </p>
-                  <div className="flex flex-col gap-1 w-full">
-                    <InputCnp 
-                      type="text" 
-                      name="to_name" 
-                      placeholder="Nombre" 
-                      className="h-8 !text-sm "
-                      value={userMember?.name}
-                      autoFocus
-                      required
-                      readOnly
-                      >
-                      <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
-                        <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
-                        </span>
-                        <IconCuenta 
-                          color="#50073a50"
-                          className="w-5 absolute top-[7px] left-[5px]"
-                        />
-                      </div>
-                    </InputCnp>
-                    <InputCnp 
-                      type="email" 
-                      name="to_email" 
-                      placeholder="Email" 
-                      className="h-8 !text-sm " 
-                      defaultValue={userMember?.email}
-                      required
-                      // readOnly
-                      >
-                      <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
-                        <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
-                        </span>
-                        <IconEmail2 
-                          color="#50073a50"
-                          className="w-4 absolute top-[9px] left-1.5"
-                          />
-                      </div>
-                    </InputCnp>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1 mb-4">
-                  <fieldset className="flex flex-col">
-                    <label
-                      className="text-start text-[13px] "
-                      htmlFor="title"
-                    >
-                      Trámite
-                    </label>
-                    <InputCnp 
-                      type="text" 
-                      name="title" 
-                      placeholder="Asunto" 
-                      className="h-8 !pl-4 !text-sm"
-                      value={tramite.tramite}
-                      required
-                      readOnly
-                      >
-                      <div className="w-0" >
-                      </div>
-                    </InputCnp>
-                  </fieldset>
-
-                  <fieldset className="flex flex-col">
-                    <label
-                      className="text-start text-[13px] "
-                      htmlFor="content"
-                    >
-                      Precio $
-                    </label>
-                    <InputCnp 
-                      type="text" 
-                      name="content" 
-                      placeholder="Asunto" 
-                      className="h-8 !pl-4 !text-sm"
-                      value={presupuesto.toLocaleString("es-Ar")}
-                      required
-                      readOnly
-                      >
-                      <div className="w-0" >
-                      </div>
-                    </InputCnp>
-                  </fieldset>
-
-                  <fieldset className="flex flex-col">
-                    <label
-                      className="text-start text-[13px]"
-                      htmlFor="validez"
-                    >
-                      Validez (días)
-                    </label>
-                    <InputCnp
-                      type="text" 
-                      name="validez" 
-                      placeholder="7" 
-                      className="h-8 !pl-4 !text-sm"
-                      value={"7"}
-                      // onChange={(e) => {
-                      //   setValidez(e.target.value)
-                      // }}
-                      // required
-                      readOnly
-                      >
-                      <div className="w-0" >
-                      </div>
-                    </InputCnp>
-                  </fieldset>
-
-                  {/* <TextareaCnp
-                    name="content" 
-                    placeholder="Mensaje" 
-                    value={presupuesto.toLocaleString("es-Ar")}
-                    rows={6}
-                    required
-                    className=""
-                  /> */}
-                </div>
-
-                <ButtonA className="py-1">
-                  Enviar
-                </ButtonA>
-              </form>
-            </DisclosurePanel>
-          </Disclosure>
-        </Frente>
-
-
-
-
-        <Frente className="hidden text-sm my-10 text-center rounded-lg !bg-[#1d021511] w-full mx-auto max-w-lg shadow-xl pt-[1px] ">
-          <div className="relative ">
-            <div className="text-start w-full px-4 py-2 mb-3 rounded-t-lg bg-[#1d02151c]">
-              Nuevo mensaje
-            </div>
-            <div className="text-base absolute top-1.5 right-5 font-semibold ">
-              x
-            </div>
-          </div>
-
-          <form action={handleForm} method="POST"  className="rounded-lg w-full p-4 ">
-            <div className="flex items-start w-full mb-4 gap-3">
-              <p className="mt-2 leading-none text-[13px]">
-                Para
-              </p>
-              <div className="flex flex-col gap-1 w-full">
-                <InputCnp 
-                  type="text" 
-                  name="to_name" 
-                  placeholder="Nombre" 
-                  className="h-8 !text-sm "
-                  value={userMember?.name}
-                  autoFocus
-                  required
-                  readOnly
-                  >
-                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
-                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
-                    </span>
-                    <IconCuenta 
-                      color="#50073a50"
-                      className="w-5 absolute top-[7px] left-[5px]"
-                    />
-                  </div>
-                </InputCnp>
-                <InputCnp 
-                  type="email" 
-                  name="to_email" 
-                  placeholder="Email" 
-                  className="h-8 !text-sm " 
-                  defaultValue={userMember?.email}
-                  required
-                  // readOnly
-                  >
-                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
-                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
-                    </span>
-                    <IconEmail2 
-                      color="#50073a50"
-                      className="w-4 absolute top-[9px] left-1.5"
-                      />
-                  </div>
-                </InputCnp>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-1 mb-4">
-              <fieldset className="flex flex-col">
-                <label
-                  className="text-start text-[13px] "
-                  htmlFor="title"
-                >
-                  Trámite
-                </label>
-                <InputCnp 
-                  type="text" 
-                  name="title" 
-                  placeholder="Asunto" 
-                  className="h-8 !pl-4 !text-sm"
-                  value={tramite.tramite}
-                  required
-                  readOnly
-                  >
-                  <div className="w-0" >
-                  </div>
-                </InputCnp>
-              </fieldset>
-
-              <fieldset className="flex flex-col">
-                <label
-                  className="text-start text-[13px] "
-                  htmlFor="content"
-                >
-                  Precio $
-                </label>
-                <InputCnp 
-                  type="text" 
-                  name="content" 
-                  placeholder="Asunto" 
-                  className="h-8 !pl-4 !text-sm"
-                  value={presupuesto.toLocaleString("es-Ar")}
-                  required
-                  readOnly
-                  >
-                  <div className="w-0" >
-                  </div>
-                </InputCnp>
-              </fieldset>
-
-              <fieldset className="flex flex-col">
-                <label
-                  className="text-start text-[13px]"
-                  htmlFor="validez"
-                >
-                  Validez (días)
-                </label>
-                <InputCnp
-                  type="text" 
-                  name="validez" 
-                  placeholder="7" 
-                  className="h-8 !pl-4 !text-sm"
-                  value={"7"}
-                  // onChange={(e) => {
-                  //   setValidez(e.target.value)
-                  // }}
-                  // required
-                  readOnly
-                  >
-                  <div className="w-0" >
-                  </div>
-                </InputCnp>
-              </fieldset>
-
-              {/* <TextareaCnp
-                name="content" 
-                placeholder="Mensaje" 
-                value={presupuesto.toLocaleString("es-Ar")}
-                rows={6}
-                required
-                className=""
-              /> */}
-            </div>
-
-            <ButtonA className="py-1">
-              Enviar
-            </ButtonA>
-          </form>
-        </Frente>
-        </>
-      )}
-      
     </>
   );
 }

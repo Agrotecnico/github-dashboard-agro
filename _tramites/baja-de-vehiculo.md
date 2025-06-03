@@ -5,7 +5,7 @@ date: "Febrero-2024"
 image: "/hero.png"
 estado: ""
 documentacion: "Comprobante de pago del sellado provincial correspondiente, Documento de identidad de la persona que realiza el trámite, Libre multa de tránsito, Solicitud Tipo '04', Título del Automotor o Histórico de Dominio"
-documentos: "Título del vehículo, Cédula del vehículo, Patente"
+documentos: "Título del vehículo, Patente"
 informacion: "Radicacion, Provincia, Dominio del vehículo"
 ---
 

@@ -32,10 +32,13 @@ import {
 import { Frente, Fondo } from './ui/marcos';
 import { useSession } from "next-auth/react"
 import { User } from '@/app/lib/definitions';
-import  IconWhatsApp  from "@/app/ui/logosIconos/icon-whatsApp";
+import  IconWhatsApp  from "@/app/ui/logosIconos/icon-whatsApp2";
 import { ChevronRightIcon, } from '@heroicons/react/24/outline';
 import { ButtonA } from '@/app/ui/button';
 import { Metadata } from 'next';
+import IconPresupuesto from './ui/logosIconos/icon-presupuesto';
+import IconConsulta from './ui/logosIconos/icon-consulta';
+import IconLink from './ui/logosIconos/icon-link';
 
 
 
@@ -106,11 +109,15 @@ export default function CNPMandataria({
     >
       <NavInicio user={user} />
       
-      {/* <div className= "fixed z-20 flex justify-end top-[26px] right-[100px] w-full lg:max-w-5xl lg:mx-[calc((100vw_-_64rem)_/_2)]">
-        <Link href= "https://api.whatsapp.com/send?phone=543476606595"  target="_blank"  className="opacity-70 hover:opacity-100 duration-200 rounded-md border-2 border-[#ffffffc7] " >
-          <IconWhatsApp colorFondo="#0000" size="28"/>
+      <div className= "fixed z-20 flex justify-end bottom-[24px] right-[8px] rounded-xl lg:max-w-5xl lg:mx-[calc((100vw_-_64rem)_/_2)] shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2)]">
+        <Link 
+          href= "https://api.whatsapp.com/send?phone=543476606595"
+          // href= "https://wa.me/543476606595?text=CNPmandataria"  
+          target="_blank"  
+          className="duration-200 rounded-md " >{/* opacity-70 hover:opacity-90 */}
+          <IconWhatsApp size="38"  className="sm:w-[42px] " />
         </Link>
-      </div> */}
+      </div>
 
       {/* Inicio */}
       <SwiperSlide id="ini" className= "flex flex-col !justify-start">
@@ -119,8 +126,8 @@ export default function CNPMandataria({
             CNP mandataria
           </h1>
           <p className="text-sm px-4 leading-snug max-w-[700px] my-0 mx-auto text-center md:text-base">
-          Un servicio con la facultad de representación legal, asesoramiento y gestión en la compra y venta de vehículos terrestres o náuticos. 
-          Esto incluye la transferencia de dominio, el trámite de la cédula verde y azul, y otras diligencias importantes
+          Un servicio con la facultad de representación legal, asesoramiento y gestión en la compra/venta de vehículos automotores y náuticos. 
+          Esto incluye la transferencia de dominio, cédula de identificación y otros trámites más.
           </p>
         </div>
         <Swiper
@@ -193,11 +200,20 @@ export default function CNPMandataria({
                     Hola! Bienvenido
                   </h1>
                   <div className="flex flex-col items-start text-[#1d0215dd] text-sm min-[376px]:text-base sm:mx-10">
-                    <p className="mb-1 w-full text-center">
-                      Aqui podés<Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}  className=" px-1.5 rounded-md duration-200 underline decoration-[#1d021581] underline-offset-2 hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">{session ? "Ver las consultas" : "Realizar consultas" } </Link>
+                    <p className="flex mb-1 w-full text-center">
+                      Aqui podés
+                      <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}  className="flex px-1.5 rounded-md duration-200 underline decoration-[#1d021581] underline-offset-2 hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
+                        {session ? "Ver las consultas" : "Realizar consultas" }
+                        <IconLink size="13px" className="ml-1"/>
+                      </Link>
                     </p>
-                    <p className="w-full text-center">{/* {session ? 'o' : 'e'} */}o<Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}  className="duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
-                    {session ? "Ver los trámites" : "Iniciar trámites" } </Link>de registros y propiedad del automotor
+                    <p className="flex w-full text-center">
+                      o
+                      <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}  className="flex duration-200 underline decoration-[#1d021581] underline-offset-2 px-1.5 rounded-md hover:decoration-[#1d0215] hover:underline-offset-[3px] hover:text-[#1d0215] ">
+                        {session ? "Ver los trámites" : "Pedí presupuesto"}
+                        <IconLink size="13px" className='ml-1'/>
+                      </Link> 
+                      <span className={`${user && "hidden" }`}>por tu trámite</span>
                     </p>
                   </div>
                 </div>
@@ -208,7 +224,7 @@ export default function CNPMandataria({
           {/* Oficina */}
           <SwiperSlide className="">
             <div
-              className="absolute top-0 flex w-full h-[40vh] flex-col items-center justify-start rounded-xl text-4xl  bg-cover   bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005)]"
+              className="absolute top-0 flex w-full h-[40vh] flex-col items-center justify-start rounded-xl text-4xl bg-cover bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005)]"
             >
               <Image
                 src='https://res.cloudinary.com/dchmrl6fc/image/upload/v1740689272/carina-oficina_whue5m.jpg'
@@ -217,25 +233,21 @@ export default function CNPMandataria({
                 height={720}
                 objectFit={"container"}
                 className="absolute -z-10 object-cover top-[0px] mb-2 flex h-full w-full items-center justify-center rounded-[10px]"
-              >{/* */}
+              >
               </Image>
 
               <Link 
                 href={"https://www.dnrpa.gov.ar/portal_dnrpa/mandatarios2.php?CONSULTAS2=true"} 
                 target='_blank'
                 className="w-full text-[#ffffffdd] decoration-[#ffffff77] underline underline-offset-2 duration-150 opacity-60 hover:opacity-80 hover:decoration-[#ffffffdd]">
-                <p className="w-full h-6 leading-5 rounded-t-xl border border-[#111] bg-[#000d] text-[12.5px] font-normal backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
+                <p className="flex justify-center items-center gap-2 w-full h-6 leading-5 rounded-t-xl border border-[#111] bg-[#000d] text-[12.5px] font-normal backdrop-blur-[1px] [font-variant-caps:_small-caps] [text-shadow:_1px_1px_black] min-[884px]:text-[15px]">
                   Mandataria Nacional{' '}
-                  <span className="ml-2 text-[11px]">
-                    {/* Mat:{' '} */}
-                    CUIT{' '}&#160;
-                    
-                      {/* <span className="text-[12.5px]">M202427306151350 DN</span> */}
-                      <span className="text-[12.5px]">27 30615135 0</span>
-                    
-                  </span>
+                  <span className="text-[11px]">
+                    CUIT{' '}&#160;<span className="text-[12.5px]">27 30615135 0
+                  </span></span><IconLink size="12px" color="#ffffff"/*#d400aa" */ color2="#ffffff" />
                 </p>
               </Link>
+              <div className="text-[12.5px] text-[#ffffff99] absolute -bottom-2.5">Mat: <span className="text-[12px] ">M202427306151350 DN</span></div>
             </div>
           </SwiperSlide>
         </Swiper>
@@ -244,7 +256,7 @@ export default function CNPMandataria({
       {/* Trámites */}
       <SwiperSlide id="ev" className="flex flex-col !justify-start">
         <Swiper
-          className="swiper2 !pt-24 sm:!pt-32"
+          className="swiper2 !pt-[88px] sm:!pt-32"
           centeredSlides={true}
           grabCursor={false}
           modules={[
@@ -326,7 +338,7 @@ export default function CNPMandataria({
                   width={960}
                   height={720}
                   className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
-                >{/*  h-[240px] */}
+                >
                 </Image>
               </SwiperSlide>
 
@@ -350,7 +362,7 @@ export default function CNPMandataria({
                 ></Image>
               </SwiperSlide>  
             </Swiper>
-            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
+            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
               <div className="flex items-center w-full mb-[1vh] justify-center">
                 <IconConocimiento size="33" />
               </div>
@@ -426,15 +438,15 @@ export default function CNPMandataria({
               </SwiperSlide>  
 
             </Swiper>
-            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
-              <div className="flex items-center w-full mb-4 justify-center">
+            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
+              <div className="flex items-center w-full mb-[1vh] justify-center">
                 <IconTiempo />
               </div>
-              <div className="px-4">
+              <div className="px-2">
                 <h4 className="font-bold text-base m-0">Ahorra Tiempo y Esfuerzo</h4>
                 <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
                 Si no estás familiarizado con los procedimientos o si no tenés tiempo para gestionarlos tú mismo, 
-                me encargaré de todos los detalles administrativos y legales.
+                nos encargaremos de los detalles para cursar el trámite.{/* todos los detalles administrativos y legales */}
                 </p>
               </div>
             </div>
@@ -499,47 +511,43 @@ export default function CNPMandataria({
                 ></Image>
               </SwiperSlide>      
             </Swiper>
-            <div className="flex flex-col justify-center h-[36%] absolute z-10 bottom-[16%] items-center">
-              <div className="flex items-center w-full mb-4 justify-center">
+            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
+              <div className="flex items-center w-full mb-[1vh] justify-center">
                 <IconSeguridad size="33" />
               </div>
               <div className="px-4">
                 <h4 className="font-bold text-base m-0">Seguridad y Legalidad</h4>
                 <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
-                Debidamente habilitada y registrada, garantizo que todos los trámites se realizan de manera legal y segura,
-                  evitando posibles problemas a futuro.
+                Debidamente habilitada y registrada, se garantiza que todos los trámites se realizán de manera legal y segura, evitando posibles problemas a futuro.
                 </p>
               </div>
             </div>
           </SwiperSlide>
-
-          <div className={`absolute z-10 bottom-[4vh] text-sm flex justify-center gap-[1px] ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_146px)]" : "ml-[calc(100%_/_2_-_108px)]"  } `}>
-            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}>
-              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 w-full rounded-none rounded-l-md !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>{session ? "Trámites" : "Iniciar trámite" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
-              </ButtonA>
-            </Link>
-
-            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}>
-              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-r-md !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>{session ? "Consultas" : "Realizar consulta" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
-              </ButtonA>
-            </Link>
+          
+          <div className={` absolute z-10 bottom-[2vh] text-sm flex flex-col justify-center gap-[1px] ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_84px)] sm:ml-[calc(100%_/_2_-_180px)]" : "ml-[calc(100%_/_2_-_108px)]"} sm:bottom-[4vh] sm:flex-row sm:text-[15px] `}>
+            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]`}>
+              <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} className="relative">
+                <IconPresupuesto  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[1px] -left-[36px] sm:w-[19px] sm:h-[19px] sm:-left-[36px] sm:-bottom-0 "/>
+                <p>{session ? "Trámites" : "Pedir presupuesto" }</p>
+              </Link>
+            </ButtonA>
+            
+            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !bg-[#b2439a] !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!justify-center sm:!rounded-none sm:!rounded-r-[5px] `}>
+              <Link 
+                href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
+                <IconConsulta  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[2px] left-[16px] sm:w-[19px] sm:h-[19px] sm:left-[16px] sm:bottom-[2px] " />
+                <p>{session ? "Consultas" : "Realizar consulta" }</p>
+              </Link>
+            </ButtonA>
           </div>
         </Swiper>
       </SwiperSlide>
 
       {/* Consultas */}
       <SwiperSlide id="cp">
-        <div className="w-full absolute top-0 z-10 flex h-full flex-col items-center justify-center px-4 [border-radius:_12px_12px_0_0] min-[500px]:px-6 md:px-9 ">
-          <Fondo className="p-4">
-            <div className="mb-4 mt-2.5 w-full text-xl text-center font-medium ">
+        <div className="w-full absolute top-0 z-10 flex h-full flex-col items-center justify-start pt-24 px-2 [border-radius:_12px_12px_0_0] sm:px-4 md:px-9 sm:pt-[24vh] ">
+          <Fondo className="p-2 sm:p-4">
+            <div className="mb-1.5 w-full text-[17px] text-center font-medium sm:text-xl sm:mt-2.5 sm:mb-4">
               CONSULTAS FRECUENTES
             </div>
             
@@ -569,24 +577,21 @@ export default function CNPMandataria({
             </div>
           </Fondo>
 
-          <div className="flex absolute bottom-16 gap-[1px] text-[14px]">
-            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'}>
-              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 w-full rounded-none rounded-l-md !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>{session ? "Trámites" : "Iniciar trámite" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
-              </ButtonA>
-            </Link>
-
-            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'}>
-              <ButtonA className={`h-[26px] !opacity-75 pl-3 pr-2 bg-[#b2439a] w-full rounded-none rounded-r-md !justify-start hover:!opacity-100`}>
-                <div className="flex gap-2 items-center ">
-                  <p>{session ? "Consultas" : "Realizar consulta" }</p>
-                  <ChevronRightIcon className="w-4 stroke-[3] opacity-80" />
-                </div>
-              </ButtonA>
-            </Link>
+          <div className="flex flex-col gap-[1px] absolute bottom-[11vh] text-sm sm:text-[15px] sm:flex-row">
+            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]`}>
+              <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} className="relative">
+                <IconPresupuesto  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[1px] -left-[36px] sm:w-[19px] sm:h-[19px] sm:-left-[36px] sm:-bottom-0 "/>
+                <p>{session ? "Trámites" : "Pedir presupuesto" }</p>
+              </Link>
+            </ButtonA>
+            
+            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!justify-center !bg-[#b2439a] sm:!rounded-none sm:!rounded-r-[5px] `}>
+              <Link 
+                href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
+                <IconConsulta  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[2px] left-[16px] sm:w-[19px] sm:h-[19px] sm:left-[16px] sm:bottom-[2px] " />
+                <p>{session ? "Consultas" : "Realizar consulta" }</p>
+              </Link>
+            </ButtonA>
           </div>
         </div>
         <FooterInicio />

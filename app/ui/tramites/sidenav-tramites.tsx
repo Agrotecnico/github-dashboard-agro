@@ -10,7 +10,7 @@ export default async function SideNavTramites() {
 
   return (
     <div className="flex h-max flex-col w-[268px] min-w-[268px] max-[900px]:w-full">
-      <TramiteButtonMenu allTramites={allTramites} />
+      {/* <TramiteButtonMenu allTramites={allTramites} /> */}
       <NavLinksTramites  allTramites={allTramites} />
     </div>
   );

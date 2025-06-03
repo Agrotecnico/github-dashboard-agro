@@ -5,7 +5,6 @@ import { auth } from 'auth';
 import {Frente} from '@/app/ui/marcos'
 import { ButtonB, ButtonA } from '@/app/ui/button';
 import  IconCambio  from "@/app/ui/logosIconos/icon-cambio";
-import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import * as Tabs  from "@radix-ui/react-tabs";
 import { fetchUserById } from '@/app/lib/data';
 

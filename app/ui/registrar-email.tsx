@@ -4,7 +4,6 @@ import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { useFormState } from 'react-dom';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { signOut } from 'next-auth/react';
 import { Disclosure, DisclosurePanel } from '@headlessui/react'
 
 
@@ -15,9 +14,7 @@ import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2"
 import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
 import { ButtonB, ButtonA } from '@/app/ui/button';
-import { createCustomer } from '@/app/lib/actions';
 import { createUser } from '@/app/lib/actions';
-import { fetchUserById } from '@/app/lib/data';
 
 
 export default function RegistrarEmail( {registroEmail}:{registroEmail: string}  ) {
@@ -43,15 +40,8 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
     }
   }, [successState, close])
 
-  // const initialState = { message: null, errors: {} };
-  // const [estado, dispatch] = useFormState(createCustomer, initialState);
-
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createUser, initialState);
-
-
-  // const session = await auth();
-  // const user = await fetchUserById(email)
 
 
   return (
@@ -67,7 +57,6 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
           <ButtonB
             className={`h-8 text-[13px]  w-max`}
             onClick={() => { handleToggle(); setEmail(""); setName("")}}
-            // type={state ? "reset" : "button"}
             data-testid="edit-button"
             data-active={state}
           >
@@ -89,7 +78,7 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
             <div className="flex flex-col gap-y-2 pt-4">
               <div>
                 {/* Registrar name/email */}
-                <form action={dispatch} /* id="actualizarPerfil" */>
+                <form action={dispatch} >
 
                   {/*input nombre/email */}
                   <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
@@ -176,12 +165,6 @@ export default function RegistrarEmail( {registroEmail}:{registroEmail: string} 
                       type="submit"
                       className={`h-8 text-[13px] w-max`}
                       disabled={ email == "" && name == ""}
-                      /* onClick={() => {
-                        setSpin(true);
-                      }} */
-                        // onClick={() => {
-                        //   handleToggle();
-                        // }}
                     >
                       Registrar
                     </ButtonA>

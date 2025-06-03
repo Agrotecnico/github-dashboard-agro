@@ -20,11 +20,9 @@ export default async function ListComment({
   
   const comments= await fetchFilteredComments(id)
 
-  // console.log("id:", id)
-  // console.log("comment:", comments)
 
   return (
-    <div className="space-y-5 my-14">
+    <div className="space-y-5 mt-10">
       {comments &&
         comments.map((comment, index) => {
           const isAuthor = user && user.email === comment.email_id;

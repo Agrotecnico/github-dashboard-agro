@@ -30,8 +30,6 @@ export default async function PostPage({ params }: Params) {
   const user = await fetchUserById(session?.user?.email)
   const post = getPostBySlug(params.slug);
 
-  // console.log("post:", post)
-
   if (!post) {
     return notFound();
   }
@@ -43,7 +41,7 @@ export default async function PostPage({ params }: Params) {
         <article className="px-3 pb-6 pt-6 md:px-6">
           <h1 className="mb-6 text-xl font-bold md:text-2xl">
             {post.excerpt}
-          </h1>{/*  leading-tight tracking-tighter  md:leading-none*/}
+          </h1>
 
           <div className="hidden md:mb-6 md:block">
             <div className="flex items-center">
@@ -97,14 +95,14 @@ export default async function PostPage({ params }: Params) {
             </div>
           </div>
 
-          <div className="mx-auto mb-8 max-w-2xl">
+          <div className="mx-auto mb-8 max-w-2xl text-sm sm:text-base">
             <div
-              className={`  ${markdownStyles['markdown']}`}
+              className={` ${markdownStyles['markdown']}`}
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </div>
 
-          <div className="my-20 mx-auto text-sm max-w-2xl sm:text-[15px]">
+          <div className="mt-20 mx-auto text-sm max-w-2xl sm:text-[15px]">
             <FormComment user={user} post={post} />
             <ListComment post={post} />
           </div>

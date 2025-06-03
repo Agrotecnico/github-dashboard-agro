@@ -177,7 +177,7 @@ export async function fetchFilteredCustomers(query: string, currentPage: number,
 		ORDER BY customers.name ASC
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
 	  `;
-
+    console.log("data: ", data)
     const customers = data.rows.map((customer) => ({
       ...customer,
       total_pending: formatCurrency(customer.total_pending),

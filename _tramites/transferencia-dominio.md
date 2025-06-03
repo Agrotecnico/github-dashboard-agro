@@ -4,7 +4,7 @@ resumen: "Trámite realizado cuando se produce la transmisión del dominio del a
 date: "Junio-2024"
 image: "/hero.png"
 estado: ""
-documentacion: "Título, Cédula, Constancia CUIL/CUIT, Boleto de compra/venta, Formulario 08 Firmado por el vendedor si existiera, Sellado provincial pago"
+documentacion: "Título y cédula del automotor, Constancia CUIL/CUIT, Boleto de compra/venta, Formulario 08 Firmado por el vendedor si existiera, Sellado provincial pago"
 documentos: "Título del vehículo, Cédula del vehículo"
 informacion: ""
 ---

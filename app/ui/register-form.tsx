@@ -117,17 +117,13 @@ export default function RegisterForm() {
               </div>
             </Frente>
 
-            <input
-              // className="hidden"
+            {/* <input
               id="role"
               type="hidden"
               name="role"
               value="memberAccount"
-              // autoComplete="new password"
-              // required
               readOnly
-              // minLength={6}
-            />
+            /> */}
           </div>
         </Fondo>
         <LoginButton />
@@ -143,18 +139,7 @@ export default function RegisterForm() {
           <p className="text-sm text-red-500">{state.message}</p>
         </>
       )}
-      {/* {state.message === "usuario" || !state.message ? null : (
-        <>
-        <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-        <p className="text-sm text-red-500">{state.message}</p>
-      </>
-      )} */}
-      {/* {state.message && (
-        <>
-          <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-          <p className="text-sm text-red-500">{state.message}</p>
-        </>
-      )} */}
+
     </div>
     <Link
       href={'/login'}

@@ -5,14 +5,14 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from './button';
-import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate } from '@/app/lib/actions';
 import { signIn } from 'next-auth/react';
-import LogoGoogle from './logosIconos/logo-google';
 import Link from 'next/link';
+import { useFormState, useFormStatus } from 'react-dom';
+
+import { Button } from './button';
+import { authenticate } from '@/app/lib/actions';
+import LogoGoogle from './logosIconos/logo-google';
 import { Fondo, Frente } from '@/app/ui/marcos';
-import { InputCnp } from '@/app/ui/uiRadix/input-cnp';
 
 export default function LoginForm() {
 

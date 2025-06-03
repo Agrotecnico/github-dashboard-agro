@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { auth } from 'auth';
 
 import { fetchUserById } from '@/app/lib/data';
-// import IniciarTramiteUser from '@/app/ui/tramites/iniciar-tramite-user';
 import IniciarTramite from '@/app/ui/tramites/iniciar-tramite';
 import { getTramiteBySlug } from '@/app/lib/getTramite';
 import markdownToHtml from '@/app/lib/markdownToHtml';
@@ -31,7 +30,7 @@ export default async function Page({ params }: Params) {
     <main className="min-h-[93vh] mx-auto w-full max-w-[64rem] flex-auto">
       <div className="mx-auto flex flex-col pb-16 ">
         <div className=" flex flex-col-reverse min-[1024px]:flex-row md:gap-4 md:overflow-hidden ">
-          <div className="w-full max-w-2xl flex-grow flex-col justify-between first-line:flex ">
+          <div className="w-full flex-grow first-line:flex ">
             <IniciarTramite user= {user} tramiteMd= {tramiteMd} content={content} />
           </div>
         </div>
