@@ -7,10 +7,10 @@ import UserButtonMenuMember from '@/app/ui/user-button-menu-member';
 import UserButtonMenuFaq from '@/app/ui/user-button-menu-faq';
 import UserButtonMenuIni from '@/app/ui/user-button-menu-ini';
 import LogoCnpColor from '@/app/ui/logosIconos/logo-cnp-color';
+import LogoCnpColorV from '@/app/ui/logosIconos/logo-cnp-color-v';
 import IconCuenta from '@/app/ui/logosIconos/icon-cuenta';
 import { fetchUserById } from '@/app/lib/data'; 
 import { getAllPosts } from '@/app/lib/getPost';
-
 
 
 export default async function Header( ) {
@@ -22,17 +22,16 @@ export default async function Header( ) {
 
 
   return (
-    <header className=" fixed left-0 z-10 flex h-[68px] w-[100vw] items-center justify-center bg-[#300322]  sm:h-20 ">
+    <header className="fixed left-0 z-10 flex h-[68px] w-[100vw] items-center justify-center bg-[#300322]  sm:h-20 ">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 sm:px-6">
-        <div className="flex items-center gap-4 opacity-80 duration-200 hover:opacity-100 ">
+        <div className="flex items-center gap-4 ">
           <Link
             className="flex items-center justify-between rounded-md leading-6 md:items-end"
             href="/"
           >
             <div className="-ml-3 w-full text-white">
-              <LogoCnpColor size="138px"
-                className="ml-3"
-              />
+              <LogoCnpColorV size="58px" className="ml-3 sm:hidden" />
+              <LogoCnpColor size="138px" className="hidden ml-3 sm:block" />
             </div>
           </Link>
         </div>

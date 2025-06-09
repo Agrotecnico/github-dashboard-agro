@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
-import Image from 'next/image'
 import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { Disclosure, DisclosurePanel } from '@headlessui/react'
 import clsx from 'clsx';
@@ -12,25 +11,16 @@ import { Tramite } from '@/app/lib/definitions';
 import { Button } from '@/app/ui/button';
 import { updateTramite } from '@/app/lib/actions';
 import { User } from '@/app/lib/definitions';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import {InputCnp} from "@/app/ui/uiRadix/input-cnp"
-import { TextareaCnp } from "@/app/ui/uiRadix/textarea-cnp";
 import { Frente } from '@/app/ui/marcos';
-import IconConsultaRight from "@/app/ui/logosIconos/icon-consulta-right"
-import distanceToNow from '@/app/lib/dateRelative';
 import useToggleState from "@/app/lib/hooks/use-toggle-state"
 import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
 import { ButtonA } from "@/app/ui/button";
-import { PartyPopper } from 'lucide-react';
-import  {FormatearInput}  from "@/app/ui/tramites/input-tramite-number";
-import { setDefaultHighWaterMark } from 'stream';
-// import { handleForm } from "@/app/pruebas/action";
 import { handleFormPresupuesto } from "@/app/lib/actions";
-// import { emailPresupuesto } from "@/app/lib/brevo/email-presupuesto";
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2";
-import IconEnvioEmail from '../logosIconos/icon-envio-email';
+import IconEnvioEmail from '@/app/ui/logosIconos/icon-envio-email';
 import IconAdjunto from "@/app/ui/logosIconos/icon-adjunto";
-
+import { TextareaCnp } from "@/app/ui/uiRadix/textarea-cnp";
 
 
 export default function EditTramiteForm({
@@ -44,7 +34,6 @@ export default function EditTramiteForm({
     const [successState, setSuccessState] = useState(false)
     const [estado, setEstado] = useState(true)
     const [estadoRegistrar, setEstadoRegistrar] = useState(false)
-    // const [presupuesto, setPresupuesto] = useState("")
     const [pago, setPago] = useState("pendiente")
     const [finalizado, setFinalizado] = useState("")
 
@@ -54,7 +43,7 @@ export default function EditTramiteForm({
     const [gastos, setGastos] = useState("")
     const [impuestos, setImpuestos] = useState("")
 
-    const [validez, setValidez] = useState("7")
+    // const [validez, setValidez] = useState("7")
 
     const { state, close, toggle } = useToggleState()
 
@@ -84,10 +73,7 @@ export default function EditTramiteForm({
   const updateTramiteWithId = updateTramite.bind(null, id);
   const [statex, dispatch] = useFormState(updateTramiteWithId, initialState);
 
-
-  // console.log("validez:", validez)
-
-
+  
   return (
     <>
       <div className="flex flex-col justify-between rounded-xl ">
@@ -220,58 +206,6 @@ export default function EditTramiteForm({
                   </div>
                 </div>
               </div>
-
-
-
-              {/* <div className="flex flex-col mb-1" >
-                <div className="w-full bg-[#1d0215] p-4 mt-4 rounded-lg flex flex-col gap-2.5 flex-wrap justify-start">
-                  <div className="mb-1.5 text-white  text-[15px] sm:text-base">
-                    Informacion adjunta
-                  </div>
-                  {infoAdjuntos ? (
-                    <div className="text-[#ffffffdd] flex flex-col gap-1 ">
-                      {infoAdjuntos?.map((infoAdjunto, index) => (
-                        <div key={index } className=" text-sm sm:text-[15px] ">
-                          {infoAdjunto.startsWith("undefined") ? "" : infoAdjunto}
-                        </div> 
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-[#ffffffaa] ">No tiene informacion adjunta</div>
-                  )}
-                </div>
-              </div> */}
-
-              {/* <div className={`flex flex-col `}>
-                <div className="w-full bg-[#1d0215] p-4 rounded-lg flex flex-col gap-2.5 flex-wrap justify-center">
-                  <div className="mb-1.5 text-white text-[15px] sm:text-base">Documentos adjuntos</div>
-                      <div className="text-[#1d0215dd] flex gap-5 items-baseline ">
-                        {archivos?.map((archivo, index) => (
-                          <div key={index } className=" text-[13px] leading-[18px] opacity-80 hover:opacity-100 ">
-                            
-                            <Link 
-                              href={archivo.slice(-4) === ".pdf" ? 
-                                archivo.replace(".pdf", ".png") 
-                                : 
-                                archivo
-                              } 
-                              target="_blank">
-                              <img 
-                                src={archivo.slice(-4) === ".pdf" ? 
-                                  archivo.replace(".pdf", ".png") 
-                                  : 
-                                  archivo
-                                } 
-                                alt="imagen archivo"
-                                width={96}
-                                height={96}
-                                className="rounded border border-[#777] " />
-                            </Link>
-                          </div> 
-                        ))}
-                      </div>
-                </div>
-              </div> */}
             </DisclosurePanel>
           </Disclosure>
         </Frente>
@@ -474,89 +408,60 @@ export default function EditTramiteForm({
                     <div className="flex my-2 items-end justify-end text-sm">
                         <p className="mr-4">Total</p>
                         <p className="px-3 py-1 !w-36 text-end text-sm">
-                          {/* (Number(honorarios) + Number(formularios) + Number(viaticos) + Number(gastos) + Number(impuestos)) */presupuesto.toLocaleString("es-AR", {
+                          {presupuesto.toLocaleString("es-AR", {
                             style: 'currency',
                             currency: "ARS",
                           })}
                         </p>
                     </div>
-
-                    {/* <fieldset className="hidden relative">
-                      <InputCnp 
-                        className={`h-8 text-sm  ${presupuesto && "bg-[#ffffffdd]"} `}
-                        id="presupuestox"
-                        type="number"
-                        step="0.01"
-                        name="presupuestox"
-                        value={presupuesto}
-                        placeholder= "Presupuesto"
-                        required
-                        disabled={ !estado }
-                        onChange={(e) => {
-                          setPresupuesto(e.target.value);
-                        }} >
-                        <div className={`absolute rounded-l-[4px] h-[32px] w-[32px] left-0 bg-[#1d02150b] $ `}></div>
-                        <IconCuenta  className="absolute w-[20px] left-[6px] top-[6px] " color="#50073a66" />
-                      </InputCnp>
-                    </fieldset> */}
                   </div>
                 )}
 
                 { tramite.estado === "presupuestado" && (
-                  // <div className="">
-                    <fieldset>
-                      <div className="rounded-md border-gray-200 bg-[#f7f7f700] px-[14px] py-3">
-                        <div className="flex gap-8">
-                          <div className={`px-2 border border-[#dbdbdb] rounded-lg flex items-center ${pago === "pagado" ? "bg-[#eaeaea] text-[#1d021577]" : " text-[#1d0215cc] border-[#ff000018] bg-[#ff000014]"}`}>
-                            <input
-                              id="pendiente"
-                              name="status"
-                              type="radio"
-                              value="pendiente"
-                              defaultChecked= {pago === 'pendiente'}
-                              className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                              onChange={(e) => {
-                                setPago(e.target.value)
-                              }}
-                            />
-                            <label
-                              htmlFor="pendiente"
-                              className={`flex cursor-pointer items-center gap-1.5 px-3 py-1.5 text-sm font-medium `}
-                            >
-                              Pendiente <ClockIcon className="h-4 w-4" />
-                            </label>
-                          </div>
-                          <div className={`px-2 border rounded-lg flex items-center ${pago === "pendiente" ? "bg-[#eaeaea] text-[#1d021577] border-[#dbdbdb]" : " text-[#1d0215cc] border-[#22bb0028] bg-[#22bb0018]"}`}>
-                            <input
-                              id="pagado"
-                              name="status"
-                              type="radio"
-                              value="pagado"
-                              defaultChecked= {pago === 'pagado'}
-                              className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
-                              onChange={(e) => {
-                                setPago(e.target.value)
-                              }}
-                            />
-                            <label
-                              htmlFor="pagado"
-                              className={`ml-2 flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium `}
-                            >
-                              Pagado <CheckIcon className="h-4 w-4" />
-                            </label>
-                          </div>
+                  <fieldset>
+                    <div className="rounded-md border-gray-200 bg-[#f7f7f700] px-[14px] py-3">
+                      <div className="flex gap-8">
+                        <div className={`px-2 border border-[#dbdbdb] rounded-lg flex items-center ${pago === "pagado" ? "bg-[#eaeaea] text-[#1d021577]" : " text-[#1d0215cc] border-[#ff000018] bg-[#ff000014]"}`}>
+                          <input
+                            id="pendiente"
+                            name="status"
+                            type="radio"
+                            value="pendiente"
+                            defaultChecked= {pago === 'pendiente'}
+                            className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                            onChange={(e) => {
+                              setPago(e.target.value)
+                            }}
+                          />
+                          <label
+                            htmlFor="pendiente"
+                            className={`flex cursor-pointer items-center gap-1.5 px-3 py-1.5 text-sm font-medium `}
+                          >
+                            Pendiente <ClockIcon className="h-4 w-4" />
+                          </label>
+                        </div>
+                        <div className={`px-2 border rounded-lg flex items-center ${pago === "pendiente" ? "bg-[#eaeaea] text-[#1d021577] border-[#dbdbdb]" : " text-[#1d0215cc] border-[#22bb0028] bg-[#22bb0018]"}`}>
+                          <input
+                            id="pagado"
+                            name="status"
+                            type="radio"
+                            value="pagado"
+                            defaultChecked= {pago === 'pagado'}
+                            className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                            onChange={(e) => {
+                              setPago(e.target.value)
+                            }}
+                          />
+                          <label
+                            htmlFor="pagado"
+                            className={`ml-2 flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium `}
+                          >
+                            Pagado <CheckIcon className="h-4 w-4" />
+                          </label>
                         </div>
                       </div>
-                      {/* <div id="status-error" aria-live="polite" aria-atomic="true">
-                        {state.errors?.status &&
-                          state.errors.status.map((error: string) => (
-                            <p className="mt-2 text-sm text-red-500" key={error}>
-                              {error}
-                            </p>
-                          ))}
-                      </div> */}
-                    </fieldset>
-                  // </div>
+                    </div>
+                  </fieldset>
                 )}
 
                 { tramite.estado === "iniciado" && (
@@ -564,7 +469,6 @@ export default function EditTramiteForm({
                     <label htmlFor="select" className="mr-2">Selecciona una opción:</label>
                     <select 
                       id="select" 
-                      // value={finalizado}
                       className="pl-4 w-max text-[13px] rounded-[4px] pr-4 pb-0.5 pt-0 border border-[#e9dae9] bg-[#ffffff] text-[#000000] opacity-70 transition-[opacity,shadow] duration-150 ease-in sm:text-sm sm:pb-1 hover:opacity-90 hover:border-[#c737c747] focus:border-[rgba(195,123,195,0)] focus:opacity-100 focus:[box-shadow:_0px_0px_0px_1px_#c737c7cc] focus:outline-1 focus:outline-[#c37bc336] focus:outline-offset-2 focus:placeholder:opacity-40 placeholder:text-sm  placeholder:text-[#858585] h-8   "
                       onChange={(e) => {
                         setFinalizado(e.target.value);
@@ -577,19 +481,16 @@ export default function EditTramiteForm({
 
                   </div>
                 )}
-
-                {/* { tramite.estado === "terminado" && (
-                  ""
-                )} */}
               </DisclosurePanel>
             </Disclosure>
           </Frente>
         )}
 
+        {/* E-mail presupuesto*/}
         {tramite.estado === "presupuestar" && (
           <Frente className={`py-4 mb-4 px-4 text-sm sm:px-4 `} >
             <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
-              <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>{/*  ${state && "hidden"} */}
+              <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>
                 <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
                 <p>Email - Presupuesto</p>
               </div>
@@ -616,7 +517,7 @@ export default function EditTramiteForm({
                   }
                 )}
               >
-                <form action= /*{emailPresupuesto} */ {handleFormPresupuesto} /* method="POST" */  className="rounded-lg w-full p-4 ">
+                <form action= {handleFormPresupuesto}  className="rounded-lg w-full p-4 ">
                   <div className="flex items-start w-full mb-4 gap-3">
                     <p className="mt-2 leading-none text-[13px]">
                       Para
@@ -628,7 +529,6 @@ export default function EditTramiteForm({
                         placeholder="Nombre" 
                         className="h-8 !text-sm "
                         value={userMember?.name}
-                        autoFocus
                         required
                         readOnly
                         >
@@ -646,9 +546,9 @@ export default function EditTramiteForm({
                         name="to_email" 
                         placeholder="Email" 
                         className="h-8 !text-sm " 
-                        defaultValue={userMember?.email}
+                        value=/* {userMember?.email} */"agrotecnicog@gmail.com"
                         required
-                        // readOnly
+                        readOnly
                         >
                         <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
                           <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599] `}>
@@ -668,20 +568,19 @@ export default function EditTramiteForm({
                         className="text-start text-[13px] "
                         htmlFor="title"
                       >
-                        Trámite
+                        Asunto
                       </label>
-                      <InputCnp 
-                        type="text" 
+                      <TextareaCnp 
                         name="title" 
-                        placeholder="Asunto" 
-                        className="h-8 !pl-4 !text-sm"
-                        value={tramite.tramite}
+                        className="!pl-4 !text-sm"
+                        rows={1}
+                        value={`Presupuesto Trámite "${tramite.tramite}"`}
                         required
                         readOnly
                         >
                         <div className="w-0" >
                         </div>
-                      </InputCnp>
+                      </TextareaCnp>
                     </fieldset>
 
                     <fieldset className="flex flex-col">
@@ -717,26 +616,35 @@ export default function EditTramiteForm({
                         name="validez" 
                         placeholder="7" 
                         className="h-8 !pl-4 !text-sm"
-                        value={validez}
-                        onChange={(e) => {
-                          setValidez(e.target.value)
-                        }}
-                        // required
-                        // readOnly
+                        value={"7"}
+                        required
+                        readOnly
                         >
                         <div className="w-0" >
                         </div>
                       </InputCnp>
                     </fieldset>
 
-                    {/* <TextareaCnp
-                      name="content" 
-                      placeholder="Mensaje" 
-                      value={presupuesto.toLocaleString("es-Ar")}
-                      rows={6}
-                      required
-                      className=""
-                    /> */}
+                    <fieldset className="flex flex-col">
+                      <label
+                        className="text-start text-[13px] "
+                        htmlFor="tramite"
+                      >
+                        Trámite
+                      </label>
+                      <InputCnp 
+                        type="text" 
+                        name="tramite" 
+                        placeholder="Trámite" 
+                        className="h-8 !pl-4 !text-sm"
+                        value={tramite.tramite}
+                        required
+                        readOnly
+                        >
+                        <div className="w-0" >
+                        </div>
+                      </InputCnp>
+                    </fieldset>
                   </div>
 
                   <button 
@@ -759,7 +667,6 @@ export default function EditTramiteForm({
             name="presupuesto"
             id="presupuesto"
             type= "number"
-            // step="0.01"
             value={tramite.presupuesto ? tramite.presupuesto/100 :  presupuesto}
             aria-describedby="respuesta-error"
             required
@@ -769,40 +676,40 @@ export default function EditTramiteForm({
             name="estado" 
             id="estado"
             type="text"
-            defaultValue= {
+            value= {
               tramite.estado === "presupuestar" ? "presupuestado" : 
               tramite.estado === "presupuestado" ? "iniciado" : 
               tramite.estado === "iniciado" ? finalizado  : undefined
             }
-            // readOnly
+            readOnly
           />
           <input 
             name="budgeted_at" 
             id="budgeted_at" 
             type="text"
-            defaultValue= { tramite.budgeted_at ? new Date(tramite.budgeted_at).toISOString() : tramite.estado === "presupuestar" ? new Date().toISOString()  : ""}
-            // readOnly
+            value= { tramite.budgeted_at ? new Date(tramite.budgeted_at).toISOString() : tramite.estado === "presupuestar" ? new Date().toISOString()  : ""}
+            readOnly
           />
           <input 
             name="started_at" 
             id="started_at" 
             type="text"
-            defaultValue= { tramite.started_at ? new Date(tramite.started_at).toISOString() : tramite.estado === "presupuestado" ? new Date().toISOString()  : ""}
-            // readOnly
+            value= { tramite.started_at ? new Date(tramite.started_at).toISOString() : tramite.estado === "presupuestado" ? new Date().toISOString()  : ""}
+            readOnly
           />
           <input 
             name="finished_at" 
             id="finished_at" 
             type="text"
-            defaultValue= { tramite.estado === "iniciado" && finalizado === "terminado" ? new Date().toISOString() : ""}
-            // readOnly
+            value= { tramite.estado === "iniciado" && finalizado === "terminado" ? new Date().toISOString() : ""}
+            readOnly
           />
           <input 
             name="canceled_at" 
             id="canceled_at" 
             type="text"
-            defaultValue= { tramite.estado === "iniciado" && finalizado === "cancelado" ? new Date().toISOString() : ""}
-            // readOnly
+            value= { tramite.estado === "iniciado" && finalizado === "cancelado" ? new Date().toISOString() : ""}
+            readOnly
           />
           
         </div>

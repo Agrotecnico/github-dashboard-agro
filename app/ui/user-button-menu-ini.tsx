@@ -16,15 +16,18 @@ export default  function UserButtonMenuIni() {
     <div>
       <Link 
         href={ini ? "/realizar-consulta" : "/iniciar-tramite/baja-de-vehiculo" } 
-        className={`mx-10 py-1 px-3 rounded-md leading-4 text-sm opacity-70 duration-150 sm:text-base ${ini || pathname.startsWith('/realizar-consulta') ? "block" : "hidden" } hover:opacity-90 `}>{/* text-[#ffffffcc] hover:bg-black hover:text-[#ffffffee] hover:border-[#afafaf64] border border-transparent */}
-
-        {/* {ini ? "Realizar consulta" : "Pedir presupuesto" } */}
+        className={`text-sm opacity-80 duration-150 sm:text-base ${ini || pathname.startsWith('/realizar-consulta') ? "block" : "hidden" } hover:opacity-90 `}>
         {ini ? (
-          <IconConsulta color="#ffffff" size="26" />
+          <div className="flex flex-col items-center justify-center">
+            <IconConsulta size="20" />
+            <p className=" text-[#ffffff] leading-[1.1]">Consulta</p>
+          </div>
         ) : (
-          <IconPresupuesto color="#ffffff" size="26" />
+          <div className="flex flex-col items-center justify-center">
+            <IconPresupuesto size="20" />
+            <p className=" text-[#ffffff] leading-[1.1]">Presupuesto</p>
+          </div>
         )}
-
       </Link>
     </div>
   );

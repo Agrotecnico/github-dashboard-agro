@@ -6,19 +6,16 @@ import { ExclamationCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outlin
 import clsx from 'clsx';
 import * as Tabs  from "@radix-ui/react-tabs";
 import Link from 'next/link';
-import { redirect } from 'next/navigation'
 
 import { User } from '@/app/lib/definitions';
 import { createTramite } from '@/app/lib/actions';
 import { Frente } from '@/app/ui/marcos';
 import IconCambio from '@/app/ui/logosIconos/icon-cambio';
-import { generarClaveUnica } from "@/app/lib/utils";
 import { ImageListType} from '@/app/ui/consultas/typings';
 import ImageUploading from "@/app/ui/consultas/ImageUploading"
 import IconDragDrop from '@/app/ui/logosIconos/icon-drag-drop';
-import { ButtonB, ButtonA } from '@/app/ui/button';
+import { ButtonB, ButtonA, Button } from '@/app/ui/button';
 import markdownStyles from './markdown-styles.module.css';
-
 import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2"
 import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
@@ -26,8 +23,10 @@ import { TextareaCnp } from "@/app/ui/uiRadix/textarea-cnp";
 import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import { createUser } from '@/app/lib/actions';
 import { TramiteMd } from "@/app/lib/definitions"
-import { Divide } from 'lucide-react';
-import EditProfileImage from '@/app/ui/edit-profile-image';
+import IconEnvioEmail from '../logosIconos/icon-envio-email';
+import { handleFormRegistro } from '@/app/lib/actions';
+import IconInfo from '../logosIconos/icon-info';
+import { handleFormPedido } from '@/app/lib/actions';
 
 
 export default function IniciarTramite( {
@@ -55,12 +54,16 @@ export default function IniciarTramite( {
   const [info2, setInfo2] = useState<string | undefined>("")
   const [info3, setInfo3] = useState<string | undefined>("")
 
+   const [estadoRegistrar, setEstadoRegistrar] = useState(false)
+
+
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const emailValid= emailRegex.test(email)
-  // console.log("emailValid: ", emailRegex.test(email));
-
 
   const info= [info0, info1, info2, info3]
+
+  const infos:string[]= []
+  info.map((inf) => { inf !== "" && infos.push(`${inf}`)})
 
    const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -75,18 +78,26 @@ export default function IniciarTramite( {
   // const maxNumber = 5;
   const maxNumber = documentos?.length;
 
+  const buttonRefRegistro = useRef<HTMLButtonElement>(null);
+  const handleClickButtonRegistro= () => {
+    if (buttonRefRegistro.current) buttonRefRegistro.current.click()
+  };
+
+  const buttonRefPedido = useRef<HTMLButtonElement>(null);
+  const handleClickButtonPedido= () => {
+    if (buttonRefPedido.current) buttonRefPedido.current.click()
+  };
 
   const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
   const d = new Date();
   const date= `${months[d.getMonth()]}-${d.getFullYear()}`
 
   const files: File[]= []
-  images.map((image) => {
+  images?.map((image) => {
     files.push(image.file!)
   })
 
   const buttonyRef = useRef<HTMLButtonElement>(null);
-
   const handleClickButton= () => {
     if (buttonyRef.current) buttonyRef.current.click()
   };
@@ -137,7 +148,6 @@ export default function IniciarTramite( {
     } catch (error) {
       console.error(error);
     }
-    // setSpin(false)
   };
 
   const renderFilePreview = (file: File ) => { 
@@ -165,13 +175,16 @@ export default function IniciarTramite( {
   }
 
   useEffect(() => {
-    !tramite && setTramite(`${tramiteMd.tramite}`);
+    !tramite && tramiteMd.slug !== "x-Otros" && setTramite(`${tramiteMd.tramite}`);
+    informations[0] === "" && setInfo0("Sin info adicional");
+    tramiteMd.slug === "x-Otros" && setInfo0("Info adicional en Descripción de Otros trámites");
+    // !tramite && setTramite(`${tramiteMd.tramite}`);
     sessionStorage.getItem('name') && setName(`${sessionStorage.getItem('name')}`)
     sessionStorage.getItem('email') && setEmail(`${sessionStorage.getItem('email')}`)
     if (sessionStorage.getItem('email')) {
       setEmailSession(true);
     }
-  }, [tramiteMd, name, email, open ])
+  }, [tramiteMd, name, email, open, info0, info1, imageUrl ])
 
   const onChange = (imageList: ImageListType, addUpdateIndex: Array<number> | undefined) => {
     setImages(imageList);
@@ -183,9 +196,7 @@ export default function IniciarTramite( {
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createTramite, initialState);
 
-  // console.log("tramite: ", tramite)
-
-
+  
   return (
     <>
       <div className="flex items-center pb-3">
@@ -194,7 +205,7 @@ export default function IniciarTramite( {
           alt="icono trámites" 
           width={26} 
           height={"auto"}
-          className="opacity-80 h-[16px] w-[16px] mr-1.5 sm:h-[18px] sm:w-[18px] " 
+          className="opacity-80 h-[14px] w-[14px] mr-1.5 sm:h-[16px] sm:w-[16px]"
         />
         <h1 className=" text-start text-lg text-[#50073a88] font-semibold leading-tight tracking-tighter sm:text-[22px] md:leading-none ">
           {tramiteMd.tramite}
@@ -221,7 +232,7 @@ export default function IniciarTramite( {
               className="border-x border-[#e6e0e3] flex bg-[#ffffff63] flex-1 duration-150 cursor-pointer select-none items-center justify-center py-3 px-2.5 leading-none  text-[#1d021577] outline-none hover:text-[#1d0215aa] data-[state=active]:bg-[#f1eef000] data-[state=active]:cursor-default data-[state=active]:text-[#1d0215cc]"
               value="tab2"
             >
-              Adjuntar Documentos
+              Adjuntar Comprobantes
             </Tabs.Trigger>
 
             <Tabs.Trigger
@@ -230,16 +241,15 @@ export default function IniciarTramite( {
             >
               Adjuntar Informacíon
             </Tabs.Trigger>
-
-                  
           </Tabs.List>
 
           <Tabs.Content
-            className="grow rounded-b-md p-2 outline-none text-sm text-[#1d0215cc] sm:p-4 md:text-[15px]"
+            className="grow rounded-b-md p-2 outline-none leading-[1.15] text-[13px] text-[#1d0215cc] sm:p-4 sm:leading-normal sm:text-[15px]"
             value="tab1"
           >
-            <p className="mb-3">
-                Descripción general del trámite
+            <p className="mb-3 mt-1 sm:mt-0 leading-normal">
+               {tramiteMd.slug === "x-Otros" ? "Describí el trámite" : "Descripción general del trámite" }  
+               <span className={`font-semibold text-[#d400aa] ${tramiteMd.slug !== "x-Otros" && "hidden"}`}> *</span>
             </p>
 
             <div className=" duration-300 rounded-[4px] ">
@@ -249,10 +259,10 @@ export default function IniciarTramite( {
                     className=""
                     id="tramite"
                     name="tramite"
-                    placeholder= "Detallá el trámite..."
+                    placeholder= "Descripción..."
                     required
                     value={tramite}
-                    rows={4}
+                    rows={8}
                     maxLength={1024}
                     wrap="hard"
                     onChange={(e) => {
@@ -266,14 +276,14 @@ export default function IniciarTramite( {
                   className={`rounded-sm py-2 px-3  ${markdownStyles['markdown']}`}
                   dangerouslySetInnerHTML={{ __html: content }}
                   />
-                  <p className="px-3 text-sm underline underline-offset-2 decoration-[#1d021555]">
+                  <p className="px-3 underline underline-offset-2 decoration-[#1d021555]">
                     Comprobantes
                   </p>
                   <div className="py-2 px-3 rounded-sm">
-                    <ul className="ml-4 list-disc marker:text-[#50073aaa]" >
+                    <ul>
                         {documentacions?.map((documento, index) => (
-                            <li key={index} className=" ">
-                                {documento}
+                            <li key={index} className="flex ">
+                                <span className="mr-1">-</span><span>{documento}</span>
                             </li>
                         ))}
                     </ul>
@@ -282,7 +292,7 @@ export default function IniciarTramite( {
               )}
             </div>
             
-            <div className="w-full flex mt-3 ">
+            <div className="hidden w-full  mt-3 sm:flex">
               <div className="flex items-center text-[13px] opacity-90 md:text-[13.5px]">
                   <ArrowPathIcon className="h-4 w-4 mr-2.5 text-[#50073a9d] stroke-2 " />
                   <p className="text-[#50073a7d] font-medium ">{tramiteMd.date !== "actual" ? tramiteMd.date : date }</p>
@@ -291,21 +301,18 @@ export default function IniciarTramite( {
           </Tabs.Content>
 
           <Tabs.Content
-            className="grow rounded-b-md p-2 outline-none text-[13px] text-[#1d0215cc] sm:p-4 md:text-sm"
+            className="grow rounded-b-md p-2 outline-none text-[13px] text-[#1d0215cc] sm:p-4 sm:text-[15px]"
             value="tab2"
           >
-            <p className="mb-3">
-                Cargá los siguientes documentos:
+            <p className="mb-3 mt-1 sm:mt-0">
+               {tramiteMd.slug === "x-Otros" ? "Podés cargar dos comprobantes:" : "Cargá los siguientes comprobantes:" }  
             </p>
 
             <div className="py-2 px-3 mb-4 rounded-sm bg-[#ffffff65]">
               <ul className="list-none" >
                   {documentos?.map((documento, index) => (
-
-                    // <EditProfileImage  user={user} />
-
                     <li key={index} className=" ">
-                        {documento} <span className="font-semibold text-xs text-[#d400aa]">{/* &#10003; */}*</span>
+                      {documento} <span className={`font-semibold text-xs text-[#d400aa] ${tramiteMd.slug === "x-Otros" && "hidden"}`}>*</span>
                     </li>
                   ))}
               </ul>
@@ -351,7 +358,6 @@ export default function IniciarTramite( {
                       {errors && (
                         <div className={`w-max mb-1 mt-4 mx-auto text-[12.5px] border border-[#ffffff1e] tracking-wide text-[#ffffffee] leading-[1.5] py-0.5 px-2 bg-[#91359185] rounded-xl `}>
                           {errors.maxNumber && (
-                            // <span>La cantidad excede el máximo permitido</span>
                             <span>Cantidad máxima: {maxNumber} arch.</span>
                           )}
                           {errors.acceptType && (
@@ -395,7 +401,6 @@ export default function IniciarTramite( {
                             </div>
                           </div>
                           <div className="text-xs break-words w-36 text-[#ffffffee] mt-[3px] opacity-80 text-start sm:text-sm sm:w-44">
-                            {/* {image.file?.name }  */}
                             {documentos?.length && documentos[index].toLocaleUpperCase() }
                           </div>
                         </div>
@@ -408,25 +413,33 @@ export default function IniciarTramite( {
           </Tabs.Content>
 
           <Tabs.Content
-            className="grow rounded-b-md p-2 outline-none text-sm text-[#1d0215cc] sm:p-4 md:text-[15px]"
+            className="grow rounded-b-md p-2 outline-none text-sm text-[#1d0215cc] sm:p-4 sm:text-[15px]"
             value="tab3"
           >
-            <p className="mb-3">
-              {/* Información necesaria para realizar el presupuesto */}
-              Llena el formulario con la información:
+            <p className="mb-3 mt-1 sm:mt-0">
+               {tramiteMd.slug === "x-Otros" ? "Informacion adicional:" :"Llená el formulario con información adicional:" }  
             </p>
-            <div className="grid grid-cols-1 gap-3  sm:grid-cols-2">
-              {informations.map((information, index) => (
-                // <div>polo {information} </div>
-                <fieldset className="w-full"  key= {index}>
-                  <label
-                    className="text-[13px] sm:text-sm"
-                    htmlFor={information}
-                  >
-                    {information} <span className="text-[#d400aa]"> *</span>
-                  </label>
-                  <InputCnp
-                      className="text-sm h-8 placeholder:opacity-50"
+
+            {informations[0] === "" ? (
+              <div className="bg-[#ffffff65] py-1 px-3 rounded-sm w-fit text-[14px] sm:text-[15px]">
+                {tramiteMd.slug === "x-Otros" ? (
+                  'Agregá toda la infornación en la pestaña "Descripción"'
+                ) : (
+                  'Sin formulario para adjuntar información adicional '
+                )}
+              </div>
+              ) : (
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {informations.map((information, index) => (
+                  <fieldset className="w-full"  key= {index}>
+                    <label
+                      className="text-[13px] sm:text-sm"
+                      htmlFor={information}
+                    >
+                      {information} <span className={`text-[#d400aa]  ${tramiteMd.slug === "x-Otros" && "hidden"}`}> *</span>
+                    </label>
+                    <InputCnp
+                      className="text-sm !pl-11 h-7 placeholder:opacity-50 sm:h-8"
                       id={information}
                       type="text"
                       name={information}
@@ -437,19 +450,8 @@ export default function IniciarTramite( {
                         index === 3 ? info3 : 
                         ""
                       }
-                      // value= {info}
-                      placeholder= /* {information} */"..."
+                      placeholder= "..."
                       required
-                      // onFocus= {(e) => {
-                      //   handleFocus(index, e)
-                      // }}
-                      // onBlur={(e) => {
-                      //   handleBlur(index, e);
-                      // }}
-                      // onChange={(e) => {
-                      //   setInfo0(e.target.value)
-                      // }}
-
                       onChange={(e) => {
                         index === 0 ? setInfo0(e.target.value) : 
                         index === 1 ? setInfo1(e.target.value) : 
@@ -457,21 +459,15 @@ export default function IniciarTramite( {
                         index === 3 ? setInfo3(e.target.value) : 
                         ""
                       }}
-                      // onChange={(e) => setInfo([...info, e.target.value])}
-                  >
-                      <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
-                        
-
-                        <span className={`text-[17px] font-serif absolute w-3 font-black left-[11px] top-1.5 opacity-40 text-[#50073a88]  `}>
-                          {/* &#10003; */}i
-                        </span>
-                        
-                      </div>{/* ${info0 === ""  ?   : info1  ?  "text-[#d400aadd] opacity-60" : info2  ?  "text-[#d400aadd] opacity-60" : "null"
-                        } */}
-                  </InputCnp>
-                </fieldset>
-              ))}
-            </div>
+                    >
+                      <div className="absolute rounded-l-[4px] h-7 w-8 left-0 top-0 bg-[#00000010] sm:h-8 sm:w-9" >
+                        <IconInfo className="w-4 h-4 absolute top-1.5 left-2 sm:w-5 sm:h-5" />
+                      </div>
+                    </InputCnp>
+                  </fieldset>
+                ))}
+              </div>
+            )}
           </Tabs.Content>
         </Tabs.Root>
       </Frente>
@@ -479,14 +475,14 @@ export default function IniciarTramite( {
       {/* registrar email */}
       {!user && (
          emailSession === false  ? (
-          <Frente className="p-2 mt-4 text-small-regular sm:p-4 !bg-[#1d021513] ">
+          <Frente className="p-2 mt-2 text-small-regular !bg-[#1d021513] sm:p-4 sm:mt-4 ">
             <div className="flex items-center justify-between gap-3 sm:gap-5">
               <div className="mt-1.5 ">
                 <IconRegistro className="opacity-80 w-[24px] ml-1.5 sm:ml-3 " />
               </div>
   
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] transition-[opacity, display] duration-300   `}>{/* ${open ? "hidden" : "block"  } */}
-                {/* Regístrate para iniciar un trámite y */}Dejá tu e-mail para enviarte el presupuesto <span className=" text-[#d400aa]">*</span> 
+              <div className={`w-full text-start text-[14px] leading-[1.1] text-[#50073aaa] transition-[opacity, display] duration-300 sm:leading-normal `}>
+                Dejá tu e-mail para enviarte el presupuesto <span className=" text-[#d400aa]">*</span> 
               </div>
                 
               <ButtonB
@@ -501,125 +497,115 @@ export default function IniciarTramite( {
                 data-testid="edit-button"
                 data-active={open}
               >
-                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Anotar{/* Registrar */}</div>  }
+                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Anotar</div>  }
               </ButtonB>
             </div>
             
             <div
-                className={clsx(
-                  "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
-                  {
-                    "max-h-[1000px] opacity-100": open,
-                    "max-h-0 opacity-0": !open,
-                  }
-                )}
-              >
-                {/* create user*/}
-                <div className="pt-2 sm:pt-4">
-                  <form action={dispatchx}>
-                    <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
-                      <InputCnp
-                        className="text-sm h-8"
-                        id="name"
-                        type="text"
-                        name="name"
-                        minLength={3}
-                        maxLength={100}
-                        value={name}
-                        placeholder= "Nombre"
-                        required
-                        disabled={ !open }
-                        onChange={(e) => {
-                          setName(e.target.value);
-                          // sessionStorage.setItem('name', e.target.value);
-                        }} 
-                        >
-                        <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
-                        </div>
-                        <IconCuenta  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
-                      </InputCnp>
-
-                      <InputCnp
-                        className="text-sm h-8"
-                        id="email"
-                        type="email"
-                        name="email"
-                        minLength={3}
-                        maxLength={100}
-                        value={email}
-                        placeholder= "Email"
-                        required
-                        disabled={ !open }
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                        // onBlur={(e) => {
-                        //   sessionStorage.setItem('email', e.target.value);
-                        // }} 
-                        >
-                        <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
-                        </div>
-                        <IconEmail2  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
-                      </InputCnp>
-                      {/* {!emailValid && (
-                        <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>
-                          Emeil invalido
-                        </div>
-                      )} */}
-                    </fieldset>
-                    <input
-                      id="password"
-                      type="hidden"
-                      name="password"
-                      defaultValue={"xxxxxx"}
-                      readOnly
-                    />
-
-                    <input
-                      id="confirmPassword"
-                      type="hidden"
-                      name="confirmPassword"
-                      defaultValue={"xxxxxx"}
-                      readOnly
-                    />
-
-                    {/* Massages erros */}
-                    <div
-                      className="flex items-end relative space-x-8"
-                      aria-live="polite"
-                      aria-atomic="true"
-                    >
-                      {estadox?.message && estadox?.message !== "usuario" && estadox?.message === "Database Error: Error al crear consulta." && (
-                        <>
-                          <ExclamationCircleIcon className="absolute top-4 h-5 w-5 text-red-500" />
-                          <p className="pt-4 text-sm text-red-500">{estadox?.message}</p>
-                        </>
-                      )}
-                    </div>
-
-                    {/* button submit */}
-                    <div className="mt-2 text-sm sm:mt-4">
-                      <ButtonA
-                        className={`h-8 text-[13px] w-max ml-auto`}
-                        // disabled={ email == "" && name == ""}
-                        onClick={ () => {
-                          emailValid && name && setTimeout(() => setOpen(!open), 200) 
-                          // setEmailSession(true)
-                          emailValid && name && sessionStorage.setItem('name', `${name}`);
-                          emailValid && name && sessionStorage.setItem('email', `${email}`);
-                        }}
+              className={clsx(
+                "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+                {
+                  "max-h-[1000px] opacity-100": open,
+                  "max-h-0 opacity-0": !open,
+                }
+              )}
+            >
+              {/* create user*/}
+              <div className="pt-2 sm:pt-4">
+                <form action={dispatchx}>
+                  <fieldset className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
+                    <InputCnp
+                      className="text-sm h-8"
+                      id="name"
+                      type="text"
+                      name="name"
+                      minLength={3}
+                      maxLength={100}
+                      value={name}
+                      placeholder= "Nombre"
+                      required
+                      disabled={ !open }
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }} 
                       >
-                        Registrar
-                      </ButtonA>
-                    </div>
-                  </form>
-                </div>
+                      <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
+                      </div>
+                      <IconCuenta  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
+                    </InputCnp>
+
+                    <InputCnp
+                      className="text-sm h-8"
+                      id="email"
+                      type="email"
+                      name="email"
+                      minLength={3}
+                      maxLength={100}
+                      value={email}
+                      placeholder= "Email"
+                      required
+                      disabled={ !open }
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      >
+                      <div className="absolute rounded-l-[4px] h-[32px] w-[32px] left-0 top-0 bg-[#1d02150b]" >
+                      </div>
+                      <IconEmail2  className="absolute w-[14px] left-[9px] top-[9px] " color="#50073a66" />
+                    </InputCnp>
+                  </fieldset>
+                  <input
+                    id="password"
+                    type="hidden"
+                    name="password"
+                    defaultValue={"xxxxxx"}
+                    readOnly
+                  />
+
+                  <input
+                    id="confirmPassword"
+                    type="hidden"
+                    name="confirmPassword"
+                    defaultValue={"xxxxxx"}
+                    readOnly
+                  />
+
+                  {/* Massages erros */}
+                  <div
+                    className="flex items-end relative space-x-8"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    {estadox?.message && estadox?.message !== "usuario" && estadox?.message === "Database Error: Error al crear consulta." && (
+                      <>
+                        <ExclamationCircleIcon className="absolute top-4 h-5 w-5 text-red-500" />
+                        <p className="pt-4 text-sm text-red-500">{estadox?.message}</p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* button submit */}
+                  <div className="mt-2 text-sm sm:mt-4">
+                    <ButtonA
+                      className={`h-8 text-[13px] w-max ml-auto`}
+                      onClick={ () => {
+                        emailValid && name && setTimeout(() => setOpen(!open), 200) 
+                        emailValid && name && sessionStorage.setItem('name', `${name}`);
+                        emailValid && name && sessionStorage.setItem('email', `${email}`);
+                        handleClickButtonRegistro()
+                      }}
+                    >
+                      Registrar
+                    </ButtonA>
+                  </div>
+                </form>
+              </div>
             </div>
           </Frente>
           ) : (
             <Frente className="p-2 mt-2 text-small-regular sm:p-4 !bg-[#e0e6e1] ">
               <div className={`w-full text-start text-[13px] text-[rgba(29,2,21,0.87)] transition-[opacity] duration-300  sm:text-sm `}>
-                <span className="font-semibold text-sm sm:text-[15px] ">{ !estadox.message ? "" : name }</span> {/* Te enviaremos el presupuesto al */} Para enviarte el presupuesto se registró el e-mail  <span className="font-semibold  mx-1 text-sm sm:text-[15px]">{email}</span>
+                <span className="font-semibold text-sm sm:text-[15px] ">{ !estadox.message ? "" : name }</span>  Para enviarte el presupuesto se registró el e-mail  <span className="font-semibold  mx-1 text-sm sm:text-[15px]">{email}</span>
               </div>
             </Frente> 
           ) 
@@ -629,14 +615,14 @@ export default function IniciarTramite( {
       {estado?.message === "tramiteIniciado" && (
         <Frente className="!p-2 mt-2 !bg-[#d7e5d9] sm:!p-4 ">
           <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>
-            Recibimos el pedido. Te enviaremos el presupuesto a la brevedad. {/* Pronto enviaremos el presupuesto a tu email */}
+            Recibimos el pedido. Te enviaremos el presupuesto a la brevedad.
           </div>
         </Frente> 
       )}
 
       {/* Massages error tramite */}
       <div
-        className="mb-3 mt-3 flex items-end space-x-1"
+        className="my-1.5 flex items-end space-x-1 sm:my-3"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -655,7 +641,7 @@ export default function IniciarTramite( {
           type="hidden"
           id="documentos_url"
           name="documentos_url"
-          value={imageUrl /* ? imageUrl : `["https://res.cloudinary.com/dchmrl6fc/image/upload/v1740640515/sin-adjuntos_ut7col.png"]` */ }
+          value={imageUrl}
           readOnly
         />
         {/* tramite */}
@@ -671,8 +657,7 @@ export default function IniciarTramite( {
           type="hidden"
           id="email_id"
           name="email_id"
-          // value= {email ? email : user?.email /* ? user.email : emailx */ }
-          value= {!email ? user?.email : email /* ? user.email : emailx */ }
+          value= {!email ? user?.email : email }
           readOnly
         />
         {/* informacion */}
@@ -680,14 +665,8 @@ export default function IniciarTramite( {
           type="hidden"
           id="informacion"
           name="informacion"
-          // value= "polo"
           value={`["${informations[0]} : ${info0}", "${informations[1]} : ${info1}", "${informations[2]} : ${info2}", "${informations[3]} : ${info3}"]`}
-          // value={`["${inf[0]}: ${info0}", "${inf[1]}: ${info1}", "${inf[2]}: ${info2}", "${inf[3]}: ${info3}"]`}
           readOnly
-          // onChange={(e) => {
-          //   setInf(e.target.value);
-          //   // console.log("value info:", e.target.value)
-          // }}
         />
 
         <button
@@ -702,7 +681,7 @@ export default function IniciarTramite( {
 
       {/* Enviar tramite */}
       <div className=" w-full flex justify-between items-center gap-4">
-        <p className={`text-xs ml-2 text-[#1d0215cc] ${images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && sessionStorage.getItem('email')  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
+        <p className={`text-xs ml-2 text-[#1d0215cc] ${tramite && (images.length === documentos?.length || tramiteMd.slug === "x-Otros") && infos.length === lengthInformations && (emailSession || user )  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
 
         <div className="flex">
           <div className={`mr-2 text-[#1d0215bb] rounded-md ${!emailSession && "hidden"} bg-[#1d02150d] duration-150 hover:bg-[#1d021517] hover:text-[#1d0215] sm:mr-4`} >
@@ -721,19 +700,23 @@ export default function IniciarTramite( {
           </div>
 
           {estado?.message !== "tramiteIniciado" ? (
-            <form onSubmit={ /* files.length === 0 ? uploadToServer1 : */ uploadToServer2 } className="w-full" >
+            <form 
+              // onSubmit={ uploadToServer2 } 
+              onSubmit={ images.length === 0 ? uploadToServer1 : uploadToServer2 } 
+              className="w-full" >
               <div className="group relative w-full flex justify-between">
-                <span className={`opacity-0 invisible text-xs text-[#1d0215] absolute bottom-[150%] bg-[#ffffff] pt-[3px] pb-[5px] pl-1.5 pr-3 rounded-xl duration-150 shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2),_0px_-5px_10px_#00000012] ${images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && sessionStorage.getItem('email') ? "" : "group-hover:opacity-100"} sm:text-[13px] group-hover:visible`}><span className="text-base text-[#d400aa]">* </span>Completar requeridos</span>
+                <span className={`opacity-0 invisible text-xs text-[#1d0215] absolute bottom-[150%] bg-[#ffffff] pt-[3px] pb-[5px] pl-1.5 pr-3 rounded-xl duration-150 shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2),_0px_-5px_10px_#00000012] ${images.length === documentos?.length  && infos.length === lengthInformations && sessionStorage.getItem('email') ? "" : "group-hover:opacity-100"} sm:text-[13px] group-hover:visible`}><span className="text-base text-[#d400aa]">* </span>Completar requeridos</span>
                 <ButtonA
-                  className={`h-8 !px-2 text-sm !justify-start sm:!px-4  disabled:!opacity-60`}/* ${!tramite ? 'opacity-40' :  'opacity-100'} *//*  disabled:!cursor-no-drop */
+                  className={`h-7 !px-2 text-sm !justify-start sm:h-8 sm:!px-4 disabled:!opacity-60`}
                   type="submit"
-                  disabled={images.length === documentos?.length  &&  info[lengthInformations - 1 ] !== "" && emailSession ? false : true }
+                  disabled={ tramite && (images.length === documentos?.length || tramiteMd.slug === "x-Otros") && infos.length === lengthInformations && (emailSession || user ) ? false : true }
                   onClick={() => {
                     setSpin(true);
+                    handleClickButtonPedido()
                   }}
                 >
                   <IconCambio
-                    className={`${spin && "animate-spin"} mr-2 w-[22px] h-[22px] `}
+                    className={`${spin && "animate-spin"} mr-2 w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] `}
                     fill2="#fffc"
                     fill="#ff00ff"
                   />
@@ -746,9 +729,6 @@ export default function IniciarTramite( {
               <Link href={"/dashboard/tramites"}>
                 <ButtonA
                   className={`h-8 text-sm !justify-start ${!user && "hidden"}`}
-                  // onClick={() => {
-                  //   redirect('/dashboard/tramites"')
-                  // }}
                 >
                   Ver Trámites
                 </ButtonA>
@@ -768,6 +748,191 @@ export default function IniciarTramite( {
           }
         </div>
       </div>
+
+      {/* Envio e-mail confirmar registro */}
+      <Frente className={`hidden !bg-[#1d021513] mt-6 py-4 mb-4 px-4 text-sm sm:px-4 `} >
+        <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
+          <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>
+            <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
+            <p>Confirmacion de recepcion e-mail</p>
+          </div>
+
+          <Button
+            className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[72px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
+            onClick={() => { setEstadoRegistrar(!estadoRegistrar)}}
+            data-testid="edit-button"
+            // data-active={state}
+            type='button'
+          >
+            {estadoRegistrar ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
+          </Button>
+        </div>
+        <div
+          className={clsx(
+            "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+            {
+              "max-h-[1000px] opacity-100 pt-4": estadoRegistrar,
+              "max-h-0 opacity-0": !estadoRegistrar,
+              "invisible": !estadoRegistrar,
+            }
+          )}
+        >
+          <form action={handleFormRegistro} /* method="POST" */  className="rounded-lg w-full p-4 ">
+            <div className="flex items-start w-full mb-4 gap-3">
+              <p className="mt-2 leading-none text-[13px]">
+                Para
+              </p>
+              <div className="flex flex-col gap-1 w-full">
+                <InputCnp 
+                  type="text" 
+                  name="to_name" 
+                  placeholder="Nombre" 
+                  className="h-8 !text-sm "
+                  value={name}
+                  autoFocus
+                  required
+                  readOnly
+                  >
+                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
+                    </span>
+                    <IconCuenta 
+                      color="#50073a50"
+                      className="w-5 absolute top-[7px] left-[5px]"
+                    />
+                  </div>
+                </InputCnp>
+                
+                <InputCnp 
+                  type="email" 
+                  name="to_email" 
+                  placeholder="Email" 
+                  className="h-8 !text-sm " 
+                  defaultValue= /*{email}*/ "agrotecnicog@gmail.com"
+                  required
+                  readOnly
+                  >
+                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599] `}>
+                    </span>
+                    <IconEmail2 
+                      color="#50073a50"
+                      className="w-4 absolute top-[9px] left-1.5"
+                      />
+                  </div>
+                </InputCnp>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-1 mb-4">
+              <fieldset className="flex flex-col">
+                <label
+                  className="text-start text-[13px] "
+                  htmlFor="title"
+                >
+                  Asunto
+                </label>
+                <TextareaCnp 
+                  name="title" 
+                  className="!pl-4 !text-sm"
+                  rows={1}
+                  value="Confirmacion registro e-mail"
+                  required
+                  readOnly
+                  >
+                  <div className="w-0" >
+                  </div>
+                </TextareaCnp>
+              </fieldset>
+
+              <fieldset>
+                <label
+                  className="text-start text-[13px] "
+                  htmlFor="content"
+                >
+                  Mensaje
+                </label>
+                <TextareaCnp
+                  name="content" 
+                  placeholder="Mensaje de confirmación" 
+                  className=" !pl-4 !text-sm"
+                  value={`Para mandarte el Presupuesto por tu Trámite se registró el e-mail: ${email}`}
+                  rows={3}
+                  required
+                  readOnly
+                />
+              </fieldset>
+            </div>
+
+            <button 
+              type="submit" 
+              ref={buttonRefRegistro}
+              className="hidden py-1">
+              Enviar
+            </button>
+          </form>
+        </div>
+      </Frente>
+
+      {/* Envio e-mail confirmar pedido */}
+      <form action={handleFormPedido}  className="hidden rounded-lg bg-[#50073a66] w-full border border-gray-700 m-4 p-4 ">
+        <div className="flex items-start w-full mb-4 gap-3">
+          <p className="mt-2 leading-none text-[13px]">
+            Para
+          </p>
+          <div className="flex flex-col gap-1 w-full">
+            <input 
+              type="text" 
+              name="to_name" 
+              placeholder="Nombre" 
+              value={name}
+              required
+              readOnly
+              />
+            
+            <input
+              type="email" 
+              name="to_email" 
+              placeholder="Email" 
+              value= /*{email}*/ "agrotecnicog@gmail.com"
+              required
+              readOnly
+              />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-1 mb-4">
+          <fieldset className="flex flex-col">
+            <label htmlFor="title">Asunto</label>
+            <textarea
+              name="title" 
+              rows={1}
+              value="Confirmación recepción Pedido Presupuesto"
+              required
+              readOnly
+              />
+          </fieldset> 
+
+          <fieldset className="flex flex-col">
+            <label htmlFor="content">Mensaje</label>
+            <textarea
+              name="content" 
+              placeholder="Mensaje de confirmación" 
+              value={`Recibimos tu Pedido de Presupuesto por el trámite: "${tramite}"`}
+              rows={3}
+              required
+              readOnly
+            />
+          </fieldset>
+        </div>
+
+        <button 
+          type="submit" 
+          ref={buttonRefPedido}
+          className="bg-slate-600 text-white p-2">
+          Enviar
+        </button>
+      </form>
     </>
   );
 }

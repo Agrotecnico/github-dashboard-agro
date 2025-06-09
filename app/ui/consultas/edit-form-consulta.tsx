@@ -18,7 +18,6 @@ import IconRespuesta from '@/app/ui/logosIconos/icon-respuesta';
 import {InputCnp} from "@/app/ui/uiRadix/input-cnp"
 import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2";
-import { handleForm } from "@/app/pruebas/action";
 
 
 export default function EditConsultaForm({
@@ -33,10 +32,11 @@ export default function EditConsultaForm({
   const [estadoRespuesta, setEstadoRespuesta] = useState(false)
   const [estadoRegistrar, setEstadoRegistrar] = useState(false)
 
-  const [consultaEmail, setConsultaEmail] = useState("")
-  const [respuestaEmail, setRespuestaEmail] = useState("")
+  const [consultaAsunto, setConsultaAsunto] = useState("")
+  const [respuesta, setRespuesta] = useState("")
 
-  const consultaAsunto= `${consultaEmail}:   ${consulta.consulta}`
+  const consultaEmail= `${consultaAsunto}:  ${consulta.consulta}`
+  const extrConsulta= consultaEmail.slice(0, 150)
 
   const id= consulta.id
 
@@ -78,7 +78,7 @@ export default function EditConsultaForm({
         <Frente className="py-4 mb-4 px-4 text-sm sm:px-4" >
           <div className="w-full items-center flex gap-3 justify-end sm:mb-0">
             <div className={`flex gap-4 w-full text-[15px] sm:text-base`}>
-              <IconConsulta  className="w-6 h-6 fill-[#50073aaa]" color="#50073a88" />
+              <IconConsulta  className="w-6 h-6" color="#ffffff" color2="#50073aaa" />
               <p className={`font-medium text-[14px] text-[#50073a88]`}>
                 CONSULTA 
                 <span className="text-[13px]" > - {formatDateToLocal(consulta.created_at)}</span>
@@ -121,11 +121,11 @@ export default function EditConsultaForm({
                   id="consulta"
                   name="consulta"
                   rows={2}
-                  value={consultaEmail}
+                  value={consultaAsunto}
                   className="!text-sm "
                   aria-describedby="consulta-error"
                   placeholder='Asunto...'
-                  onChange={(e) => setConsultaEmail(e.target.value)}
+                  onChange={(e) => setConsultaAsunto(e.target.value)}
                 />
               </div>
             )} 
@@ -136,11 +136,20 @@ export default function EditConsultaForm({
         <Frente className="py-4 mb-4 px-4 text-sm sm:px-4" >
           <div className="w-full items-center flex gap-3 justify-end sm:mb-0">
             <div className={`flex gap-4 w-full text-[15px] sm:text-base`}>
-              <IconRespuesta  className="w-6 h-6 fill-[#50073aaa]" color="#50073a88"/>
-              <p className={`font-medium text-[14px] text-[#50073a88]`}>
-                RESPUESTA
-                {!consulta.updated_at ? <span className="text-[13px]"> <span className={`ml-2 text-sm  px-[5px] rounded-[4px] text-[#ffffff] bg-[#e580d0]`}>&#10003;</span> Enviar respuesta</span> : <span className="text-[13px]"> - {formatDateToLocal(consulta.updated_at)}</span> } 
-              </p>
+               {!consulta.updated_at ? (
+                  <p className={`flex items-center font-medium text-[14px] text-[#50073a88]`}>
+                    <IconRespuesta color="#ffffff" color2="#b2439acc" size="24"  className="mr-4 scale-x-[-1]"/>
+                    ENVIAR RESPUESTA
+                  </p>
+                ): (
+                  <div className="flex items-center">
+                    <IconRespuesta color="#ffffff" color2="#50073aaa" size="24"  className=" mr-4"/>
+                    <p className={`font-medium text-[14px] text-[#50073a88]`}>
+                      CONSULTA 
+                      <span className="text-[13px]" > - {formatDateToLocal(consulta.created_at)}</span>
+                    </p>
+                  </div>
+               )}
             </div>
 
             <Button
@@ -173,7 +182,7 @@ export default function EditConsultaForm({
                   htmlFor="respuesta"
                   className="mb-1 ml-3 block text-[#50073a88] text-sm  font-medium"
                 >
-                  EDITAR
+                  EDITAR 
                 </label>
                 <TextareaCnp
                   id="respuesta"
@@ -183,7 +192,7 @@ export default function EditConsultaForm({
                   placeholder={consulta.respuesta}
                   className={`!text-sm `}
                   aria-describedby="respuesta-error"
-                  onChange={(e) => setRespuestaEmail(e.target.value)}
+                  onChange={(e) => setRespuesta(e.target.value)}
                   required
                 />
               </div>
@@ -191,8 +200,9 @@ export default function EditConsultaForm({
           </div>
         </Frente>
 
+        {/* Email Consulta */}
         {!consulta.respuesta && (
-          <Frente className={` py-4 mb-4 px-4 text-sm sm:px-4 `} >
+          <Frente className={`hidden py-4 mb-4 px-4 text-sm sm:px-4 `} >
             <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
               <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>
                 <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
@@ -209,6 +219,7 @@ export default function EditConsultaForm({
                 {estadoRegistrar ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
               </Button>
             </div>
+            
             <div
               className={clsx(
                 "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
@@ -219,7 +230,7 @@ export default function EditConsultaForm({
                 }
               )}
             >
-              <form action={handleFormRespuesta} method="POST"  className="rounded-lg w-full p-4 ">
+              <form action={handleFormRespuesta}  className="rounded-lg w-full p-4 ">
                 <div className="flex items-start w-full mb-4 gap-3">
                   <p className="mt-2 leading-none text-[13px]">
                     Para
@@ -249,9 +260,9 @@ export default function EditConsultaForm({
                       name="to_email" 
                       placeholder="Email" 
                       className="h-8 !text-sm " 
-                      defaultValue={userMember?.email}
+                      value=/* {userMember?.email} */"agrotecnicog@gmail.com"
                       required
-                      // readOnly
+                      readOnly
                       >
                       <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
                         <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599] `}>
@@ -271,14 +282,13 @@ export default function EditConsultaForm({
                       className="text-start text-[13px] "
                       htmlFor="title"
                     >
-                      Consulta
+                      Asunto
                     </label>
                     <TextareaCnp 
                       name="title" 
-                      placeholder="Consulta..." 
                       className="!pl-4 !text-sm"
-                      rows={3}
-                      value={consultaAsunto}
+                      rows={1}
+                      value={`Consulta: "${consultaAsunto}"`}
                       required
                       readOnly
                       >
@@ -287,7 +297,6 @@ export default function EditConsultaForm({
                     </TextareaCnp>
                   </fieldset>
 
-                  
                   <fieldset>
                     <label
                       className="text-start text-[13px] "
@@ -299,12 +308,35 @@ export default function EditConsultaForm({
                       name="content" 
                       placeholder="Respuesta..." 
                       className=" !pl-4 !text-sm"
-                      value={respuestaEmail}
+                      value={respuesta}
                       rows={3}
                       required
                       readOnly
                     />
                   </fieldset>
+
+                  <fieldset className="flex flex-col">
+                    <label
+                      className="text-start text-[13px] "
+                      htmlFor="consulta"
+                    >
+                      Consulta
+                    </label>
+                    <TextareaCnp 
+                      name="consulta" 
+                      placeholder="Consulta..." 
+                      className="!pl-4 !text-sm"
+                      rows={3}
+                      value={extrConsulta}
+                      required
+                      readOnly
+                      >
+                      <div className="w-0" >
+                      </div>
+                    </TextareaCnp>
+                  </fieldset>
+
+                  
                 </div>
 
                 <button 
@@ -321,11 +353,11 @@ export default function EditConsultaForm({
 
       <form action={dispatch}>
         {/* Campos datos*/}
-        <div className="flex flex-col ">
+        <div className="hidden flex-col ">
           <textarea
             id="consulta"
             name="consulta"
-            value={consultaAsunto}
+            value={consultaEmail}
             aria-describedby="consulta-error"
             required
             readOnly
@@ -334,7 +366,7 @@ export default function EditConsultaForm({
           <textarea
             id="respuesta"
             name="respuesta"
-            value={respuestaEmail}
+            value={respuesta}
             aria-describedby="respuesta-error"
             required
             readOnly
@@ -345,7 +377,7 @@ export default function EditConsultaForm({
             id="updated_at" 
             type="text"
             defaultValue= { new Date().toISOString() }
-            // readOnly
+            readOnly
           />
         </div>
 
@@ -369,9 +401,9 @@ export default function EditConsultaForm({
               onClick={() => {
               handleClickButton()
               }}
-              disabled= {!respuestaEmail || !consultaEmail ? true : false}
+              disabled= {!respuesta || !consultaAsunto ? true : false}
               >
-              Editar Consulta</ButtonA>
+              Enviar respuesta</ButtonA>
           )}
         </div>
       </form>

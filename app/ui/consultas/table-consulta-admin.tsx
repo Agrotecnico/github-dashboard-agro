@@ -1,11 +1,13 @@
 import Image from 'next/image'
 
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { UpdateConsulta, DeleteConsulta } from '@/app/ui/consultas/buttons';
+import { UpdateConsulta } from '@/app/ui/consultas/buttons';
 import Search from '@/app/ui/search';
 import { fetchFilteredConsultas } from '@/app/lib/data';
 import distanceToNow from '@/app/lib/dateRelative';
-import EliminarConsulta from "@/app/ui/consultas/eliminar-consulta"
+import DeleteConsulta from "@/app/ui/consultas/delete-consulta"
+import IconConsulta from '../logosIconos/icon-consulta';
+import IconRespuesta from '../logosIconos/icon-respuesta';
 
 
 export default async function TableConsultaAdmin({
@@ -17,8 +19,7 @@ export default async function TableConsultaAdmin({
 }) {
 
   const AllConsultas = await fetchFilteredConsultas(query, currentPage);
-
-  console.log("AllConsultas: ", AllConsultas)
+  
 
   return (
     <>
@@ -63,7 +64,8 @@ export default async function TableConsultaAdmin({
 
                   <div className="flex flex-col w-full text-[#1d0215] py-2 gap-2 border-y border-[#1d021514]">
                     <div className={`flex items-center `}>
-                      <div className="mr-2 px-[5px] bg-[#dd00dd00] rounded-[4px]">&#10003;</div>
+                      {/* <div className="mr-2 px-[5px] bg-[#dd00dd00] rounded-[4px]">&#10003;</div> */}
+                      <IconConsulta color="#ffffff" color2="#50073a88" size="17"  className="mr-2"/>
                       <div className={``}>
                         Consulta realizada 
 
@@ -77,7 +79,10 @@ export default async function TableConsultaAdmin({
                     </div>
 
                     <div className={`flex items-center `}>
-                      <div className={`mr-2 px-[5px] rounded-[4px]  ${!AllConsulta.respuesta && "text-[#ffffff] bg-[#e580d0]"}`}>&#10003;</div>
+                      {/* <div className={`mr-2 px-[5px] rounded-[4px]  ${!AllConsulta.respuesta && "text-[#ffffff] bg-[#e580d0]"}`}>&#10003;</div> */}
+
+                      {AllConsulta.respuesta ? <IconRespuesta color="#ffffff" color2="#50073a88" size="17"  className="mr-2"/> : <IconRespuesta color="#ffffff" color2="#b2439a" size="18"  className="mr-2 scale-x-[-1]"/>}
+
                       { AllConsulta.respuesta  ? (
                         <div className={``}>
                           Respuesta enviado el día 
@@ -94,7 +99,7 @@ export default async function TableConsultaAdmin({
                   </div>
                   <div className="flex gap-2 items-end justify-end pt-2">
                     <UpdateConsulta id={AllConsulta.id} />
-                    <EliminarConsulta id={AllConsulta.id} />
+                    <DeleteConsulta id={AllConsulta.id} />
                   </div>
                 </div>
               ))}

@@ -11,9 +11,10 @@ interface Params {
     subject: string;
     to: {email: string; name: string}[]
     htmlContent: string;
+    consulta: string;
 }
 
-export async function emailRespuesta( {subject, to, htmlContent }: Params ) {
+export async function emailRespuesta( {subject, to, htmlContent, consulta }: Params ) {
     try {
         const smtpEmail = new brevo.SendSmtpEmail()
 
@@ -30,8 +31,8 @@ export async function emailRespuesta( {subject, to, htmlContent }: Params ) {
                 <img src="https://res.cloudinary.com/dchmrl6fc/image/upload/v1746567883/logo-cnp-horizontal_c0bn3p.png" alt="Logo" width="160" height="46">
                 <br>
                 <br>
-                <p>Tu consulta <b>${subject}</b></p>
-                <p>Respuesta <b>${htmlContent}</b></p>
+                <p><b>Tu consulta</b>  ${consulta}...</p>
+                <p><b>Respuesta:</b>  ${htmlContent}</p>
             </body>
         </html>
         `

@@ -34,7 +34,7 @@ export default function EditPerfilName( { user }: { user: User | undefined } ) {
     if (successState) {
       close()
     }
-  }, [successState, close])
+  }, [successState, close, ])
 
   const initialState = { message: null, errors: {} };
   const updateUserWithId = updateUserName.bind(null, `${user?.id}`);

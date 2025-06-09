@@ -17,14 +17,16 @@ import IconArchivo from '@/app/ui/logosIconos/icon-archivo';
 import { ImageListType} from './typings';
 import ImageUploading from "@/app/ui/consultas/ImageUploading"
 import IconDragDrop from '@/app/ui/logosIconos/icon-drag-drop';
-import { ButtonB, ButtonA } from '@/app/ui/button';
+import { ButtonB, ButtonA, Button } from '@/app/ui/button';
 import IconCuenta from "@/app/ui/logosIconos/icon-cuenta"
 import IconEmail2 from "@/app/ui/logosIconos/icon-email2"
 import { InputCnp } from "@/app/ui/uiRadix/input-cnp";
 import { TextareaCnp } from "@/app/ui/uiRadix/textarea-cnp";
 import IconRegistro from "@/app/ui/logosIconos/icon-registro"
 import { createUser } from '@/app/lib/actions';
-import IconConsulta from '../logosIconos/icon-consulta';
+import IconEnvioEmail from '../logosIconos/icon-envio-email';
+import { handleFormRegistro } from '@/app/lib/actions';
+import { handleFormPedido } from '@/app/lib/actions';
 
 
 export default function RealizarConsulta( { user }: { user: User | undefined } ) {
@@ -43,9 +45,21 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
   const [openConsulta, setOpenConsulta] = useState(true);
   const [emailSession, setEmailSession] = useState(false);
 
+  const [estadoRegistrar, setEstadoRegistrar] = useState(false)
+
 
   const { state, close, toggle } = useToggleState()
   const maxNumber = 2;
+
+  const buttonRefRegistro = useRef<HTMLButtonElement>(null);
+  const handleClickButtonRegistro= () => {
+    if (buttonRefRegistro.current) buttonRefRegistro.current.click()
+  };
+
+  const buttonRefPedido = useRef<HTMLButtonElement>(null);
+  const handleClickButtonPedido= () => {
+    if (buttonRefPedido.current) buttonRefPedido.current.click()
+  };
 
   const files: File[]= []
   images.map((image) => {
@@ -53,7 +67,6 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
   })
 
   const buttonyRef = useRef<HTMLButtonElement>(null);
-
   const handleClickButton= () => {
     if (buttonyRef.current) buttonyRef.current.click()
   };
@@ -160,8 +173,6 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
   const initialState = { message: null, errors: {} };
   const [estado, dispatch] = useFormState(createConsulta, initialState);
 
-  // console.log("email:", email)
-
 
   return (
     <>
@@ -169,7 +180,6 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
       <Frente className=" p-2 text-small-regular !bg-[#1d021513] sm:p-4 ">
         <div  className="flex items-center justify-between sm:flex-row" >
           <div className="relative flex items-center">
-            {/* <IconConsulta className="opacity-80 ml-1.5 h-[24px] w-[24px] sm:ml-3 " /> */}
             <IconConsultaRight className="opacity-80 ml-1.5 h-[36px] w-[30px] stroke-1 sm:ml-3 " />
             <div className="absolute top-[1px] left-6 text-[#ffffff] text-xs sm:left-[30px]">?</div>
             <p className="ml-4 text-sm text-[#50073aaa]">Consulta <span className=" text-[#d400aa]">*</span></p>
@@ -348,7 +358,7 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
                 <IconRegistro className="opacity-80 w-[24px] ml-1.5 sm:ml-3" />
               </div>
   
-              <div className={`w-full text-start text-[14px] text-[#50073aaa] duration-300  `}>{/*  ${open ? "hidden" : "block"  } */}
+              <div className={`w-full text-start text-[14px] text-[#50073aaa] duration-300  `}>
                 Dejá tu e-mail para mandarte la respuesta <span className=" text-[#d400aa]">*</span>
               </div>
                 
@@ -365,7 +375,7 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
                 data-testid="edit-button"
                 data-active={open}
               >
-                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Anotar{/* Registrar */}</div>  }
+                {open ? "Cancelar" :  <div className="text-[13px] overflow-auto whitespace-nowrap">Anotar</div>  }
               </ButtonB>
             </div>
             
@@ -456,10 +466,10 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
                   <div className="mt-2 text-sm sm:mt-4">
                     <ButtonA
                       className={`h-8 text-[13px] w-max ml-auto ${!open && "hidden"}`}
-                      // disabled={ email == "" && name == ""}
                       onClick={() => { 
                         email && name && sessionStorage.setItem('name', `${name}`);
                         email && name && sessionStorage.setItem('email', `${email}`);
+                        handleClickButtonRegistro()
                       }}
                     >
                       Registrar
@@ -472,7 +482,7 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
           ) : (
             <Frente className="p-2 mt-2 text-small-regular sm:p-4 !bg-[#e0e6e1]">
               <div className={`w-full text-start text-[13px] text-[#1d0215dd] transition-[opacity] duration-300 sm:text-sm `}>
-                <span className="font-semibold text-sm sm:text-[15px]">{ !estadox.message ? "" : name }</span> Para mandarte la respuesta se registró el e-mail {/* Te enviaremos la respuesta al email */}  <span className="font-semibold mx-1 text-sm sm:text-[15px] ">{email}</span>
+                <span className="font-semibold text-sm sm:text-[15px]">{ !estadox.message ? "" : name }</span> Para mandarte la respuesta se registró el e-mail <span className="font-semibold mx-1 text-sm sm:text-[15px] ">{email}</span>
               </div>
             </Frente> 
           )
@@ -481,7 +491,7 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
 
       {estado?.message === "consultaCreada" && (
         <Frente className="!p-2 mt-2 !bg-[#d7e5d9] sm:!p-4 ">
-          <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>{/*  text-small-regular */}
+          <div className={`w-full text-start text-sm text-[#1d0215dd] transition-[opacity] duration-300 sm:text-[15px] `}>
             Recibimos la consulta. Te responderemos a la brevedad.
           </div>
         </Frente> 
@@ -540,8 +550,7 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
 
       {/* Enviar consult */}
       <div className="w-full flex justify-between items-center">
-        <p className={`text-xs ml-2 text-[#1d0215cc] ${consulta && sessionStorage.getItem('email')  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
-        {/* <p className={`text-xs ml-4 text-[#1d0215cc] sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p> */}
+        <p className={`text-xs ml-2 text-[#1d0215cc] ${consulta && (emailSession || user)  && "opacity-0" } sm:text-[13px]`}><span className=" text-[#d400aa]">*</span> Requeridos</p>
 
         <div className="flex gap-4">
           <div className={`text-[#1d0215bb] rounded-md ${!emailSession && "hidden"} bg-[#1d02150d] duration-150 hover:bg-[#1d021517] hover:text-[#1d0215]`} >
@@ -561,19 +570,16 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
           {estado?.message !== "consultaCreada" ? (
             <form onSubmit={ files.length === 0 ? uploadToServer1 : uploadToServer2 } >
               <div className="group relative w-full flex justify-end items-center">
-                <span className={`opacity-0 invisible text-xs text-[#1d0215] absolute bottom-[150%] bg-[#ffffff] pt-[3px] pb-[5px] pl-1.5 pr-3 rounded-xl duration-150 shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2),_0px_-5px_10px_#00000012] ${consulta && sessionStorage.getItem('email') ? "" : "group-hover:opacity-100"} sm:text-[13px] group-hover:visible`}/* opacity-0 invisible text-[13px] text-[#ffffffee] absolute bottom-[125%] bg-[#1d0215] pb-0.5 pl-1.5 pr-3 rounded-md duration-150 shadow-xl */><span className="text-base text-[#d400aa]">* </span>Completar requeridos</span>
-                {/* <IconCambio
-                  className={`mr-2 w-[22px] h-[22px] opacity-70 ${spin && "animate-spin"} `}
-                  fill2="#50073a"
-                  fill="#b2439a"
-                /> */}
+                <span className={`opacity-0 invisible text-xs text-[#1d0215] absolute bottom-[150%] bg-[#ffffff] pt-[3px] pb-[5px] pl-1.5 pr-3 rounded-xl duration-150 shadow-[0_20px_25px_-5px_rgb(0_0_0_/_0.2),_0_8px_10px_-6px_rgb(0_0_0_/_0.2),_0px_-5px_10px_#00000012] ${consulta && (emailSession || user) ? "" : "group-hover:opacity-100"} sm:text-[13px] group-hover:visible`}><span className="text-base text-[#d400aa]">* </span>Completar requeridos</span>
                 <ButtonA
-                  className={`h-8 !px-4 text-sm !justify-start disabled:!opacity-60`}/*  disabled:!cursor-no-drop */
-                  /* className={`h-8 text-sm !justify-start `} *//*  ${!consulta ? 'opacity-40' :  'opacity-100'} */
+                  className={`h-8 !px-4 text-sm !justify-start disabled:!opacity-60`}
                   type="submit"
-                  disabled={ consulta && emailSession && !user ? false : consulta && emailSession && user ? false : true }/*  */
+                  disabled={ consulta && (emailSession || user) ? false : true }
                   onClick={() => {
+                    email && name && sessionStorage.setItem('name', `${name}`);
+                    email && name && sessionStorage.setItem('email', `${email}`);
                     setSpin(true);
+                    handleClickButtonPedido()
                   }}
                 >
                   <IconCambio
@@ -611,6 +617,191 @@ export default function RealizarConsulta( { user }: { user: User | undefined } )
           }
         </div>
       </div>
+
+      {/* Envio e-mail confirmar registro e-mail */}
+      <Frente className={`hidden !bg-[#1d021513] mt-6 py-4 mb-4 px-4 text-sm sm:px-4 `} >
+        <div className="w-full items-start flex gap-3 justify-end sm:items-center sm:mb-0">
+          <div className={`flex items-center gap-4 w-full text-[15px] sm:text-base`}>
+            <IconEnvioEmail  className="w-9 h-4 fill-[#50073aaa]" size={32} />
+            <p>Confirmacion de recepcion e-mail</p>
+          </div>
+
+          <Button
+            className="relative h-[30px] rounded-md border border-[#e9dae9] min-h-[24px] w-[72px] justify-center bg-[#ffffffaa] !px-2.5 py-1 text-[13px] !font-normal text-[#1d0215aa] hover:bg-[#ffffff] hover:text-[#1d0215dd] hover:border-[#d8c0d7] active:!bg-[#eee]"
+            onClick={() => { setEstadoRegistrar(!estadoRegistrar)}}
+            data-testid="edit-button"
+            data-active={state}
+            type='button'
+          >
+            {estadoRegistrar ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
+          </Button>
+        </div>
+        <div
+          className={clsx(
+            "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+            {
+              "max-h-[1000px] opacity-100 pt-4": estadoRegistrar,
+              "max-h-0 opacity-0": !estadoRegistrar,
+              "invisible": !estadoRegistrar,
+            }
+          )}
+        >
+          <form action={handleFormRegistro} /* method="POST" */  className="rounded-lg w-full p-4 ">
+            <div className="flex items-start w-full mb-4 gap-3">
+              <p className="mt-2 leading-none text-[13px]">
+                Para
+              </p>
+              <div className="flex flex-col gap-1 w-full">
+                <InputCnp 
+                  type="text" 
+                  name="to_name" 
+                  placeholder="Nombre" 
+                  className="h-8 !text-sm "
+                  value={name}
+                  autoFocus
+                  required
+                  readOnly
+                  >
+                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599]  `}>
+                    </span>
+                    <IconCuenta 
+                      color="#50073a50"
+                      className="w-5 absolute top-[7px] left-[5px]"
+                    />
+                  </div>
+                </InputCnp>
+                
+                <InputCnp 
+                  type="email" 
+                  name="to_email" 
+                  placeholder="Email" 
+                  className="h-8 !text-sm " 
+                  defaultValue=/* {email} */"agrotecnicog@gmail.com"
+                  required
+                  // readOnly
+                  >
+                  <div className="absolute rounded-l-[4px] h-[32px] w-[28px] left-0 top-0 bg-[#00000007]" >
+                    <span className={`absolute w-3 font-semibold left-[9px] top-1.5 opacity-40 text-[#1d021599] `}>
+                    </span>
+                    <IconEmail2 
+                      color="#50073a50"
+                      className="w-4 absolute top-[9px] left-1.5"
+                      />
+                  </div>
+                </InputCnp>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-1 mb-4">
+              <fieldset className="flex flex-col">
+                <label
+                  className="text-start text-[13px] "
+                  htmlFor="title"
+                >
+                  Asunto
+                </label>
+                <TextareaCnp 
+                  name="title" 
+                  className="!pl-4 !text-sm"
+                  rows={1}
+                  value="Confirmación registro e-mail"
+                  required
+                  readOnly
+                  >
+                  <div className="w-0" >
+                  </div>
+                </TextareaCnp>
+              </fieldset>
+
+              <fieldset>
+                <label
+                  className="text-start text-[13px] "
+                  htmlFor="content"
+                >
+                  Mensaje
+                </label>
+                <TextareaCnp
+                  name="content" 
+                  placeholder="Mensaje de confirmación" 
+                  className=" !pl-4 !text-sm"
+                  value={`Para mandarte una Respuesta por tu Consulta se registró el e-mail: ${email}`}
+                  rows={3}
+                  required
+                  readOnly
+                />
+              </fieldset>
+            </div>
+
+            <button 
+              type="submit" 
+              ref={buttonRefRegistro}
+              className="hidden py-1">
+              Enviar
+            </button>
+          </form>
+        </div>
+      </Frente>
+
+      {/* Envio e-mail confirmar recepción consulta */}
+      <form action={handleFormPedido}  className="hidden rounded-lg bg-[#50073a66] w-full border border-gray-700 m-4 p-4 ">
+        <div className="flex items-start w-full mb-4 gap-3">
+          <p className="mt-2 leading-none text-[13px]">
+            Para
+          </p>
+          <div className="flex flex-col gap-1 w-full">
+            <input 
+              type="text" 
+              name="to_name" 
+              placeholder="Nombre" 
+              value={name}
+              required
+              readOnly
+              />
+            
+            <input
+              type="email" 
+              name="to_email" 
+              placeholder="Email" 
+              value=  /*{email}*/"agrotecnicog@gmail.com"
+              required
+              readOnly
+              />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-1 mb-4">
+          <fieldset className="flex flex-col">
+            <label htmlFor="title">Asunto</label>
+            <textarea
+              name="title" 
+              rows={1}
+              value="Confirmación recepción Consulta"
+              required
+              readOnly
+              />
+          </fieldset> 
+
+          <fieldset className="flex flex-col">
+            <label htmlFor="content">Mensaje</label>
+            <textarea
+              name="content" 
+              placeholder="Mensaje de confirmación" 
+              value={`Recibimos tu consulta: "${consulta}"`}
+              rows={3}
+              required
+              readOnly
+            />
+          </fieldset>
+        </div>
+
+        <button 
+          type="submit" 
+          ref={buttonRefPedido}
+          className="bg-slate-600 text-white p-2">
+          Enviar
+        </button>
+      </form>
     </>
   );
 }

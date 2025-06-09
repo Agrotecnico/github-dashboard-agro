@@ -1,11 +1,11 @@
 ---
-tramite: "Otro: detalla el trámite"
+tramite: "Otros Trámites"
 resumen: ""
 date: "actual"
 image: "/hero.png"
 estado: ""
-documentos: "Título del vehículo"
-informacion: "Info 1, Info 2"
+documentos: "Comprobante 1, Comprobante 2"
+informacion: ""
 ---
 
 #### Otros

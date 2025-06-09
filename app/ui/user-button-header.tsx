@@ -31,7 +31,7 @@ export default function UserButtonHeader( { user }: { user: User | undefined } )
             className="relative gap-4 h-8 w-full max-w-max rounded-full px-0"
           >
             {user?.image ? (
-              <Avatar className="h-11 w-11">
+              <Avatar className="h-10 w-10 sm:w-11 sm:h-11">
                 {user?.image && (
                   <AvatarImage
                     src={user?.image}

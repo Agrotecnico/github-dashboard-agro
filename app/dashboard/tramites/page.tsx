@@ -38,10 +38,7 @@ export default async function Page({
 
   const {totalPagesMember, countcon} = await fetchTramitesPagesM(email);
 
-
   const tramites = await fetchFilteredTramitesM( email, currentPage );
-
-  const lengthTramites= tramites.length
 
 
   if (user?.email === process.env.ADMIN)
@@ -71,7 +68,7 @@ export default async function Page({
       <main>
         <div className=" mb-8">
           <h1 className={` text-xl lg:text-2xl`}>
-            Trámites
+            Tus Trámites
           </h1>
         </div>
         
@@ -79,7 +76,7 @@ export default async function Page({
           <div className="text-[#1d0215dd] flex flex-col gap-2 ">
             {tramites?.map((tramite, idx) => (
               <div key={idx } className=" text-[13px] leading-[18px] ">
-                <TableTramiteMember tramite={tramite} idx={idx} lengthTramites={lengthTramites} />
+                <TableTramiteMember tramite={tramite} />
               </div>
             ))}
 

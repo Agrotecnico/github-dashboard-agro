@@ -13,7 +13,6 @@ const FooterInicio = () => {
             cnp.mandataria@gmail.com
           </div>
         </div>
-      {/* </div> */}
     </footer>
   )
 }

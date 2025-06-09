@@ -71,33 +71,51 @@
   top: 0;
   height: 68vh;
 }
+/* ////////// */
 .swiper3 .swiper-pagination-bullet {
   position: absolute;
-  height: 22px;
+  height: 20px;
   width: 100%;
   background: #0000;
   transition: 0.2s;
   border-radius: 0;
   margin: 0 !important;
   cursor: pointer;
-  display: none;
-  opacity: 0.75;
-  top: 36vh;
+  top: 31.5vh;
+}
+.swiper3 .swiper-pagination-bullet:nth-child(2) {
+  top: calc(31.5vh + 20px);
+}
+.swiper3 .swiper-pagination-bullet:nth-child(3)  {
+  top: calc(31.5vh + 40px);
+}
+.swiper3 .swiper-pagination-bullet > div > img {
+  width: 7px;
+  height: 7px;
 }
 .swiper3 .swiper-pagination-bullet > a {
-  padding: 4px 20px;
-  font-size: 16px;
+  color: #50073aaa;
+  font-size: 14px;
+}
+.swiper3 .swiper-pagination-bullet:hover > div > img {
+  width: 10px;
+  height: 10px;
+  transition: 0.2s;
+}
+.swiper3 .swiper-pagination-bullet:hover > a {
   color: #50073a;
-  position: absolute;
-  left: 8px;
+  transition: 0.2s;
 }
-.swiper3 .swiper-pagination-bullet:hover {
-  opacity: 1;
+.swiper3 .swiper-pagination-bullet-active > div > img {
+  width: 10px;
+  height: 10px;
+  transition: 0.2s;
 }
-.swiper3 .swiper-pagination-bullet-active {
-  display: flex;
-  align-items: center;
+.swiper3 .swiper-pagination-bullet-active > a {
+  color: #50073a;
+  transition: 0.2s;
 }
+/* ////////// */
 .swiper3 > .swiper-button-next:after,
 .swiper3 > .swiper-button-prev:after {
   font-size: 24px;
@@ -105,14 +123,14 @@
   text-shadow: 3px 0px 0px black;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet {
-  height: 40px;
+  height: 46px;
   width: max-content;
   border-radius: 0;
   color: #ffffff;
   margin: 0 !important;
   background: none;
   opacity: 1;
-  font-size: 15px;
+  font-size: 14px;
   text-shadow: 1px 1px #000000;
   display: flex !important;
   align-items: end;
@@ -123,7 +141,7 @@
   align-items: center;
   gap: 2px;
   opacity: .75;
-  padding-left: 16px;
+  padding-left: 4px;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:hover {
   opacity: 1;
@@ -180,11 +198,12 @@
   bottom: 0;
   right: calc((100vw / 2) - 30px);
 }
+
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(2) {
-  padding-left: 30px;
+  padding-left: 14px;
 }
 .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(3) {
-  padding-left: 16px;
+  padding-left: 12px;
 }
 .swiper3 > .swiper-pagination > .swiper-pagination-bullet:nth-child(1) > div,
 .swiper3 > .swiper-pagination > .swiper-pagination-bullet:nth-child(2) > div,
@@ -223,16 +242,24 @@
 @media (min-width: 640px) {
   .swiper1 > .swiper-pagination > .swiper-pagination-bullet {
     padding-left: 24px;
+    height: 40;
+    font-size: 15px;
+  }
+  .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(2) {
+    padding-left: 30px;
+  }
+  .swiper1 > .swiper-pagination > .swiper-pagination-bullet:nth-child(3) {
+    padding-left: 16px;
   }
   .swiper1 > .swiper-pagination {
     top: 40px !important;
   }
-  .swiper3 .swiper-pagination-bullet {
-    top: 34vh;
-  }
   .swiper2 .swiper-pagination {
-  bottom: 10vh;
-}
+    bottom: 10vh;
+  }
+  .swiper3 .swiper-pagination-bullet > a {
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 880px) {

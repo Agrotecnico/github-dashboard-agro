@@ -116,14 +116,6 @@ export default function RegisterForm() {
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-900 peer-focus:text-gray-900" />
               </div>
             </Frente>
-
-            {/* <input
-              id="role"
-              type="hidden"
-              name="role"
-              value="memberAccount"
-              readOnly
-            /> */}
           </div>
         </Fondo>
         <LoginButton />

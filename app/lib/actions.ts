@@ -9,6 +9,8 @@ import { AuthError } from 'next-auth';
 import bcrypt from "bcrypt";
 import { emailPresupuesto } from "@/app/lib/brevo/email-presupuesto";
 import { emailRespuesta } from "@/app/lib/brevo/email-respuesta";
+import { emailConfirmRegistro } from "@/app/lib/brevo/email-confirm-registro";
+import { emailConfirmPedido } from "@/app/lib/brevo/email-confirm-pedido";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -454,7 +456,7 @@ export async function deleteConsulta(id: string) {
   // throw new Error('Failed to Delete Consulta');
   try {
     await sql`DELETE FROM consultas WHERE id = ${id}`;
-    revalidatePath('/dashboard/tusConsulta');
+    revalidatePath('/dashboard/consulta');
     return { message: 'Deleted Consulta' };
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Consulta.' };
@@ -597,9 +599,6 @@ export async function createUser(prevStateUser: StateUser, formData: FormData) {
   
   let rol= ""
   password === "xxxxxx" ? rol = "member" : rol = "memberAccount"
-
-  // let passw= ""
-  // password !== "xxxxxx" ? passw = password : passw = "xxxxxx"
 
   // Insert data into the database
   try {
@@ -797,6 +796,16 @@ export async function createComment(prevStateComment: StateComment, formData: Fo
   // redirect('/dashboard/tusConsultas');
 
 }
+export async function deleteComment(id: string) {
+  // throw new Error('Failed to Delete Comment');
+  try {
+    await sql`DELETE FROM comments WHERE id = ${id}`;
+    revalidatePath('/faq');
+    return { message: 'Comentario eliminado' };
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Comment.' };
+  }
+}
 
 
 export async function authenticate(
@@ -827,9 +836,10 @@ export async function handleFormPresupuesto(formData: FormData) {
   const to_email= formData.get("to_email")
   const content= formData.get("content")
   const validez= formData.get("validez")
+  const tramite= formData.get("tramite")
 
-  if (!title || !to_name || !to_email || !content || !validez) {
-    return console.log("Por favoe llene todos los campos")
+  if (!title || !to_name || !to_email || !content || !validez || !tramite ) {
+    return console.log("Por favor llene todos los campos")
   }
   
   await emailPresupuesto({
@@ -839,11 +849,34 @@ export async function handleFormPresupuesto(formData: FormData) {
       email: to_email as string
       }],
     htmlContent: content as string,
-    validez: validez as string
+    validez: validez as string,
+    tramite: tramite as string
   })
 }
 
 export async function handleFormRespuesta(formData: FormData) {
+  const title= formData.get("title")
+  const to_name= formData.get("to_name")
+  const to_email= formData.get("to_email")
+  const content= formData.get("content")
+  const consulta= formData.get("consulta")
+
+  if (!title || !to_name || !to_email || !content || !consulta ) {
+    return console.log("Por favoe llene todos los campos")
+  }
+  
+  await emailRespuesta({
+    subject: title as string,
+    to: [{
+      name: to_name as string,
+      email: to_email as string
+      }],
+    htmlContent: content as string,
+    consulta: consulta as string
+  })
+}
+
+export async function handleFormRegistro(formData: FormData) {
   const title= formData.get("title")
   const to_name= formData.get("to_name")
   const to_email= formData.get("to_email")
@@ -853,7 +886,27 @@ export async function handleFormRespuesta(formData: FormData) {
     return console.log("Por favoe llene todos los campos")
   }
   
-  await emailRespuesta({
+  await emailConfirmRegistro({
+    subject: title as string,
+    to: [{
+      name: to_name as string,
+      email: to_email as string
+      }],
+    htmlContent: content as string
+  })
+}
+
+export async function handleFormPedido(formData: FormData) {
+  const title= formData.get("title")
+  const to_name= formData.get("to_name")
+  const to_email= formData.get("to_email")
+  const content= formData.get("content")
+
+  if (!title || !to_name || !to_email || !content ) {
+    return console.log("Por favoe llene todos los campos")
+  }
+  
+  await emailConfirmPedido({
     subject: title as string,
     to: [{
       name: to_name as string,

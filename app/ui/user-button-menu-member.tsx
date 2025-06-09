@@ -10,6 +10,8 @@ import IconMenu from '@/app/ui/logosIconos/icon-menu';
 import {  linkMembers } from '@/app/constant';
 import Dropdown from '@/app/ui/Dropdown';
 import { ButtonA } from '@/app/ui/button';
+import IconPresupuesto from '@/app/ui/logosIconos/icon-presupuesto';
+import IconConsulta from '@/app/ui/logosIconos/icon-consulta';
 
 
 export default  function UserButtonMenuMember() {
@@ -64,16 +66,19 @@ export default  function UserButtonMenuMember() {
               })
             }
           </div>
-          <div className={`flex flex-col gap-[1px] text-[14px] mx-3 mb-3  ${session?.user?.email === process.env.ADMIN && "hidden"}`}>
-            <Link href="/iniciar-tramite/baja-de-vehiculo">
-              <ButtonA className={`h-6 !text-[#ffffff] w-full rounded-none !rounded-t-[4px] !justify-start sm:h-[26px]`}>
-                <p className="w-full">Pedir presupuesto</p>
+
+          <div className={`flex flex-col gap-[1px] text-[14px] mx-3 mb-3  ${session?.user?.email === process.env.ADMIN && "hidden"}`} >
+            <Link href="/iniciar-tramite/baja-de-vehiculo" >
+              <ButtonA className="relative pl-8 h-6 w-full !rounded-none !rounded-t-[4px] !justify-start">
+                <IconPresupuesto className="absolute w-[16px] h-[16px] bottom-[3px] left-[8px] "/>
+                <p className="">Pedir presupuesto</p>
               </ButtonA>
             </Link>
 
-            <Link href="/realizar-consulta">
-              <ButtonA className={`h-6 !bg-[#b74ab7] w-full rounded-none !rounded-b-[4px] !justify-start sm:h-[26px]`}>
-                <p className="w-full">Realizar consulta</p>
+            <Link href="/realizar-consulta" >
+              <ButtonA className=" !bg-[#b2439a] relative pl-8 h-6 w-full !rounded-none !rounded-b-[4px] !justify-start">
+                <IconConsulta className="absolute w-[16px] h-[16px] bottom-[3px] left-[8px] "/>
+                <p className="">Realizar consulta</p>
               </ButtonA>
             </Link>
           </div>

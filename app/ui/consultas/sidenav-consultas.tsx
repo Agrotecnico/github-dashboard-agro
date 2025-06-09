@@ -19,22 +19,19 @@ export default async function SideNavConsultas() {
         <NavLinksConsultas allPosts={allPosts} />
 
         <div className="flex flex-col gap-[1px] text-[14px] mt-3" >
-          <ButtonA className="relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-t-[4px] !justify-start sm:h-[26px]">
-            <Link 
-              href="/iniciar-tramite/baja-de-vehiculo"
-              className="relative"
-              >
-              <IconPresupuesto  color="#ffffff" className="absolute w-[18px] h-[18px] bottom-[2px] -left-[36px] "/>
-              <p className="w-full">Pedir presupuesto</p>
-            </Link>
-          </ButtonA>
-          
-          <ButtonA className="relative h-6 !pr-4 !pl-[52px] !bg-[#b2439a] !rounded-none !rounded-b-[4px] !justify-start sm:h-[26px]">
-            <Link href="/realizar-consulta">
-              <IconConsulta color="#ffffff" className="absolute w-[18px] h-[18px] bottom-[3px] left-[16px] " />
-              <p className="w-full">Realizar consulta</p>
-            </Link>
-          </ButtonA>
+          <Link href="/iniciar-tramite/baja-de-vehiculo" >
+            <ButtonA className="relative pl-9 h-[26px] w-full !rounded-none !rounded-t-[4px] !justify-start">
+              <IconPresupuesto className="absolute w-[16px] h-[16px] bottom-1 left-[9px] "/>
+              <p className="">Pedir presupuesto</p>
+            </ButtonA>
+          </Link>
+
+          <Link href="/realizar-consulta" >
+            <ButtonA className="!bg-[#b2439a] relative pl-9 h-[26px] w-full !rounded-none !rounded-b-[4px] !justify-start ">
+              <IconConsulta className="absolute w-[16px] h-[16px] bottom-1 left-[9px] "/>
+              <p className="">Realizar consulta</p>
+            </ButtonA>
+          </Link>
         </div>
       </Fondo> 
     </div>

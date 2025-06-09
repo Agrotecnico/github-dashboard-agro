@@ -41,7 +41,6 @@ import IconConsulta from './ui/logosIconos/icon-consulta';
 import IconLink from './ui/logosIconos/icon-link';
 
 
-
 export const metadata: Metadata = {
     title: 'CNP Mandataria',
   };
@@ -114,8 +113,8 @@ export default function CNPMandataria({
           href= "https://api.whatsapp.com/send?phone=543476606595"
           // href= "https://wa.me/543476606595?text=CNPmandataria"  
           target="_blank"  
-          className="duration-200 rounded-md " >{/* opacity-70 hover:opacity-90 */}
-          <IconWhatsApp size="38"  className="sm:w-[42px] " />
+          className="duration-150 bg-[#57c061] rounded-lg hover:bg-[#49a352] " >
+          <IconWhatsApp size="38" colorFondo="#0000"  className="sm:w-[42px] " />
         </Link>
       </div>
 
@@ -189,7 +188,8 @@ export default function CNPMandataria({
                 alt="Reempadronamiento"
                 width={960}
                 height={720}
-                objectFit={"container"}
+                priority
+                // objectFit={"container"}
                 className="absolute -z-10 object-cover top-[0px] flex h-full w-full items-center justify-center rounded-[10px]"
               >{/* */}
               </Image>
@@ -231,7 +231,7 @@ export default function CNPMandataria({
                 alt="Reempadronamiento"
                 width={960}
                 height={720}
-                objectFit={"container"}
+                // objectFit={"container"}
                 className="absolute -z-10 object-cover top-[0px] mb-2 flex h-full w-full items-center justify-center rounded-[10px]"
               >
               </Image>
@@ -327,17 +327,18 @@ export default function CNPMandataria({
               }}
               modules={[EffectFade, Navigation, Pagination, Autoplay]}
               autoplay={{
-                delay: 3000,
+                delay: 2500,
                 disableOnInteraction: false,
               }}
             >
+              <h2 className="text-lg absolute z-10 left-3 top-[25vh] text-[#ffffff96] [text-shadow:_1px_1px_0_#00000082] font-extrabold md:top-[26vh]">TRÁMITES</h2>
               <SwiperSlide>
                 <Image
                   src='/tramite1.jpg'
                   alt="Baja de vehículo"
                   width={960}
                   height={720}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
+                  className="absolute object-cover h-[30vh] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
                 >
                 </Image>
               </SwiperSlide>
@@ -348,7 +349,7 @@ export default function CNPMandataria({
                   alt="Cambio de radicación y domicilio"
                   width={660}
                   height={490}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
+                  className="absolute object-cover h-[30vh] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
                 ></Image>
               </SwiperSlide>
 
@@ -358,17 +359,17 @@ export default function CNPMandataria({
                   alt="Denuncia de venta"
                   width={660}
                   height={490}
-                  className="absolute object-fill h-[40%] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
+                  className="absolute object-fill h-[30vh] top-[0px] flex w-full items-center justify-center rounded-l-[10px]"
                 ></Image>
               </SwiperSlide>  
             </Swiper>
-            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
-              <div className="flex items-center w-full mb-[1vh] justify-center">
-                <IconConocimiento size="33" />
+            <div className="flex flex-col justify-start pt-[2vh] h-[36%] absolute z-10 bottom-[16%] items-center sm:pt-[4vh]">
+              <div className="flex items-center w-full justify-center">
+                <IconConocimiento size="33" className="h-9 sm:h-10" />
               </div>
               <div className="px-4">
                 <h4 className="font-bold text-base m-0">Conocimiento Especializado</h4>
-                <p className="mt-[2vh] mx-0 mb-0 font-normal text-sm text-center">
+                <p className="mt-[1vh] mx-0 mb-0 font-normal text-sm text-center sm:text-[15px] sm:mt-[2vh]">
                 Profesional matriculada  por la <dfn title="Dirección Nacional de Registros y Propiedad del Automotor" className="text-[#2e37e6] font-medium ">DNRPA</dfn>.
                 Capacitada para realizar los trámites de la manera más eficiente en los Registros Seccionales.
                 </p>
@@ -399,17 +400,18 @@ export default function CNPMandataria({
               }}
               modules={[EffectFade, Navigation, Pagination, Autoplay]}
               autoplay={{
-                delay: 3000,
+                delay: 2500,
                 disableOnInteraction: false,
               }}
             >
+              <h2 className="text-lg absolute z-10 left-3 top-[25vh] text-[#ffffff96] [text-shadow:_1px_1px_0_#00000082] font-extrabold md:top-[26vh]">TRÁMITES</h2>
               <SwiperSlide>
                 <Image
                   src='/tramite4.jpg'
                   alt="Duplicado de título o cédula"
                   width={960}
                   height={720}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
+                  className="absolute object-cover  h-[30vh] top-[0px] flex w-full items-center justify-center"
                 >
                 </Image>
 
@@ -421,7 +423,7 @@ export default function CNPMandataria({
                   alt="Informe de Estado de Dominio"
                   width={660}
                   height={490}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
+                  className="absolute object-cover  h-[30vh] top-[0px] flex w-full items-center justify-center"
                 ></Image>
                   
               </SwiperSlide>
@@ -432,19 +434,19 @@ export default function CNPMandataria({
                   alt="Inscripción inicial"
                   width={660}
                   height={490}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center"
+                  className="absolute object-cover  h-[30vh] top-[0px] flex w-full items-center justify-center"
                 ></Image>
                   
               </SwiperSlide>  
 
             </Swiper>
-            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
-              <div className="flex items-center w-full mb-[1vh] justify-center">
-                <IconTiempo />
+            <div className="flex flex-col justify-start pt-[2vh] h-[36%] absolute z-10 bottom-[16%] items-center sm:pt-[4vh]">
+              <div className="flex items-center w-full justify-center">
+                <IconTiempo  className="h-9 sm:h-10"/>
               </div>
               <div className="px-2">
                 <h4 className="font-bold text-base m-0">Ahorra Tiempo y Esfuerzo</h4>
-                <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
+                <p className="mt-[1vh] mx-0 mb-0 font-normal text-sm text-center sm:text-[15px] sm:mt-[2vh]">
                 Si no estás familiarizado con los procedimientos o si no tenés tiempo para gestionarlos tú mismo, 
                 nos encargaremos de los detalles para cursar el trámite.{/* todos los detalles administrativos y legales */}
                 </p>
@@ -475,17 +477,18 @@ export default function CNPMandataria({
               }}
               modules={[EffectFade, Navigation, Pagination, Autoplay]}
               autoplay={{
-                  delay: 3000,
+                  delay: 2500,
                   disableOnInteraction: false,
                 }}
             >
+              <h2 className="text-lg absolute z-10 left-3 top-[25vh] text-[#ffffff96] [text-shadow:_1px_1px_0_#00000082] font-extrabold md:top-[26vh]">TRÁMITES</h2>
               <SwiperSlide>
                 <Image
                   src='/tramite7.jpg'
                   alt="Reempadronamiento"
                   width={960}
                   height={720}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
+                  className="absolute object-cover h-[30vh] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
                 >
                 </Image>
 
@@ -497,7 +500,7 @@ export default function CNPMandataria({
                   alt="Renovación de Cédula"
                   width={660}
                   height={490}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
+                  className="absolute object-cover h-[30vh] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
                 ></Image>
               </SwiperSlide>
 
@@ -507,38 +510,37 @@ export default function CNPMandataria({
                   alt="Transferencia de dominio"
                   width={660}
                   height={490}
-                  className="absolute object-cover h-[40%] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
+                  className="absolute object-cover h-[30vh] top-[0px] flex w-full items-center justify-center rounded-r-[10px]"
                 ></Image>
               </SwiperSlide>      
             </Swiper>
-            <div className="flex flex-col justify-start pt-[1vh] h-[36%] absolute z-10 bottom-[16%] items-center">
-              <div className="flex items-center w-full mb-[1vh] justify-center">
-                <IconSeguridad size="33" />
+            <div className="flex flex-col justify-start pt-[2vh] h-[36%] absolute z-10 bottom-[16%] items-center sm:pt-[4vh]">
+              <div className="flex items-center w-full justify-center">
+                <IconSeguridad size="33"  className="h-9 sm:h-10"/>
               </div>
               <div className="px-4">
                 <h4 className="font-bold text-base m-0">Seguridad y Legalidad</h4>
-                <p className="mt-2 mx-0 mb-0 font-normal text-sm text-center">
+                <p className="mt-[1vh] mx-0 mb-0 font-normal text-sm text-center sm:text-[15px] sm:mt-[2vh]">
                 Debidamente habilitada y registrada, se garantiza que todos los trámites se realizán de manera legal y segura, evitando posibles problemas a futuro.
                 </p>
               </div>
             </div>
           </SwiperSlide>
           
-          <div className={` absolute z-10 bottom-[2vh] text-sm flex flex-col justify-center gap-[1px] ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_84px)] sm:ml-[calc(100%_/_2_-_180px)]" : "ml-[calc(100%_/_2_-_108px)]"} sm:bottom-[4vh] sm:flex-row sm:text-[15px] `}>
-            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]`}>
-              <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} className="relative">
-                <IconPresupuesto  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[1px] -left-[36px] sm:w-[19px] sm:h-[19px] sm:-left-[36px] sm:-bottom-0 "/>
+          <div className={` absolute z-10 bottom-[2vh] text-sm flex flex-col justify-center gap-[1px] ${user?.role !== "admin" && user?.role !== "memberAccount"  ? "ml-[calc(100%_/_2_-_84px)] sm:ml-[calc(100%_/_2_-_180px)]" : "ml-[calc(100%_/_2_-_65px)] sm:ml-[calc(100%_/_2_-_130px)]"} sm:bottom-[4vh] sm:flex-row sm:text-[15px] `}>
+            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} >
+              <ButtonA className="relative pl-9 h-6 w-full !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]">
+                <IconPresupuesto className="absolute w-[15px] h-[15px] left-[9px] bottom-[3px] sm:w-[16px] sm:h-[16px] sm:bottom-1"/>
                 <p>{session ? "Trámites" : "Pedir presupuesto" }</p>
-              </Link>
-            </ButtonA>
-            
-            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !bg-[#b2439a] !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!justify-center sm:!rounded-none sm:!rounded-r-[5px] `}>
-              <Link 
-                href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-                <IconConsulta  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[2px] left-[16px] sm:w-[19px] sm:h-[19px] sm:left-[16px] sm:bottom-[2px] " />
+              </ButtonA>
+            </Link>
+
+            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
+              <ButtonA className="relative !bg-[#b2439a] pl-9 h-6 w-full !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-r-[5px]">
+                <IconConsulta className="absolute w-[15px] h-[15px] left-[9px] bottom-[3px] sm:w-[16px] sm:h-[16px] sm:bottom-1"/>
                 <p>{session ? "Consultas" : "Realizar consulta" }</p>
-              </Link>
-            </ButtonA>
+              </ButtonA>
+            </Link>
           </div>
         </Swiper>
       </SwiperSlide>
@@ -578,20 +580,19 @@ export default function CNPMandataria({
           </Fondo>
 
           <div className="flex flex-col gap-[1px] absolute bottom-[11vh] text-sm sm:text-[15px] sm:flex-row">
-            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]`}>
-              <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} className="relative">
-                <IconPresupuesto  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[1px] -left-[36px] sm:w-[19px] sm:h-[19px] sm:-left-[36px] sm:-bottom-0 "/>
+            <Link href={session ? '/dashboard/tramites' : '/iniciar-tramite/baja-de-vehiculo'} >
+              <ButtonA className="relative pl-9 h-6 w-full !rounded-none !rounded-t-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-l-[5px]">
+                <IconPresupuesto className="absolute w-[15px] h-[15px] left-[9px] bottom-[3px] sm:w-[16px] sm:h-[16px] sm:bottom-1"/>
                 <p>{session ? "Trámites" : "Pedir presupuesto" }</p>
-              </Link>
-            </ButtonA>
-            
-            <ButtonA className={`relative h-6 !pr-4 !pl-[52px] !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!justify-center !bg-[#b2439a] sm:!rounded-none sm:!rounded-r-[5px] `}>
-              <Link 
-                href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
-                <IconConsulta  color="#ffffff"  className="absolute w-[18px] h-[18px] bottom-[2px] left-[16px] sm:w-[19px] sm:h-[19px] sm:left-[16px] sm:bottom-[2px] " />
+              </ButtonA>
+            </Link>
+
+            <Link href={session ? '/dashboard/consultas' : '/realizar-consulta'} >
+              <ButtonA className="relative !bg-[#b2439a] pl-9 h-6 w-full !rounded-none !rounded-b-[5px] !justify-start sm:h-[26px] sm:!rounded-none sm:!rounded-r-[5px]">
+                <IconConsulta className="absolute w-[15px] h-[15px] left-[9px] bottom-[3px] sm:w-[16px] sm:h-[16px] sm:bottom-1"/>
                 <p>{session ? "Consultas" : "Realizar consulta" }</p>
-              </Link>
-            </ButtonA>
+              </ButtonA>
+            </Link>
           </div>
         </div>
         <FooterInicio />

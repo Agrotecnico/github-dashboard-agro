@@ -16,12 +16,8 @@ import distanceToNow from '@/app/lib/dateRelative';
 
 export default function TableConsultaMember( { 
   consulta,
-  idx,
-  lengthConsultas,
 }: { 
   consulta: Consulta;
-  idx: number;
-  lengthConsultas: number;
 } ) {
   
   const [palabrasConsulta, setTextconsulta] = useState(consulta.consulta.split(" "))
@@ -102,7 +98,6 @@ export default function TableConsultaMember( {
             {state ? "Cerrar" :  <div><span className="text-[12px] uppercase">Ver</span></div> }
           </Button>
         </div>
-
       </div>
       <Disclosure>
         <DisclosurePanel

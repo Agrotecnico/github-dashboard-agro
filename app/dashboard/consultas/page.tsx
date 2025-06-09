@@ -34,7 +34,6 @@ export default async function Page({
   const {totalPagesMember, countcon} = await fetchConsultasPagesM(id);
 
   const consultas = await fetchFilteredConsultasM( id, currentPage );
-  const lengthConsultas= consultas.length
 
 
   if (user?.email === process.env.ADMIN)
@@ -56,7 +55,7 @@ export default async function Page({
       <main>
         <div className=" mb-8">
           <h1 className={` text-xl lg:text-2xl`}>
-            Consultas
+            Tus Consultas
           </h1>
         </div>
         
@@ -64,7 +63,7 @@ export default async function Page({
           <div className="text-[#1d0215dd] flex flex-col gap-2 ">
             {consultas?.map((consulta, idx) => (
               <div key={idx } className=" text-[13px] leading-[18px] ">
-                <TableConsultaMember consulta={consulta} idx={idx} lengthConsultas={lengthConsultas} />
+                <TableConsultaMember consulta={consulta} />
               </div>
             ))}
             <div className="-z-10 mt-5 flex w-full justify-center">

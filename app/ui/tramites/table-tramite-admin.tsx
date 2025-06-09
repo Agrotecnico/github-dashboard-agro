@@ -1,14 +1,11 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import clsx from 'clsx';
 
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { UpdateTramite, DeleteTramite } from '@/app/ui/tramites/buttons';
-import EliminarTramite from '@/app/ui/tramites/eliminar-tramite';
-import Search from '@/app/ui/search';
-import { fetchFilteredTramites } from '@/app/lib/data';
+import { UpdateTramite } from '@/app/ui/tramites/buttons';
+import DeleteTramite from '@/app/ui/tramites/delete-tramite';
 import Image from 'next/image'
 import distanceToNow from '@/app/lib/dateRelative';
 import { Button } from '@/app/ui/button';
@@ -18,40 +15,30 @@ import { Disclosure, DisclosurePanel } from '@headlessui/react'
 
 
 
-export default /* async */ function TableTramiteAdmin({
-  // query,
-  // currentPage,
+export default function TableTramiteAdmin({
   AllTramite,
 }: {
-  // query: string;
-  // currentPage: number;
   AllTramite: TramitesTable
 }) {
 
   const [successState, setSuccessState] = useState(false)
   const { state, close, toggle } = useToggleState()
 
-  const archivosAdjuntos:string | undefined= AllTramite?.documentos_url
-  const archivos: string[] = JSON.parse(`${archivosAdjuntos}`)
-
-  const infoAdjuntos: string[] = JSON.parse(AllTramite?.informacion!)
-
   const clearState = () => {
-      setSuccessState(false)
-    }
+    setSuccessState(false)
+  }
   
-    const handleToggle = () => {
-      clearState()
-      setTimeout(() => toggle(), 100)
-    }
+  const handleToggle = () => {
+    clearState()
+    setTimeout(() => toggle(), 100)
+  }
   
-    useEffect(() => {
-      if (successState) {
-        close()
-      }
-    }, [successState, close])
+  useEffect(() => {
+    if (successState) {
+      close()
+    }
+  }, [successState, close])
 
-  // const AllTramites = await fetchFilteredTramites(query, currentPage);
 
   return (
     <div>
@@ -147,7 +134,7 @@ export default /* async */ function TableTramiteAdmin({
                       </div>
                       <div className="flex flex-col w-full text-[#1d0215cc] mb-4 py-2 gap-1 ">
                         <div className={`flex items-center gap-1.5 `}>
-                          <div className="mb-auto mt-[3px] text-[11px] leading-[1.6] w-[18px] px-[5px] bg-[#dd00dd00] rounded-[4px]">1</div>{/* &#10003; */}
+                          <div className="mb-auto mt-[3px] text-[11px] leading-[1.6] w-[18px] px-[5px] bg-[#dd00dd00] rounded-[4px]">1</div>
                           <div className={`flex items-center flex-wrap`}>
                             Presupuesto pedido  
                             <div className={`text-[13px] py-0.5 px-1.5 mx-1 rounded-lg bg-[#22ff0014] ${AllTramite.estado === "presupuestar" && "hidden"} `} >
@@ -176,7 +163,6 @@ export default /* async */ function TableTramiteAdmin({
                             </div>
                           </div>
                           ) : (
-                            // <div>Te enviaremos el presupuesto en la major brevedad</div>
                             <div>Calcular y enviar el presupuesto</div>
                           ) }
                         </div>
@@ -218,14 +204,10 @@ export default /* async */ function TableTramiteAdmin({
 
                       <div className="flex gap-2 justify-end items-end">
                         <UpdateTramite id={AllTramite.id} />
-                        {/* <DeleteTramite id={AllTramite.id} /> */}
-                        <EliminarTramite id={AllTramite.id} />
+                        <DeleteTramite id={AllTramite.id} />
                       </div>
-
                     </DisclosurePanel>
                   </Disclosure>
-
-
                 </div>
             </div>
           </div>

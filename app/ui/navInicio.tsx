@@ -10,8 +10,8 @@ export default function NavInicio({ user }: { user: User | undefined }) {
   const { data: session, update } = useSession();
 
   return (
-    <div className="xgroup w-ful fixed inset-x-0 top-0  z-20 bg-[#300322] backdrop-blur-md ">
-      <header className=" mt-0px group-hover:bg-tranaparent h-18 relative mx-auto h-[68px] bg-transparent transition-colors duration-200 group-hover:border-gray-200 sm:h-20">
+    <div className="w-ful fixed inset-x-0 top-0  z-20 bg-[#300322] ">{/* xgroup   backdrop-blur-md*/}
+      <header className=" mt-0px h-18 relative mx-auto h-[68px] bg-transparent transition-colors duration-200  sm:h-20">{/*  group-hover:bg-tranaparent group-hover:border-gray-200*/}
         <nav className=" text-small-regular mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 text-white transition-colors duration-200 sm:px-6">
           <div className="flex w-full items-center justify-end min-[1100px]:mr-0">
             {session?.user ? (

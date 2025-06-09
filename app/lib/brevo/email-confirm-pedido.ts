@@ -11,11 +11,9 @@ interface Params {
     subject: string;
     to: {email: string; name: string}[]
     htmlContent: string;
-    validez: string;
-    tramite: string;
 }
 
-export async function emailPresupuesto( {subject, to, htmlContent, validez, tramite}: Params ) {
+export async function emailConfirmPedido( {subject, to, htmlContent }: Params ) {
     try {
         const smtpEmail = new brevo.SendSmtpEmail()
 
@@ -32,9 +30,8 @@ export async function emailPresupuesto( {subject, to, htmlContent, validez, tram
                 <img src="https://res.cloudinary.com/dchmrl6fc/image/upload/v1746567883/logo-cnp-horizontal_c0bn3p.png" alt="Logo" width="160" height="46">
                 <br>
                 <br>
-                <p>Trámite: <b>${tramite}</b></p>
-                <p>Presupuesto: <b>Precio $ ${htmlContent}</b></p>
-                <p>Validez: <b> ${validez} días</b></p>
+                <p>${htmlContent}</p>
+                <b>Te responderemos en la mayor brevedad</b>
             </body>
         </html>
         `

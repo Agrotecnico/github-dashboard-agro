@@ -54,7 +54,7 @@ export default async function PostPage({ params }: Params) {
                   className="mr-4 h-auto w-12 rounded-full"
                 />
               ) : null}
-              <div className="text-md font-semibold">{post.autor}</div>
+              <div className="text-lg font-semibold">{post.autor}</div>
             </div>
           </div>
 
@@ -67,6 +67,7 @@ export default async function PostPage({ params }: Params) {
                   width={481}
                   height={361}
                   className="roundrd w-96 h-auto "
+                  priority
                 />
               ) : null}
             </div>
@@ -84,7 +85,7 @@ export default async function PostPage({ params }: Params) {
                     className="mr-4 h-auto w-12 rounded-full"
                   />
                 ) : null}
-                <div className="text-xl font-bold">{post.autor}</div>
+                <div className="text-lg font-bold">{post.autor}</div>
               </div>
             </div>
 
