@@ -178,7 +178,7 @@ export default function GaleriaFotosCnp({
                             bg-[linear-gradient(90deg,#0005,transparent_1.5%,transparent_98.5%,#0005),linear-gradient(180deg,#0005,transparent_1.5%,transparent_98.5%,#0005),url('https://lh3.googleusercontent.com/pw/AP1GczNB_LOmDwneOypSdbXJYhH1BPPrHIOOo_VXGnGfQKpcPqU0qO9HHps0NgJyfMxdako6Tybj61v7ywgT-mNiom_VQWx_3kDB9WLjqc2SjD03oV3axhbT=w1920-h1080')]
                             bg-cover bg-fixed bg-center text-4xl text-[#333] backdrop-blur "
                   >
-                    <p className="mt-8 text-[34px]">Hola!</p>
+                    <p className="mt-8 text-[34px]">Hola Bienvenido!</p>
                     <p className="px-9 py-2 text-[18px] leading-7">
                       Aquí harás consultas y obtendrás respuestas
                     </p>
