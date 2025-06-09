@@ -1,6 +1,18 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+	--violet-11: #6550b9;
+	--violet-3: #f4f0fe;
+    --violet-4: #ebe4ff;
+    --violet-6: #d4cafe;
+    --violet-9: #6e56cf;
+	--black-a7: #00000080;
+	--mauve-8: #bcbac7;
+  }
 
 input[type='number'] {
   -moz-appearance: textfield;
@@ -53,3 +65,43 @@ input[type='number']::-webkit-outer-spin-button {
 
 
 
+/* pagina iniciar-tramite */
+
+.tramite-global:first-child #accordion-trigger {
+  border-radius: 6px 6px 0 0;
+}
+
+.tramite-global:last-child #accordion-trigger {
+  border-radius: 0 0 6px 6px;
+}
+
+
+
+.AccordionContent {
+  overflow: hidden;
+}
+.AccordionContent[data-state="open"] {
+  animation: slideDown 300ms ease-out;
+  /* animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1); */
+}
+.AccordionContent[data-state="closed"] {
+  animation: slideUp 100ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

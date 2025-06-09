@@ -3,7 +3,7 @@ title: "En Argentina, el trámite de transferencia de vehículos es un proceso l
 excerpt: "¿Qué es y cómo funciona el 08 para transferir un vehículo?"
 date: "2024-04-08"
 image: "/form-08.jpg"
-avatar: "/carina-blog.jpg"
+avatar: "/customers/carina-blog.jpg"
 autor: "Carina Noemi Pacheco"
 ---
 

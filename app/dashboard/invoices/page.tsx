@@ -32,7 +32,7 @@ export default async function Page({
     return (
       <div className="">
         <div className="flex w-full items-center justify-between">
-          <h1 className={`${lusitana.className} mb-4 text-xl md:mb-8 lg:text-2xl`}>Facturas</h1>
+          <h1 className={` mb-4 text-xl md:mb-8 lg:text-2xl`}>Facturas</h1>{/* ${lusitana.className} */}
         </div>
         <div className="flex items-center justify-between gap-2">
           <Search placeholder="Buscar facturas..." />
@@ -47,6 +47,6 @@ export default async function Page({
       </div>
     )
       return (
-        <div className="h-[50%] flex items-center justify-center ">Facturas no disponble para este Usuario</div>
+        <div className="h-[50%] flex items-center justify-center ">Página no disponble</div>
       );
 }

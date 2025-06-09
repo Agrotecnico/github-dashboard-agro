@@ -78,7 +78,7 @@ const LogoCNP2: React.FC<IconProps> = ({
           stroke= "white"
           strokeWidth="0"
           filter={`url(#${filter})`}
-          opacity="0.7"
+          opacity="0.95"
         />
       </g>
     </svg>

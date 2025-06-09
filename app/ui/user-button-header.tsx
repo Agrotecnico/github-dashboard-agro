@@ -1,25 +1,26 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
-import { Button } from '@/app/ui/uiRadix/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/app/ui/uiRadix/dropdown-menu';
-import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
-export default function UserButtonHeader({
-  session,
-}: {
-  session: Session | null;
-}) {
+import { Avatar, AvatarFallback, AvatarImage } from '@/app/ui/uiRadix/avatar';
+import { Button } from '@/app/ui/uiRadix/button';
+import { User } from '@/app/lib/definitions';
+
+
+export default function UserButtonHeader( { user }: { user: User | undefined } ) {
+  
   const pathname = usePathname();
+
 
   return (
     <>
@@ -27,102 +28,152 @@ export default function UserButtonHeader({
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="relative mb-1.5 h-8 w-full max-w-max rounded-full px-0"
+            className="relative gap-4 h-8 w-full max-w-max rounded-full px-0"
           >
-            {session?.user?.image ? (
-              <Avatar className="h-8 w-8">
-                {session?.user.image && (
+            {user?.image ? (
+              <Avatar className="h-10 w-10 sm:w-11 sm:h-11">
+                {user?.image && (
                   <AvatarImage
-                    src={session?.user.image}
-                    alt={session?.user.name ?? ''}
+                    src={user?.image}
+                    alt={user?.name ?? ''}
                   />
                 )}
-                <AvatarFallback>{session?.user.email}</AvatarFallback>
+                <AvatarFallback>{user?.email}</AvatarFallback>
               </Avatar>
             ) : (
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eee] text-[#374151] ">
-                {session?.user?.email?.substring(0, 1).toUpperCase()}
+                {user?.email?.substring(0, 1).toUpperCase()}
               </span>
             )}
           </Button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent
-          className="mt-2 w-56 bg-white shadow-md"
+          className="mt-3 bg-white w-56 rounded-md shadow-xl shadow-[#30032222]"
           align="end"
           forceMount
         >
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none text-[#374151] ">
-                {session?.user?.name}
+                {user?.name}
               </p>
               <p className="text-muted-foreground text-xs leading-none text-[#64748b]">
-                {session?.user?.email}
+                {user?.email}
               </p>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuItem className="mt-4 flex flex-col">
-            <div className="flex w-full flex-col ">
-              {pathname == '/' ? (
-                <Link
-                  href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
-                >
-                  Cnp mandataria
-                </Link>
-              ) : (
-                <Link
-                  href={'/'}
-                  className="mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 "
-                >
-                  Cnp mandataria
-                </Link>
-              )}
-              {pathname.startsWith('/consultas') ? (
-                <Link
-                  href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188]"
-                >
-                  Consultas frecuentes
-                </Link>
-              ) : (
-                <Link
-                  href={'/consultas/dif-gestor-mandatario'}
-                  className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100"
-                >
-                  Consultas frecuentes
-                </Link>
-              )}
-              {pathname.startsWith('/dashboard') ? (
-                <Link
-                  href={'#'}
-                  className="mb-1 cursor-default rounded-md p-1 pl-2 text-[#37415188] "
-                >
-                  {session?.user?.email == 'agrotecnicog@gmail.com'
-                    ? 'Panel de control'
-                    : 'Realizar consulta'}
-                </Link>
-              ) : (
-                <Link
-                  href={'/dashboard'}
-                  className=" mb-1 rounded-md p-1 pl-2 text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 "
-                >
-                  {session?.user?.email == 'agrotecnicog@gmail.com'
-                    ? 'Panel de control'
-                    : 'Realizar consulta'}
-                </Link>
-              )}
-            </div>
-            <Button
-              variant={'ghost'}
-              className="ml-auto mt-6 h-auto w-full bg-[#3741511c] p-1 text-[#020817] opacity-[0.85] hover:opacity-100 "
-              onClick={async () => {
-                await signOut({ callbackUrl: '/' });
-              }}
+
+          <DropdownMenuSeparator className="h-[1px] bg-[#37415122] m-[3px]" />
+
+          {pathname == '/' ? (
+            <Link
+              href={'#'}
             >
-              Salir
-            </Button>
-          </DropdownMenuItem>
+              <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Cnp mandataria</div>
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/'}
+            >
+              <DropdownMenuItem>
+                <div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#37415111] hover:opacity-100 ">Cnp mandataria</div>
+              </DropdownMenuItem>
+            </Link>
+          )}
+
+          {pathname.startsWith('/faq') ? (
+            <Link
+              href={'#'}
+            >
+              <div className="w-full px-2 py-1 text-sm cursor-default rounded-md text-[#37415188] ">Consultas frecuentes</div>
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/faq/dif-gestor-mandatario'}
+            >
+              <DropdownMenuItem>
+                <div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#37415111]  hover:opacity-100">Consultas frecuentes</div>
+              </DropdownMenuItem>
+            </Link>
+          )}
+            
+          {pathname == '/dashboard/consultas' ? (
+            <Link
+              href={'#'}
+            >
+              {user?.role === "admin"
+                ? ''
+                : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Consultas</div>) }
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard/consultas'}
+            >
+              <DropdownMenuItem>
+                {user?.role === "admin"
+                  ? ''
+                  : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Consultas</div>)}
+              </DropdownMenuItem>
+            </Link>
+          )}
+
+          {pathname == '/dashboard/tramites' ? (
+            <Link
+              href={'#'}
+            >
+              {user?.role === "admin"
+                ? ''
+                : (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Trámites</div>)}
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard/tramites'}
+            >
+              <DropdownMenuItem>
+              {user?.role === "admin"
+                ? ''
+                : (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Trámites</div>)}
+              </DropdownMenuItem>
+            </Link>
+          )}
+
+          {pathname.startsWith('/dashboard') ? (
+            <Link
+              href={'#'}
+            >
+              {user?.role === "admin"
+                ? (<div className="w-full px-2 py-1 text-sm  cursor-default rounded-md text-[#37415188] ">Panel Admin</div>)
+                : ''}
+              
+            </Link>
+          ) : (
+            <Link
+              href={'/dashboard'}
+            >
+              <DropdownMenuItem>
+                {user?.role === "admin"
+                  ? (<div className="w-full px-2 py-1 rounded-md text-[#374151] opacity-[0.85] hover:bg-[#0000000a] hover:opacity-100 ">Panel Admin</div>)
+                  : ''}
+              </DropdownMenuItem>
+            </Link>
+          )}
+          
+          <Button
+            variant={'ghost'}
+            className=" mt-3 file:ml-auto h-auto w-full bg-[#3741511c] text-[#020817] opacity-[0.85] hover:opacity-100 active:bg-transparent"
+            onClick={async () => {
+              await signOut({ callbackUrl: '/' });
+            }}
+          >
+            <DropdownMenuItem>
+              <p>Salir</p>
+            </DropdownMenuItem>
+          </Button>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

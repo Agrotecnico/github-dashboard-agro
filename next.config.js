@@ -10,6 +10,12 @@ const nextConfig = {
           },
           {
             protocol: 'https',
+            hostname: 'res.cloudinary.com',
+            port: '',
+            pathname: '/dchmrl6fc/**',
+          },
+          {
+            protocol: 'https',
             hostname: 'i.ibb.co',
             port: '',
             pathname: '/mB4S7K2/**',

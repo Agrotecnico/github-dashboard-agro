@@ -6,16 +6,16 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  password: string;
-  role: 'admin' | 'member' | 'developer';
+  password: string | undefined;
+  role: 'admin' | 'member' | 'memberAccount';
   image: string | undefined;
 };
 
 export type Customer = {
   id: string;
-  name: string;
+  name: string | undefined;
   email: string;
-  image_url: string;
+  image_url: string | undefined;
 };
 
 export type Invoice = {
@@ -30,11 +30,27 @@ export type Invoice = {
 
 export type Consulta = {
   id: string;
-  name: string;
-  email: string;
+  email_id: string;
+  archivos_url: string | undefined;
   consulta: string;
   respuesta: string | undefined;
   created_at: string;
+  updated_at: string;
+};
+
+export type Tramite = {
+  id: string;
+  email_id: string;
+  tramite: string;
+  documentos_url: string | undefined;
+  informacion: string | undefined;
+  estado: 'presupuestar' | 'presupuestado' | 'iniciado' | 'cancelado' | 'terminado';
+  presupuesto: number;
+  created_at: string;
+  started_at: string | undefined;
+  canceled_at: string | undefined;
+  budgeted_at: string | undefined;
+  finished_at: string | undefined;
 };
 
 export type Revenue = {
@@ -64,6 +80,33 @@ export type InvoicesTable = {
   date: string;
   amount: number;
   status: 'pending' | 'paid';
+};
+
+export type ConsultasTable = {
+  id: string;
+  consulta: string;
+  respuesta: string | undefined;
+  email_id: string;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  image: string | undefined;
+};
+export type TramitesTable = {
+  id: string;
+  email_id: string;
+  tramite: string;
+  documentos_url: string | undefined;
+  informacion: string | undefined;
+  estado: 'presupuestar' | 'presupuestado' | 'iniciado' | 'cancelado' | 'terminado';
+  presupuesto: number;
+  created_at: string;
+  budgeted_at: string | undefined;
+  started_at: string | undefined;
+  canceled_at: string | undefined;
+  finished_at: string | undefined;
+  name: string;
+  image: string | undefined;
 };
 
 export type CustomersTableType = {
@@ -107,4 +150,36 @@ export type Post = {
   excerpt?: string;
   [key: string]: any;
   image?: string;
+};
+
+export type TramiteMd = {
+  slug?: string;
+  tramite?: string;
+  date?: string;
+  content?: string;
+  resumen?: string;
+  estado?: string;
+  [key: string]: any;
+  image?: string;
+  documentos?: string;
+  documentacion?: string;
+  informacion: string;
+};
+
+export type Comment = {
+  id: string;
+  created_at: string;
+  post_slug: string;
+  comment: string;
+  email_id: string;
+};
+
+export type CommentsPost = {
+  id: string;
+  email_id: string;
+  post_slug: string;
+  comment: string;
+  created_at: string;
+  name: string;
+  image: string | undefined;
 };

@@ -9,7 +9,7 @@ export type IconProps = {
   filter?: string | number
 } & React.SVGAttributes<SVGElement>
 
-const IconWhatsApp: React.FC<IconProps> = ({
+const LogoGoogle: React.FC<IconProps> = ({
   size= 92,
   color= "white",
   colorFondo="#57c061",
@@ -83,4 +83,4 @@ const IconWhatsApp: React.FC<IconProps> = ({
   )
 }
 
-export default IconWhatsApp
+export default LogoGoogle
