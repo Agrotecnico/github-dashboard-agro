@@ -126,7 +126,7 @@ export default function CNPMandataria({
           </h1>
           <p className="text-sm px-4 leading-snug max-w-[700px] my-0 mx-auto text-center md:text-base">
           Un servicio con la facultad de representación legal, asesoramiento y gestión en la compra/venta de vehículos automotores y náuticos. 
-          Esto incluye la transferencia de dominio, cédula de identificación y otros trámites más.
+          Esto incluye la transferencia de dominio, cédula de identificación y otros trámites.
           </p>
         </div>
         <Swiper
