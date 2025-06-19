@@ -93,7 +93,7 @@ export const generarClaveUnica= (longitud: number) => {
 
 
 
-export const guardarConsulta = (buttonRef): void => {
+export const guardarConsulta = (buttonRef:any): void => {
   if (buttonRef.current) buttonRef.current.click();
 };
 
