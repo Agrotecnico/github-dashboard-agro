@@ -1,4 +1,4 @@
-import type { VFileCompatible } from "vfile";
+// import type { VFileCompatible } from "vfile";
 import { remark } from "remark";
 import html from "remark-html";
 
