@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
   try {
     const results = await Promise.all(uploadPromises);
 
-    results.map((result, idx) => {
+    results.map((result:any, idx) => {
     response[idx]= result?.secure_url
     })
 
