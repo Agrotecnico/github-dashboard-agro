@@ -62,7 +62,7 @@ function DropdownMenu({ children }: { children: ReactNode }) {
           <RadixDropdownMenu.Portal forceMount>
             <RadixDropdownMenu.Content
               align="start"
-              className="mt-1 overflow-hidden rounded-b-lg bg-white text-left shadow-xl shadow-[#30032222] md:mt-4"
+              className="!opacity-100 mt-1 overflow-hidden rounded-b-lg bg-white text-left shadow-xl shadow-[#30032222] md:mt-4"
               asChild
             >
               <motion.div
